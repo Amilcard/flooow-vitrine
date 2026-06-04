@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Flooow — Trouver · Financer · S'y rendre</title>
+  <meta name="description" content="Flooow aide les familles à accéder aux activités pour leurs enfants en reliant l'offre disponible, les aides possibles et les conditions d'accès réelles."/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --terra:#d4622a;--terra-d:#b8501f;--terra-l:#fdf0eb;--terra-xl:#fef8f5;
+      --navy:#1a2e4a;--navy-l:#243d5e;
+      --sand:#f5f0e8;--sand-d:#ede5d8;
+      --anthracite:#2d3142;
+      --text:#2d3142;--muted:#6b7280;--border:#e5ddd4;
+      --white:#fff;
+      --r:12px;--sh:0 4px 24px rgba(0,0,0,.08);
+      --font:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family:var(--font);color:var(--text);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+    a{text-decoration:none;color:inherit}
+    .hidden{display:none!important}
+
+    /* ── PAGES SPA ── */
+    .page{display:none}
+    .page.active{display:block}
+
+    /* ── HEADER ── */
+    header{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+    .nav-w{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;align-items:center;height:64px;gap:0}
+    .logo{display:flex;align-items:center;gap:9px;font-size:1.45rem;font-weight:900;color:var(--terra);letter-spacing:-.5px;margin-right:40px;flex-shrink:0;cursor:pointer}
+    .logo-mark{width:36px;height:36px;background:var(--terra);border-radius:10px;display:flex;align-items:center;justify-content:center}
+    .logo-mark svg{width:22px;height:22px}
+    .nav-links{display:flex;gap:2px;list-style:none}
+    .nav-links li a,.nav-links li button{padding:7px 13px;border-radius:8px;font-size:.875rem;font-weight:500;color:var(--text);background:none;border:none;cursor:pointer;transition:.15s;font-family:var(--font)}
+    .nav-links li a:hover,.nav-links li button:hover,.nav-links li a.active,.nav-links li button.active{background:var(--terra-l);color:var(--terra)}
+    .nav-sep{flex:1}
+    .btn-cta-sm{background:var(--terra)!important;color:#fff!important;padding:8px 18px!important;border-radius:8px!important;font-weight:700!important;margin-left:8px;transition:.15s!important;border:none;cursor:pointer;font-size:.875rem;font-family:var(--font)}
+    .btn-cta-sm:hover{background:var(--terra-d)!important}
+    .mobile-menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--text);font-size:1.3rem}
+
+    /* ── BOUTONS ── */
+    .btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:14px 26px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;transition:.15s;font-family:var(--font)}
+    .btn-p:hover{background:var(--terra-d);transform:translateY(-1px)}
+    .btn-s{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--terra);color:var(--terra);padding:12px 24px;border-radius:10px;font-size:.95rem;font-weight:700;background:transparent;cursor:pointer;transition:.15s;font-family:var(--font)}
+    .btn-s:hover{background:var(--terra-l)}
+    .btn-n{display:inline-flex;align-items:center;gap:6px;color:var(--terra);font-size:.875rem;font-weight:700;cursor:pointer;background:none;border:none;font-family:var(--font);padding:4px 0;transition:.15s}
+    .btn-n:hover{color:var(--terra-d);gap:10px}
+    .btn-w{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--terra);padding:13px 24px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;transition:.15s;font-family:var(--font)}
+    .btn-w:hover{background:var(--terra-xl)}
+
+    /* ── COMMUNS ── */
+    .container{max-width:1200px;margin:0 auto;padding:0 28px}
+    .tag{display:inline-block;background:var(--terra-l);color:var(--terra);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:4px 12px;border-radius:20px;margin-bottom:14px}
+    .tag-navy{background:rgba(26,46,74,.12);color:var(--navy)}
+    h2{font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:900;color:var(--anthracite);line-height:1.2;margin-bottom:14px}
+    h2 em{color:var(--terra);font-style:normal}
+    .sec-sub{font-size:1rem;color:var(--muted);max-width:560px;line-height:1.72}
+    section{padding:80px 0}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+    .two.rev .vis{order:-1}
+    .check-list{list-style:none;display:flex;flex-direction:column;gap:13px;margin-top:26px}
+    .check-list li{display:flex;gap:11px;align-items:flex-start}
+    .ck{width:20px;height:20px;background:var(--terra);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.62rem;flex-shrink:0;margin-top:3px;font-weight:900}
+    .check-list li p{font-size:.88rem;color:var(--muted);line-height:1.55}
+    .check-list li strong{color:var(--text)}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+
+    /* ── CARDS ── */
+    .card{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:26px 22px;transition:.2s}
+    .card:hover{box-shadow:var(--sh);transform:translateY(-3px);border-color:var(--terra)}
+    .card-ico{width:46px;height:46px;background:var(--terra-l);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:14px}
+    .card h3{font-size:.97rem;font-weight:800;color:var(--anthracite);margin-bottom:7px;line-height:1.3}
+    .card p{font-size:.84rem;color:var(--muted);line-height:1.6}
+
+    /* ── HERO ── */
+    .hero{background:linear-gradient(135deg,var(--sand) 0%,var(--terra-xl) 60%,var(--sand-d) 100%);padding:80px 0 64px}
+    .hero-in{max-width:1200px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:1fr 440px;gap:60px;align-items:center}
+    .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--terra);color:#fff;padding:4px 14px;border-radius:20px;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px}
+    h1{font-size:clamp(2rem,4vw,3.1rem);font-weight:900;line-height:1.1;color:var(--anthracite);margin-bottom:20px}
+    h1 em{color:var(--terra);font-style:normal}
+    .hero-sub{font-size:1.05rem;color:var(--muted);max-width:500px;margin-bottom:32px;line-height:1.75}
+
+    /* MOCKUP */
+    .mockup{background:var(--anthracite);border-radius:20px;padding:3px;box-shadow:0 28px 70px rgba(0,0,0,.22)}
+    .mockup-in{background:var(--sand);border-radius:18px;overflow:hidden;min-height:380px}
+    .mockup-bar{background:var(--terra);padding:14px 16px;display:flex;align-items:center;gap:8px}
+    .mockup-bar span{font-size:.8rem;font-weight:800;color:#fff}
+    .mockup-body{padding:16px;display:flex;flex-direction:column;gap:10px}
+    .m-card{background:#fff;border-radius:10px;padding:12px 14px;border:1.5px solid var(--border)}
+    .m-card-top{display:flex;align-items:center;gap:9px;margin-bottom:6px}
+    .m-ico{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+    .m-card-title{font-size:.78rem;font-weight:800;color:var(--anthracite)}
+    .m-chip{display:inline-block;background:var(--terra-l);color:var(--terra);font-size:.62rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-right:4px}
+    .m-chip-g{background:#e8f5e9;color:#2e7d32}
+    .m-chip-b{background:#e3f2fd;color:#1565c0}
+    .aide-row{display:flex;justify-content:space-between;align-items:center;background:var(--terra-l);border-radius:8px;padding:8px 10px;font-size:.72rem;font-weight:700}
+    .aide-row .prix{color:var(--terra);font-size:.82rem}
+    .trajet-row{display:flex;gap:8px;margin-top:6px}
+    .t-chip{background:#f0f4ff;color:#1565c0;border-radius:6px;padding:4px 8px;font-size:.65rem;font-weight:600}
+
+    /* ── TRIPTYQUE ── */
+    .triptyque{background:#fff;padding:80px 0}
+    .tri-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
+    .tri-card{border-radius:var(--r);padding:30px 24px;border:1.5px solid var(--border);transition:.2s;cursor:default}
+    .tri-card:hover{box-shadow:var(--sh);transform:translateY(-4px)}
+    .tri-card.featured{background:var(--terra);border-color:var(--terra);color:#fff}
+    .tri-card.featured p{color:rgba(255,255,255,.75)}
+    .tri-card.featured h3{color:#fff}
+    .tri-num{font-size:2.2rem;font-weight:900;margin-bottom:12px;line-height:1}
+    .tri-card.featured .tri-num{color:rgba(255,255,255,.4)}
+    .tri-num-def{color:var(--border)}
+    .tri-card h3{font-size:1.1rem;font-weight:800;color:var(--anthracite);margin-bottom:9px}
+    .tri-card p{font-size:.87rem;color:var(--muted);line-height:1.65}
+
+    /* ── PROBLEM ── */
+    .problem{background:var(--sand);padding:80px 0}
+    .prob-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
+    .prob-col{background:#fff;border-radius:var(--r);padding:24px;border-left:4px solid var(--terra)}
+    .prob-col h4{font-size:.95rem;font-weight:800;color:var(--anthracite);margin-bottom:8px}
+    .prob-col p{font-size:.84rem;color:var(--muted);line-height:1.6}
+
+    /* ── PORTES ACTION ── */
+    .portes{background:var(--terra-xl);padding:80px 0}
+    .portes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+    .porte-card{background:#fff;border-radius:var(--r);padding:28px 22px;border:1.5px solid var(--border);transition:.2s;display:flex;flex-direction:column;gap:14px}
+    .porte-card:hover{box-shadow:var(--sh);border-color:var(--terra)}
+    .porte-tag{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--terra);margin-bottom:2px}
+    .porte-card h3{font-size:1rem;font-weight:800;color:var(--anthracite);margin-bottom:0}
+    .porte-card p{font-size:.84rem;color:var(--muted);line-height:1.6;flex:1}
+
+    /* ── CONFIANCE MINI ── */
+    .trust-band{background:var(--navy);padding:64px 0}
+    .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+    .trust-item{text-align:center;padding:20px}
+    .trust-ico{font-size:1.6rem;margin-bottom:10px}
+    .trust-item h4{font-size:.9rem;font-weight:800;color:#fff;margin-bottom:5px}
+    .trust-item p{font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.5}
+
+    /* ── TERRITOIRES TEASER ── */
+    .terr-teaser{background:var(--sand);padding:80px 0}
+    .terr-dash{background:var(--navy);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:12px}
+    .td-row{background:rgba(255,255,255,.08);border-radius:9px;padding:12px 15px;display:flex;align-items:center;gap:12px}
+    .td-ico{font-size:1rem;flex-shrink:0}
+    .td-lbl{font-size:.8rem;color:rgba(255,255,255,.7);flex:1}
+    .td-val{font-size:.9rem;font-weight:800;color:#fff}
+    .td-bar{height:5px;background:rgba(255,255,255,.15);border-radius:3px;overflow:hidden;margin-top:8px}
+    .td-bar-fill{height:100%;background:var(--terra);border-radius:3px}
+
+    /* ── CTA FINAL HOME ── */
+    .cta-final{background:linear-gradient(135deg,var(--terra) 0%,var(--terra-d) 100%);padding:80px 0;text-align:center}
+    .cta-final h2{color:#fff;font-size:clamp(1.6rem,3vw,2.2rem)}
+    .cta-final p{color:rgba(255,255,255,.8);max-width:520px;margin:12px auto 36px}
+    .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+    /* ══════════════════════════════════
+       PAGE MISSION
+    ══════════════════════════════════ */
+    .mission-hero{background:var(--sand);padding:80px 0 64px}
+    .stat-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
+    .stat-card{background:#fff;border-radius:var(--r);padding:26px;text-align:center;border:1.5px solid var(--border)}
+    .stat-n{font-size:2.2rem;font-weight:900;color:var(--terra);margin-bottom:6px}
+    .stat-card p{font-size:.83rem;color:var(--muted);line-height:1.5}
+    .stat-card small{display:block;font-size:.68rem;color:var(--muted);margin-top:4px;opacity:.7}
+    .engage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+    .eng-card{background:var(--sand);border-radius:var(--r);padding:28px 24px;border-top:4px solid var(--terra)}
+    .eng-card h3{font-size:1rem;font-weight:800;color:var(--anthracite);margin-bottom:9px}
+    .eng-card p{font-size:.85rem;color:var(--muted);line-height:1.65}
+    .eng-ico{font-size:1.8rem;margin-bottom:12px}
+    .promise-row{background:var(--terra-l);border-radius:var(--r);padding:24px;border-left:4px solid var(--terra);margin-top:24px}
+    .promise-row h4{font-size:.95rem;font-weight:800;color:var(--terra);margin-bottom:6px}
+    .promise-row p{font-size:.88rem;color:var(--text);line-height:1.6}
+    .comm-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+    .comm-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:22px;transition:.2s}
+    .comm-card:hover{border-color:var(--terra);box-shadow:var(--sh)}
+    .comm-card h4{font-size:.92rem;font-weight:800;color:var(--anthracite);margin-bottom:6px}
+    .comm-card p{font-size:.82rem;color:var(--muted);line-height:1.55}
+
+    /* ══════════════════════════════════
+       PAGE TERRITOIRES
+    ══════════════════════════════════ */
+    .terr-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-l) 100%);padding:80px 0 64px}
+    .terr-hero h1{color:#fff}
+    .terr-hero .hero-sub{color:rgba(255,255,255,.7)}
+    .fonctions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+    .fn-card{background:#fff;border-radius:var(--r);padding:26px 22px;border-top:4px solid var(--terra);transition:.2s}
+    .fn-card:hover{box-shadow:var(--sh)}
+    .fn-num{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--terra);margin-bottom:8px}
+    .fn-card h3{font-size:.97rem;font-weight:800;color:var(--anthracite);margin-bottom:8px}
+    .fn-card p{font-size:.84rem;color:var(--muted);line-height:1.6}
+    .modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+    .mod-card{background:var(--sand);border-radius:var(--r);padding:22px;border:1.5px solid var(--border)}
+    .mod-status{display:inline-block;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:2px 9px;border-radius:20px;margin-bottom:10px}
+    .s-cadrage{background:#e8f5e9;color:#2e7d32}
+    .s-pilote{background:#fff3e0;color:#e65100}
+    .s-deploy{background:var(--terra-l);color:var(--terra)}
+    .mod-card h4{font-size:.9rem;font-weight:800;color:var(--anthracite);margin-bottom:6px}
+    .mod-card p{font-size:.8rem;color:var(--muted);line-height:1.55}
+    .timeline{display:flex;flex-direction:column;gap:0;margin-top:36px;position:relative}
+    .timeline::before{content:'';position:absolute;left:18px;top:10px;bottom:10px;width:2px;background:var(--border)}
+    .tl-step{display:flex;gap:18px;align-items:flex-start;padding:0 0 28px 0;position:relative;z-index:1}
+    .tl-dot{width:36px;height:36px;background:var(--terra);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;font-weight:900;flex-shrink:0;border:3px solid #fff;box-shadow:0 0 0 2px var(--terra)}
+    .tl-body h4{font-size:.92rem;font-weight:800;color:var(--anthracite);margin-bottom:4px}
+    .tl-body p{font-size:.82rem;color:var(--muted);line-height:1.5}
+    .faq-list{display:flex;flex-direction:column;gap:2px;margin-top:36px}
+    .faq-item{border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden}
+    .faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;cursor:pointer;font-size:.9rem;font-weight:700;color:var(--anthracite);background:#fff;transition:.15s}
+    .faq-q:hover{background:var(--terra-l)}
+    .faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:.3s;background:var(--sand);font-size:.85rem;color:var(--muted);line-height:1.65}
+    .faq-a.open{max-height:200px;padding:14px 20px}
+    .faq-ico{font-size:.8rem;transition:.3s}
+    .faq-ico.open{transform:rotate(45deg)}
+
+    /* ══════════════════════════════════
+       PAGE AGIR
+    ══════════════════════════════════ */
+    .agir-hero{background:var(--sand);padding:72px 0 56px}
+    .agir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+    .agir-card{background:#fff;border-radius:16px;padding:32px 26px;border:2px solid var(--border);transition:.2s;display:flex;flex-direction:column;cursor:pointer;text-align:center}
+    .agir-card:hover{border-color:var(--terra);box-shadow:var(--sh);transform:translateY(-4px)}
+    .agir-ico{width:60px;height:60px;border-radius:16px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+    .agir-card h3{font-size:1.1rem;font-weight:900;color:var(--anthracite);margin-bottom:10px}
+    .agir-card p{font-size:.87rem;color:var(--muted);line-height:1.65;flex:1;margin-bottom:18px}
+    .agir-card .btn-p{width:100%;justify-content:center}
+
+    /* ══════════════════════════════════
+       FORMULAIRES
+    ══════════════════════════════════ */
+    .form-page{background:var(--sand);min-height:100vh;padding:80px 0}
+    .form-box{background:#fff;border-radius:20px;padding:40px;max-width:600px;margin:0 auto;border:1.5px solid var(--border);box-shadow:var(--sh)}
+    .form-tag{display:inline-block;background:var(--terra-l);color:var(--terra);font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;padding:4px 12px;border-radius:20px;margin-bottom:14px}
+    .form-box h2{font-size:1.5rem;font-weight:900;color:var(--anthracite);margin-bottom:8px}
+    .form-box p.desc{font-size:.9rem;color:var(--muted);margin-bottom:28px;line-height:1.65}
+    .form-group{margin-bottom:18px}
+    .form-group label{display:block;font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:6px}
+    .form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:.9rem;color:var(--text);background:#fff;outline:none;transition:.15s;font-family:var(--font)}
+    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--terra);box-shadow:0 0 0 3px rgba(212,98,42,.1)}
+    .form-group textarea{resize:vertical;min-height:80px}
+    .form-submit{width:100%;padding:14px;background:var(--terra);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:800;cursor:pointer;font-family:var(--font);transition:.15s;margin-top:6px}
+    .form-submit:hover{background:var(--terra-d)}
+    .cnil-note{font-size:.72rem;color:var(--muted);margin-top:12px;line-height:1.55;text-align:center}
+    .form-back{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.83rem;font-weight:600;cursor:pointer;background:none;border:none;font-family:var(--font);padding:0;margin-bottom:20px;transition:.15s}
+    .form-back:hover{color:var(--terra)}
+
+    /* Merci page */
+    .merci-box{text-align:center;max-width:520px;margin:80px auto;padding:0 28px}
+    .merci-ico{width:72px;height:72px;background:var(--terra-l);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 24px}
+    .merci-box h2{font-size:1.8rem;font-weight:900;color:var(--anthracite);margin-bottom:12px}
+    .merci-box p{font-size:.95rem;color:var(--muted);line-height:1.7;margin-bottom:28px}
+
+    /* ══════════════════════════════════
+       PAGE CONFIANCE
+    ══════════════════════════════════ */
+    .conf-hero{background:var(--navy);padding:72px 0 56px}
+    .conf-hero h1{color:#fff}
+    .conf-hero .hero-sub{color:rgba(255,255,255,.65)}
+    .conf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:44px}
+    .conf-card{background:#fff;border-radius:var(--r);padding:26px;border-left:4px solid var(--terra)}
+    .conf-card h3{font-size:.97rem;font-weight:800;color:var(--anthracite);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+    .conf-card p{font-size:.85rem;color:var(--muted);line-height:1.65}
+    .acces-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px}
+    .acces-item{background:var(--sand);border-radius:var(--r);padding:20px;text-align:center;border:1.5px solid var(--border)}
+    .acces-ico{font-size:1.5rem;margin-bottom:8px}
+    .acces-item h4{font-size:.85rem;font-weight:800;color:var(--anthracite);margin-bottom:4px}
+    .acces-item p{font-size:.75rem;color:var(--muted);line-height:1.45}
+
+    /* ── FOOTER ── */
+    footer{background:var(--anthracite);color:rgba(255,255,255,.65);padding:56px 0 28px}
+    .foot-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
+    .foot-logo{display:flex;align-items:center;gap:9px;font-size:1.3rem;font-weight:900;color:var(--terra);margin-bottom:12px;letter-spacing:-.5px}
+    .foot-brand p{font-size:.82rem;line-height:1.7;color:rgba(255,255,255,.4);max-width:220px}
+    .foot-tagline{font-size:.78rem;color:var(--terra);font-weight:700;margin-top:6px;letter-spacing:.03em}
+    .foot-col h4{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.8);margin-bottom:12px}
+    .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+    .foot-col ul li button,.foot-col ul li a{font-size:.83rem;color:rgba(255,255,255,.42);transition:.15s;background:none;border:none;cursor:pointer;font-family:var(--font);padding:0;text-align:left}
+    .foot-col ul li button:hover,.foot-col ul li a:hover{color:var(--terra)}
+    .foot-bottom{padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    .foot-bottom p{font-size:.75rem;color:rgba(255,255,255,.28)}
+    .foot-legal{display:flex;gap:16px}
+    .foot-legal a{font-size:.75rem;color:rgba(255,255,255,.28);transition:.15s}
+    .foot-legal a:hover{color:var(--terra)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){
+      .tri-grid,.portes-grid,.fonctions-grid,.modules-grid,.agir-grid,.engage-grid{grid-template-columns:repeat(2,1fr)}
+      .trust-grid{grid-template-columns:repeat(2,1fr)}
+      .foot-top{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:768px){
+      .hero-in,.two,.two.rev,.terr-teaser .two{grid-template-columns:1fr;gap:36px}
+      .hero-vis{display:none}
+      .two.rev .vis{order:0}
+      .tri-grid,.portes-grid,.prob-cols,.stat-cards,.agir-grid,.engage-grid,.conf-grid,.acces-grid,.comm-cards{grid-template-columns:1fr}
+      .fonctions-grid,.modules-grid,.trust-grid{grid-template-columns:1fr}
+      .foot-top{grid-template-columns:1fr 1fr}
+      nav .nav-links,.nav-sep{display:none}
+      .mobile-menu-btn{display:block}
+    }
+    @media(max-width:520px){
+      .container,.nav-w,.hero-in{padding-left:16px;padding-right:16px}
+      section{padding:56px 0}
+      .foot-top{grid-template-columns:1fr}
+      .form-box{padding:24px 18px}
+      .cta-btns{flex-direction:column;align-items:center}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════ HEADER -->
+<header>
+  <div class="nav-w">
+    <div class="logo" onclick="showPage('home')">
+      <div class="logo-mark">
+        <svg viewBox="0 0 22 22" fill="none">
+          <path d="M4 18 C4 18, 7 10, 11 6 C15 2, 18 4, 18 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="11" cy="13" r="3" fill="#fff" opacity=".5"/>
+          <path d="M3 14 Q7 11 11 13 Q15 15 19 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".6"/>
+        </svg>
+      </div>
+      Flooow
+    </div>
+    <ul class="nav-links">
+      <li><button onclick="showPage('mission')" id="nav-mission">Notre mission</button></li>
+      <li><button onclick="showPage('territoires')" id="nav-territoires">Territoires</button></li>
+      <li><button onclick="showPage('agir')" id="nav-agir">Agir</button></li>
+      <li><button onclick="showPage('confiance')" id="nav-confiance">Confiance</button></li>
+    </ul>
+    <div class="nav-sep"></div>
+    <button class="btn-cta-sm" onclick="showPage('demo')">Demander une démo</button>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════ PAGE : ACCUEIL -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-in">
+      <div>
+        <div class="hero-badge">🌊 Démarche pilote</div>
+        <h1>Trouver · Financer<br><em>S'y rendre</em></h1>
+        <p class="hero-sub">Flooow aide les familles à accéder plus facilement aux activités pour leurs enfants en reliant trois informations souvent dispersées : l'offre disponible, les aides possibles et les conditions d'accès réelles.</p>
+        <div class="cta-row">
+          <button class="btn-p" onclick="showPage('family')">Je partage un besoin</button>
+          <button class="btn-s" onclick="showPage('territoires')">Je représente un territoire</button>
+        </div>
+        <div style="margin-top:18px">
+          <button class="btn-n" onclick="showPage('mission')">Découvrir la mission →</button>
+        </div>
+      </div>
+      <div class="hero-vis">
+        <div class="mockup">
+          <div class="mockup-in">
+            <div class="mockup-bar">
+              <span>🌊 Flooow — Recherche d'activité</span>
+            </div>
+            <div class="mockup-body">
+              <div class="m-card">
+                <div class="m-card-top">
+                  <div class="m-ico" style="background:#fff3e0">⚽</div>
+                  <div>
+                    <div class="m-card-title">Club de foot du quartier</div>
+                    <div style="font-size:.65rem;color:var(--muted)">Paris 14e · 6–12 ans</div>
+                  </div>
+                </div>
+                <div>
+                  <span class="m-chip">Sport</span>
+                  <span class="m-chip-g">Accessible</span>
+                  <span class="m-chip-b">Mercredi</span>
+                </div>
+              </div>
+              <div class="aide-row">
+                <span>Prix affiché : <s style="color:var(--muted)">180 €</s></span>
+                <span class="prix">Reste : 36 €</span>
+              </div>
+              <div class="m-card" style="background:var(--terra-xl)">
+                <div style="font-size:.72rem;font-weight:800;color:var(--terra);margin-bottom:6px">💡 Aides applicables</div>
+                <div style="font-size:.7rem;color:var(--muted);line-height:1.5">
+                  Pass'Sport (50 €) · Aide CAF (60 €) · Coupon sport mairie (34 €)
+                </div>
+              </div>
+              <div>
+                <div style="font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:6px">🗺 Accès</div>
+                <div class="trajet-row">
+                  <span class="t-chip">🚇 Métro 14 — 8 min</span>
+                  <span class="t-chip">🚌 Bus 62</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLÈME -->
+  <section class="problem">
+    <div class="container">
+      <div class="tag">Le constat</div>
+      <h2>Pourquoi tant de parcours s'arrêtent<br><em>avant même l'inscription ?</em></h2>
+      <p class="sec-sub">Le renoncement vient souvent d'une accumulation de petits obstacles séparés.</p>
+      <div class="prob-cols">
+        <div class="prob-col">
+          <h4>🔍 L'offre est peu visible</h4>
+          <p>Les activités existent, mais elles ne sont pas toujours simples à repérer pour les familles qui ne connaissent pas les bons canaux ou les structures locales.</p>
+        </div>
+        <div class="prob-col">
+          <h4>💶 Le coût réel reste flou</h4>
+          <p>Entre le prix affiché, les aides nationales, les dispositifs CAF/MSA, les aides locales et les conditions propres à chaque structure, le reste à charge est difficile à anticiper.</p>
+        </div>
+        <div class="prob-col">
+          <h4>🚌 L'accès n'est pas calculé</h4>
+          <p>Les horaires, le trajet, l'accompagnement nécessaire ou l'absence de solutions de déplacement font renoncer avant même le premier contact avec la structure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRIPTYQUE -->
+  <section class="triptyque">
+    <div class="container">
+      <div class="tag">Le triptyque Flooow</div>
+      <h2>Trois questions,<br><em>un même parcours</em></h2>
+      <p class="sec-sub">Flooow relie dans un seul parcours lisible les trois informations que les familles doivent aujourd'hui chercher séparément.</p>
+      <div class="tri-grid">
+        <div class="tri-card">
+          <div class="tri-num tri-num-def">01</div>
+          <h3>Trouver</h3>
+          <p>Repérer les activités par âge, type, lieu et accessibilité. Voir les structures locales, leurs horaires, leurs publics et leurs disponibilités.</p>
+        </div>
+        <div class="tri-card featured">
+          <div class="tri-num">02</div>
+          <h3>Financer</h3>
+          <p>Comprendre les aides possibles, le coût réel et le reste à charge. Distinguer prix affiché, aides nationales et dispositifs locaux cumulables.</p>
+        </div>
+        <div class="tri-card">
+          <div class="tri-num tri-num-def">03</div>
+          <h3>S'y rendre</h3>
+          <p>Anticiper la proximité, le trajet, l'accompagnement nécessaire ou les solutions de déplacement disponibles autour de l'activité.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTES D'ACTION -->
+  <section class="portes">
+    <div class="container">
+      <div class="tag">Agir avec Flooow</div>
+      <h2>Trois portes d'entrée,<br><em>trois actions concrètes</em></h2>
+      <p class="sec-sub">Votre retour terrain est ce qui rend Flooow utile. Choisissez votre porte d'entrée.</p>
+      <div class="portes-grid">
+        <div class="porte-card">
+          <div>
+            <div class="porte-tag">Pour les familles</div>
+            <h3>Flooow Family</h3>
+          </div>
+          <p>Partagez un besoin concret ou un frein d'accès à une activité pour votre enfant. Votre retour aide à améliorer l'accès pour tous.</p>
+          <button class="btn-p" onclick="showPage('family')">Je partage mon besoin →</button>
+        </div>
+        <div class="porte-card">
+          <div>
+            <div class="porte-tag">Pour les jeunes</div>
+            <h3>Flooow Jeunes</h3>
+          </div>
+          <p>Dites ce qui donne envie, ce qui bloque, quels lieux et quels formats manquent. Votre avis compte directement.</p>
+          <button class="btn-p" onclick="showPage('jeunes')">Je donne mon avis →</button>
+        </div>
+        <div class="porte-card">
+          <div>
+            <div class="porte-tag">Pour les structures et collectivités</div>
+            <h3>Flooow Territoires</h3>
+          </div>
+          <p>Référencez une structure, contribuez à la cartographie ou échangez sur une démarche pilote locale.</p>
+          <button class="btn-p" onclick="showPage('territoire-form')">J'échange sur un territoire →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERRITOIRES TEASER -->
+  <section class="terr-teaser">
+    <div class="container">
+      <div class="two">
+        <div>
+          <div class="tag">Pour les territoires</div>
+          <h2>Flooow n'est pas<br>seulement <em>un annuaire</em></h2>
+          <p class="sec-sub">C'est une démarche pour mieux relier activités, aides et accès réel — et comprendre ce qui freine vraiment les familles sur un territoire.</p>
+          <ul class="check-list">
+            <li><div class="ck">✓</div><p><strong>Cartographier les offres et structures</strong> disponibles sur votre territoire.</p></li>
+            <li><div class="ck">✓</div><p><strong>Qualifier les freins récurrents</strong> remontés par les familles et les jeunes.</p></li>
+            <li><div class="ck">✓</div><p><strong>Tester une démarche pilote</strong> avec les acteurs locaux — associations, équipements, collectivités.</p></li>
+          </ul>
+          <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn-p" onclick="showPage('demo')">Demander une démonstration</button>
+            <button class="btn-s" onclick="showPage('territoires')">Découvrir la page Territoires</button>
+          </div>
+        </div>
+        <div class="vis">
+          <div class="terr-dash">
+            <div style="color:rgba(255,255,255,.45);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px">🗺 Tableau de bord pilote</div>
+            <div class="td-row"><span class="td-ico">🏫</span><span class="td-lbl">Structures référencées</span><span class="td-val">47</span></div>
+            <div class="td-row"><span class="td-ico">👨‍👩‍👧</span><span class="td-lbl">Besoins familles remontés</span><span class="td-val">183</span></div>
+            <div class="td-row"><span class="td-ico">💬</span><span class="td-lbl">Avis jeunes collectés</span><span class="td-val">94</span></div>
+            <div class="td-row"><span class="td-ico">🚌</span><span class="td-lbl">Frein #1 : Déplacement</span><span class="td-val">41%</span></div>
+            <div class="td-row"><span class="td-ico">💶</span><span class="td-lbl">Frein #2 : Coût / aides</span><span class="td-val">37%</span></div>
+            <div style="padding:4px 0">
+              <div style="display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.5);margin-bottom:5px">
+                <span>Avancement pilote</span><span>62%</span>
+              </div>
+              <div class="td-bar"><div class="td-bar-fill" style="width:62%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONFIANCE BAND -->
+  <section class="trust-band">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:0">
+        <div class="tag tag-navy" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.7)">Nos engagements</div>
+        <h2 style="color:#fff;margin-top:8px">Une démarche sobre,<br>transparente et <em>respectueuse</em></h2>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-item"><div class="trust-ico">🔒</div><h4>Données minimisées</h4><p>Uniquement l'essentiel au premier contact. Aucune donnée sensible collectée initialement.</p></div>
+        <div class="trust-item"><div class="trust-ico">♿</div><h4>Accessibilité</h4><p>Design pensé pour tous les publics, sur tous les écrans, avec des contrastes suffisants.</p></div>
+        <div class="trust-item"><div class="trust-ico">🌱</div><h4>Démarche pilote</h4><p>Un projet qui progresse avec le terrain, pas une promesse de couverture nationale immédiate.</p></div>
+        <div class="trust-item"><div class="trust-ico">📅</div><h4>Mis à jour</h4><p>Les informations sur les aides et les structures sont vérifiées et actualisées régulièrement.</p></div>
+      </div>
+      <div style="text-align:center;margin-top:32px">
+        <button class="btn-w" onclick="showPage('confiance')">Voir tous nos engagements →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final">
+    <div class="container">
+      <h2>Choisissez votre porte d'entrée</h2>
+      <p>Famille, jeune, structure ou collectivité — votre retour peut rendre les activités plus accessibles.</p>
+      <div class="cta-btns">
+        <button class="btn-w" onclick="showPage('family')">Je partage un besoin</button>
+        <button class="btn-w" onclick="showPage('jeunes')">Je donne mon avis</button>
+        <button class="btn-w" onclick="showPage('territoire-form')">Je référence une structure</button>
+        <button class="btn-w" onclick="showPage('demo')">J'échange sur un territoire</button>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-home -->
+
+<!-- ════════════════════════════════════ PAGE : MISSION -->
+<div id="page-mission" class="page">
+  <section class="mission-hero">
+    <div class="container">
+      <div class="tag">Notre mission</div>
+      <h1>Rendre les activités plus <em>accessibles</em> aux enfants</h1>
+      <p class="hero-sub">Flooow agit sur trois frictions qui se cumulent : repérer l'offre, comprendre les aides, anticiper l'accès réel.</p>
+    </div>
+  </section>
+
+  <section style="background:#fff;padding:80px 0">
+    <div class="container">
+      <div class="tag">Pourquoi maintenant ?</div>
+      <h2>Un décalage réel entre <em>les droits et leur accès</em></h2>
+      <p class="sec-sub">Des aides existent. Des activités existent. Mais les familles peinent encore à relier ces informations dans un parcours lisible.</p>
+      <div class="stat-cards">
+        <div class="stat-card">
+          <div class="stat-n">4/10</div>
+          <p>Personnes citent le manque d'information sur les aides comme première cause de non-recours</p>
+          <small>Source : études non-recours 2022-2024</small>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n">3 sources</div>
+          <p>En moyenne, une famille doit consulter pour trouver l'offre, comprendre les aides et vérifier l'accès</p>
+          <small>Observation terrain Flooow</small>
+        </div>
+        <div class="stat-card">
+          <div class="stat-n">Variable</div>
+          <p>Le Pass'Sport, les aides CAF/MSA et les dispositifs locaux varient selon l'âge, la situation et le territoire</p>
+          <small>Données 2025-2026</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--sand);padding:80px 0">
+    <div class="container">
+      <div class="tag">Nos trois engagements</div>
+      <h2>Ce que Flooow <em>s'engage</em> à faire</h2>
+      <div class="engage-grid">
+        <div class="eng-card">
+          <div class="eng-ico">🔍</div>
+          <h3>Rendre les activités plus visibles</h3>
+          <p>Aider à repérer des offres sportives, culturelles, de loisirs, de vacances ou d'apprentissage adaptées aux enfants — par âge, lieu, accessibilité et disponibilité.</p>
+        </div>
+        <div class="eng-card">
+          <div class="eng-ico">💶</div>
+          <h3>Rendre les aides plus compréhensibles</h3>
+          <p>Aider à distinguer prix affiché, aides possibles et reste à charge. Rendre lisible ce qui est cumulable, ce qui est conditionnel, ce qui est local.</p>
+        </div>
+        <div class="eng-card">
+          <div class="eng-ico">🗺</div>
+          <h3>Relier les parcours au terrain</h3>
+          <p>Ne pas séparer l'offre, les démarches, les contraintes d'horaires et les questions d'accès. Remettre ces éléments dans un seul parcours lisible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#fff;padding:80px 0">
+    <div class="container">
+      <div class="two">
+        <div>
+          <div class="tag">Utilité territoriale</div>
+          <h2>Un projet d'utilité <em>territoriale</em></h2>
+          <p class="sec-sub">Flooow ne remplace pas les structures, les collectivités ou les dispositifs existants. Le projet cherche à mieux les relier pour rendre le parcours des familles plus clair et plus proche du terrain.</p>
+          <div class="promise-row">
+            <h4>Ce que Flooow ne promet pas</h4>
+            <p>Pas de "tout en un" magique. Pas de chiffres gonflés. Pas de collecte excessive. Pas de couverture nationale immédiate. Flooow préfère une progression territoriale lisible, documentée et utile.</p>
+          </div>
+        </div>
+        <div>
+          <div class="tag">Construire avec le terrain</div>
+          <h2>Trois <em>communautés</em> d'action</h2>
+          <div class="comm-cards" style="grid-template-columns:1fr;gap:12px">
+            <div class="comm-card">
+              <h4>🏠 Flooow Family</h4>
+              <p>Des besoins concrets, des freins remontés, des retours d'usage. Les familles sont au cœur de la démarche.</p>
+            </div>
+            <div class="comm-card">
+              <h4>🎯 Flooow Jeunes</h4>
+              <p>Des envies réelles, des formats crédibles, des lieux et horaires observés. La parole des jeunes, directement.</p>
+            </div>
+            <div class="comm-card">
+              <h4>🏙 Flooow Territoires</h4>
+              <p>Des structures, associations et collectivités qui aident à rendre l'offre plus visible et plus actionnable.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-final">
+    <div class="container">
+      <h2>Vous voulez participer à la mission ?</h2>
+      <p>La meilleure manière de faire avancer Flooow est de partir de situations réelles.</p>
+      <div class="cta-btns">
+        <button class="btn-w" onclick="showPage('agir')">Je contribue →</button>
+        <button class="btn-w" onclick="showPage('demo')">Demander une démo territoire</button>
+      </div>
+    </div>
+  </section>
+</div><!-- /page-mission -->
+
+<!-- ════════════════════════════════════ PAGE : TERRITOIRES -->
+<div id="page-territoires" class="page">
+  <section class="terr-hero">
+    <div class="container">
+      <div class="tag tag-navy" style="background:rgba(255,255,255,.12);color:rgba(255,255,255,.8)">Territoires</div>
+      <h1>Mieux comprendre les freins d'accès aux activités <em style="color:var(--terra)">sur votre territoire</em></h1>
+      <p class="hero-sub">Flooow aide à relier activités, aides et accès réel pour éclairer l'action locale. Pour les collectivités, associations, équipements, centres sociaux, clubs et partenaires locaux.</p>
+      <div class="cta-row" style="margin-top:28px">
+        <button class="btn-p" onclick="showPage('demo')">Demander une démonstration</button>
+        <button class="btn-w" onclick="showPage('demo')">Recevoir une note de présentation</button>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#fff;padding:80px 0">
+    <div class="container">
+      <div class="tag">Trois fonctions territoriales</div>
+      <h2>Ce que Flooow peut <em>aider à faire</em></h2>
+      <div class="fonctions-grid">
+        <div class="fn-card">
+          <div class="fn-num">Fonction 01</div>
+          <h3>Comprendre</h3>
+          <p>Mieux documenter les besoins remontés par les familles et les jeunes sur votre territoire. Identifier les freins les plus fréquents.</p>
+        </div>
+        <div class="fn-card">
+          <div class="fn-num">Fonction 02</div>
+          <h3>Cartographier</h3>
+          <p>Rendre visibles les structures, les activités, les aides disponibles et les points d'accès. Mettre en lien les acteurs locaux.</p>
+        </div>
+        <div class="fn-card">
+          <div class="fn-num">Fonction 03</div>
+          <h3>Piloter</h3>
+          <p>Hiérarchiser les freins récurrents et suivre une démarche pilote. Produire une synthèse partageable entre partenaires.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--sand);padding:80px 0">
+    <div class="container">
+      <div class="tag">Modules de la démarche</div>
+      <h2>Ce que la démarche Flooow <em>peut montrer</em></h2>
+      <p class="sec-sub">Des modules honnêtes, avec leur niveau de maturité affiché.</p>
+      <div class="modules-grid">
+        <div class="mod-card">
+          <span class="mod-status s-pilote">En pilote</span>
+          <h4>Cartographie des offres et structures</h4>
+          <p>Visualiser les activités, publics, tarifs, contacts, aides connues et informations d'accès.</p>
+        </div>
+        <div class="mod-card">
+          <span class="mod-status s-pilote">En pilote</span>
+          <h4>Lecture des freins</h4>
+          <p>Voir remonter les motifs récurrents : information, coût, aides, horaires, déplacement.</p>
+        </div>
+        <div class="mod-card">
+          <span class="mod-status s-cadrage">En cadrage</span>
+          <h4>Vue synthèse territoire</h4>
+          <p>Produire une synthèse territoriale simple à partager entre partenaires du projet.</p>
+        </div>
+        <div class="mod-card">
+          <span class="mod-status s-cadrage">En cadrage</span>
+          <h4>Aide à la décision</h4>
+          <p>Hiérarchiser les interventions prioritaires selon les freins identifiés sur le terrain.</p>
+        </div>
+        <div class="mod-card">
+          <span class="mod-status s-deploy">Cible déploiement</span>
+          <h4>OpenData local</h4>
+          <p>Restitution anonymisée et agréée des données collectées au bénéfice du territoire.</p>
+        </div>
+        <div class="mod-card">
+          <span class="mod-status s-deploy">Cible déploiement</span>
+          <h4>Espace partenaires</h4>
+          <p>Accès privé aux documents de travail, ressources partagées et vues de suivi du pilote.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#fff;padding:80px 0">
+    <div class="container">
+      <div class="two">
+        <div>
+          <div class="tag">Déroulé d'un pilote</div>
+          <h2>Comment se passe <em>un pilote Flooow ?</em></h2>
+          <div class="timeline" style="margin-top:32px">
+            <div class="tl-step"><div class="tl-dot">1</div><div class="tl-body"><h4>Cadrage du besoin local</h4><p>Identifier les publics prioritaires, les acteurs à mobiliser et le périmètre territorial du pilote.</p></div></div>
+            <div class="tl-step"><div class="tl-dot">2</div><div class="tl-body"><h4>Repérage des structures et aides</h4><p>Cartographier l'offre existante, les aides disponibles et les points d'accès sur le territoire.</p></div></div>
+            <div class="tl-step"><div class="tl-dot">3</div><div class="tl-body"><h4>Collecte de retours terrain</h4><p>Via Flooow Family, Flooow Jeunes et Flooow Territoires — besoins, freins, envies remontés directement.</p></div></div>
+            <div class="tl-step" style="padding-bottom:0"><div class="tl-dot">4</div><div class="tl-body"><h4>Restitution et suite</h4><p>Synthèse partagée avec les partenaires du pilote, préconisations et plan de déploiement progressif.</p></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="tag">Données & confiance</div>
+          <h2>Une approche <em>respectueuse</em> des données</h2>
+          <p class="sec-sub">Flooow ne demande que les informations utiles au premier contact. Les premiers formulaires n'ont pas vocation à recueillir des données sensibles.</p>
+          <ul class="check-list">
+            <li><div class="ck">✓</div><p><strong>Données minimisées</strong> : uniquement ce qui est nécessaire à la démarche pilote.</p></li>
+            <li><div class="ck">✓</div><p><strong>Pas de données sensibles</strong> au premier contact — familles comme structures.</p></li>
+            <li><div class="ck">✓</div><p><strong>Finalité explicite</strong> : améliorer l'accès aux activités sur votre territoire, rien d'autre.</p></li>
+            <li><div class="ck">✓</div><p><strong>Hébergement et conformité</strong> documentés dans notre page Confiance.</p></li>
+          </ul>
+          <div style="margin-top:22px">
+            <button class="btn-n" onclick="showPage('confiance')">Voir la page Confiance →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--sand);padding:80px 0">
+    <div class="container" style="max-width:760px">
+      <div class="tag">Questions fréquentes</div>
+      <h2>Vos questions sur <em>Flooow Territoires</em></h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>À qui s'adresse Flooow Territoires ?</span><span class="faq-ico">+</span></div>
+          <div class="faq-a">Aux collectivités (communes, intercommunalités, départements), associations locales, équipements sportifs et culturels, centres sociaux, structures d'accompagnement jeunesse et tout acteur impliqué dans l'accès aux activités pour les enfants et les familles.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>Que peut-on tester dans un pilote ?</span><span class="faq-ico">+</span></div>
+          <div class="faq-a">La cartographie des structures et offres locales, la collecte de besoins remontés par les familles, l'identification des freins les plus fréquents (coût, accès, information) et la production d'une synthèse territoriale partageable. Les fonctionnalités avancées sont en cadrage.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>Quelles données sont nécessaires au démarrage ?</span><span class="faq-ico">+</span></div>
+          <div class="faq-a">Au premier contact, uniquement votre organisation, votre territoire et votre sujet prioritaire. Pas de données sensibles. Les informations complémentaires sont demandées progressivement, selon les étapes du pilote.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)"><span>Comment associer les structures locales ?</span><span class="faq-ico">+</span></div>
+          <div class="faq-a">Via la porte Flooow Territoires, les structures peuvent se référencer elles-mêmes ou être invitées par la collectivité partenaire. Le processus est simple : organisation, type d'acteur, territoire et objet de la contribution.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-final">
+    <div class="container">
+      <h2>Vous souhaitez explorer un pilote local ?</h2>
+      <p>Partons d'un besoin concret, pas d'un discours générique.</p>
+      <div class="cta-btns">
+        <button class="btn-w" onclick="showPage('demo')">Demander une démonstration →</button>
+      </div>
+    </div>
+  </section>
+</div><!-- /page-territoires -->
+
+<!-- ════════════════════════════════════ PAGE : AGIR -->
+<div id="page-agir" class="page">
+  <section class="agir-hero">
+    <div class="container">
+      <div class="tag">Agir avec Flooow</div>
+      <h1>Choisissez votre <em>porte d'entrée</em></h1>
+      <p class="hero-sub">Votre retour terrain est ce qui rend Flooow utile. Trois formes d'action, trois publics, une même ambition : rendre les activités plus accessibles.</p>
+    </div>
+  </section>
+  <section style="background:var(--sand);padding:64px 0 80px">
+    <div class="container">
+      <div class="agir-grid">
+        <div class="agir-card">
+          <div class="agir-ico" style="background:#fff3e0">🏠</div>
+          <h3>Flooow Family</h3>
+          <p>Vous cherchez une activité pour votre enfant ? Vous hésitez à cause du coût, des aides, du trajet ou des démarches ? Partagez ce qui bloque aujourd'hui.</p>
+          <button class="btn-p" onclick="showPage('family')">Je partage mon besoin</button>
+        </div>
+        <div class="agir-card">
+          <div class="agir-ico" style="background:#e8f5e9">🎯</div>
+          <h3>Flooow Jeunes</h3>
+          <p>Qu'est-ce qui donne envie de participer ? Qu'est-ce qui décourage ? Quels lieux, quels horaires, quels formats manquent ? Votre avis compte.</p>
+          <button class="btn-p" onclick="showPage('jeunes')">Je donne mon avis</button>
+        </div>
+        <div class="agir-card">
+          <div class="agir-ico" style="background:#e3f2fd">🏙</div>
+          <h3>Flooow Territoires</h3>
+          <p>Vous proposez une activité, accompagnez des familles ou représentez une structure ? Référencez-vous, contribuez ou demandez un échange.</p>
+          <button class="btn-p" onclick="showPage('territoire-form')">Je référence une structure</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /page-agir -->
+
+<!-- ════════════════════════════════════ FORM : FLOOOW FAMILY -->
+<div id="page-family" class="page">
+  <section class="form-page">
+    <div class="container">
+      <button class="form-back" onclick="showPage('agir')">← Retour</button>
+      <div class="form-box">
+        <div class="form-tag">Flooow Family</div>
+        <h2>Partagez un besoin concret</h2>
+        <p class="desc">Vous cherchez une activité pour votre enfant ? Dites-nous simplement ce qui bloque aujourd'hui. Votre retour aide à améliorer l'accès pour toutes les familles.</p>
+        <form onsubmit="showMerci(event,'family')">
+          <div class="form-group">
+            <label>Commune ou quartier *</label>
+            <input type="text" placeholder="ex: Paris 14e, Clichy, Brest centre…" required/>
+          </div>
+          <div class="form-group">
+            <label>Tranche d'âge de l'enfant *</label>
+            <select required>
+              <option value="">Sélectionner…</option>
+              <option>3–5 ans</option><option>6–8 ans</option><option>9–11 ans</option>
+              <option>12–14 ans</option><option>15–17 ans</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Type d'activité recherchée</label>
+            <select>
+              <option value="">Sélectionner…</option>
+              <option>Sport</option><option>Culture / arts</option><option>Loisirs créatifs</option>
+              <option>Vacances / séjours</option><option>Soutien scolaire</option><option>Numérique</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Principal frein rencontré *</label>
+            <select required>
+              <option value="">Sélectionner…</option>
+              <option>Difficulté à trouver l'information</option>
+              <option>Coût / reste à charge trop élevé</option>
+              <option>Aides difficiles à comprendre</option>
+              <option>Problème de trajet / transport</option>
+              <option>Horaires incompatibles</option>
+              <option>Démarches trop complexes</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Email de contact (optionnel)</label>
+            <input type="email" placeholder="Pour vous tenir informé des avancées"/>
+          </div>
+          <button type="submit" class="form-submit">Envoyer mon besoin →</button>
+          <p class="cnil-note">🔒 Vos données sont utilisées uniquement pour améliorer l'accès aux activités. Aucune donnée sensible n'est demandée ici. Conformément au RGPD, vous pouvez demander leur suppression à tout moment.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════ FORM : FLOOOW JEUNES -->
+<div id="page-jeunes" class="page">
+  <section class="form-page">
+    <div class="container">
+      <button class="form-back" onclick="showPage('agir')">← Retour</button>
+      <div class="form-box">
+        <div class="form-tag">Flooow Jeunes</div>
+        <h2>Donnez votre avis</h2>
+        <p class="desc">Qu'est-ce qui donne envie de participer ? Qu'est-ce qui bloque ? Quels lieux, quels horaires, quels formats manquent ? Parlez-nous directement.</p>
+        <form onsubmit="showMerci(event,'jeunes')">
+          <div class="form-group">
+            <label>Ton âge (ou tranche d'âge) *</label>
+            <select required>
+              <option value="">Sélectionner…</option>
+              <option>11–13 ans</option><option>14–15 ans</option>
+              <option>16–17 ans</option><option>18–25 ans</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Commune ou quartier *</label>
+            <input type="text" placeholder="ex: Lyon 8e, Roubaix, Bordeaux…" required/>
+          </div>
+          <div class="form-group">
+            <label>Activité ou type d'activité qui te donne envie</label>
+            <input type="text" placeholder="ex: musique, foot, jeux vidéo, cuisine…"/>
+          </div>
+          <div class="form-group">
+            <label>Ce qui te bloque le plus *</label>
+            <select required>
+              <option value="">Sélectionner…</option>
+              <option>Je ne sais pas où trouver des infos</option>
+              <option>C'est trop cher</option>
+              <option>C'est loin / difficile d'y aller</option>
+              <option>Les horaires ne conviennent pas</option>
+              <option>Je ne connais personne qui y va</option>
+              <option>Les démarches sont compliquées</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Contact ou structure relais (optionnel)</label>
+            <input type="text" placeholder="Email, réseau social ou nom d'une structure"/>
+          </div>
+          <button type="submit" class="form-submit">Envoyer mon avis →</button>
+          <p class="cnil-note">🔒 Tes données sont utilisées uniquement pour améliorer l'accès aux activités. Aucune information sensible n'est demandée. Tu peux demander leur suppression à tout moment.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════ FORM : TERRITOIRE -->
+<div id="page-territoire-form" class="page">
+  <section class="form-page">
+    <div class="container">
+      <button class="form-back" onclick="showPage('agir')">← Retour</button>
+      <div class="form-box">
+        <div class="form-tag">Flooow Territoires</div>
+        <h2>Référencer ou contribuer</h2>
+        <p class="desc">Vous proposez une activité, accompagnez des familles ou représentez une structure locale ? Cette porte d'entrée est faite pour vous.</p>
+        <form onsubmit="showMerci(event,'territoire')">
+          <div class="form-group">
+            <label>Organisation / structure *</label>
+            <input type="text" placeholder="ex: Association Sportive du 14e, Centre social…" required/>
+          </div>
+          <div class="form-group">
+            <label>Type d'acteur *</label>
+            <select required>
+              <option value="">Sélectionner…</option>
+              <option>Association sportive</option><option>Association culturelle</option>
+              <option>Centre social / MJC</option><option>Équipement municipal</option>
+              <option>Collectivité</option><option>Structure d'accompagnement jeunesse</option><option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Territoire concerné *</label>
+            <input type="text" placeholder="Commune, quartier, intercommunalité…" required/>
+          </div>
+          <div class="form-group">
+            <label>Objet de votre démarche *</label>
+            <select required>
+              <option value="">Sélectionner…</option>
+              <option>Référencer notre structure / activité</option>
+              <option>Contribuer à la cartographie locale</option>
+              <option>Échanger sur une démarche pilote</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Email de contact *</label>
+            <input type="email" placeholder="votre@email.org" required/>
+          </div>
+          <button type="submit" class="form-submit">Envoyer ma contribution →</button>
+          <p class="cnil-note">🔒 Vos données sont utilisées uniquement pour la démarche Flooow. Conformément au RGPD, vous pouvez demander leur suppression à tout moment. Contact : contact@flooow.fr</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════ PAGE : DÉMO -->
+<div id="page-demo" class="page">
+  <section class="form-page">
+    <div class="container">
+      <button class="form-back" onclick="showPage('territoires')">← Retour Territoires</button>
+      <div class="form-box">
+        <div class="form-tag">Démo Territoire</div>
+        <h2>Découvrez comment Flooow peut s'adapter à votre territoire</h2>
+        <p class="desc">En 20 à 30 minutes, nous regardons ensemble votre contexte, vos publics et la meilleure manière de tester la démarche. Pas de discours générique — une conversation concrète.</p>
+        <form onsubmit="showMerci(event,'demo')">
+          <div class="form-group">
+            <label>Organisation / collectivité *</label>
+            <input type="text" placeholder="Commune, intercommunalité, association…" required/>
+          </div>
+          <div class="form-group">
+            <label>Votre fonction *</label>
+            <input type="text" placeholder="ex: Responsable jeunesse, Chargée de mission…" required/>
+          </div>
+          <div class="form-group">
+            <label>Territoire concerné *</label>
+            <input type="text" placeholder="Commune, quartier, département…" required/>
+          </div>
+          <div class="form-group">
+            <label>Sujet prioritaire *</label>
+            <select required>
+              <option value="">Sélectionner…</option>
+              <option>Cartographie des offres locales</option>
+              <option>Lisibilité des aides disponibles</option>
+              <option>Freins d'accès identifiés</option>
+              <option>Publics spécifiques (handicap, jeunes…)</option>
+              <option>Démarche pilote globale</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Email professionnel *</label>
+            <input type="email" placeholder="votre@collectivite.fr" required/>
+          </div>
+          <button type="submit" class="form-submit">Envoyer ma demande de démo →</button>
+          <p class="cnil-note">🔒 Ces données sont utilisées uniquement pour organiser la démonstration. Aucune information sensible n'est demandée. Conformément au RGPD, vous pouvez demander leur suppression : contact@flooow.fr</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════ PAGE : CONFIANCE -->
+<div id="page-confiance" class="page">
+  <section class="conf-hero">
+    <div class="container">
+      <div class="tag tag-navy" style="background:rgba(255,255,255,.12);color:rgba(255,255,255,.8)">Confiance & transparence</div>
+      <h1>Une démarche sobre, <em style="color:var(--terra)">transparente</em> et respectueuse</h1>
+      <p class="hero-sub">Pas de promesse gonflée. Pas de collecte excessive. Flooow construit sa crédibilité sur des engagements concrets et vérifiables.</p>
+    </div>
+  </section>
+
+  <section style="background:#fff;padding:80px 0">
+    <div class="container">
+      <div class="tag">Données personnelles</div>
+      <h2>Ce que nous collectons, <em>pourquoi</em> et comment</h2>
+      <div class="conf-grid">
+        <div class="conf-card">
+          <h3>🔒 Minimisation des données</h3>
+          <p>Flooow ne demande que l'essentiel au premier contact. Les formulaires se limitent à 5 champs maximum. Aucune donnée sensible (santé, handicap, situation familiale détaillée) n'est demandée lors des premiers échanges.</p>
+        </div>
+        <div class="conf-card">
+          <h3>🎯 Finalité explicite</h3>
+          <p>Les données collectées ont une seule finalité : améliorer l'accès aux activités pour les enfants sur les territoires. Elles ne sont ni revendues, ni utilisées à des fins publicitaires ou commerciales.</p>
+        </div>
+        <div class="conf-card">
+          <h3>⚖️ Conformité RGPD</h3>
+          <p>Vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour toute demande : contact@flooow.fr. Délai de réponse : 72h maximum.</p>
+        </div>
+        <div class="conf-card">
+          <h3>🌍 Hébergement</h3>
+          <p>Les données sont hébergées en Europe. Aucun transfert hors UE n'est effectué sans votre consentement explicite. La politique d'hébergement est documentée et disponible sur demande.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--sand);padding:80px 0">
+    <div class="container">
+      <div class="tag">Accessibilité</div>
+      <h2>Un site accessible <em>à tous</em></h2>
+      <p class="sec-sub">Flooow est conçu pour être lisible et utilisable par tous les publics, sur tous les supports.</p>
+      <div class="acces-grid">
+        <div class="acces-item"><div class="acces-ico">📱</div><h4>Mobile first</h4><p>Optimisé pour smartphone, tablette et bureau.</p></div>
+        <div class="acces-item"><div class="acces-ico">🎨</div><h4>Contrastes</h4><p>Respect des niveaux WCAG 2.1 AA pour tous les textes.</p></div>
+        <div class="acces-item"><div class="acces-ico">🔤</div><h4>Langage clair</h4><p>Zéro jargon institutionnel. Phrases courtes, actions directes.</p></div>
+        <div class="acces-item"><div class="acces-ico">📝</div><h4>Formulaires simples</h4><p>5 champs max, labels explicites, messages d'erreur clairs.</p></div>
+      </div>
+      <div style="margin-top:28px;background:#fff;border-radius:var(--r);padding:20px;border:1.5px solid var(--border)">
+        <p style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">Déclaration d'accessibilité :</strong> Ce site est en cours d'amélioration continue. Si vous rencontrez un problème d'accessibilité, signalez-le à <a href="mailto:contact@flooow.fr" style="color:var(--terra)">contact@flooow.fr</a> — nous traitons ces retours en priorité.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#fff;padding:80px 0">
+    <div class="container" style="max-width:760px">
+      <div class="tag">Gouvernance & transparence</div>
+      <h2>Qui porte <em>Flooow</em> ?</h2>
+      <div style="display:flex;flex-direction:column;gap:16px;margin-top:36px">
+        <div class="conf-card"><h3>🧭 Statut du projet</h3><p>Flooow est une démarche pilote, pas une plateforme nationale déployée. Le projet progresse territoire par territoire, en collaboration avec les acteurs locaux. La mention "version bêta" n'est pas utilisée car elle dit peu de chose aux usagers — nous préférons "démarche pilote" ou "territoires d'expérimentation".</p></div>
+        <div class="conf-card"><h3>🤝 Méthode de construction</h3><p>Flooow se construit avec les familles, les jeunes et les territoires. Ateliers, entretiens, tests et retours d'usage alimentent chaque évolution. Aucune fonctionnalité n'est développée sans validation terrain préalable.</p></div>
+        <div class="conf-card"><h3>📅 Actualisation</h3><p>Les informations sur les aides (Pass'Sport, CAF/MSA, dispositifs locaux) sont vérifiées régulièrement. Chaque page stratégique porte une mention de dernière mise à jour. Dernière révision : juin 2026.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-final">
+    <div class="container">
+      <h2>Une question ? Un retour ?</h2>
+      <p>Nous sommes disponibles et nous répondons dans les 72h.</p>
+      <div class="cta-btns">
+        <a href="mailto:contact@flooow.fr" class="btn-w">Nous contacter →</a>
+      </div>
+    </div>
+  </section>
+</div><!-- /page-confiance -->
+
+<!-- ════════════════════════════════════ PAGES MERCI -->
+<div id="page-merci-family" class="page">
+  <section style="background:var(--sand);min-height:80vh;display:flex;align-items:center">
+    <div class="container"><div class="merci-box">
+      <div class="merci-ico">🏠</div>
+      <h2>Merci pour votre retour !</h2>
+      <p>Votre besoin a bien été reçu. Chaque retour de famille aide à mieux comprendre ce qui bloque et à améliorer l'accès aux activités pour tous.</p>
+      <p style="font-size:.85rem;color:var(--muted);margin-top:-12px;margin-bottom:28px">Si vous avez laissé votre email, nous vous tiendrons informé des avancées sur votre territoire.</p>
+      <div class="cta-row" style="justify-content:center">
+        <button class="btn-p" onclick="showPage('home')">Retour à l'accueil</button>
+        <button class="btn-s" onclick="showPage('mission')">Découvrir la mission</button>
+      </div>
+    </div></div>
+  </section>
+</div>
+
+<div id="page-merci-jeunes" class="page">
+  <section style="background:var(--sand);min-height:80vh;display:flex;align-items:center">
+    <div class="container"><div class="merci-box">
+      <div class="merci-ico">🎯</div>
+      <h2>Merci pour ton avis !</h2>
+      <p>Ton retour compte vraiment. Il va directement alimenter la réflexion sur les formats et les offres qui manquent pour les jeunes de ton territoire.</p>
+      <div class="cta-row" style="justify-content:center">
+        <button class="btn-p" onclick="showPage('home')">Retour à l'accueil</button>
+      </div>
+    </div></div>
+  </section>
+</div>
+
+<div id="page-merci-territoire" class="page">
+  <section style="background:var(--sand);min-height:80vh;display:flex;align-items:center">
+    <div class="container"><div class="merci-box">
+      <div class="merci-ico">🏙</div>
+      <h2>Merci pour votre contribution !</h2>
+      <p>Votre structure a bien été référencée. Nous reviendrons vers vous prochainement pour échanger sur la suite.</p>
+      <div class="cta-row" style="justify-content:center">
+        <button class="btn-p" onclick="showPage('home')">Retour à l'accueil</button>
+        <button class="btn-s" onclick="showPage('territoires')">Page Territoires</button>
+      </div>
+    </div></div>
+  </section>
+</div>
+
+<div id="page-merci-demo" class="page">
+  <section style="background:var(--sand);min-height:80vh;display:flex;align-items:center">
+    <div class="container"><div class="merci-box">
+      <div class="merci-ico">✅</div>
+      <h2>Demande de démo reçue</h2>
+      <p>Nous reviendrons vers vous sous 48h pour confirmer le créneau. En attendant, vous pouvez consulter notre page Territoires pour en savoir plus sur la démarche.</p>
+      <div class="cta-row" style="justify-content:center">
+        <button class="btn-p" onclick="showPage('territoires')">Retour à la page Territoires</button>
+        <button class="btn-s" onclick="showPage('home')">Accueil</button>
+      </div>
+    </div></div>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════ FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="foot-logo">
+          <div class="logo-mark" style="width:28px;height:28px">
+            <svg viewBox="0 0 22 22" fill="none" width="16" height="16">
+              <path d="M4 18 C4 18, 7 10, 11 6 C15 2, 18 4, 18 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="11" cy="13" r="3" fill="#fff" opacity=".5"/>
+              <path d="M3 14 Q7 11 11 13 Q15 15 19 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".6"/>
+            </svg>
+          </div>
+          Flooow
+        </div>
+        <p>Trouver · Financer · S'y rendre</p>
+        <div class="foot-tagline">Démarche pilote — territoires d'expérimentation</div>
+      </div>
+      <div class="foot-col">
+        <h4>Le projet</h4>
+        <ul>
+          <li><button onclick="showPage('mission')">Notre mission</button></li>
+          <li><button onclick="showPage('confiance')">Confiance & données</button></li>
+          <li><a href="mailto:contact@flooow.fr">Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Agir</h4>
+        <ul>
+          <li><button onclick="showPage('family')">Flooow Family</button></li>
+          <li><button onclick="showPage('jeunes')">Flooow Jeunes</button></li>
+          <li><button onclick="showPage('territoire-form')">Flooow Territoires</button></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Territoires</h4>
+        <ul>
+          <li><button onclick="showPage('territoires')">Page Territoires</button></li>
+          <li><button onclick="showPage('demo')">Demander une démo</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2026 Flooow — Démarche pilote</p>
+      <div class="foot-legal">
+        <a href="#">Mentions légales</a>
+        <a href="#">Confidentialité</a>
+        <a href="mailto:contact@flooow.fr">contact@flooow.fr</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── SPA NAVIGATION
+  const pages = ['home','mission','territoires','agir','confiance','family','jeunes',
+    'territoire-form','demo','merci-family','merci-jeunes','merci-territoire','merci-demo'];
+  const navIds = ['mission','territoires','agir','confiance'];
+
+  function showPage(id) {
+    pages.forEach(p => {
+      const el = document.getElementById('page-'+p);
+      if (el) el.classList.toggle('active', p === id);
+    });
+    navIds.forEach(n => {
+      const btn = document.getElementById('nav-'+n);
+      if (btn) btn.classList.toggle('active', n === id);
+    });
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  // ── FORMS
+  function showMerci(e, type) {
+    e.preventDefault();
+    showPage('merci-'+type);
+  }
+
+  // ── FAQ
+  function toggleFaq(el) {
+    const ans = el.nextElementSibling;
+    const ico = el.querySelector('.faq-ico');
+    ans.classList.toggle('open');
+    ico.classList.toggle('open');
+  }
+
+  // ── MOBILE MENU (simple toggle)
+  function toggleMobileMenu() {
+    const links = document.querySelector('.nav-links');
+    if (!links) return;
+    const vis = links.style.display === 'flex';
+    links.style.display = vis ? '' : 'flex';
+    links.style.flexDirection = 'column';
+    links.style.position = 'absolute';
+    links.style.top = '64px';
+    links.style.left = '0';
+    links.style.right = '0';
+    links.style.background = '#fff';
+    links.style.padding = '12px 16px';
+    links.style.borderBottom = '1px solid #e5ddd4';
+    links.style.zIndex = '100';
+  }
+</script>
+</body>
+</html>
