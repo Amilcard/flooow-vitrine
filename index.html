@@ -5,17 +5,20 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Flooow — Trouver · Financer · S'y rendre</title>
   <meta name="description" content="Flooow aide les familles à accéder aux activités pour leurs enfants en reliant l'offre disponible, les aides possibles et les conditions d'accès réelles."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --terra:#d4622a;--terra-d:#b8501f;--terra-l:#fdf0eb;--terra-xl:#fef8f5;
+      --terra:#e8762c;--terra-d:#cf6420;--terra-l:#fdf0eb;--terra-xl:#fef8f5;
       --navy:#1a2e4a;--navy-l:#243d5e;
       --sand:#f5f0e8;--sand-d:#ede5d8;
       --anthracite:#2d3142;
       --text:#2d3142;--muted:#6b7280;--border:#e5ddd4;
       --white:#fff;
-      --r:12px;--sh:0 4px 24px rgba(0,0,0,.08);
-      --font:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;
+      --r:18px;--sh:0 4px 24px rgba(0,0,0,.08);
+      --font:'Poppins','Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;
     }
     html{scroll-behavior:smooth}
     body{font-family:var(--font);color:var(--text);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -36,18 +39,20 @@
     .nav-links li a,.nav-links li button{padding:7px 13px;border-radius:8px;font-size:.875rem;font-weight:500;color:var(--text);background:none;border:none;cursor:pointer;transition:.15s;font-family:var(--font)}
     .nav-links li a:hover,.nav-links li button:hover,.nav-links li a.active,.nav-links li button.active{background:var(--terra-l);color:var(--terra)}
     .nav-sep{flex:1}
-    .btn-cta-sm{background:var(--terra)!important;color:#fff!important;padding:8px 18px!important;border-radius:8px!important;font-weight:700!important;margin-left:8px;transition:.15s!important;border:none;cursor:pointer;font-size:.875rem;font-family:var(--font)}
+    .btn-cta-sm{background:var(--terra)!important;color:#fff!important;padding:8px 18px!important;border-radius:999px!important;font-weight:700!important;margin-left:8px;transition:.15s!important;border:none;cursor:pointer;font-size:.875rem;font-family:var(--font)}
     .btn-cta-sm:hover{background:var(--terra-d)!important}
     .mobile-menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--text);font-size:1.3rem}
 
     /* ── BOUTONS ── */
-    .btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:14px 26px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;transition:.15s;font-family:var(--font)}
+    .btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:14px 28px;border-radius:999px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;transition:.15s;font-family:var(--font)}
     .btn-p:hover{background:var(--terra-d);transform:translateY(-1px)}
-    .btn-s{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--terra);color:var(--terra);padding:12px 24px;border-radius:10px;font-size:.95rem;font-weight:700;background:transparent;cursor:pointer;transition:.15s;font-family:var(--font)}
+    .btn-s{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--terra);color:var(--terra);padding:12px 26px;border-radius:999px;font-size:.95rem;font-weight:700;background:transparent;cursor:pointer;transition:.15s;font-family:var(--font)}
     .btn-s:hover{background:var(--terra-l)}
+    .btn-wh{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--anthracite);padding:13px 28px;border-radius:999px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;transition:.15s;font-family:var(--font)}
+    .btn-wh:hover{background:var(--sand)}
     .btn-n{display:inline-flex;align-items:center;gap:6px;color:var(--terra);font-size:.875rem;font-weight:700;cursor:pointer;background:none;border:none;font-family:var(--font);padding:4px 0;transition:.15s}
     .btn-n:hover{color:var(--terra-d);gap:10px}
-    .btn-w{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--terra);padding:13px 24px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;transition:.15s;font-family:var(--font)}
+    .btn-w{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--terra);padding:13px 26px;border-radius:999px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;transition:.15s;font-family:var(--font)}
     .btn-w:hover{background:var(--terra-xl)}
 
     /* ── COMMUNS ── */
@@ -78,10 +83,10 @@
     .logo img{height:34px;display:block}
     .foot-logo img{height:26px;display:block}
 
-    /* ── HERO (photo réelle bord à bord) ── */
-    .hero{position:relative;background:url('assets/hero-judo.jpg') center 30%/cover no-repeat;padding:0}
-    .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,46,74,.5) 0%,rgba(26,46,74,.2) 45%,rgba(18,22,32,.78) 100%)}
-    .hero-in{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:130px 28px 120px;display:block}
+    /* ── HERO (plein écran bord à bord, modèle Patagonia) ── */
+    .hero{position:relative;height:100svh;min-height:540px;background:url('assets/hero-judo.jpg') center 30%/cover no-repeat;padding:0;display:flex;align-items:flex-end}
+    .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,46,74,.35) 0%,rgba(26,46,74,.1) 45%,rgba(18,22,32,.72) 100%)}
+    .hero-in{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 28px 88px;display:block;width:100%}
     .hero-in>div{max-width:640px}
     .hero h1{color:#fff}
     .hero h1 em{color:#ffb38a}
@@ -99,20 +104,36 @@
     .photo-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:0}
     .photo-strip img{width:100%;height:230px;object-fit:cover;display:block}
 
-    /* ── ÉCRANS DE L'APP (cadres téléphone) ── */
-    .app-show{background:var(--anthracite);padding:80px 0}
-    .app-show h2{color:#fff}
-    .app-show .sec-sub{color:rgba(255,255,255,.6)}
-    .phones{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;margin-top:50px}
-    .phone-col{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
-    .phone{width:252px;background:#11141d;border-radius:34px;padding:10px;box-shadow:0 26px 60px rgba(0,0,0,.45)}
-    .phone-scr{background:var(--sand);border-radius:25px;overflow:hidden}
-    .phone-top{background:var(--terra);padding:10px 14px;display:flex;align-items:center;gap:7px}
-    .phone-top span{font-size:.74rem;font-weight:800;color:#fff}
-    .phone-img{width:100%;height:118px;object-fit:cover;display:block}
-    .phone-body{padding:12px;display:flex;flex-direction:column;gap:9px}
-    .phone-cap{font-size:.92rem;font-weight:800;color:#fff}
-    .phone-cap small{display:block;font-weight:500;color:rgba(255,255,255,.5);font-size:.76rem;margin-top:2px}
+    /* ── CARROUSELS (modèle Patagonia : snap + flèches rondes) ── */
+    .carousel-wrap{position:relative}
+    .carousel{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:6px 28px;-webkit-overflow-scrolling:touch}
+    .carousel::-webkit-scrollbar{display:none}
+    .car-item{scroll-snap-align:start;flex-shrink:0}
+    .car-arrow{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:#fff;border:none;box-shadow:0 4px 16px rgba(0,0,0,.22);cursor:pointer;font-size:1.05rem;font-weight:700;color:var(--anthracite);z-index:5;display:flex;align-items:center;justify-content:center;transition:.15s;font-family:var(--font)}
+    .car-arrow:hover{transform:translateY(-50%) scale(1.06)}
+    .car-prev{left:12px}.car-next{right:12px}
+
+    /* Carrousel univers : grande carte photo, label sous la carte */
+    .univers-sec{background:#fff;padding:76px 0 84px}
+    .univers-mots{max-width:330px;width:70vw;display:block;margin-bottom:8px}
+    .univ-card{width:min(460px,86vw)}
+    .univ-card img{width:100%;height:min(540px,62vh);object-fit:cover;border-radius:10px;display:block}
+    .univ-name{font-size:1.08rem;font-weight:700;color:var(--anthracite);margin-top:14px}
+
+    /* Bande image large mission (modèle « Sacs Black Hole ») */
+    .mission-band{position:relative;background:url('assets/escalade.jpg') center/cover no-repeat;padding:150px 0}
+    .mission-band::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(18,22,32,.62) 0%,rgba(18,22,32,.25) 70%,rgba(18,22,32,.1) 100%)}
+    .mission-band .container{position:relative;z-index:1}
+    .mission-band h2{color:#fff;max-width:560px}
+    .mission-band p{color:rgba(255,255,255,.9);max-width:480px;font-size:1rem;line-height:1.7;margin-bottom:28px}
+
+    /* Carrousel écrans app (modèle cartes « Dernières histoires ») */
+    .app-sec{background:#fff;padding:76px 0 84px}
+    .app-card{width:min(300px,76vw);background:#f4f2ef;border-radius:10px;overflow:hidden}
+    .app-card img{width:100%;display:block}
+    .app-card .cap{padding:16px 18px 20px}
+    .app-card .cap strong{display:block;font-size:.98rem;font-weight:700;color:var(--anthracite)}
+    .app-card .cap small{display:block;font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.5}
 
     /* MOCKUP */
     .mockup{background:var(--anthracite);border-radius:20px;padding:3px;box-shadow:0 28px 70px rgba(0,0,0,.22)}
@@ -269,7 +290,7 @@
     .form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:.9rem;color:var(--text);background:#fff;outline:none;transition:.15s;font-family:var(--font)}
     .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--terra);box-shadow:0 0 0 3px rgba(212,98,42,.1)}
     .form-group textarea{resize:vertical;min-height:80px}
-    .form-submit{width:100%;padding:14px;background:var(--terra);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:800;cursor:pointer;font-family:var(--font);transition:.15s;margin-top:6px}
+    .form-submit{width:100%;padding:14px;background:var(--terra);color:#fff;border:none;border-radius:999px;font-size:1rem;font-weight:800;cursor:pointer;font-family:var(--font);transition:.15s;margin-top:6px}
     .form-submit:hover{background:var(--terra-d)}
     .cnil-note{font-size:.72rem;color:var(--muted);margin-top:12px;line-height:1.55;text-align:center}
     .form-back{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.83rem;font-weight:600;cursor:pointer;background:none;border:none;font-family:var(--font);padding:0;margin-bottom:20px;transition:.15s}
@@ -380,10 +401,13 @@
       .vd-row{grid-template-columns:1fr}
       .terri-input-row{flex-direction:column}
       .ladder-grid{grid-template-columns:1fr!important}
-      .hero-in{padding:90px 16px 80px}
+      .hero-in{padding:0 16px 64px}
       .photo-strip{grid-template-columns:repeat(3,1fr)}
       .photo-strip img{height:130px}
       .logo img{height:28px}
+      .car-arrow{width:40px;height:40px}
+      .carousel{padding:6px 16px}
+      .mission-band{padding:110px 0}
     }
     @media(max-width:520px){
       .container,.nav-w,.hero-in{padding-left:16px;padding-right:16px}
@@ -435,13 +459,71 @@
         <h1>Trouver · Financer<br><em>S'y rendre</em></h1>
         <p class="hero-sub">Flooow aide les familles à accéder plus facilement aux activités pour leurs enfants en reliant trois informations souvent dispersées : l'offre disponible, les aides possibles et les conditions d'accès réelles.</p>
         <div class="cta-row">
-          <button class="btn-p" onclick="showPage('mon-territoire')">📍 Que se passe-t-il près de chez moi ?</button>
-          <button class="btn-s on-dark" onclick="showPage('territoires')">Je représente un territoire</button>
+          <button class="btn-wh" onclick="showPage('mon-territoire')">📍 Près de chez moi</button>
+          <button class="btn-wh" onclick="showPage('territoires')">Je représente un territoire</button>
         </div>
         <div style="margin-top:18px">
           <button class="btn-n" onclick="showPage('mission')">Découvrir la mission →</button>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- CARROUSEL 1 : LES 5 UNIVERS -->
+  <section class="univers-sec">
+    <div class="container">
+      <img class="univers-mots" src="assets/univers-mots.png" alt="sport, vacances, culture, loisirs, apprentissages"/>
+    </div>
+    <div class="carousel-wrap">
+      <button class="car-arrow car-prev" onclick="carScroll(this,-1)" aria-label="Précédent">‹</button>
+      <div class="carousel">
+        <div class="car-item univ-card"><img src="assets/univers-sport.jpg" alt="Univers sport"/><div class="univ-name">Sport</div></div>
+        <div class="car-item univ-card"><img src="assets/univers-vacances.jpg" alt="Univers vacances"/><div class="univ-name">Vacances</div></div>
+        <div class="car-item univ-card"><img src="assets/univers-culture.jpg" alt="Univers culture"/><div class="univ-name">Culture</div></div>
+        <div class="car-item univ-card"><img src="assets/univers-loisirs.jpg" alt="Univers loisirs"/><div class="univ-name">Loisirs</div></div>
+        <div class="car-item univ-card"><img src="assets/univers-apprentissage.jpg" alt="Univers apprentissages"/><div class="univ-name">Apprentissages</div></div>
+      </div>
+      <button class="car-arrow car-next" onclick="carScroll(this,1)" aria-label="Suivant">›</button>
+    </div>
+  </section>
+
+  <!-- IMAGE LARGE 2 : MISSION -->
+  <section class="mission-band">
+    <div class="container">
+      <h2>Trouver · Financer · <em style="color:#ffb38a">S'y rendre</em></h2>
+      <p>Trois questions que chaque famille se pose, un même parcours. Flooow relie l'offre, les aides et l'accès réel.</p>
+      <button class="btn-wh" onclick="showPage('mission')">Découvrir la mission</button>
+    </div>
+  </section>
+
+  <!-- CARROUSEL 2 : ÉCRANS DE L'APP -->
+  <section class="app-sec">
+    <div class="container">
+      <div class="tag">L'application</div>
+      <h2>L'app Flooow, <em>en vrai</em></h2>
+      <p class="sec-sub">Les écrans réels de l'application, tels que les familles pilotes les utilisent.</p>
+    </div>
+    <div class="carousel-wrap" style="margin-top:36px">
+      <button class="car-arrow car-prev" onclick="carScroll(this,-1)" aria-label="Précédent">‹</button>
+      <div class="carousel">
+        <div class="car-item app-card">
+          <img src="assets/app-accueil.jpeg" alt="Écran d'accueil : activités à proximité"/>
+          <div class="cap"><strong>Activités à proximité</strong><small>Une sélection adaptée au profil de votre famille</small></div>
+        </div>
+        <div class="car-item app-card">
+          <img src="assets/app-filtres-budget.jpeg" alt="Écran filtres : budget et aides"/>
+          <div class="cap"><strong>Budget & aides</strong><small>CAF, Ville, ANCV, Pass'Sport, Pass Culture</small></div>
+        </div>
+        <div class="car-item app-card">
+          <img src="assets/app-simulateur.jpeg" alt="Écran simulateur d'aides"/>
+          <div class="cap"><strong>Simulateur d'aides — <span id="mockup-ville">Saint-Étienne</span></strong><small>Le coût réel après aides, avant d'inscrire</small></div>
+        </div>
+        <div class="car-item app-card">
+          <img src="assets/app-filtres-inklusif.jpeg" alt="Écran filtres InKlusif : accessibilité"/>
+          <div class="cap"><strong>InKlusif</strong><small>Besoins spécifiques, accessibilité, trajets & mobilité</small></div>
+        </div>
+      </div>
+      <button class="car-arrow car-next" onclick="carScroll(this,1)" aria-label="Suivant">›</button>
     </div>
   </section>
 
@@ -489,84 +571,6 @@
           <div class="tri-num tri-num-def">03</div>
           <h3>S'y rendre</h3>
           <p>Anticiper la proximité, le trajet, l'accompagnement nécessaire ou les solutions de déplacement disponibles autour de l'activité.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ÉCRANS DE L'APP -->
-  <section class="app-show">
-    <div class="container">
-      <div style="text-align:center">
-        <div class="tag" style="background:rgba(255,255,255,.1);color:#ffb38a">L'application</div>
-        <h2>Le triptyque, <em>en vrai, dans l'app</em></h2>
-        <p class="sec-sub" style="margin:0 auto">Trois questions, trois écrans. Voici comment Flooow accompagne concrètement une famille, de la recherche à l'inscription.</p>
-      </div>
-      <div class="phones">
-        <div class="phone-col">
-          <div class="phone">
-            <div class="phone-scr">
-              <div class="phone-top"><span>😊 Flooow — Recherche</span></div>
-              <img class="phone-img" src="assets/natation.jpg" alt="Cours de natation enfants"/>
-              <div class="phone-body">
-                <div class="m-card">
-                  <div class="m-card-title">Natation enfants</div>
-                  <div style="font-size:.65rem;color:var(--muted);margin-bottom:5px"><span id="mockup-ville">Saint-Étienne</span> · 6–9 ans</div>
-                  <span class="m-chip">Sport</span>
-                  <span class="m-chip-g">Accessible</span>
-                  <span class="m-chip-b">Mercredi</span>
-                </div>
-                <div class="m-card">
-                  <div class="m-card-title">Judo découverte</div>
-                  <div style="font-size:.65rem;color:var(--muted)">À 800 m · dès 6 ans</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="phone-cap">01 · Trouver<small>Par âge, lieu, période, accessibilité</small></div>
-        </div>
-        <div class="phone-col">
-          <div class="phone">
-            <div class="phone-scr">
-              <div class="phone-top"><span>😊 Flooow — Mes aides</span></div>
-              <img class="phone-img" src="assets/aides.webp" alt="Simulation des aides financières"/>
-              <div class="phone-body">
-                <div class="aide-row">
-                  <span>Prix affiché : <s style="color:var(--muted)">180 €</s></span>
-                  <span class="prix">Reste : 36 €</span>
-                </div>
-                <div class="m-card" style="background:var(--terra-xl)">
-                  <div style="font-size:.72rem;font-weight:800;color:var(--terra);margin-bottom:6px">💡 Aides applicables</div>
-                  <div style="font-size:.7rem;color:var(--muted);line-height:1.5">
-                    Pass'Sport (50 €) · Aide CAF (60 €) · Coupon sport mairie (34 €)
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="phone-cap">02 · Financer<small>Le coût réel après aides, avant d'inscrire</small></div>
-        </div>
-        <div class="phone-col">
-          <div class="phone">
-            <div class="phone-scr">
-              <div class="phone-top"><span>😊 Flooow — Y aller</span></div>
-              <img class="phone-img" src="assets/eco-mobilite.webp" alt="Famille à vélo — éco-mobilité"/>
-              <div class="phone-body">
-                <div class="m-card">
-                  <div style="font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:6px">🗺 Votre trajet</div>
-                  <div class="trajet-row" style="margin-top:0;flex-wrap:wrap;gap:6px">
-                    <span class="t-chip">🚌 Bus — 12 min</span>
-                    <span class="t-chip">🚲 Vélo — 9 min</span>
-                    <span class="t-chip">🚶 18 min</span>
-                  </div>
-                </div>
-                <div class="m-card" style="background:#e8f5e9;border-color:#c8e6c9">
-                  <div style="font-size:.68rem;color:#2e7d32;font-weight:700">🌱 Option éco-mobilité disponible</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="phone-cap">03 · S'y rendre<small>Trajets, accompagnement, éco-mobilité</small></div>
         </div>
       </div>
     </div>
@@ -1646,6 +1650,12 @@
   function showMerci(e, type) {
     e.preventDefault();
     showPage('merci-'+type);
+  }
+
+  // ── CARROUSELS
+  function carScroll(btn, dir) {
+    const sc = btn.closest('.carousel-wrap').querySelector('.carousel');
+    sc.scrollBy({left: dir * sc.clientWidth * 0.8, behavior: 'smooth'});
   }
 
   // ── FAQ
