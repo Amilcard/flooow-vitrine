@@ -381,6 +381,50 @@
     .vd-fait{background:var(--terra-l)}
     .vd-fait h5{color:var(--terra)}
 
+    /* ── NAVIGATION DEUX ENTRÉES (details/summary, accessible clavier) ── */
+    .nav-dds{display:flex;gap:6px;align-items:center}
+    .nav-dd{position:relative}
+    .nav-dd summary{list-style:none;cursor:pointer;padding:8px 16px;border-radius:999px;font-weight:600;font-size:.9rem;color:var(--text);transition:.15s;user-select:none}
+    .nav-dd summary::-webkit-details-marker{display:none}
+    .nav-dd summary::after{content:' ▾';font-size:.7em;opacity:.6}
+    .nav-dd summary:hover,.nav-dd[open] summary{background:var(--terra-l);color:var(--terra)}
+    .dd-panel{position:absolute;top:calc(100% + 8px);left:0;background:#fff;border:1.5px solid var(--border);border-radius:16px;box-shadow:var(--sh);padding:10px;min-width:240px;z-index:300;display:flex;flex-direction:column;gap:2px}
+    .dd-panel button{text-align:left;background:none;border:none;font-family:var(--font);font-size:.88rem;padding:9px 12px;border-radius:10px;cursor:pointer;color:var(--text);transition:.12s}
+    .dd-panel button:hover,.dd-panel button:focus-visible{background:var(--terra-l);color:var(--terra)}
+
+    /* ── MENU MOBILE ── */
+    #mobile-menu{background:#fff;border-top:1px solid var(--border);padding:16px;display:flex;flex-direction:column;gap:16px;max-height:calc(100vh - 70px);overflow:auto}
+    #mobile-menu.hidden{display:none}
+    .mm-group{display:flex;flex-direction:column}
+    .mm-group h5{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 4px}
+    .mm-group button{text-align:left;background:none;border:none;font-family:var(--font);padding:11px 4px;font-size:.95rem;color:var(--text);border-bottom:1px solid var(--sand-d);cursor:pointer}
+
+    /* ── BANDES IMAGE LARGE (constat / engagement) ── */
+    .band{position:relative;padding:150px 0;background-size:cover;background-position:center}
+    .band::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(18,22,32,.66) 0%,rgba(18,22,32,.22) 75%,rgba(18,22,32,.08) 100%)}
+    .band .container{position:relative;z-index:1}
+    .band h2{color:#fff;max-width:620px}
+    .band p{color:rgba(255,255,255,.92);max-width:520px;font-size:1rem;line-height:1.7;margin-bottom:28px}
+    .band-constat{background-image:url('assets/theatre.jpg')}
+    .band-engage{background-image:url('assets/hiphop.jpg')}
+    .btn-ghost{display:inline-flex;align-items:center;gap:8px;border:2px solid #fff;color:#fff;background:transparent;padding:11px 26px;border-radius:999px;font-size:.95rem;font-weight:700;cursor:pointer;transition:.15s;font-family:var(--font)}
+    .btn-ghost:hover{background:rgba(255,255,255,.16)}
+
+    /* ── CARTES CARROUSELS (bénéfices / communautés) ── */
+    .car-sec{background:#fff;padding:76px 0 84px}
+    .ben-card{width:min(320px,80vw);background:#f6f4f1;border-radius:14px;overflow:hidden}
+    .ben-card img{width:100%;height:190px;object-fit:cover;display:block}
+    .ben-card .cap{padding:16px 18px 20px}
+    .ben-card .cap strong{display:block;font-size:1rem;font-weight:700;color:var(--anthracite)}
+    .ben-card .cap small{display:block;font-size:.82rem;color:var(--muted);margin-top:5px;line-height:1.55}
+    .com-card2{width:min(320px,80vw);background:#fff;border:1.5px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+    .com-card2 img{width:100%;height:170px;object-fit:cover;display:block}
+    .com-card2 .cap{padding:16px 18px 20px;display:flex;flex-direction:column;gap:9px;flex:1}
+    .com-card2 .cap strong{font-size:1rem;font-weight:700;color:var(--anthracite)}
+    .com-card2 .cap small{font-size:.82rem;color:var(--muted);line-height:1.55;flex:1}
+    .btn-p-sm{display:inline-flex;align-items:center;gap:6px;background:var(--terra);color:#fff;padding:9px 18px;border-radius:999px;font-size:.84rem;font-weight:700;cursor:pointer;border:none;transition:.15s;font-family:var(--font);align-self:flex-start}
+    .btn-p-sm:hover{background:var(--terra-d)}
+
     /* ── RESPONSIVE ── */
     @media(max-width:1024px){
       .tri-grid,.portes-grid,.fonctions-grid,.modules-grid,.agir-grid,.engage-grid{grid-template-columns:repeat(2,1fr)}
@@ -394,8 +438,10 @@
       .tri-grid,.portes-grid,.prob-cols,.stat-cards,.agir-grid,.engage-grid,.conf-grid,.acces-grid,.comm-cards{grid-template-columns:1fr}
       .fonctions-grid,.modules-grid,.trust-grid{grid-template-columns:1fr}
       .foot-top{grid-template-columns:1fr 1fr}
-      nav .nav-links,.nav-sep{display:none}
+      nav .nav-links,.nav-sep,.nav-dds{display:none}
       .mobile-menu-btn{display:block}
+      .btn-cta-sm{margin-left:auto}
+      .band{padding:110px 0}
       .commu-in{padding:0 12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
       .cb-lbl{display:none}
       .vd-row{grid-template-columns:1fr}
@@ -420,62 +466,232 @@
 </head>
 <body>
 
-<!-- ════════════════════════════════════ HEADER (double navigation : communauté + projet) -->
+<!-- ════════════════════════════════════ HEADER (deux entrées : Découvrir / Rejoindre) -->
 <header>
-  <div class="commu-bar">
-    <div class="commu-in">
-      <span class="cb-lbl">Communauté</span>
-      <button onclick="showPage('mon-territoire')">📍 Mon territoire</button>
-      <button onclick="showPage('famille-pilote')">🧪 Tester l'app</button>
-      <button onclick="showPage('agir')">💬 Partager un retour</button>
-      <button onclick="showPage('journal')">📓 Journal du pilote</button>
-      <span class="cb-sep"></span>
-      <button class="cb-cta" onclick="showPage('agir')">Rejoindre la communauté</button>
-    </div>
-  </div>
   <div class="nav-w">
     <div class="logo" onclick="showPage('home')">
       <img src="assets/logo-flooow.png" alt="Flooow"/>
     </div>
-    <ul class="nav-links">
-      <li><button onclick="showPage('mission')" id="nav-mission">Notre mission</button></li>
-      <li><button onclick="showPage('territoires')" id="nav-territoires">Territoires</button></li>
-      <li><button onclick="showPage('confiance')" id="nav-confiance">Confiance</button></li>
-    </ul>
+    <nav class="nav-dds" aria-label="Navigation principale">
+      <details class="nav-dd">
+        <summary>Découvrir Flooow</summary>
+        <div class="dd-panel">
+          <button onclick="showPage('mission')">Le projet</button>
+          <button onclick="showPage('activites')">Activités</button>
+          <button onclick="showPage('aides')">Aides financières</button>
+          <button onclick="showPage('mobilite')">Mobilité</button>
+          <button onclick="showPage('territoires')">Territoires</button>
+          <button onclick="showPage('demo')">Partenaires</button>
+        </div>
+      </details>
+      <details class="nav-dd">
+        <summary>Rejoindre la communauté</summary>
+        <div class="dd-panel">
+          <button onclick="showPage('family')">Familles</button>
+          <button onclick="showPage('jeunes')">Jeunes</button>
+          <button onclick="showPage('territoire-form')">Structures d'activités</button>
+          <button onclick="showPage('territoire-form')">Associations relais</button>
+          <button onclick="showPage('demo')">Collectivités</button>
+          <button onclick="showPage('famille-pilote')">Premiers utilisateurs</button>
+        </div>
+      </details>
+    </nav>
     <div class="nav-sep"></div>
-    <button class="btn-cta-sm" onclick="showPage('demo')">Demander une démo</button>
-    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    <button class="btn-cta-sm" onclick="showPage('agir')">Rejoindre la communauté</button>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Ouvrir le menu" aria-controls="mobile-menu">☰</button>
+  </div>
+  <div id="mobile-menu" class="hidden">
+    <button class="btn-p" style="width:100%;justify-content:center" onclick="showPage('agir')">Rejoindre la communauté</button>
+    <button class="btn-s" style="width:100%;justify-content:center" onclick="showPage('mission')">Découvrir Flooow</button>
+    <div class="mm-group">
+      <h5>Découvrir Flooow</h5>
+      <button onclick="showPage('mission')">Le projet</button>
+      <button onclick="showPage('activites')">Activités</button>
+      <button onclick="showPage('aides')">Aides financières</button>
+      <button onclick="showPage('mobilite')">Mobilité</button>
+      <button onclick="showPage('territoires')">Territoires</button>
+      <button onclick="showPage('demo')">Partenaires</button>
+    </div>
+    <div class="mm-group">
+      <h5>Rejoindre la communauté</h5>
+      <button onclick="showPage('family')">Familles</button>
+      <button onclick="showPage('jeunes')">Jeunes</button>
+      <button onclick="showPage('territoire-form')">Structures d'activités</button>
+      <button onclick="showPage('territoire-form')">Associations relais</button>
+      <button onclick="showPage('demo')">Collectivités</button>
+      <button onclick="showPage('famille-pilote')">Premiers utilisateurs</button>
+    </div>
   </div>
 </header>
 
 <!-- ════════════════════════════════════ PAGE : ACCUEIL -->
 <div id="page-home" class="page active">
 
-  <!-- HERO bord à bord -->
+  <!-- 1. HERO IMAGE LARGE -->
   <section class="hero">
     <div class="hero-in">
       <div>
-        <div class="hero-badge">Démarche pilote — territoires d'expérimentation</div>
-        <h1>Trouver · Financer<br><em>S'y rendre</em></h1>
-        <p class="hero-sub">Flooow aide les familles à accéder plus facilement aux activités pour leurs enfants en reliant trois informations souvent dispersées : l'offre disponible, les aides possibles et les conditions d'accès réelles.</p>
+        <div class="hero-badge">Activités · Aides · Mobilité</div>
+        <h1>Des activités plus faciles à trouver, <em>financer et rejoindre</em>.</h1>
+        <p class="hero-sub">Flooow réunit activités, aides financières et solutions de mobilité pour aider les familles à passer de l'envie à l'inscription.</p>
         <div class="cta-row">
-          <button class="btn-wh" onclick="showPage('mon-territoire')">📍 Près de chez moi</button>
-          <button class="btn-wh" onclick="showPage('territoires')">Je représente un territoire</button>
-        </div>
-        <div style="margin-top:18px">
-          <button class="btn-n" onclick="showPage('mission')">Découvrir la mission →</button>
+          <button class="btn-p" onclick="showPage('agir')">Rejoindre la communauté</button>
+          <button class="btn-wh" onclick="showPage('mission')">Découvrir Flooow</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CARROUSEL 1 : LES 5 UNIVERS -->
+  <!-- 2. CARROUSEL BÉNÉFICES IMMÉDIATS -->
+  <section class="car-sec">
+    <div class="container">
+      <div class="tag">Concrètement</div>
+      <h2>Ce que vous y <em>gagnez</em></h2>
+    </div>
+    <div class="carousel-wrap" style="margin-top:32px">
+      <button class="car-arrow car-prev" onclick="carScroll(this,-1)" aria-label="Cartes précédentes">‹</button>
+      <div class="carousel">
+        <div class="car-item ben-card">
+          <img src="assets/natation.jpg" alt="Enfants à un cours de natation"/>
+          <div class="cap"><strong>Trouver une activité</strong><small>Sport, culture, loisirs, plein air, vacances : découvrez des idées adaptées aux enfants et aux jeunes.</small></div>
+        </div>
+        <div class="car-item ben-card">
+          <img src="assets/app-simulateur.jpeg" alt="Écran Flooow : simulation des aides financières" style="object-position:top"/>
+          <div class="cap"><strong>Comprendre les aides</strong><small>Repérez les aides possibles avant de renoncer ou de choisir.</small></div>
+        </div>
+        <div class="car-item ben-card">
+          <img src="assets/eco-mobilite.webp" alt="Famille à vélo sur un trajet du quotidien"/>
+          <div class="cap"><strong>Préparer le trajet</strong><small>Visualisez les options pour s'y rendre plus simplement.</small></div>
+        </div>
+        <div class="car-item ben-card">
+          <img src="assets/app-accueil.jpeg" alt="Écran Flooow : activités à proximité" style="object-position:top"/>
+          <div class="cap"><strong>Gagner du temps</strong><small>Moins de recherches dispersées, plus d'informations utiles au même endroit.</small></div>
+        </div>
+        <div class="car-item ben-card">
+          <img src="assets/theatre.jpg" alt="Spectacle d'enfants devant leur quartier"/>
+          <div class="cap"><strong>Découvrir près de chez soi</strong><small>Des activités et relais ancrés dans les territoires.</small></div>
+        </div>
+        <div class="car-item ben-card">
+          <img src="assets/volley.jpg" alt="Jeunes jouant au volley ensemble"/>
+          <div class="cap"><strong>Faire partie de la communauté</strong><small>Familles, jeunes, structures et collectivités avancent ensemble.</small></div>
+        </div>
+      </div>
+      <button class="car-arrow car-next" onclick="carScroll(this,1)" aria-label="Cartes suivantes">›</button>
+    </div>
+  </section>
+
+  <!-- 3. IMAGE LARGE — CONSTAT TERRAIN -->
+  <section class="band band-constat">
+    <div class="container">
+      <h2>Souvent, l'activité existe. Ce qui manque, c'est le chemin pour y accéder.</h2>
+      <p>Entre le coût, les aides, les horaires, les trajets et les informations dispersées, beaucoup de familles renoncent avant même d'inscrire leur enfant.</p>
+      <button class="btn-wh" onclick="showPage('mission')">Voir comment Flooow aide</button>
+    </div>
+  </section>
+
+  <!-- 4. CARROUSEL PAR COMMUNAUTÉS -->
+  <section class="car-sec">
+    <div class="container">
+      <div class="tag">La communauté</div>
+      <h2>Une place pour <em>chacun</em></h2>
+    </div>
+    <div class="carousel-wrap" style="margin-top:32px">
+      <button class="car-arrow car-prev" onclick="carScroll(this,-1)" aria-label="Cartes précédentes">‹</button>
+      <div class="carousel">
+        <div class="car-item com-card2">
+          <img src="assets/univers-loisirs.jpg" alt="Enfants en activité de loisirs"/>
+          <div class="cap"><strong>Familles</strong><small>Des idées d'activités, des aides plus lisibles et des trajets plus simples à anticiper.</small>
+          <button class="btn-p-sm" onclick="showPage('family')">Rejoindre les familles Flooow</button></div>
+        </div>
+        <div class="car-item com-card2">
+          <img src="assets/univers-sport.jpg" alt="Jeunes en activité sportive"/>
+          <div class="cap"><strong>Jeunes</strong><small>Des activités qui donnent envie, des expériences à découvrir, une voix pour dire ce qui manque.</small>
+          <button class="btn-p-sm" onclick="showPage('jeunes')">Découvrir les idées</button></div>
+        </div>
+        <div class="car-item com-card2">
+          <img src="assets/univers-culture.jpg" alt="Atelier culturel pour enfants"/>
+          <div class="cap"><strong>Structures d'activités</strong><small>Plus de visibilité auprès des familles et une meilleure compréhension des freins d'accès.</small>
+          <button class="btn-p-sm" onclick="showPage('territoire-form')">Présenter une activité</button></div>
+        </div>
+        <div class="car-item com-card2">
+          <img src="assets/univers-apprentissage.jpg" alt="Atelier d'apprentissage accompagné"/>
+          <div class="cap"><strong>Associations & relais</strong><small>Un outil simple pour orienter les familles et faire remonter les besoins du terrain.</small>
+          <button class="btn-p-sm" onclick="showPage('territoire-form')">Devenir relais</button></div>
+        </div>
+        <div class="car-item com-card2">
+          <img src="assets/univers-vacances.jpg" alt="Enfants en séjour de vacances"/>
+          <div class="cap"><strong>Territoires</strong><small>Une lecture concrète des freins entre offres existantes, aides disponibles et mobilité.</small>
+          <button class="btn-p-sm" onclick="showPage('territoires')">Découvrir l'approche territoire</button></div>
+        </div>
+        <div class="car-item com-card2">
+          <img src="assets/musique.jpg" alt="Éveil musical pour enfants"/>
+          <div class="cap"><strong>Partenaires</strong><small>Rejoindre une dynamique utile autour de l'accès aux activités des enfants et des jeunes.</small>
+          <button class="btn-p-sm" onclick="showPage('demo')">Échanger avec Flooow</button></div>
+        </div>
+      </div>
+      <button class="car-arrow car-next" onclick="carScroll(this,1)" aria-label="Cartes suivantes">›</button>
+    </div>
+  </section>
+
+  <!-- 5. GRAND VISUEL ENGAGEMENT / COMMUNAUTÉ -->
+  <section class="band band-engage">
+    <div class="container">
+      <h2>Une communauté pour ouvrir plus de chemins vers les activités.</h2>
+      <p>Flooow rassemble familles, jeunes, structures, associations et territoires autour d'un objectif simple : rendre les activités plus visibles, plus accessibles et plus faciles à rejoindre.</p>
+      <div class="cta-row">
+        <button class="btn-wh" onclick="showPage('agir')">Rejoindre la communauté Flooow</button>
+        <button class="btn-ghost" onclick="showPage('territoires')">Je représente une structure ou un territoire</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. BLOC BÉNÉFICES / PREUVE DE VALEUR -->
+  <section style="background:#fff;padding:84px 0">
+    <div class="container">
+      <div class="two">
+        <div>
+          <div class="tag">La preuve par l'usage</div>
+          <h2>Ce que la communauté Flooow <em>permet de faire</em></h2>
+          <ul class="check-list">
+            <li><div class="ck">✓</div><p><strong>Découvrir des activités</strong> utiles aux enfants et aux jeunes.</p></li>
+            <li><div class="ck">✓</div><p><strong>Identifier les aides</strong> qui peuvent changer une décision.</p></li>
+            <li><div class="ck">✓</div><p><strong>Mieux anticiper les trajets.</strong></p></li>
+            <li><div class="ck">✓</div><p><strong>Valoriser les structures locales.</strong></p></li>
+            <li><div class="ck">✓</div><p><strong>Aider les territoires</strong> à comprendre les freins réels.</p></li>
+            <li><div class="ck">✓</div><p><strong>Faire remonter les besoins</strong> sans parcours compliqué.</p></li>
+          </ul>
+        </div>
+        <div>
+          <div class="promise-row" style="margin-top:0">
+            <h4>Faites partie des premiers utilisateurs</h4>
+            <p>Faites partie des premiers utilisateurs Flooow et découvrez une nouvelle façon de relier activités, aides et mobilité.</p>
+          </div>
+          <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn-p" onclick="showPage('famille-pilote')">Faire partie des premiers utilisateurs</button>
+            <button class="btn-s" onclick="showPage('mon-territoire')">📍 Près de chez moi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-home -->
+
+<!-- ════════════════════════════════════ PAGE : ACTIVITÉS -->
+<div id="page-activites" class="page">
+  <section class="mission-hero">
+    <div class="container">
+      <div class="tag">Activités</div>
+      <h1>Des idées pour les enfants <em>et les jeunes</em></h1>
+      <p class="hero-sub">Sport, culture, loisirs, plein air, vacances : des activités adaptées, ancrées dans les territoires, plus simples à repérer.</p>
+    </div>
+  </section>
   <section class="univers-sec">
     <div class="container">
       <img class="univers-mots" src="assets/univers-mots.png" alt="sport, vacances, culture, loisirs, apprentissages"/>
     </div>
     <div class="carousel-wrap">
-      <button class="car-arrow car-prev" onclick="carScroll(this,-1)" aria-label="Précédent">‹</button>
+      <button class="car-arrow car-prev" onclick="carScroll(this,-1)" aria-label="Univers précédents">‹</button>
       <div class="carousel">
         <div class="car-item univ-card"><img src="assets/univers-sport.jpg" alt="Univers sport"/><div class="univ-name">Sport</div></div>
         <div class="car-item univ-card"><img src="assets/univers-vacances.jpg" alt="Univers vacances"/><div class="univ-name">Vacances</div></div>
@@ -483,100 +699,9 @@
         <div class="car-item univ-card"><img src="assets/univers-loisirs.jpg" alt="Univers loisirs"/><div class="univ-name">Loisirs</div></div>
         <div class="car-item univ-card"><img src="assets/univers-apprentissage.jpg" alt="Univers apprentissages"/><div class="univ-name">Apprentissages</div></div>
       </div>
-      <button class="car-arrow car-next" onclick="carScroll(this,1)" aria-label="Suivant">›</button>
+      <button class="car-arrow car-next" onclick="carScroll(this,1)" aria-label="Univers suivants">›</button>
     </div>
   </section>
-
-  <!-- IMAGE LARGE 2 : MISSION -->
-  <section class="mission-band">
-    <div class="container">
-      <h2>Trouver · Financer · <em style="color:#ffb38a">S'y rendre</em></h2>
-      <p>Trois questions que chaque famille se pose, un même parcours. Flooow relie l'offre, les aides et l'accès réel.</p>
-      <button class="btn-wh" onclick="showPage('mission')">Découvrir la mission</button>
-    </div>
-  </section>
-
-  <!-- CARROUSEL 2 : ÉCRANS DE L'APP -->
-  <section class="app-sec">
-    <div class="container">
-      <div class="tag">L'application</div>
-      <h2>L'app Flooow, <em>en vrai</em></h2>
-      <p class="sec-sub">Les écrans réels de l'application, tels que les familles pilotes les utilisent.</p>
-    </div>
-    <div class="carousel-wrap" style="margin-top:36px">
-      <button class="car-arrow car-prev" onclick="carScroll(this,-1)" aria-label="Précédent">‹</button>
-      <div class="carousel">
-        <div class="car-item app-card">
-          <img src="assets/app-accueil.jpeg" alt="Écran d'accueil : activités à proximité"/>
-          <div class="cap"><strong>Activités à proximité</strong><small>Une sélection adaptée au profil de votre famille</small></div>
-        </div>
-        <div class="car-item app-card">
-          <img src="assets/app-filtres-budget.jpeg" alt="Écran filtres : budget et aides"/>
-          <div class="cap"><strong>Budget & aides</strong><small>CAF, Ville, ANCV, Pass'Sport, Pass Culture</small></div>
-        </div>
-        <div class="car-item app-card">
-          <img src="assets/app-simulateur.jpeg" alt="Écran simulateur d'aides"/>
-          <div class="cap"><strong>Simulateur d'aides — <span id="mockup-ville">Saint-Étienne</span></strong><small>Le coût réel après aides, avant d'inscrire</small></div>
-        </div>
-        <div class="car-item app-card">
-          <img src="assets/app-filtres-inklusif.jpeg" alt="Écran filtres InKlusif : accessibilité"/>
-          <div class="cap"><strong>InKlusif</strong><small>Besoins spécifiques, accessibilité, trajets & mobilité</small></div>
-        </div>
-      </div>
-      <button class="car-arrow car-next" onclick="carScroll(this,1)" aria-label="Suivant">›</button>
-    </div>
-  </section>
-
-  <!-- PROBLÈME -->
-  <section class="problem">
-    <div class="container">
-      <div class="tag">Le constat</div>
-      <h2>Pourquoi tant de parcours s'arrêtent<br><em>avant même l'inscription ?</em></h2>
-      <p class="sec-sub">Le renoncement vient souvent d'une accumulation de petits obstacles séparés.</p>
-      <div class="prob-cols">
-        <div class="prob-col">
-          <h4>🔍 L'offre est peu visible</h4>
-          <p>Les activités existent, mais elles ne sont pas toujours simples à repérer pour les familles qui ne connaissent pas les bons canaux ou les structures locales.</p>
-        </div>
-        <div class="prob-col">
-          <h4>💶 Le coût réel reste flou</h4>
-          <p>Entre le prix affiché, les aides nationales, les dispositifs CAF/MSA, les aides locales et les conditions propres à chaque structure, le reste à charge est difficile à anticiper.</p>
-        </div>
-        <div class="prob-col">
-          <h4>🚌 L'accès n'est pas calculé</h4>
-          <p>Les horaires, le trajet, l'accompagnement nécessaire ou l'absence de solutions de déplacement font renoncer avant même le premier contact avec la structure.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRIPTYQUE -->
-  <section class="triptyque">
-    <div class="container">
-      <div class="tag">Le triptyque Flooow</div>
-      <h2>Trois questions,<br><em>un même parcours</em></h2>
-      <p class="sec-sub">Flooow relie dans un seul parcours lisible les trois informations que les familles doivent aujourd'hui chercher séparément.</p>
-      <div class="tri-grid">
-        <div class="tri-card">
-          <div class="tri-num tri-num-def">01</div>
-          <h3>Trouver</h3>
-          <p>Repérer les activités par âge, type, lieu et accessibilité. Voir les structures locales, leurs horaires, leurs publics et leurs disponibilités.</p>
-        </div>
-        <div class="tri-card featured">
-          <div class="tri-num">02</div>
-          <h3>Financer</h3>
-          <p>Comprendre les aides possibles, le coût réel et le reste à charge. Distinguer prix affiché, aides nationales et dispositifs locaux cumulables.</p>
-        </div>
-        <div class="tri-card">
-          <div class="tri-num tri-num-def">03</div>
-          <h3>S'y rendre</h3>
-          <p>Anticiper la proximité, le trajet, l'accompagnement nécessaire ou les solutions de déplacement disponibles autour de l'activité.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BANDE PHOTO BORD À BORD -->
   <div class="photo-strip">
     <img src="assets/escalade.jpg" alt="Adolescents en escalade"/>
     <img src="assets/hiphop.jpg" alt="Cours de danse hip-hop"/>
@@ -585,114 +710,98 @@
     <img src="assets/musique.jpg" alt="Éveil musical"/>
     <img src="assets/hero-judo.jpg" alt="Enfants au football"/>
   </div>
-
-  <!-- PORTES D'ACTION -->
-  <section class="portes">
-    <div class="container">
-      <div class="tag">Agir avec Flooow</div>
-      <h2>Trois portes d'entrée,<br><em>trois actions concrètes</em></h2>
-      <p class="sec-sub">Votre retour terrain est ce qui rend Flooow utile. Choisissez votre porte d'entrée.</p>
-      <div class="portes-grid">
-        <div class="porte-card">
-          <div>
-            <div class="porte-tag">Pour les familles</div>
-            <h3>Flooow Family</h3>
-          </div>
-          <p>Partagez un besoin concret ou un frein d'accès à une activité pour votre enfant. Votre retour aide à améliorer l'accès pour tous.</p>
-          <button class="btn-p" onclick="showPage('family')">Je partage mon besoin →</button>
-        </div>
-        <div class="porte-card">
-          <div>
-            <div class="porte-tag">Pour les jeunes</div>
-            <h3>Flooow Jeunes</h3>
-          </div>
-          <p>Dites ce qui donne envie, ce qui bloque, quels lieux et quels formats manquent. Votre avis compte directement.</p>
-          <button class="btn-p" onclick="showPage('jeunes')">Je donne mon avis →</button>
-        </div>
-        <div class="porte-card">
-          <div>
-            <div class="porte-tag">Pour les structures et collectivités</div>
-            <h3>Flooow Territoires</h3>
-          </div>
-          <p>Référencez une structure, contribuez à la cartographie ou échangez sur une démarche pilote locale.</p>
-          <button class="btn-p" onclick="showPage('territoire-form')">J'échange sur un territoire →</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TERRITOIRES TEASER -->
-  <section class="terr-teaser">
-    <div class="container">
-      <div class="two">
-        <div>
-          <div class="tag">Pour les territoires</div>
-          <h2>Flooow n'est pas<br>seulement <em>un annuaire</em></h2>
-          <p class="sec-sub">C'est une démarche pour mieux relier activités, aides et accès réel — et comprendre ce qui freine vraiment les familles sur un territoire.</p>
-          <ul class="check-list">
-            <li><div class="ck">✓</div><p><strong>Cartographier les offres et structures</strong> disponibles sur votre territoire.</p></li>
-            <li><div class="ck">✓</div><p><strong>Qualifier les freins récurrents</strong> remontés par les familles et les jeunes.</p></li>
-            <li><div class="ck">✓</div><p><strong>Tester une démarche pilote</strong> avec les acteurs locaux — associations, équipements, collectivités.</p></li>
-          </ul>
-          <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap">
-            <button class="btn-p" onclick="showPage('demo')">Demander une démonstration</button>
-            <button class="btn-s" onclick="showPage('territoires')">Découvrir la page Territoires</button>
-          </div>
-        </div>
-        <div class="vis">
-          <div class="terr-dash">
-            <div style="color:rgba(255,255,255,.45);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px">🗺 Tableau de bord pilote — illustration, données d'exemple</div>
-            <div class="td-row"><span class="td-ico">🏫</span><span class="td-lbl">Structures référencées</span><span class="td-val">47</span></div>
-            <div class="td-row"><span class="td-ico">👨‍👩‍👧</span><span class="td-lbl">Besoins familles remontés</span><span class="td-val">183</span></div>
-            <div class="td-row"><span class="td-ico">💬</span><span class="td-lbl">Avis jeunes collectés</span><span class="td-val">94</span></div>
-            <div class="td-row"><span class="td-ico">🚌</span><span class="td-lbl">Frein #1 : Déplacement</span><span class="td-val">41%</span></div>
-            <div class="td-row"><span class="td-ico">💶</span><span class="td-lbl">Frein #2 : Coût / aides</span><span class="td-val">37%</span></div>
-            <div style="padding:4px 0">
-              <div style="display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.5);margin-bottom:5px">
-                <span>Avancement pilote</span><span>62%</span>
-              </div>
-              <div class="td-bar"><div class="td-bar-fill" style="width:62%"></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONFIANCE BAND -->
-  <section class="trust-band">
-    <div class="container">
-      <div style="text-align:center;margin-bottom:0">
-        <div class="tag tag-navy" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.7)">Nos engagements</div>
-        <h2 style="color:#fff;margin-top:8px">Une démarche sobre,<br>transparente et <em>respectueuse</em></h2>
-      </div>
-      <div class="trust-grid">
-        <div class="trust-item"><div class="trust-ico">🔒</div><h4>Données minimisées</h4><p>Uniquement l'essentiel au premier contact. Aucune donnée sensible collectée initialement.</p></div>
-        <div class="trust-item"><div class="trust-ico">♿</div><h4>Accessibilité</h4><p>Design pensé pour tous les publics, sur tous les écrans, avec des contrastes suffisants.</p></div>
-        <div class="trust-item"><div class="trust-ico">🌱</div><h4>Démarche pilote</h4><p>Un projet qui progresse avec le terrain, pas une promesse de couverture nationale immédiate.</p></div>
-        <div class="trust-item"><div class="trust-ico">📅</div><h4>Mis à jour</h4><p>Les informations sur les aides et les structures sont vérifiées et actualisées régulièrement.</p></div>
-      </div>
-      <div style="text-align:center;margin-top:32px">
-        <button class="btn-w" onclick="showPage('confiance')">Voir tous nos engagements →</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA FINAL -->
   <section class="cta-final">
     <div class="container">
-      <h2>Choisissez votre porte d'entrée</h2>
-      <p>Famille, jeune, structure ou collectivité — votre retour peut rendre les activités plus accessibles.</p>
+      <h2>Découvrir près de chez vous</h2>
+      <p>Dites-nous où vous êtes : Flooow vous montre ce qui existe sur votre territoire.</p>
       <div class="cta-btns">
-        <button class="btn-w" onclick="showPage('mon-territoire')">📍 Je découvre mon territoire</button>
-        <button class="btn-w" onclick="showPage('famille-pilote')">Je teste l'application</button>
-        <button class="btn-w" onclick="showPage('agir')">Je partage un retour</button>
-        <button class="btn-w" onclick="showPage('demo')">J'échange sur un territoire</button>
+        <button class="btn-w" onclick="showPage('mon-territoire')">📍 Près de chez moi</button>
       </div>
     </div>
   </section>
+</div><!-- /page-activites -->
 
-</div><!-- /page-home -->
+<!-- ════════════════════════════════════ PAGE : AIDES FINANCIÈRES -->
+<div id="page-aides" class="page">
+  <section class="mission-hero">
+    <div class="container">
+      <div class="tag">Aides financières</div>
+      <h1>Des aides plus lisibles, des décisions <em>plus simples</em></h1>
+      <p class="hero-sub">Repérez les aides possibles avant de renoncer ou de choisir : le coût réel d'une activité est souvent bien plus bas que le prix affiché.</p>
+    </div>
+  </section>
+  <section style="background:#fff;padding:76px 0">
+    <div class="container">
+      <div class="engage-grid">
+        <div class="eng-card">
+          <div class="eng-ico">🎫</div>
+          <h3>Aides nationales</h3>
+          <p>Pass'Sport, Pass Culture, dispositifs CAF et MSA : des aides qui existent, mais que beaucoup de familles ne mobilisent pas faute d'information.</p>
+        </div>
+        <div class="eng-card">
+          <div class="eng-ico">🏙</div>
+          <h3>Aides locales</h3>
+          <p>Coupons sport, chèques loisirs, aides de la ville ou du département : des dispositifs propres à chaque territoire, réunis au même endroit.</p>
+        </div>
+        <div class="eng-card">
+          <div class="eng-ico">💶</div>
+          <h3>Reste à charge clair</h3>
+          <p>Distinguer prix affiché, aides cumulables et coût final : de quoi décider sereinement, avant l'inscription.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="cta-final">
+    <div class="container">
+      <h2>Trouver des aides pour votre famille</h2>
+      <p>Partagez votre situation : la communauté Flooow aide à repérer ce qui peut changer une décision.</p>
+      <div class="cta-btns">
+        <button class="btn-w" onclick="showPage('family')">Rejoindre les familles Flooow</button>
+      </div>
+    </div>
+  </section>
+</div><!-- /page-aides -->
+
+<!-- ════════════════════════════════════ PAGE : MOBILITÉ -->
+<div id="page-mobilite" class="page">
+  <section class="mission-hero">
+    <div class="container">
+      <div class="tag">Mobilité</div>
+      <h1>Préparer le trajet, <em>simplement</em></h1>
+      <p class="hero-sub">Le trajet fait souvent renoncer avant même le premier contact. Flooow aide à visualiser les options pour s'y rendre plus simplement.</p>
+    </div>
+  </section>
+  <section style="background:#fff;padding:76px 0">
+    <div class="container">
+      <div class="engage-grid">
+        <div class="eng-card">
+          <div class="eng-ico">🚌</div>
+          <h3>Transports du quotidien</h3>
+          <p>Bus, tram, train : voir les options et les durées de trajet autour de chaque activité.</p>
+        </div>
+        <div class="eng-card">
+          <div class="eng-ico">🚲</div>
+          <h3>Éco-mobilité</h3>
+          <p>Vélo, marche, covoiturage : des solutions plus simples qu'on ne croit, valorisées activité par activité.</p>
+        </div>
+        <div class="eng-card">
+          <div class="eng-ico">🤝</div>
+          <h3>Accompagnement</h3>
+          <p>Identifier les besoins d'accompagnement et les relais possibles pour que le trajet ne soit plus un frein.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="cta-final">
+    <div class="container">
+      <h2>Anticiper les trajets près de chez vous</h2>
+      <p>Découvrez les activités et les solutions de mobilité sur votre territoire.</p>
+      <div class="cta-btns">
+        <button class="btn-w" onclick="showPage('mon-territoire')">📍 Près de chez moi</button>
+      </div>
+    </div>
+  </section>
+</div><!-- /page-mobilite -->
 
 <!-- ════════════════════════════════════ PAGE : MISSION -->
 <div id="page-mission" class="page">
@@ -784,6 +893,36 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="app-sec">
+    <div class="container">
+      <div class="tag">L'application</div>
+      <h2>L'app Flooow, <em>écran par écran</em></h2>
+      <p class="sec-sub">Les écrans réels de l'application : activités à proximité, aides, simulateur, accessibilité.</p>
+    </div>
+    <div class="carousel-wrap" style="margin-top:36px">
+      <button class="car-arrow car-prev" onclick="carScroll(this,-1)" aria-label="Écrans précédents">‹</button>
+      <div class="carousel">
+        <div class="car-item app-card">
+          <img src="assets/app-accueil.jpeg" alt="Écran d'accueil : activités à proximité"/>
+          <div class="cap"><strong>Activités à proximité</strong><small>Une sélection adaptée au profil de votre famille</small></div>
+        </div>
+        <div class="car-item app-card">
+          <img src="assets/app-filtres-budget.jpeg" alt="Écran filtres : budget et aides"/>
+          <div class="cap"><strong>Budget & aides</strong><small>CAF, Ville, ANCV, Pass'Sport, Pass Culture</small></div>
+        </div>
+        <div class="car-item app-card">
+          <img src="assets/app-simulateur.jpeg" alt="Écran simulateur d'aides"/>
+          <div class="cap"><strong>Simulateur d'aides — <span id="mockup-ville">Saint-Étienne</span></strong><small>Le coût réel après aides, avant d'inscrire</small></div>
+        </div>
+        <div class="car-item app-card">
+          <img src="assets/app-filtres-inklusif.jpeg" alt="Écran filtres InKlusif : accessibilité"/>
+          <div class="cap"><strong>InKlusif</strong><small>Besoins spécifiques, accessibilité, trajets & mobilité</small></div>
+        </div>
+      </div>
+      <button class="car-arrow car-next" onclick="carScroll(this,1)" aria-label="Écrans suivants">›</button>
     </div>
   </section>
 
@@ -918,7 +1057,7 @@
           <div class="faq-a">Aux collectivités (communes, intercommunalités, départements), associations locales, équipements sportifs et culturels, centres sociaux, structures d'accompagnement jeunesse et tout acteur impliqué dans l'accès aux activités pour les enfants et les familles.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span>Que peut-on tester dans un pilote ?</span><span class="faq-ico">+</span></div>
+          <div class="faq-q" onclick="toggleFaq(this)"><span>Que peut-on explorer dans un pilote ?</span><span class="faq-ico">+</span></div>
           <div class="faq-a">La cartographie des structures et offres locales, la collecte de besoins remontés par les familles, l'identification des freins les plus fréquents (coût, accès, information) et la production d'une synthèse territoriale partageable. Les fonctionnalités avancées sont en cadrage.</div>
         </div>
         <div class="faq-item">
@@ -1006,9 +1145,9 @@
         <div class="agir-grid ladder-grid" style="grid-template-columns:repeat(2,1fr)">
           <div class="agir-card">
             <div class="agir-ico" style="background:var(--terra-l)">🧪</div>
-            <h3>Devenir famille pilote</h3>
-            <p>Testez l'application en avant-première, dites ce qui marche et ce qui bloque. Vos retours orientent directement ce que nous construisons — et c'est public, dans le journal du pilote.</p>
-            <button class="btn-p" onclick="showPage('famille-pilote')">Je deviens famille pilote</button>
+            <h3>Premiers utilisateurs</h3>
+            <p>Faites partie des premiers utilisateurs Flooow : découvrez une nouvelle façon de relier activités, aides et mobilité — et vos retours sont partagés dans le journal Flooow.</p>
+            <button class="btn-p" onclick="showPage('famille-pilote')">Je rejoins les premiers utilisateurs</button>
           </div>
           <div class="agir-card">
             <div class="agir-ico" style="background:#e3f2fd">🗺</div>
@@ -1183,7 +1322,7 @@
       <div class="form-box">
         <div class="form-tag">Démo Territoire</div>
         <h2>Découvrez comment Flooow peut s'adapter à votre territoire</h2>
-        <p class="desc">En 20 à 30 minutes, nous regardons ensemble votre contexte, vos publics et la meilleure manière de tester la démarche. Pas de discours générique — une conversation concrète.</p>
+        <p class="desc">En 20 à 30 minutes, nous regardons ensemble votre contexte, vos publics et la meilleure manière d'engager la démarche. Pas de discours générique — une conversation concrète.</p>
         <form onsubmit="showMerci(event,'demo')">
           <div class="form-group">
             <label>Organisation / collectivité *</label>
@@ -1277,8 +1416,8 @@
       <div class="tag">Gouvernance & transparence</div>
       <h2>Qui porte <em>Flooow</em> ?</h2>
       <div style="display:flex;flex-direction:column;gap:16px;margin-top:36px">
-        <div class="conf-card"><h3>🧭 Statut du projet</h3><p>Flooow est une démarche pilote, pas une plateforme nationale déployée. Le projet progresse territoire par territoire, en collaboration avec les acteurs locaux. La mention "version bêta" n'est pas utilisée car elle dit peu de chose aux usagers — nous préférons "démarche pilote" ou "territoires d'expérimentation".</p></div>
-        <div class="conf-card"><h3>🤝 Méthode de construction</h3><p>Flooow se construit avec les familles, les jeunes et les territoires. Ateliers, entretiens, tests et retours d'usage alimentent chaque évolution. Aucune fonctionnalité n'est développée sans validation terrain préalable.</p></div>
+        <div class="conf-card"><h3>🧭 Statut du projet</h3><p>Flooow est une démarche pilote, pas une plateforme nationale déployée. Le projet progresse territoire par territoire, en collaboration avec les acteurs locaux. La progression est lisible et documentée, territoire par territoire.</p></div>
+        <div class="conf-card"><h3>🤝 Méthode de construction</h3><p>Flooow se construit avec les familles, les jeunes et les territoires. Ateliers, entretiens et retours d'usage alimentent chaque évolution. Aucune fonctionnalité n'est développée sans validation terrain préalable.</p></div>
         <div class="conf-card"><h3>📅 Actualisation</h3><p>Les informations sur les aides (Pass'Sport, CAF/MSA, dispositifs locaux) sont vérifiées régulièrement. Chaque page stratégique porte une mention de dernière mise à jour. Dernière révision : juin 2026.</p></div>
       </div>
     </div>
@@ -1380,9 +1519,9 @@
 <div id="page-journal" class="page">
   <section class="mission-hero">
     <div class="container">
-      <div class="tag">📓 Journal du pilote</div>
-      <h1>Flooow se construit <em>en public</em></h1>
-      <p class="hero-sub">À la manière des startups d'État (pass Culture, beta.gouv) : nos avancées, nos décisions et nos chiffres réels, datés et assumés — y compris quand ça n'avance pas comme prévu.</p>
+      <div class="tag">📓 Le journal Flooow</div>
+      <h1>Flooow avance, <em>et le partage</em></h1>
+      <p class="hero-sub">Nos avancées, nos décisions et nos chiffres réels, datés et partagés en toute transparence — y compris quand ça n'avance pas comme prévu.</p>
     </div>
   </section>
 
@@ -1397,12 +1536,12 @@
       </div>
       <div class="journal-entry">
         <div class="journal-date">Juin 2026</div>
-        <h4>Préparation du programme Familles pilotes</h4>
-        <p>Recrutement des premières familles testeuses : sessions de test de l'application sur des parcours réels — trouver une activité, comprendre le coût après aides, anticiper le trajet.</p>
+        <h4>Ouverture aux premiers utilisateurs</h4>
+        <p>Les premières familles rejoignent Flooow sur des parcours réels — trouver une activité, comprendre le coût après aides, anticiper le trajet.</p>
       </div>
       <div class="journal-entry">
         <div class="journal-date">2025 – 2026</div>
-        <h4>Construction de l'application sur le territoire pilote</h4>
+        <h4>L'application s'enrichit sur le premier territoire</h4>
         <p>Cartographie des activités locales, simulateur d'aides (Pass'Sport, CAF, dispositifs locaux), informations d'éco-mobilité et prise en compte du handicap. La démarche progresse avec les acteurs de terrain.</p>
       </div>
     </div>
@@ -1412,7 +1551,7 @@
     <div class="container" style="max-width:760px">
       <div class="tag">La boucle de retour</div>
       <h2>Vous nous avez dit → <em>nous avons fait</em></h2>
-      <p class="sec-sub">Chaque vague de retours familles alimente cette page. C'est notre engagement : aucun retour ne part dans le vide.</p>
+      <p class="sec-sub">Les retours de la communauté alimentent cette page. C'est notre engagement : aucun retour ne part dans le vide.</p>
       <div class="vd-row">
         <div class="vd-card vd-dit"><h5>Vous nous avez dit</h5><p>« Le reste à charge est impossible à anticiper : entre le prix affiché et les aides, on ne sait jamais combien on va vraiment payer. »</p></div>
         <div class="vd-card vd-fait"><h5>Nous avons fait</h5><p>Le simulateur d'aides de l'application affiche le coût réel après aides, avant l'inscription.</p></div>
@@ -1426,10 +1565,10 @@
 
   <section class="cta-final">
     <div class="container">
-      <h2>Faites partie de la prochaine entrée du journal</h2>
-      <p>Les familles pilotes testent, nous corrigeons, et tout est documenté ici.</p>
+      <h2>Écrivez la prochaine entrée avec nous</h2>
+      <p>La communauté propose, Flooow améliore — et tout est documenté ici.</p>
       <div class="cta-btns">
-        <button class="btn-w" onclick="showPage('famille-pilote')">Devenir famille pilote →</button>
+        <button class="btn-w" onclick="showPage('famille-pilote')">Rejoindre les premiers utilisateurs →</button>
       </div>
     </div>
   </section>
@@ -1441,9 +1580,9 @@
     <div class="container">
       <button class="form-back" onclick="showPage('agir')">← Retour</button>
       <div class="form-box">
-        <div class="form-tag">🧪 Familles pilotes</div>
-        <h2>Testez Flooow en avant-première</h2>
-        <p class="desc">Devenez famille pilote : testez l'application sur des situations réelles, dites ce qui marche et ce qui bloque. Si Flooow n'est pas encore ouvert chez vous, votre inscription compte comme un vote pour votre territoire — vous serez les premiers informés et les premiers à tester.</p>
+        <div class="form-tag">Premiers utilisateurs</div>
+        <h2>Faites partie des premiers utilisateurs</h2>
+        <p class="desc">Faites partie des premiers utilisateurs Flooow et découvrez une nouvelle façon de relier activités, aides et mobilité. Si Flooow n'est pas encore ouvert chez vous, votre inscription compte comme un vote pour votre territoire — vous serez les premiers informés.</p>
         <form onsubmit="showMerci(event,'pilote')">
           <div class="form-group">
             <label>Commune ou quartier *</label>
@@ -1458,20 +1597,20 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Comment préférez-vous tester ?</label>
+            <label>Comment préférez-vous découvrir Flooow ?</label>
             <select>
               <option value="">Sélectionner…</option>
-              <option>Atelier en présence (sur le territoire pilote)</option>
-              <option>Test à distance avec un échange en visio</option>
-              <option>En autonomie, quand j'ai le temps</option>
+              <option>Lors d'un atelier près de chez moi</option>
+              <option>Avec un échange en visio</option>
+              <option>En autonomie, à mon rythme</option>
             </select>
           </div>
           <div class="form-group">
             <label>Email de contact *</label>
-            <input type="email" placeholder="Pour vous inviter à la prochaine vague de tests" required/>
+            <input type="email" placeholder="Pour vous accueillir parmi les premiers utilisateurs" required/>
           </div>
-          <button type="submit" class="form-submit">Je rejoins les familles pilotes →</button>
-          <p class="cnil-note">🔒 Ces données servent uniquement à organiser les tests et à vous informer de l'ouverture de votre territoire. Aucune donnée sensible n'est demandée. Conformément au RGPD, vous pouvez demander leur suppression à tout moment : contact@flooow.fr</p>
+          <button type="submit" class="form-submit">Je rejoins les premiers utilisateurs →</button>
+          <p class="cnil-note">🔒 Ces données servent uniquement à vous accompagner et à vous informer de l'ouverture de votre territoire. Aucune donnée sensible n'est demandée. Conformément au RGPD, vous pouvez demander leur suppression à tout moment : contact@flooow.fr</p>
         </form>
       </div>
     </div>
@@ -1482,10 +1621,10 @@
   <section style="background:var(--sand);min-height:80vh;display:flex;align-items:center">
     <div class="container"><div class="merci-box">
       <div class="merci-ico">🧪</div>
-      <h2>Bienvenue parmi les familles pilotes !</h2>
-      <p>Votre inscription est bien reçue. Nous revenons vers vous pour la prochaine vague de tests — ou dès l'ouverture de votre territoire. Vos retours seront documentés publiquement dans le journal du pilote.</p>
+      <h2>Bienvenue parmi les premiers utilisateurs !</h2>
+      <p>Votre inscription est bien reçue. Nous revenons vers vous très vite — dès l'ouverture de votre territoire ou pour vous accueillir dans la communauté. Les avancées sont partagées dans le journal Flooow.</p>
       <div class="cta-row" style="justify-content:center">
-        <button class="btn-p" onclick="showPage('journal')">Voir le journal du pilote</button>
+        <button class="btn-p" onclick="showPage('journal')">Voir le journal Flooow</button>
         <button class="btn-s" onclick="showPage('home')">Retour à l'accueil</button>
       </div>
     </div></div>
@@ -1501,37 +1640,40 @@
           <img src="assets/logo-flooow.png" alt="Flooow"/>
         </div>
         <p>Trouver · Financer · S'y rendre</p>
-        <div class="foot-tagline">Démarche pilote — territoires d'expérimentation</div>
+        <div class="foot-tagline">Activités · Aides · Mobilité</div>
       </div>
       <div class="foot-col">
-        <h4>Le projet</h4>
+        <h4>Découvrir Flooow</h4>
         <ul>
-          <li><button onclick="showPage('mission')">Notre mission</button></li>
-          <li><button onclick="showPage('journal')">Journal du pilote</button></li>
+          <li><button onclick="showPage('mission')">Le projet</button></li>
+          <li><button onclick="showPage('activites')">Activités</button></li>
+          <li><button onclick="showPage('aides')">Aides financières</button></li>
+          <li><button onclick="showPage('mobilite')">Mobilité</button></li>
+          <li><button onclick="showPage('territoires')">Territoires</button></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Rejoindre la communauté</h4>
+        <ul>
+          <li><button onclick="showPage('family')">Familles</button></li>
+          <li><button onclick="showPage('jeunes')">Jeunes</button></li>
+          <li><button onclick="showPage('territoire-form')">Structures d'activités</button></li>
+          <li><button onclick="showPage('demo')">Collectivités</button></li>
+          <li><button onclick="showPage('famille-pilote')">Premiers utilisateurs</button></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Le suivi</h4>
+        <ul>
+          <li><button onclick="showPage('journal')">Le journal Flooow</button></li>
+          <li><button onclick="showPage('mon-territoire')">Mon territoire</button></li>
           <li><button onclick="showPage('confiance')">Confiance & données</button></li>
           <li><a href="mailto:contact@flooow.fr">Contact</a></li>
         </ul>
       </div>
-      <div class="foot-col">
-        <h4>Communauté</h4>
-        <ul>
-          <li><button onclick="showPage('mon-territoire')">Mon territoire</button></li>
-          <li><button onclick="showPage('famille-pilote')">Familles pilotes</button></li>
-          <li><button onclick="showPage('family')">Flooow Family</button></li>
-          <li><button onclick="showPage('jeunes')">Flooow Jeunes</button></li>
-          <li><button onclick="showPage('territoire-form')">Flooow Territoires</button></li>
-        </ul>
-      </div>
-      <div class="foot-col">
-        <h4>Territoires</h4>
-        <ul>
-          <li><button onclick="showPage('territoires')">Page Territoires</button></li>
-          <li><button onclick="showPage('demo')">Demander une démo</button></li>
-        </ul>
-      </div>
     </div>
     <div class="foot-bottom">
-      <p>© 2026 Flooow — Démarche pilote</p>
+      <p>© 2026 Flooow</p>
       <div class="foot-legal">
         <a href="#">Mentions légales</a>
         <a href="#">Confidentialité</a>
@@ -1556,10 +1698,17 @@
   // ── SPA NAVIGATION
   const pages = ['home','mission','territoires','agir','confiance','family','jeunes',
     'territoire-form','demo','merci-family','merci-jeunes','merci-territoire','merci-demo',
-    'mon-territoire','journal','famille-pilote','merci-pilote'];
+    'mon-territoire','journal','famille-pilote','merci-pilote','activites','aides','mobilite'];
   const navIds = ['mission','territoires','confiance'];
 
+  function closeMenus() {
+    document.querySelectorAll('details.nav-dd[open]').forEach(d => d.removeAttribute('open'));
+    const mm = document.getElementById('mobile-menu');
+    if (mm) mm.classList.add('hidden');
+  }
+
   function showPage(id, push = true) {
+    closeMenus();
     pages.forEach(p => {
       const el = document.getElementById('page-'+p);
       if (el) el.classList.toggle('active', p === id);
@@ -1600,9 +1749,9 @@
       html = `<div class="terri-card">
         <span class="terri-status ts-actif">Pilote actif</span>
         <h3>${terr.nom} — Flooow est chez vous 🎉</h3>
-        <p>La démarche pilote est en cours sur votre territoire. Testez l'application, partagez vos besoins, et aidez les structures locales à être plus visibles.</p>
+        <p>Flooow est actif sur votre territoire. Découvrez les activités, partagez vos besoins, et aidez les structures locales à être plus visibles.</p>
         <div class="cta-row">
-          <button class="btn-p" onclick="showPage('famille-pilote')">🧪 Tester l'application</button>
+          <button class="btn-p" onclick="showPage('famille-pilote')">Faire partie des premiers utilisateurs</button>
           <button class="btn-s" onclick="showPage('family')">Partager un besoin</button>
           <button class="btn-s" onclick="showPage('territoire-form')">Référencer une structure</button>
         </div>
@@ -1611,7 +1760,7 @@
       html = `<div class="terri-card">
         <span class="terri-status ts-prepa">Ouverture en préparation</span>
         <h3>${terr.nom} — bientôt chez vous</h3>
-        <p>Flooow prépare son arrivée sur votre territoire. Inscrivez-vous : vous serez les premiers informés de l'ouverture — et les premiers à tester si vous le souhaitez.</p>
+        <p>Flooow prépare son arrivée sur votre territoire. Inscrivez-vous : vous serez les premiers informés de l'ouverture — et les premiers utilisateurs si vous le souhaitez.</p>
         <div class="cta-row">
           <button class="btn-p" onclick="showPage('famille-pilote')">Être prévenu·e de l'ouverture</button>
           <button class="btn-s" onclick="showPage('territoire-form')">Je suis une structure locale</button>
@@ -1666,22 +1815,18 @@
     ico.classList.toggle('open');
   }
 
-  // ── MOBILE MENU (simple toggle)
+  // ── MENU MOBILE
   function toggleMobileMenu() {
-    const links = document.querySelector('.nav-links');
-    if (!links) return;
-    const vis = links.style.display === 'flex';
-    links.style.display = vis ? '' : 'flex';
-    links.style.flexDirection = 'column';
-    links.style.position = 'absolute';
-    links.style.top = '64px';
-    links.style.left = '0';
-    links.style.right = '0';
-    links.style.background = '#fff';
-    links.style.padding = '12px 16px';
-    links.style.borderBottom = '1px solid #e5ddd4';
-    links.style.zIndex = '100';
+    const mm = document.getElementById('mobile-menu');
+    if (mm) mm.classList.toggle('hidden');
   }
+
+  // Fermer les entrées déroulantes au clic hors menu
+  document.addEventListener('click', e => {
+    document.querySelectorAll('details.nav-dd[open]').forEach(d => {
+      if (!d.contains(e.target)) d.removeAttribute('open');
+    });
+  });
 </script>
 </body>
 </html>
