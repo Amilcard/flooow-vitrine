@@ -74,13 +74,45 @@
     .card h3{font-size:.97rem;font-weight:800;color:var(--anthracite);margin-bottom:7px;line-height:1.3}
     .card p{font-size:.84rem;color:var(--muted);line-height:1.6}
 
-    /* ── HERO ── */
-    .hero{background:linear-gradient(135deg,var(--sand) 0%,var(--terra-xl) 60%,var(--sand-d) 100%);padding:80px 0 64px}
-    .hero-in{max-width:1200px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:1fr 440px;gap:60px;align-items:center}
+    /* ── LOGO IMAGE ── */
+    .logo img{height:34px;display:block}
+    .foot-logo img{height:26px;display:block}
+
+    /* ── HERO (photo réelle bord à bord) ── */
+    .hero{position:relative;background:url('assets/hero-judo.jpg') center 30%/cover no-repeat;padding:0}
+    .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,46,74,.5) 0%,rgba(26,46,74,.2) 45%,rgba(18,22,32,.78) 100%)}
+    .hero-in{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:130px 28px 120px;display:block}
+    .hero-in>div{max-width:640px}
+    .hero h1{color:#fff}
+    .hero h1 em{color:#ffb38a}
+    .hero .hero-sub{color:rgba(255,255,255,.92);text-shadow:0 1px 12px rgba(0,0,0,.3)}
+    .btn-s.on-dark{border-color:#fff;color:#fff}
+    .btn-s.on-dark:hover{background:rgba(255,255,255,.14)}
+    .hero .btn-n{color:#ffb38a}
+    .hero .btn-n:hover{color:#fff}
     .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--terra);color:#fff;padding:4px 14px;border-radius:20px;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px}
     h1{font-size:clamp(2rem,4vw,3.1rem);font-weight:900;line-height:1.1;color:var(--anthracite);margin-bottom:20px}
     h1 em{color:var(--terra);font-style:normal}
     .hero-sub{font-size:1.05rem;color:var(--muted);max-width:500px;margin-bottom:32px;line-height:1.75}
+
+    /* ── BANDE PHOTO BORD À BORD ── */
+    .photo-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:0}
+    .photo-strip img{width:100%;height:230px;object-fit:cover;display:block}
+
+    /* ── ÉCRANS DE L'APP (cadres téléphone) ── */
+    .app-show{background:var(--anthracite);padding:80px 0}
+    .app-show h2{color:#fff}
+    .app-show .sec-sub{color:rgba(255,255,255,.6)}
+    .phones{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;margin-top:50px}
+    .phone-col{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+    .phone{width:252px;background:#11141d;border-radius:34px;padding:10px;box-shadow:0 26px 60px rgba(0,0,0,.45)}
+    .phone-scr{background:var(--sand);border-radius:25px;overflow:hidden}
+    .phone-top{background:var(--terra);padding:10px 14px;display:flex;align-items:center;gap:7px}
+    .phone-top span{font-size:.74rem;font-weight:800;color:#fff}
+    .phone-img{width:100%;height:118px;object-fit:cover;display:block}
+    .phone-body{padding:12px;display:flex;flex-direction:column;gap:9px}
+    .phone-cap{font-size:.92rem;font-weight:800;color:#fff}
+    .phone-cap small{display:block;font-weight:500;color:rgba(255,255,255,.5);font-size:.76rem;margin-top:2px}
 
     /* MOCKUP */
     .mockup{background:var(--anthracite);border-radius:20px;padding:3px;box-shadow:0 28px 70px rgba(0,0,0,.22)}
@@ -348,6 +380,10 @@
       .vd-row{grid-template-columns:1fr}
       .terri-input-row{flex-direction:column}
       .ladder-grid{grid-template-columns:1fr!important}
+      .hero-in{padding:90px 16px 80px}
+      .photo-strip{grid-template-columns:repeat(3,1fr)}
+      .photo-strip img{height:130px}
+      .logo img{height:28px}
     }
     @media(max-width:520px){
       .container,.nav-w,.hero-in{padding-left:16px;padding-right:16px}
@@ -375,14 +411,7 @@
   </div>
   <div class="nav-w">
     <div class="logo" onclick="showPage('home')">
-      <div class="logo-mark">
-        <svg viewBox="0 0 22 22" fill="none">
-          <path d="M4 18 C4 18, 7 10, 11 6 C15 2, 18 4, 18 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="11" cy="13" r="3" fill="#fff" opacity=".5"/>
-          <path d="M3 14 Q7 11 11 13 Q15 15 19 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".6"/>
-        </svg>
-      </div>
-      Flooow
+      <img src="assets/logo-flooow.png" alt="Flooow"/>
     </div>
     <ul class="nav-links">
       <li><button onclick="showPage('mission')" id="nav-mission">Notre mission</button></li>
@@ -398,61 +427,19 @@
 <!-- ════════════════════════════════════ PAGE : ACCUEIL -->
 <div id="page-home" class="page active">
 
-  <!-- HERO -->
+  <!-- HERO bord à bord -->
   <section class="hero">
     <div class="hero-in">
       <div>
-        <div class="hero-badge">🌊 Démarche pilote</div>
+        <div class="hero-badge">Démarche pilote — territoires d'expérimentation</div>
         <h1>Trouver · Financer<br><em>S'y rendre</em></h1>
         <p class="hero-sub">Flooow aide les familles à accéder plus facilement aux activités pour leurs enfants en reliant trois informations souvent dispersées : l'offre disponible, les aides possibles et les conditions d'accès réelles.</p>
         <div class="cta-row">
           <button class="btn-p" onclick="showPage('mon-territoire')">📍 Que se passe-t-il près de chez moi ?</button>
-          <button class="btn-s" onclick="showPage('territoires')">Je représente un territoire</button>
+          <button class="btn-s on-dark" onclick="showPage('territoires')">Je représente un territoire</button>
         </div>
         <div style="margin-top:18px">
           <button class="btn-n" onclick="showPage('mission')">Découvrir la mission →</button>
-        </div>
-      </div>
-      <div class="hero-vis">
-        <div class="mockup">
-          <div class="mockup-in">
-            <div class="mockup-bar">
-              <span>🌊 Flooow — Recherche d'activité</span>
-            </div>
-            <div class="mockup-body">
-              <div class="m-card">
-                <div class="m-card-top">
-                  <div class="m-ico" style="background:#fff3e0">⚽</div>
-                  <div>
-                    <div class="m-card-title">Club de foot du quartier</div>
-                    <div style="font-size:.65rem;color:var(--muted)"><span id="mockup-ville">Saint-Étienne</span> · 6–12 ans</div>
-                  </div>
-                </div>
-                <div>
-                  <span class="m-chip">Sport</span>
-                  <span class="m-chip-g">Accessible</span>
-                  <span class="m-chip-b">Mercredi</span>
-                </div>
-              </div>
-              <div class="aide-row">
-                <span>Prix affiché : <s style="color:var(--muted)">180 €</s></span>
-                <span class="prix">Reste : 36 €</span>
-              </div>
-              <div class="m-card" style="background:var(--terra-xl)">
-                <div style="font-size:.72rem;font-weight:800;color:var(--terra);margin-bottom:6px">💡 Aides applicables</div>
-                <div style="font-size:.7rem;color:var(--muted);line-height:1.5">
-                  Pass'Sport (50 €) · Aide CAF (60 €) · Coupon sport mairie (34 €)
-                </div>
-              </div>
-              <div>
-                <div style="font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:6px">🗺 Accès</div>
-                <div class="trajet-row">
-                  <span class="t-chip">🚇 Métro 14 — 8 min</span>
-                  <span class="t-chip">🚌 Bus 62</span>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -506,6 +493,94 @@
       </div>
     </div>
   </section>
+
+  <!-- ÉCRANS DE L'APP -->
+  <section class="app-show">
+    <div class="container">
+      <div style="text-align:center">
+        <div class="tag" style="background:rgba(255,255,255,.1);color:#ffb38a">L'application</div>
+        <h2>Le triptyque, <em>en vrai, dans l'app</em></h2>
+        <p class="sec-sub" style="margin:0 auto">Trois questions, trois écrans. Voici comment Flooow accompagne concrètement une famille, de la recherche à l'inscription.</p>
+      </div>
+      <div class="phones">
+        <div class="phone-col">
+          <div class="phone">
+            <div class="phone-scr">
+              <div class="phone-top"><span>😊 Flooow — Recherche</span></div>
+              <img class="phone-img" src="assets/natation.jpg" alt="Cours de natation enfants"/>
+              <div class="phone-body">
+                <div class="m-card">
+                  <div class="m-card-title">Natation enfants</div>
+                  <div style="font-size:.65rem;color:var(--muted);margin-bottom:5px"><span id="mockup-ville">Saint-Étienne</span> · 6–9 ans</div>
+                  <span class="m-chip">Sport</span>
+                  <span class="m-chip-g">Accessible</span>
+                  <span class="m-chip-b">Mercredi</span>
+                </div>
+                <div class="m-card">
+                  <div class="m-card-title">Judo découverte</div>
+                  <div style="font-size:.65rem;color:var(--muted)">À 800 m · dès 6 ans</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-cap">01 · Trouver<small>Par âge, lieu, période, accessibilité</small></div>
+        </div>
+        <div class="phone-col">
+          <div class="phone">
+            <div class="phone-scr">
+              <div class="phone-top"><span>😊 Flooow — Mes aides</span></div>
+              <img class="phone-img" src="assets/aides.webp" alt="Simulation des aides financières"/>
+              <div class="phone-body">
+                <div class="aide-row">
+                  <span>Prix affiché : <s style="color:var(--muted)">180 €</s></span>
+                  <span class="prix">Reste : 36 €</span>
+                </div>
+                <div class="m-card" style="background:var(--terra-xl)">
+                  <div style="font-size:.72rem;font-weight:800;color:var(--terra);margin-bottom:6px">💡 Aides applicables</div>
+                  <div style="font-size:.7rem;color:var(--muted);line-height:1.5">
+                    Pass'Sport (50 €) · Aide CAF (60 €) · Coupon sport mairie (34 €)
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-cap">02 · Financer<small>Le coût réel après aides, avant d'inscrire</small></div>
+        </div>
+        <div class="phone-col">
+          <div class="phone">
+            <div class="phone-scr">
+              <div class="phone-top"><span>😊 Flooow — Y aller</span></div>
+              <img class="phone-img" src="assets/eco-mobilite.webp" alt="Famille à vélo — éco-mobilité"/>
+              <div class="phone-body">
+                <div class="m-card">
+                  <div style="font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:6px">🗺 Votre trajet</div>
+                  <div class="trajet-row" style="margin-top:0;flex-wrap:wrap;gap:6px">
+                    <span class="t-chip">🚌 Bus — 12 min</span>
+                    <span class="t-chip">🚲 Vélo — 9 min</span>
+                    <span class="t-chip">🚶 18 min</span>
+                  </div>
+                </div>
+                <div class="m-card" style="background:#e8f5e9;border-color:#c8e6c9">
+                  <div style="font-size:.68rem;color:#2e7d32;font-weight:700">🌱 Option éco-mobilité disponible</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-cap">03 · S'y rendre<small>Trajets, accompagnement, éco-mobilité</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANDE PHOTO BORD À BORD -->
+  <div class="photo-strip">
+    <img src="assets/escalade.jpg" alt="Adolescents en escalade"/>
+    <img src="assets/hiphop.jpg" alt="Cours de danse hip-hop"/>
+    <img src="assets/theatre.jpg" alt="Spectacle de théâtre enfants"/>
+    <img src="assets/volley.jpg" alt="Volley-ball jeunes"/>
+    <img src="assets/musique.jpg" alt="Éveil musical"/>
+    <img src="assets/hero-judo.jpg" alt="Enfants au football"/>
+  </div>
 
   <!-- PORTES D'ACTION -->
   <section class="portes">
@@ -1419,14 +1494,7 @@
     <div class="foot-top">
       <div class="foot-brand">
         <div class="foot-logo">
-          <div class="logo-mark" style="width:28px;height:28px">
-            <svg viewBox="0 0 22 22" fill="none" width="16" height="16">
-              <path d="M4 18 C4 18, 7 10, 11 6 C15 2, 18 4, 18 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="11" cy="13" r="3" fill="#fff" opacity=".5"/>
-              <path d="M3 14 Q7 11 11 13 Q15 15 19 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".6"/>
-            </svg>
-          </div>
-          Flooow
+          <img src="assets/logo-flooow.png" alt="Flooow"/>
         </div>
         <p>Trouver · Financer · S'y rendre</p>
         <div class="foot-tagline">Démarche pilote — territoires d'expérimentation</div>
