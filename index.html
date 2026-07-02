@@ -1,1273 +1,1026 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>Flooow — Trouver · Financer · S'y rendre</title>
-  <meta name="description" content="Flooow aide les familles à accéder aux activités pour leurs enfants en reliant l'offre disponible, les aides possibles et les conditions d'accès réelles."/>
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --terra:#d4622a;--terra-d:#b8501f;--terra-l:#fdf0eb;--terra-xl:#fef8f5;
-      --navy:#1a2e4a;--navy-l:#243d5e;
-      --sand:#f5f0e8;--sand-d:#ede5d8;
-      --anthracite:#2d3142;
-      --text:#2d3142;--muted:#6b7280;--border:#e5ddd4;
-      --white:#fff;
-      --r:12px;--sh:0 4px 24px rgba(0,0,0,.08);
-      --font:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Flooow — Le droit aux activités pour tous, toute l'année.</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFFFF;
+  --bg-light: #F5F5F5;
+  --bd: #E5E5E5;
+  --tx: #000000;
+  --tx2: #666666;
+  
+  /* Identité visuelle - Orange Flooow */
+  --flooow-orange: #D96B27; 
+  --flooow-orange-light: #FFF4ED;
+  --flooow-orange-bd: #F4C4A7;
+  --flooow-orange-dark: #B8531D;
+  
+  --f: 'Poppins', -apple-system, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--f); background: var(--bg); color: var(--tx); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; cursor: pointer; }
+button { font-family: var(--f); cursor: pointer; border: none; outline: none; }
+.w { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+
+/* =======================================================
+   NAV SUPÉRIEURE (BANDE NOIRE & MÉGAMENUS INTERACTIFS)
+   ======================================================= */
+.top-bar { background: #000000; color: #ffffff; font-size: 12px; font-weight: 500; height: 38px; position: relative; z-index: 1002; }
+.top-bar-nav { display: grid; grid-template-columns: 1fr 2fr 1fr; align-items: center; height: 100%; padding: 0 40px; }
+.top-links-left { display: flex; gap: 24px; list-style: none; height: 100%; align-items: center; }
+.top-links-left > li { height: 100%; display: flex; align-items: center; }
+.top-links-left > li > a { color: #aaaaaa; transition: color .2s; display: flex; align-items: center; height: 100%; }
+.top-links-left > li:hover > a { color: #ffffff; }
+
+.top-links-center { display: flex; gap: 28px; list-style: none; height: 100%; align-items: center; justify-content: center; }
+.top-links-center > li { height: 100%; display: flex; align-items: center; }
+.top-links-center > li > a { color: #ffffff; font-weight: 600; display: flex; align-items: center; gap: 6px; height: 100%; transition: color 0.2s; }
+.top-links-center > li > a::after { content: '▾'; font-size: 10px; transition: transform 0.2s; }
+.top-links-center > li:hover > a { color: var(--flooow-orange); }
+.top-links-center > li:hover > a::after { transform: rotate(180deg); }
+
+/* RIDEAUX NOIRS (MÉGAMENUS DU HAUT) */
+.top-bar .megamenu { position: absolute; top: 38px; left: 0; width: 100vw; background: #000000; color: #ffffff; padding: 40px 80px; display: none; grid-template-columns: repeat(3, 1fr); gap: 60px; border-top: 1px solid #222222; box-shadow: 0 15px 30px rgba(0,0,0,0.5); z-index: 2000; }
+.top-links-left > li:first-child .megamenu { grid-template-columns: repeat(3, 1fr) 1.5fr; gap: 40px; }
+.top-links-left > li:hover .megamenu, .top-links-center > li:hover .megamenu { display: grid; }
+
+.mega-col h5 { font-size: 13px; font-weight: 700; color: #ffffff; margin-bottom: 20px; text-transform: capitalize; }
+.mega-col ul { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.mega-col ul a { color: #cccccc; font-size: 13px; font-weight: 400; transition: color 0.2s; cursor: pointer; }
+.mega-col ul a:hover { color: var(--flooow-orange); }
+
+.mega-text-block h5 { font-size: 13px; font-weight: 700; color: #ffffff; margin-bottom: 14px; }
+.mega-text-block p { font-size: 12px; color: #bbbbbb; line-height: 1.6; margin-bottom: 16px; text-align: left; }
+.mega-text-block .action-link { font-size: 12px; font-weight: 600; color: #ffffff; text-decoration: underline; display: inline-block; transition: color 0.2s; cursor: pointer;}
+.mega-text-block .action-link:hover { color: var(--flooow-orange); }
+
+.mega-focus-card { border: 1px solid #333333; border-radius: 8px; padding: 24px; display: flex; flex-direction: column; gap: 14px; background: #0a0a0a; align-self: start; text-align: left; }
+.mega-focus-card h4 { font-size: 15px; font-weight: 700; color: #fff; }
+.mega-focus-card p { font-size: 12px; color: #aaaaaa; line-height: 1.6; }
+
+/* =======================================================
+   NAV PRINCIPALE (BARRE BLANCHE)
+   ======================================================= */
+nav { height: 80px; background: #fff; border-bottom: 1px solid var(--bd); position: sticky; top: 0; z-index: 1000; display: flex; align-items: center; }
+.nav-in { display: flex; align-items: center; justify-content: space-between; width: 100%; position: relative; }
+.logo { height: 36px; display: flex; align-items: center; cursor: pointer; }
+.logo img { height: 100%; width: auto; object-fit: contain; }
+
+.nav-links { display: flex; align-items: center; gap: 8px; list-style: none; height: 80px; }
+.nav-links > li { height: 100%; display: flex; align-items: center; }
+.nav-links > li > a { font-size: 14px; font-weight: 700; color: var(--tx); padding: 0 16px; display: flex; align-items: center; height: 100%; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
+.nav-links > li:hover > a { color: var(--flooow-orange); border-bottom-color: var(--flooow-orange); }
+
+/* RIDEAUX BLANCS (MÉGAMENUS DU BAS) */
+.nav-links > li .white-megamenu { position: absolute; top: 80px; left: calc(-1 * (100vw - 100%) / 2); width: 100vw; background: #FFFFFF; color: #000000; padding: 40px 80px 60px; border-bottom: 1px solid var(--bd); box-shadow: 0 20px 40px rgba(0,0,0,0.06); display: none; grid-template-columns: repeat(4, 1fr); gap: 32px; z-index: 1999; }
+.nav-links > li:hover .white-megamenu { display: grid; }
+.white-mega-col { display: flex; flex-direction: column; text-align: left; }
+.white-mega-col h5 { font-size: 13px; font-weight: 800; color: var(--tx); margin-bottom: 18px; letter-spacing: 0.2px; }
+.white-mega-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.white-mega-col ul a { color: var(--tx); font-size: 13px; font-weight: 400; transition: color 0.2s; cursor: pointer;}
+.white-mega-col ul a:hover { color: var(--flooow-orange); font-weight: 500; }
+
+/* CONTROLES DROITE (Épurés pour l'éditorial) */
+.nav-right-icons { display: flex; align-items: center; gap: 16px; color: var(--tx); }
+.search-pill-container { display: flex; align-items: center; background: #F4F4F5; border-radius: 100px; padding: 10px 20px; min-width: 140px; cursor: pointer; transition: background-color 0.2s; }
+.search-pill-container:hover { background: #E4E4E7; }
+.search-pill-container svg { width: 16px; height: 16px; fill: none; stroke: var(--tx); stroke-width: 2.5; margin-right: 10px; }
+.search-pill-container span { font-size: 14px; font-weight: 500; color: var(--tx); }
+
+/* BOUTONS PILULES DESIGN */
+.btn-black { display: inline-block; padding: 12px 28px; background: var(--flooow-orange); color: #ffffff; border-radius: 100px; font-size: 13px; font-weight: 700; text-align: center; transition: background 0.2s, transform 0.2s; }
+.btn-black:hover { background: var(--flooow-orange-dark); transform: translateY(-2px); }
+.btn-white { display: inline-block; padding: 12px 28px; background: #ffffff; color: #000000; border-radius: 100px; font-size: 13px; font-weight: 700; text-align: center; transition: background 0.2s, color 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+.btn-white:hover { color: var(--flooow-orange); }
+.badge { display: inline-block; padding: 4px 10px; background: var(--flooow-orange-light); color: var(--flooow-orange-dark); border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
+
+/* SECTIONS STRUCTURELLES */
+.s { padding: 100px 0; }
+.s-bg { background: var(--bg-light); }
+.s-title-block { margin-bottom: 48px; }
+.s-title { font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; line-height: 1.2; }
+.s-sub { font-size: 18px; color: var(--tx2); line-height: 1.6; max-width: 700px; }
+
+/* =======================================================
+   RECHERCHE RIDEAU INTÉGRAL (TYPE PATAGONIA)
+   ======================================================= */
+.search-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #ffffff; z-index: 9999; display: none; flex-direction: column; padding: 40px 80px; text-align: left; }
+.search-modal-top { display: flex; align-items: center; width: 100%; max-width: 800px; gap: 24px; margin-bottom: 40px; }
+.search-input-wrapper { display: flex; align-items: center; background: #F5F5F5; border-radius: 100px; padding: 14px 28px; flex: 1; }
+.search-input-wrapper svg { width: 18px; height: 18px; stroke: #000000; stroke-width: 2.5; fill: none; margin-right: 14px; flex-shrink: 0; }
+.search-modal-input { width: 100%; border: none; background: transparent; outline: none; font-family: var(--f); font-size: 15px; font-weight: 500; color: #000000; }
+.search-cancel-btn { font-size: 15px; font-weight: 500; color: #000000; background: none; text-decoration: underline; text-underline-offset: 4px; padding: 0; cursor: pointer; border: none; }
+.search-cancel-btn:hover { color: var(--flooow-orange); }
+.search-suggestions-box { width: 100%; max-width: 800px; }
+.search-suggestions-box h5 { font-size: 13px; font-weight: 700; color: #000000; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px;}
+.search-suggestions-box ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+.search-suggestions-box ul li a { font-size: 16px; font-weight: 500; color: #000000; transition: color 0.2s; display: inline-block; }
+.search-suggestions-box ul li a:hover { color: var(--flooow-orange); }
+
+/* VUES SPA */
+.view-section { display: none; animation: fadeIn 0.4s ease-out; }
+.view-section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* =======================================================
+   ÉLÉMENTS ÉDITORIAUX COMMUNS
+   ======================================================= */
+.hero-editorial { height: 60vh; min-height: 450px; background-size: cover; background-position: center 30%; background-attachment: scroll; display: flex; align-items: flex-end; padding-bottom: 60px; color: #ffffff; position: relative;}
+.hero-editorial::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%); }
+.hero-editorial .w { position: relative; z-index: 2; }
+.hero-editorial h1 { font-size: clamp(40px, 5vw, 64px); font-weight: 800; letter-spacing: -1.5px; margin-bottom: 16px; line-height: 1.1; max-width: 800px;}
+.hero-editorial p { font-size: 20px; font-weight: 400; max-width: 600px; line-height: 1.5; color: rgba(255,255,255,0.9); }
+
+.article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.article-card { border: 1px solid var(--bd); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; background: #fff; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; text-align: left;}
+.article-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.06); }
+.article-img { height: 240px; background-size: cover; background-position: center; }
+.article-content { padding: 32px; display: flex; flex-direction: column; flex-grow: 1; }
+.article-meta { font-size: 11px; color: var(--tx2); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; display: flex; justify-content: space-between;}
+.article-content h3 { font-size: 20px; font-weight: 800; line-height: 1.3; margin-bottom: 16px; letter-spacing: -0.5px;}
+.article-content p { font-size: 15px; color: var(--tx2); line-height: 1.6; margin-bottom: 24px; flex-grow: 1;}
+.article-cta { font-size: 14px; font-weight: 700; color: var(--flooow-orange); }
+
+/* Grilles textuelles */
+.text-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px; margin-top: 40px; }
+.text-col h3 { font-size: 24px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.5px;}
+.text-col p { font-size: 16px; color: var(--tx2); line-height: 1.7; margin-bottom: 24px;}
+
+/* Carrousel */
+.carousel-track-wrapper { position: relative; margin: 0 -40px; padding: 10px 40px 30px; overflow-x: auto; scroll-behavior: smooth; display: flex; gap: 24px; scrollbar-width: none; }
+.carousel-track-wrapper::-webkit-scrollbar { display: none; }
+.card-pata { width: 340px; flex-shrink: 0; display: flex; flex-direction: column; gap: 16px; }
+.card-pata-img { height: 380px; border-radius: 12px; background-size: cover; background-position: center; }
+.card-pata h3 { font-size: 20px; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.5px;}
+.card-pata p { font-size: 15px; color: var(--tx2); line-height: 1.6; flex-grow: 1; text-align: left; }
+
+/* Engagement Banner */
+.banner-adventure { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('img/1544644181-1484b3fdfc62-w2000.jpg') center/cover no-repeat; padding: 160px 0; color: #ffffff; text-align: center; }
+.banner-adventure h2 { font-size: 48px; font-weight: 800; letter-spacing: -1px; margin-bottom: 24px; color: #ffffff; }
+.banner-adventure p { font-size: 18px; max-width: 700px; line-height: 1.6; margin: 0 auto 40px; color: rgba(255,255,255,0.9); }
+
+/* FOOTER */
+footer { background: #111; color: #fff; padding: 80px 0 40px; font-size: 13px; }
+.foot-grid { display: grid; grid-template-columns: 2fr repeat(3, 1fr); gap: 60px; padding-bottom: 60px; border-bottom: 1px solid #333; }
+.foot-brand h3 { font-size: 24px; font-weight: 900; margin-bottom: 16px; color: #fff;}
+.foot-brand p { color: #aaa; line-height: 1.6; max-width: 320px; text-align: left; }
+.foot-col h5 { font-size: 13px; font-weight: 800; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.5px; color: #fff; }
+.foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+.foot-col ul a { color: #aaa; font-weight: 500; transition: color 0.2s; }
+.foot-col ul a:hover { color: var(--flooow-orange); }
+.foot-btm { padding-top: 30px; display: flex; justify-content: space-between; color: #666; font-weight: 500; }
+
+/* =======================================================
+   ACCESSIBILITÉ (clavier) & MENU MOBILE
+   ======================================================= */
+/* Focus clavier visible */
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+  outline: 3px solid var(--flooow-orange); outline-offset: 2px; border-radius: 4px;
+}
+/* Ouverture des mégamenus au focus clavier (en plus du survol) */
+.top-links-left > li:focus-within .megamenu,
+.top-links-center > li:focus-within .megamenu { display: grid; }
+.nav-links > li:focus-within .white-megamenu { display: grid; }
+
+/* Bouton burger (masqué en desktop) */
+.nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; padding: 10px; background: transparent; }
+.nav-burger span { display: block; width: 100%; height: 2px; background: var(--tx); border-radius: 2px; transition: transform .25s ease, opacity .25s ease; }
+.nav-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Panneau de navigation mobile */
+.mobile-menu { display: none; position: fixed; top: 80px; left: 0; width: 100vw; height: calc(100vh - 80px); background: #fff; z-index: 1500; padding: 16px 24px 48px; overflow-y: auto; flex-direction: column; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-size: 18px; font-weight: 700; color: var(--tx); padding: 18px 4px; border-bottom: 1px solid var(--bd); }
+.mobile-menu a:hover, .mobile-menu a:focus-visible { color: var(--flooow-orange); }
+.mobile-menu .mm-join { margin-top: 28px; text-align: center; }
+
+@media(max-width: 960px) {
+  .article-grid, .text-grid { grid-template-columns: 1fr; gap: 40px; }
+  .foot-grid { grid-template-columns: 1fr; gap: 40px; }
+  .nav-links, .top-bar { display: none; }
+  .nav-burger { display: flex; }
+  .nav-right-icons > .btn-black { display: none; } /* CTA déjà présent dans le menu mobile */
+  .search-pill-container span { display: none; }
+  .search-pill-container { min-width: auto; padding: 10px 14px; }
+  .search-pill-container svg { margin-right: 0; }
+}
+@media(min-width: 961px) { .mobile-menu { display: none !important; } }
+
+    /* FIX NAVBAR CACHING CONTENT */
+    .view-section {
+      scroll-margin-top: 120px;
     }
-    html{scroll-behavior:smooth}
-    body{font-family:var(--font);color:var(--text);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
-    a{text-decoration:none;color:inherit}
-    .hidden{display:none!important}
-
-    /* ── PAGES SPA ── */
-    .page{display:none}
-    .page.active{display:block}
-
-    /* ── HEADER ── */
-    header{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-    .nav-w{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;align-items:center;height:64px;gap:0}
-    .logo{display:flex;align-items:center;gap:9px;font-size:1.45rem;font-weight:900;color:var(--terra);letter-spacing:-.5px;margin-right:40px;flex-shrink:0;cursor:pointer}
-    .logo-mark{width:36px;height:36px;background:var(--terra);border-radius:10px;display:flex;align-items:center;justify-content:center}
-    .logo-mark svg{width:22px;height:22px}
-    .nav-links{display:flex;gap:2px;list-style:none}
-    .nav-links li a,.nav-links li button{padding:7px 13px;border-radius:8px;font-size:.875rem;font-weight:500;color:var(--text);background:none;border:none;cursor:pointer;transition:.15s;font-family:var(--font)}
-    .nav-links li a:hover,.nav-links li button:hover,.nav-links li a.active,.nav-links li button.active{background:var(--terra-l);color:var(--terra)}
-    .nav-sep{flex:1}
-    .btn-cta-sm{background:var(--terra)!important;color:#fff!important;padding:8px 18px!important;border-radius:8px!important;font-weight:700!important;margin-left:8px;transition:.15s!important;border:none;cursor:pointer;font-size:.875rem;font-family:var(--font)}
-    .btn-cta-sm:hover{background:var(--terra-d)!important}
-    .mobile-menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--text);font-size:1.3rem}
-
-    /* ── BOUTONS ── */
-    .btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:14px 26px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;transition:.15s;font-family:var(--font)}
-    .btn-p:hover{background:var(--terra-d);transform:translateY(-1px)}
-    .btn-s{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--terra);color:var(--terra);padding:12px 24px;border-radius:10px;font-size:.95rem;font-weight:700;background:transparent;cursor:pointer;transition:.15s;font-family:var(--font)}
-    .btn-s:hover{background:var(--terra-l)}
-    .btn-n{display:inline-flex;align-items:center;gap:6px;color:var(--terra);font-size:.875rem;font-weight:700;cursor:pointer;background:none;border:none;font-family:var(--font);padding:4px 0;transition:.15s}
-    .btn-n:hover{color:var(--terra-d);gap:10px}
-    .btn-w{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--terra);padding:13px 24px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;transition:.15s;font-family:var(--font)}
-    .btn-w:hover{background:var(--terra-xl)}
-
-    /* ── COMMUNS ── */
-    .container{max-width:1200px;margin:0 auto;padding:0 28px}
-    .tag{display:inline-block;background:var(--terra-l);color:var(--terra);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:4px 12px;border-radius:20px;margin-bottom:14px}
-    .tag-navy{background:rgba(26,46,74,.12);color:var(--navy)}
-    h2{font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:900;color:var(--anthracite);line-height:1.2;margin-bottom:14px}
-    h2 em{color:var(--terra);font-style:normal}
-    .sec-sub{font-size:1rem;color:var(--muted);max-width:560px;line-height:1.72}
-    section{padding:80px 0}
-    .two{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
-    .two.rev .vis{order:-1}
-    .check-list{list-style:none;display:flex;flex-direction:column;gap:13px;margin-top:26px}
-    .check-list li{display:flex;gap:11px;align-items:flex-start}
-    .ck{width:20px;height:20px;background:var(--terra);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.62rem;flex-shrink:0;margin-top:3px;font-weight:900}
-    .check-list li p{font-size:.88rem;color:var(--muted);line-height:1.55}
-    .check-list li strong{color:var(--text)}
-    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
-
-    /* ── CARDS ── */
-    .card{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:26px 22px;transition:.2s}
-    .card:hover{box-shadow:var(--sh);transform:translateY(-3px);border-color:var(--terra)}
-    .card-ico{width:46px;height:46px;background:var(--terra-l);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:14px}
-    .card h3{font-size:.97rem;font-weight:800;color:var(--anthracite);margin-bottom:7px;line-height:1.3}
-    .card p{font-size:.84rem;color:var(--muted);line-height:1.6}
-
-    /* ── HERO ── */
-    .hero{background:linear-gradient(135deg,var(--sand) 0%,var(--terra-xl) 60%,var(--sand-d) 100%);padding:80px 0 64px}
-    .hero-in{max-width:1200px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:1fr 440px;gap:60px;align-items:center}
-    .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--terra);color:#fff;padding:4px 14px;border-radius:20px;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px}
-    h1{font-size:clamp(2rem,4vw,3.1rem);font-weight:900;line-height:1.1;color:var(--anthracite);margin-bottom:20px}
-    h1 em{color:var(--terra);font-style:normal}
-    .hero-sub{font-size:1.05rem;color:var(--muted);max-width:500px;margin-bottom:32px;line-height:1.75}
-
-    /* MOCKUP */
-    .mockup{background:var(--anthracite);border-radius:20px;padding:3px;box-shadow:0 28px 70px rgba(0,0,0,.22)}
-    .mockup-in{background:var(--sand);border-radius:18px;overflow:hidden;min-height:380px}
-    .mockup-bar{background:var(--terra);padding:14px 16px;display:flex;align-items:center;gap:8px}
-    .mockup-bar span{font-size:.8rem;font-weight:800;color:#fff}
-    .mockup-body{padding:16px;display:flex;flex-direction:column;gap:10px}
-    .m-card{background:#fff;border-radius:10px;padding:12px 14px;border:1.5px solid var(--border)}
-    .m-card-top{display:flex;align-items:center;gap:9px;margin-bottom:6px}
-    .m-ico{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
-    .m-card-title{font-size:.78rem;font-weight:800;color:var(--anthracite)}
-    .m-chip{display:inline-block;background:var(--terra-l);color:var(--terra);font-size:.62rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-right:4px}
-    .m-chip-g{background:#e8f5e9;color:#2e7d32}
-    .m-chip-b{background:#e3f2fd;color:#1565c0}
-    .aide-row{display:flex;justify-content:space-between;align-items:center;background:var(--terra-l);border-radius:8px;padding:8px 10px;font-size:.72rem;font-weight:700}
-    .aide-row .prix{color:var(--terra);font-size:.82rem}
-    .trajet-row{display:flex;gap:8px;margin-top:6px}
-    .t-chip{background:#f0f4ff;color:#1565c0;border-radius:6px;padding:4px 8px;font-size:.65rem;font-weight:600}
-
-    /* ── TRIPTYQUE ── */
-    .triptyque{background:#fff;padding:80px 0}
-    .tri-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
-    .tri-card{border-radius:var(--r);padding:30px 24px;border:1.5px solid var(--border);transition:.2s;cursor:default}
-    .tri-card:hover{box-shadow:var(--sh);transform:translateY(-4px)}
-    .tri-card.featured{background:var(--terra);border-color:var(--terra);color:#fff}
-    .tri-card.featured p{color:rgba(255,255,255,.75)}
-    .tri-card.featured h3{color:#fff}
-    .tri-num{font-size:2.2rem;font-weight:900;margin-bottom:12px;line-height:1}
-    .tri-card.featured .tri-num{color:rgba(255,255,255,.4)}
-    .tri-num-def{color:var(--border)}
-    .tri-card h3{font-size:1.1rem;font-weight:800;color:var(--anthracite);margin-bottom:9px}
-    .tri-card p{font-size:.87rem;color:var(--muted);line-height:1.65}
-
-    /* ── PROBLEM ── */
-    .problem{background:var(--sand);padding:80px 0}
-    .prob-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
-    .prob-col{background:#fff;border-radius:var(--r);padding:24px;border-left:4px solid var(--terra)}
-    .prob-col h4{font-size:.95rem;font-weight:800;color:var(--anthracite);margin-bottom:8px}
-    .prob-col p{font-size:.84rem;color:var(--muted);line-height:1.6}
-
-    /* ── PORTES ACTION ── */
-    .portes{background:var(--terra-xl);padding:80px 0}
-    .portes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
-    .porte-card{background:#fff;border-radius:var(--r);padding:28px 22px;border:1.5px solid var(--border);transition:.2s;display:flex;flex-direction:column;gap:14px}
-    .porte-card:hover{box-shadow:var(--sh);border-color:var(--terra)}
-    .porte-tag{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--terra);margin-bottom:2px}
-    .porte-card h3{font-size:1rem;font-weight:800;color:var(--anthracite);margin-bottom:0}
-    .porte-card p{font-size:.84rem;color:var(--muted);line-height:1.6;flex:1}
-
-    /* ── CONFIANCE MINI ── */
-    .trust-band{background:var(--navy);padding:64px 0}
-    .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
-    .trust-item{text-align:center;padding:20px}
-    .trust-ico{font-size:1.6rem;margin-bottom:10px}
-    .trust-item h4{font-size:.9rem;font-weight:800;color:#fff;margin-bottom:5px}
-    .trust-item p{font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.5}
-
-    /* ── TERRITOIRES TEASER ── */
-    .terr-teaser{background:var(--sand);padding:80px 0}
-    .terr-dash{background:var(--navy);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:12px}
-    .td-row{background:rgba(255,255,255,.08);border-radius:9px;padding:12px 15px;display:flex;align-items:center;gap:12px}
-    .td-ico{font-size:1rem;flex-shrink:0}
-    .td-lbl{font-size:.8rem;color:rgba(255,255,255,.7);flex:1}
-    .td-val{font-size:.9rem;font-weight:800;color:#fff}
-    .td-bar{height:5px;background:rgba(255,255,255,.15);border-radius:3px;overflow:hidden;margin-top:8px}
-    .td-bar-fill{height:100%;background:var(--terra);border-radius:3px}
-
-    /* ── CTA FINAL HOME ── */
-    .cta-final{background:linear-gradient(135deg,var(--terra) 0%,var(--terra-d) 100%);padding:80px 0;text-align:center}
-    .cta-final h2{color:#fff;font-size:clamp(1.6rem,3vw,2.2rem)}
-    .cta-final p{color:rgba(255,255,255,.8);max-width:520px;margin:12px auto 36px}
-    .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-
-    /* ══════════════════════════════════
-       PAGE MISSION
-    ══════════════════════════════════ */
-    .mission-hero{background:var(--sand);padding:80px 0 64px}
-    .stat-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
-    .stat-card{background:#fff;border-radius:var(--r);padding:26px;text-align:center;border:1.5px solid var(--border)}
-    .stat-n{font-size:2.2rem;font-weight:900;color:var(--terra);margin-bottom:6px}
-    .stat-card p{font-size:.83rem;color:var(--muted);line-height:1.5}
-    .stat-card small{display:block;font-size:.68rem;color:var(--muted);margin-top:4px;opacity:.7}
-    .engage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
-    .eng-card{background:var(--sand);border-radius:var(--r);padding:28px 24px;border-top:4px solid var(--terra)}
-    .eng-card h3{font-size:1rem;font-weight:800;color:var(--anthracite);margin-bottom:9px}
-    .eng-card p{font-size:.85rem;color:var(--muted);line-height:1.65}
-    .eng-ico{font-size:1.8rem;margin-bottom:12px}
-    .promise-row{background:var(--terra-l);border-radius:var(--r);padding:24px;border-left:4px solid var(--terra);margin-top:24px}
-    .promise-row h4{font-size:.95rem;font-weight:800;color:var(--terra);margin-bottom:6px}
-    .promise-row p{font-size:.88rem;color:var(--text);line-height:1.6}
-    .comm-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
-    .comm-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:22px;transition:.2s}
-    .comm-card:hover{border-color:var(--terra);box-shadow:var(--sh)}
-    .comm-card h4{font-size:.92rem;font-weight:800;color:var(--anthracite);margin-bottom:6px}
-    .comm-card p{font-size:.82rem;color:var(--muted);line-height:1.55}
-
-    /* ══════════════════════════════════
-       PAGE TERRITOIRES
-    ══════════════════════════════════ */
-    .terr-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-l) 100%);padding:80px 0 64px}
-    .terr-hero h1{color:#fff}
-    .terr-hero .hero-sub{color:rgba(255,255,255,.7)}
-    .fonctions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
-    .fn-card{background:#fff;border-radius:var(--r);padding:26px 22px;border-top:4px solid var(--terra);transition:.2s}
-    .fn-card:hover{box-shadow:var(--sh)}
-    .fn-num{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--terra);margin-bottom:8px}
-    .fn-card h3{font-size:.97rem;font-weight:800;color:var(--anthracite);margin-bottom:8px}
-    .fn-card p{font-size:.84rem;color:var(--muted);line-height:1.6}
-    .modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
-    .mod-card{background:var(--sand);border-radius:var(--r);padding:22px;border:1.5px solid var(--border)}
-    .mod-status{display:inline-block;font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:2px 9px;border-radius:20px;margin-bottom:10px}
-    .s-cadrage{background:#e8f5e9;color:#2e7d32}
-    .s-pilote{background:#fff3e0;color:#e65100}
-    .s-deploy{background:var(--terra-l);color:var(--terra)}
-    .mod-card h4{font-size:.9rem;font-weight:800;color:var(--anthracite);margin-bottom:6px}
-    .mod-card p{font-size:.8rem;color:var(--muted);line-height:1.55}
-    .timeline{display:flex;flex-direction:column;gap:0;margin-top:36px;position:relative}
-    .timeline::before{content:'';position:absolute;left:18px;top:10px;bottom:10px;width:2px;background:var(--border)}
-    .tl-step{display:flex;gap:18px;align-items:flex-start;padding:0 0 28px 0;position:relative;z-index:1}
-    .tl-dot{width:36px;height:36px;background:var(--terra);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.75rem;font-weight:900;flex-shrink:0;border:3px solid #fff;box-shadow:0 0 0 2px var(--terra)}
-    .tl-body h4{font-size:.92rem;font-weight:800;color:var(--anthracite);margin-bottom:4px}
-    .tl-body p{font-size:.82rem;color:var(--muted);line-height:1.5}
-    .faq-list{display:flex;flex-direction:column;gap:2px;margin-top:36px}
-    .faq-item{border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden}
-    .faq-q{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;cursor:pointer;font-size:.9rem;font-weight:700;color:var(--anthracite);background:#fff;transition:.15s}
-    .faq-q:hover{background:var(--terra-l)}
-    .faq-a{padding:0 20px;max-height:0;overflow:hidden;transition:.3s;background:var(--sand);font-size:.85rem;color:var(--muted);line-height:1.65}
-    .faq-a.open{max-height:200px;padding:14px 20px}
-    .faq-ico{font-size:.8rem;transition:.3s}
-    .faq-ico.open{transform:rotate(45deg)}
-
-    /* ══════════════════════════════════
-       PAGE AGIR
-    ══════════════════════════════════ */
-    .agir-hero{background:var(--sand);padding:72px 0 56px}
-    .agir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
-    .agir-card{background:#fff;border-radius:16px;padding:32px 26px;border:2px solid var(--border);transition:.2s;display:flex;flex-direction:column;cursor:pointer;text-align:center}
-    .agir-card:hover{border-color:var(--terra);box-shadow:var(--sh);transform:translateY(-4px)}
-    .agir-ico{width:60px;height:60px;border-radius:16px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
-    .agir-card h3{font-size:1.1rem;font-weight:900;color:var(--anthracite);margin-bottom:10px}
-    .agir-card p{font-size:.87rem;color:var(--muted);line-height:1.65;flex:1;margin-bottom:18px}
-    .agir-card .btn-p{width:100%;justify-content:center}
-
-    /* ══════════════════════════════════
-       FORMULAIRES
-    ══════════════════════════════════ */
-    .form-page{background:var(--sand);min-height:100vh;padding:80px 0}
-    .form-box{background:#fff;border-radius:20px;padding:40px;max-width:600px;margin:0 auto;border:1.5px solid var(--border);box-shadow:var(--sh)}
-    .form-tag{display:inline-block;background:var(--terra-l);color:var(--terra);font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;padding:4px 12px;border-radius:20px;margin-bottom:14px}
-    .form-box h2{font-size:1.5rem;font-weight:900;color:var(--anthracite);margin-bottom:8px}
-    .form-box p.desc{font-size:.9rem;color:var(--muted);margin-bottom:28px;line-height:1.65}
-    .form-group{margin-bottom:18px}
-    .form-group label{display:block;font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:6px}
-    .form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:.9rem;color:var(--text);background:#fff;outline:none;transition:.15s;font-family:var(--font)}
-    .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--terra);box-shadow:0 0 0 3px rgba(212,98,42,.1)}
-    .form-group textarea{resize:vertical;min-height:80px}
-    .form-submit{width:100%;padding:14px;background:var(--terra);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:800;cursor:pointer;font-family:var(--font);transition:.15s;margin-top:6px}
-    .form-submit:hover{background:var(--terra-d)}
-    .cnil-note{font-size:.72rem;color:var(--muted);margin-top:12px;line-height:1.55;text-align:center}
-    .form-back{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:.83rem;font-weight:600;cursor:pointer;background:none;border:none;font-family:var(--font);padding:0;margin-bottom:20px;transition:.15s}
-    .form-back:hover{color:var(--terra)}
-
-    /* Merci page */
-    .merci-box{text-align:center;max-width:520px;margin:80px auto;padding:0 28px}
-    .merci-ico{width:72px;height:72px;background:var(--terra-l);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 24px}
-    .merci-box h2{font-size:1.8rem;font-weight:900;color:var(--anthracite);margin-bottom:12px}
-    .merci-box p{font-size:.95rem;color:var(--muted);line-height:1.7;margin-bottom:28px}
-
-    /* ══════════════════════════════════
-       PAGE CONFIANCE
-    ══════════════════════════════════ */
-    .conf-hero{background:var(--navy);padding:72px 0 56px}
-    .conf-hero h1{color:#fff}
-    .conf-hero .hero-sub{color:rgba(255,255,255,.65)}
-    .conf-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:44px}
-    .conf-card{background:#fff;border-radius:var(--r);padding:26px;border-left:4px solid var(--terra)}
-    .conf-card h3{font-size:.97rem;font-weight:800;color:var(--anthracite);margin-bottom:8px;display:flex;align-items:center;gap:8px}
-    .conf-card p{font-size:.85rem;color:var(--muted);line-height:1.65}
-    .acces-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px}
-    .acces-item{background:var(--sand);border-radius:var(--r);padding:20px;text-align:center;border:1.5px solid var(--border)}
-    .acces-ico{font-size:1.5rem;margin-bottom:8px}
-    .acces-item h4{font-size:.85rem;font-weight:800;color:var(--anthracite);margin-bottom:4px}
-    .acces-item p{font-size:.75rem;color:var(--muted);line-height:1.45}
-
-    /* ── FOOTER ── */
-    footer{background:var(--anthracite);color:rgba(255,255,255,.65);padding:56px 0 28px}
-    .foot-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
-    .foot-logo{display:flex;align-items:center;gap:9px;font-size:1.3rem;font-weight:900;color:var(--terra);margin-bottom:12px;letter-spacing:-.5px}
-    .foot-brand p{font-size:.82rem;line-height:1.7;color:rgba(255,255,255,.4);max-width:220px}
-    .foot-tagline{font-size:.78rem;color:var(--terra);font-weight:700;margin-top:6px;letter-spacing:.03em}
-    .foot-col h4{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.8);margin-bottom:12px}
-    .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
-    .foot-col ul li button,.foot-col ul li a{font-size:.83rem;color:rgba(255,255,255,.42);transition:.15s;background:none;border:none;cursor:pointer;font-family:var(--font);padding:0;text-align:left}
-    .foot-col ul li button:hover,.foot-col ul li a:hover{color:var(--terra)}
-    .foot-bottom{padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
-    .foot-bottom p{font-size:.75rem;color:rgba(255,255,255,.28)}
-    .foot-legal{display:flex;gap:16px}
-    .foot-legal a{font-size:.75rem;color:rgba(255,255,255,.28);transition:.15s}
-    .foot-legal a:hover{color:var(--terra)}
-
-    /* ── RESPONSIVE ── */
-    @media(max-width:1024px){
-      .tri-grid,.portes-grid,.fonctions-grid,.modules-grid,.agir-grid,.engage-grid{grid-template-columns:repeat(2,1fr)}
-      .trust-grid{grid-template-columns:repeat(2,1fr)}
-      .foot-top{grid-template-columns:1fr 1fr}
+    .hero-editorial {
+      padding-top: 40px; /* Ajout pour ne pas être caché par le sticky header */
     }
-    @media(max-width:768px){
-      .hero-in,.two,.two.rev,.terr-teaser .two{grid-template-columns:1fr;gap:36px}
-      .hero-vis{display:none}
-      .two.rev .vis{order:0}
-      .tri-grid,.portes-grid,.prob-cols,.stat-cards,.agir-grid,.engage-grid,.conf-grid,.acces-grid,.comm-cards{grid-template-columns:1fr}
-      .fonctions-grid,.modules-grid,.trust-grid{grid-template-columns:1fr}
-      .foot-top{grid-template-columns:1fr 1fr}
-      nav .nav-links,.nav-sep{display:none}
-      .mobile-menu-btn{display:block}
-    }
-    @media(max-width:520px){
-      .container,.nav-w,.hero-in{padding-left:16px;padding-right:16px}
-      section{padding:56px 0}
-      .foot-top{grid-template-columns:1fr}
-      .form-box{padding:24px 18px}
-      .cta-btns{flex-direction:column;align-items:center}
-    }
-  </style>
+
+.toast-msg { display: none; position: fixed; top: 20px; right: 20px; z-index: 9999; background: #000; color: #fff; padding: 14px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.toast-msg.show { display: block; }
+</style>
 </head>
 <body>
 
-<!-- ════════════════════════════════════ HEADER -->
-<header>
-  <div class="nav-w">
-    <div class="logo" onclick="showPage('home')">
-      <div class="logo-mark">
-        <svg viewBox="0 0 22 22" fill="none">
-          <path d="M4 18 C4 18, 7 10, 11 6 C15 2, 18 4, 18 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="11" cy="13" r="3" fill="#fff" opacity=".5"/>
-          <path d="M3 14 Q7 11 11 13 Q15 15 19 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".6"/>
-        </svg>
-      </div>
-      Flooow
+<div class="search-overlay" id="searchBar">
+  <div class="search-modal-top">
+    <div class="search-input-wrapper">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" class="search-modal-input" placeholder="Rechercher une activité, une aide, une MJC..." autofocus>
     </div>
-    <ul class="nav-links">
-      <li><button onclick="showPage('mission')" id="nav-mission">Notre mission</button></li>
-      <li><button onclick="showPage('territoires')" id="nav-territoires">Territoires</button></li>
-      <li><button onclick="showPage('agir')" id="nav-agir">Agir</button></li>
-      <li><button onclick="showPage('confiance')" id="nav-confiance">Confiance</button></li>
-    </ul>
-    <div class="nav-sep"></div>
-    <button class="btn-cta-sm" onclick="showPage('demo')">Demander une démo</button>
-    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    <button class="search-cancel-btn" onclick="closeSearch()">Annuler</button>
   </div>
-</header>
+  <div class="search-suggestions-box">
+    <h5>Recherches fréquentes</h5>
+    <ul>
+      <li><a onclick="navigateTo('aides'); closeSearch();">Comprendre le Quotient Familial (CAF)</a></li>
+      <li><a onclick="navigateTo('activites'); closeSearch();">Activités 3-5 ans à Saint-Étienne</a></li>
+      <li><a onclick="navigateTo('histoires'); closeSearch();">L'impact du Pass'Sport dans la Loire</a></li>
+      <li><a onclick="navigateTo('organismes'); closeSearch();">Clubs sportifs partenaires</a></li>
+    </ul>
+  </div>
+</div>
 
-<!-- ════════════════════════════════════ PAGE : ACCUEIL -->
-<div id="page-home" class="page active">
+<div class="toast-msg" id="toastBox">Action enregistrée.</div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-in">
-      <div>
-        <div class="hero-badge">🌊 Démarche pilote</div>
-        <h1>Trouver · Financer<br><em>S'y rendre</em></h1>
-        <p class="hero-sub">Flooow aide les familles à accéder plus facilement aux activités pour leurs enfants en reliant trois informations souvent dispersées : l'offre disponible, les aides possibles et les conditions d'accès réelles.</p>
-        <div class="cta-row">
-          <button class="btn-p" onclick="showPage('family')">Je partage un besoin</button>
-          <button class="btn-s" onclick="showPage('territoires')">Je représente un territoire</button>
+<div class="top-bar">
+  <div class="top-bar-nav">
+    <ul class="top-links-left">
+      <li>
+        <a>Notre mission territoriale</a>
+        <div class="megamenu">
+          <div class="mega-col">
+            <h5>La démarche</h5>
+            <ul>
+              <li><a onclick="navigateTo('accueil')">Pourquoi Flooow ?</a></li>
+              <li><a onclick="openHeartbeat(event)">Notre communauté d'entraide</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h5>Actions dans la Loire</h5>
+            <ul>
+              <li><a onclick="navigateTo('activites')">Rendre le sport accessible</a></li>
+              <li><a onclick="navigateTo('aides')">Clarifier les aides CAF</a></li>
+            </ul>
+          </div>
+          <div class="mega-focus-card">
+            <h4>Construisons ensemble</h4>
+            <p>Flooow est un mouvement local stéphanois. Nous mutualisons les informations pour rompre l'isolement des familles face aux loisirs.</p>
+            <button class="btn-white" style="margin-top: 8px;" onclick="openHeartbeat(event)">Rejoindre le mouvement</button>
+          </div>
         </div>
-        <div style="margin-top:18px">
-          <button class="btn-n" onclick="showPage('mission')">Découvrir la mission →</button>
+      </li>
+      
+      <li>
+        <a>Actualités & Terrain</a>
+        <div class="megamenu">
+          <div class="mega-col">
+            <h5>Thématiques</h5>
+            <ul>
+              <li><a onclick="navigateTo('histoires')">Aides financières</a></li>
+              <li><a onclick="navigateTo('histoires')">Reportages en MJC</a></li>
+              <li><a onclick="navigateTo('histoires')">Mobilité et covoiturage</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h5>Activités Phares</h5>
+            <ul>
+              <li><a onclick="navigateTo('activites')">Dojos & Arts martiaux</a></li>
+              <li><a onclick="navigateTo('activites')">Arts plastiques</a></li>
+              <li><a onclick="navigateTo('activites')">Musique & Théâtre</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+    
+    <ul class="top-links-center">
+      <li>
+        <a>Informations sur les Aides</a>
+        <div class="megamenu">
+          <div class="mega-text-block">
+            <h5>Mise à jour des barèmes locaux</h5>
+            <p>Nous croisons et actualisons les grilles de la CAF de la Loire et des dispositifs d'État sous 1 à 2 jours ouvrés. Notre but est de rendre l'information transparente et utile pour les familles stéphanoises.</p>
+            <button class="btn-white" style="margin-top: 16px;" onclick="navigateTo('aides')">Comprendre les aides</button>
+          </div>
+        </div>
+      </li>
+      <li><a onclick="navigateTo('histoires')">Récits du terrain</a></li>
+    </ul>
+    <div></div>
+  </div>
+</div>
+
+<nav>
+  <div class="w nav-in">
+    <div class="logo" onclick="navigateTo('accueil')">
+      <img src="logo-flooow.png" alt="Flooow Logo" style="height: 30px;">
+    </div>
+    
+    <ul class="nav-links">
+      <li>
+        <a onclick="navigateTo('activites')">Activités locales</a>
+        <div class="white-megamenu">
+          <div class="white-mega-col">
+            <h5>Par type</h5>
+            <ul>
+              <li><a onclick="navigateTo('activites')">Pratiques Sportives</a></li>
+              <li><a onclick="navigateTo('activites')">Arts & Culture</a></li>
+              <li><a onclick="navigateTo('activites')">Loisirs créatifs</a></li>
+            </ul>
+          </div>
+          <div class="white-mega-col">
+            <h5>Saisonnalité</h5>
+            <ul>
+              <li><a onclick="navigateTo('activites')">Inscriptions annuelles</a></li>
+              <li><a onclick="navigateTo('activites')">Stages de vacances</a></li>
+            </ul>
+          </div>
+          <div class="white-mega-col">
+            <h5>Tranches d'âge</h5>
+            <ul>
+              <li><a onclick="navigateTo('activites')">Petite enfance (3-5 ans)</a></li>
+              <li><a onclick="navigateTo('activites')">Enfants (6-11 ans)</a></li>
+              <li><a onclick="navigateTo('activites')">Adolescents (12-17 ans)</a></li>
+            </ul>
+          </div>
+          <div class="white-mega-col">
+            <h5>Mobilité</h5>
+            <ul>
+              <li><a onclick="openHeartbeat(event)">Covoiturage entre parents</a></li>
+              <li><a onclick="navigateTo('histoires')">Accès en transports</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li>
+        <a onclick="navigateTo('aides')">Aides & Accompagnement</a>
+        <div class="white-megamenu">
+          <div class="white-mega-col">
+            <h5>Dispositifs nationaux</h5>
+            <ul>
+              <li><a onclick="navigateTo('aides')">Le Pass'Sport</a></li>
+              <li><a onclick="navigateTo('aides')">Le Pass Culture</a></li>
+            </ul>
+          </div>
+          <div class="white-mega-col">
+            <h5>Aides Locales</h5>
+            <ul>
+              <li><a onclick="navigateTo('aides')">Quotient Familial (CAF)</a></li>
+              <li><a onclick="navigateTo('aides')">Aides de la ville de Saint-Étienne</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li>
+        <a onclick="navigateTo('organismes')">Acteurs Locaux</a>
+        <div class="white-megamenu">
+          <div class="white-mega-col">
+            <h5>Structures</h5>
+            <ul>
+              <li><a onclick="navigateTo('organismes')">Clubs Sportifs</a></li>
+              <li><a onclick="navigateTo('organismes')">MJC et Centres Sociaux</a></li>
+            </ul>
+          </div>
+          <div class="white-mega-col">
+            <h5>Institutions</h5>
+            <ul>
+              <li><a onclick="navigateTo('organismes')">Collectivités</a></li>
+              <li><a onclick="navigateTo('organismes')">Partenaires publics</a></li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li><a onclick="navigateTo('histoires')">Histoires</a></li>
+    </ul>
+    
+    <div class="nav-right-icons">
+      <div class="search-pill-container" role="button" tabindex="0" aria-label="Ouvrir la recherche" onclick="openSearch()">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span>Rechercher</span>
+      </div>
+      <button class="btn-black" onclick="openHeartbeat(event)">Rejoindre la Flooow Family</button>
+      <button class="nav-burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileMenu" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Navigation mobile">
+  <a onclick="navMobile('accueil')">Accueil</a>
+  <a onclick="navMobile('activites')">Activités locales</a>
+  <a onclick="navMobile('aides')">Aides &amp; Accompagnement</a>
+  <a onclick="navMobile('organismes')">Acteurs Locaux</a>
+  <a onclick="navMobile('histoires')">Histoires</a>
+  <a onclick="closeMobileMenu(); openSearch();">Rechercher</a>
+  <button class="btn-black mm-join" onclick="openHeartbeat(event)">Rejoindre la Flooow Family</button>
+</nav>
+
+<div id="view-accueil" class="view-section active">
+  <div class="hero-editorial" style="background-image: url('img/1502680390469-be75c86b636f-w2000.jpg');">
+    <div class="w">
+      <h1>Le droit aux activités pour tous. Toute l'année.</h1>
+      <p>Flooow réunit les familles, les clubs et les acteurs de la Loire pour simplifier l'information, clarifier les aides financières et repenser la mobilité des jeunes.</p>
+    </div>
+  </div>
+
+  <section class="s" style="padding-top: 120px;">
+    <div class="w">
+      <div class="text-grid">
+        <div class="text-col">
+          <h3>Une activité extrascolaire change une année. Parfois plus.</h3>
+          <p>Un club de judo le mercredi, un stage de théâtre pendant les vacances, un atelier robotique à la MJC... Ces expériences construisent le parcours des jeunes. Pourtant, de nombreuses familles de l'agglomération stéphanoise renoncent avant l'inscription.</p>
+          <p>Le frein n'est pas toujours le coût brut, mais la difficulté à comprendre les grilles tarifaires, l'accès complexe aux aides de la CAF, ou encore la contrainte des trajets hebdomadaires.</p>
+        </div>
+        <div class="text-col">
+          <h3>Notre réponse sur le terrain</h3>
+          <p>Flooow est une démarche d'accompagnement territorial. Nous centralisons l'offre locale pour la rendre transparente. Nous traduisons le mille-feuille administratif des aides (Pass'Sport, Quotient Familial) en informations claires pour estimer un reste à charge réaliste.</p>
+          <p>Et parce que la mobilité est cruciale, nous impulsons une communauté d'entraide entre parents pour organiser des trajets partagés et solidaires vers les clubs.</p>
+          <button class="btn-black" style="margin-top: 16px;" onclick="navigateTo('histoires')">Découvrir nos histoires du terrain</button>
         </div>
       </div>
-      <div class="hero-vis">
-        <div class="mockup">
-          <div class="mockup-in">
-            <div class="mockup-bar">
-              <span>🌊 Flooow — Recherche d'activité</span>
-            </div>
-            <div class="mockup-body">
-              <div class="m-card">
-                <div class="m-card-top">
-                  <div class="m-ico" style="background:#fff3e0">⚽</div>
-                  <div>
-                    <div class="m-card-title">Club de foot du quartier</div>
-                    <div style="font-size:.65rem;color:var(--muted)">Paris 14e · 6–12 ans</div>
-                  </div>
-                </div>
-                <div>
-                  <span class="m-chip">Sport</span>
-                  <span class="m-chip-g">Accessible</span>
-                  <span class="m-chip-b">Mercredi</span>
-                </div>
+    </div>
+  </section>
+
+  <section class="s s-bg">
+    <div class="w">
+      <div class="s-title-block">
+        <h2 class="s-title">Comment nous agissons</h2>
+        <p class="s-sub">Quatre axes de travail pour lever les barrières d'accès aux loisirs jeunesse dans la Loire.</p>
+      </div>
+
+      <div class="carousel-track-wrapper">
+        <div class="card-pata">
+          <div class="card-pata-img" style="background-image: url('img/1503454537195-1dcabb73ffb9-w900.jpg');"></div>
+          <h3>Centraliser l'offre</h3>
+          <p>Répertorier avec précision les activités de Saint-Étienne et ses alentours, par tranche d'âge exacte, par quartier et par saisonnalité.</p>
+          <button class="btn-black" onclick="navigateTo('activites')">Explorer l'offre locale</button>
+        </div>
+        <div class="card-pata">
+          <div class="card-pata-img" style="background-image: url('img/1554224155-8d04cb21cd6c-w900.jpg');"></div>
+          <h3>Décrypter les aides</h3>
+          <p>Traduire de manière pédagogique le calcul du Quotient Familial et les dispositifs nationaux pour rendre le coût final prévisible.</p>
+          <button class="btn-black" onclick="navigateTo('aides')">Comprendre les aides</button>
+        </div>
+        <div class="card-pata">
+          <div class="card-pata-img" style="background-image: url('img/1472653431158-6364773b2a56-w900.jpg');"></div>
+          <h3>Mutualiser la mobilité</h3>
+          <p>Créer du lien social entre les familles d'un même quartier ou d'un même club pour organiser l'écomobilité et les trajets partagés.</p>
+          <button class="btn-black" onclick="openHeartbeat(event)">Rejoindre la communauté</button>
+        </div>
+        <div class="card-pata">
+          <div class="card-pata-img" style="background-image: url('img/1517466787929-bc90951d0974-w900.jpg');"></div>
+          <h3>Accompagner les clubs</h3>
+          <p>Aider les structures sportives et culturelles à communiquer de manière transparente sur leurs grilles d'inclusion sociale.</p>
+          <button class="btn-black" onclick="navigateTo('organismes')">Espace acteurs locaux</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s">
+    <div class="w">
+      <div class="s-title-block">
+        <h2 class="s-title">À la une : Chroniques du terrain</h2>
+      </div>
+      
+          <div class="article-grid">
+            <div class="article-card" onclick="navigateTo('article-velo')">
+              <div class="article-img" style="background-image: url('img/1517649763962-0c623066013b-w900.jpg');"></div>
+              <div class="article-content">
+                <div class="article-meta"><span>Écomobilité</span><span>Montreynaud</span></div>
+                <h3>Comment le vélo a changé le quotidien de la famille Martin à Montreynaud</h3>
+                <p>Aller à l'entraînement sans voiture, c'est possible. Rencontre avec une famille qui a repensé sa mobilité grâce aux aides locales.</p>
+                <span class="article-cta">Lire le récit &rarr;</span>
               </div>
-              <div class="aide-row">
-                <span>Prix affiché : <s style="color:var(--muted)">180 €</s></span>
-                <span class="prix">Reste : 36 €</span>
-              </div>
-              <div class="m-card" style="background:var(--terra-xl)">
-                <div style="font-size:.72rem;font-weight:800;color:var(--terra);margin-bottom:6px">💡 Aides applicables</div>
-                <div style="font-size:.7rem;color:var(--muted);line-height:1.5">
-                  Pass'Sport (50 €) · Aide CAF (60 €) · Coupon sport mairie (34 €)
-                </div>
-              </div>
-              <div>
-                <div style="font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:6px">🗺 Accès</div>
-                <div class="trajet-row">
-                  <span class="t-chip">🚇 Métro 14 — 8 min</span>
-                  <span class="t-chip">🚌 Bus 62</span>
-                </div>
+            </div>
+
+            <div class="article-card" onclick="navigateTo('article-inclusion')">
+              <div class="article-img" style="background-image: url('img/1502086223501-7ea6ecd79368-w900.jpg');"></div>
+              <div class="article-content">
+                <div class="article-meta"><span>Inclusion</span><span>Tarentaize</span></div>
+                <h3>Le sport partagé : quand la différence devient une force sur le terrain</h3>
+                <p>Immersion dans un club stéphanois pionnier dans l'accueil d'enfants en situation de handicap.</p>
+                <span class="article-cta">Lire le récit &rarr;</span>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- PROBLÈME -->
-  <section class="problem">
-    <div class="container">
-      <div class="tag">Le constat</div>
-      <h2>Pourquoi tant de parcours s'arrêtent<br><em>avant même l'inscription ?</em></h2>
-      <p class="sec-sub">Le renoncement vient souvent d'une accumulation de petits obstacles séparés.</p>
-      <div class="prob-cols">
-        <div class="prob-col">
-          <h4>🔍 L'offre est peu visible</h4>
-          <p>Les activités existent, mais elles ne sont pas toujours simples à repérer pour les familles qui ne connaissent pas les bons canaux ou les structures locales.</p>
-        </div>
-        <div class="prob-col">
-          <h4>💶 Le coût réel reste flou</h4>
-          <p>Entre le prix affiché, les aides nationales, les dispositifs CAF/MSA, les aides locales et les conditions propres à chaque structure, le reste à charge est difficile à anticiper.</p>
-        </div>
-        <div class="prob-col">
-          <h4>🚌 L'accès n'est pas calculé</h4>
-          <p>Les horaires, le trajet, l'accompagnement nécessaire ou l'absence de solutions de déplacement font renoncer avant même le premier contact avec la structure.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRIPTYQUE -->
-  <section class="triptyque">
-    <div class="container">
-      <div class="tag">Le triptyque Flooow</div>
-      <h2>Trois questions,<br><em>un même parcours</em></h2>
-      <p class="sec-sub">Flooow relie dans un seul parcours lisible les trois informations que les familles doivent aujourd'hui chercher séparément.</p>
-      <div class="tri-grid">
-        <div class="tri-card">
-          <div class="tri-num tri-num-def">01</div>
-          <h3>Trouver</h3>
-          <p>Repérer les activités par âge, type, lieu et accessibilité. Voir les structures locales, leurs horaires, leurs publics et leurs disponibilités.</p>
-        </div>
-        <div class="tri-card featured">
-          <div class="tri-num">02</div>
-          <h3>Financer</h3>
-          <p>Comprendre les aides possibles, le coût réel et le reste à charge. Distinguer prix affiché, aides nationales et dispositifs locaux cumulables.</p>
-        </div>
-        <div class="tri-card">
-          <div class="tri-num tri-num-def">03</div>
-          <h3>S'y rendre</h3>
-          <p>Anticiper la proximité, le trajet, l'accompagnement nécessaire ou les solutions de déplacement disponibles autour de l'activité.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PORTES D'ACTION -->
-  <section class="portes">
-    <div class="container">
-      <div class="tag">Agir avec Flooow</div>
-      <h2>Trois portes d'entrée,<br><em>trois actions concrètes</em></h2>
-      <p class="sec-sub">Votre retour terrain est ce qui rend Flooow utile. Choisissez votre porte d'entrée.</p>
-      <div class="portes-grid">
-        <div class="porte-card">
-          <div>
-            <div class="porte-tag">Pour les familles</div>
-            <h3>Flooow Family</h3>
-          </div>
-          <p>Partagez un besoin concret ou un frein d'accès à une activité pour votre enfant. Votre retour aide à améliorer l'accès pour tous.</p>
-          <button class="btn-p" onclick="showPage('family')">Je partage mon besoin →</button>
-        </div>
-        <div class="porte-card">
-          <div>
-            <div class="porte-tag">Pour les jeunes</div>
-            <h3>Flooow Jeunes</h3>
-          </div>
-          <p>Dites ce qui donne envie, ce qui bloque, quels lieux et quels formats manquent. Votre avis compte directement.</p>
-          <button class="btn-p" onclick="showPage('jeunes')">Je donne mon avis →</button>
-        </div>
-        <div class="porte-card">
-          <div>
-            <div class="porte-tag">Pour les structures et collectivités</div>
-            <h3>Flooow Territoires</h3>
-          </div>
-          <p>Référencez une structure, contribuez à la cartographie ou échangez sur une démarche pilote locale.</p>
-          <button class="btn-p" onclick="showPage('territoire-form')">J'échange sur un territoire →</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TERRITOIRES TEASER -->
-  <section class="terr-teaser">
-    <div class="container">
-      <div class="two">
-        <div>
-          <div class="tag">Pour les territoires</div>
-          <h2>Flooow n'est pas<br>seulement <em>un annuaire</em></h2>
-          <p class="sec-sub">C'est une démarche pour mieux relier activités, aides et accès réel — et comprendre ce qui freine vraiment les familles sur un territoire.</p>
-          <ul class="check-list">
-            <li><div class="ck">✓</div><p><strong>Cartographier les offres et structures</strong> disponibles sur votre territoire.</p></li>
-            <li><div class="ck">✓</div><p><strong>Qualifier les freins récurrents</strong> remontés par les familles et les jeunes.</p></li>
-            <li><div class="ck">✓</div><p><strong>Tester une démarche pilote</strong> avec les acteurs locaux — associations, équipements, collectivités.</p></li>
-          </ul>
-          <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap">
-            <button class="btn-p" onclick="showPage('demo')">Demander une démonstration</button>
-            <button class="btn-s" onclick="showPage('territoires')">Découvrir la page Territoires</button>
-          </div>
-        </div>
-        <div class="vis">
-          <div class="terr-dash">
-            <div style="color:rgba(255,255,255,.45);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px">🗺 Tableau de bord pilote</div>
-            <div class="td-row"><span class="td-ico">🏫</span><span class="td-lbl">Structures référencées</span><span class="td-val">47</span></div>
-            <div class="td-row"><span class="td-ico">👨‍👩‍👧</span><span class="td-lbl">Besoins familles remontés</span><span class="td-val">183</span></div>
-            <div class="td-row"><span class="td-ico">💬</span><span class="td-lbl">Avis jeunes collectés</span><span class="td-val">94</span></div>
-            <div class="td-row"><span class="td-ico">🚌</span><span class="td-lbl">Frein #1 : Déplacement</span><span class="td-val">41%</span></div>
-            <div class="td-row"><span class="td-ico">💶</span><span class="td-lbl">Frein #2 : Coût / aides</span><span class="td-val">37%</span></div>
-            <div style="padding:4px 0">
-              <div style="display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.5);margin-bottom:5px">
-                <span>Avancement pilote</span><span>62%</span>
+            <div class="article-card" onclick="navigateTo('article-vacances')">
+              <div class="article-img" style="background-image: url('img/1533873984035-25970ab07461-w900.jpg');"></div>
+              <div class="article-content">
+                <div class="article-meta"><span>Vacances</span><span>Pilat</span></div>
+                <h3>Leur premier été en colonie : dépasser ses peurs et grandir</h3>
+                <p>Grâce aux subventions de la CAF, Léo et Sarah sont partis 10 jours en pleine nature. Un récit d'aventure et de confiance.</p>
+                <span class="article-cta">Lire le récit &rarr;</span>
               </div>
-              <div class="td-bar"><div class="td-bar-fill" style="width:62%"></div></div>
             </div>
           </div>
-        </div>
-      </div>
+</section>
+</div>
+
+<div id="view-activites" class="view-section">
+  <div class="hero-editorial" style="background-image: url('img/1555597673-b21d5c935865-w2000.jpg'); background-position: center 30%; height: 40vh; min-height: 300px;">
+    <div class="w">
+      <span class="badge">Le Catalogue</span>
+      <h1>L'écosystème local des activités.</h1>
+      <p>Sports, expressions artistiques, séjours. Découvrez la richesse de l'offre stéphanoise pour les 3 à 17 ans.</p>
     </div>
-  </section>
+  </div>
 
-  <!-- CONFIANCE BAND -->
-  <section class="trust-band">
-    <div class="container">
-      <div style="text-align:center;margin-bottom:0">
-        <div class="tag tag-navy" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.7)">Nos engagements</div>
-        <h2 style="color:#fff;margin-top:8px">Une démarche sobre,<br>transparente et <em>respectueuse</em></h2>
-      </div>
-      <div class="trust-grid">
-        <div class="trust-item"><div class="trust-ico">🔒</div><h4>Données minimisées</h4><p>Uniquement l'essentiel au premier contact. Aucune donnée sensible collectée initialement.</p></div>
-        <div class="trust-item"><div class="trust-ico">♿</div><h4>Accessibilité</h4><p>Design pensé pour tous les publics, sur tous les écrans, avec des contrastes suffisants.</p></div>
-        <div class="trust-item"><div class="trust-ico">🌱</div><h4>Démarche pilote</h4><p>Un projet qui progresse avec le terrain, pas une promesse de couverture nationale immédiate.</p></div>
-        <div class="trust-item"><div class="trust-ico">📅</div><h4>Mis à jour</h4><p>Les informations sur les aides et les structures sont vérifiées et actualisées régulièrement.</p></div>
-      </div>
-      <div style="text-align:center;margin-top:32px">
-        <button class="btn-w" onclick="showPage('confiance')">Voir tous nos engagements →</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA FINAL -->
-  <section class="cta-final">
-    <div class="container">
-      <h2>Choisissez votre porte d'entrée</h2>
-      <p>Famille, jeune, structure ou collectivité — votre retour peut rendre les activités plus accessibles.</p>
-      <div class="cta-btns">
-        <button class="btn-w" onclick="showPage('family')">Je partage un besoin</button>
-        <button class="btn-w" onclick="showPage('jeunes')">Je donne mon avis</button>
-        <button class="btn-w" onclick="showPage('territoire-form')">Je référence une structure</button>
-        <button class="btn-w" onclick="showPage('demo')">J'échange sur un territoire</button>
-      </div>
-    </div>
-  </section>
-
-</div><!-- /page-home -->
-
-<!-- ════════════════════════════════════ PAGE : MISSION -->
-<div id="page-mission" class="page">
-  <section class="mission-hero">
-    <div class="container">
-      <div class="tag">Notre mission</div>
-      <h1>Rendre les activités plus <em>accessibles</em> aux enfants</h1>
-      <p class="hero-sub">Flooow agit sur trois frictions qui se cumulent : repérer l'offre, comprendre les aides, anticiper l'accès réel.</p>
-    </div>
-  </section>
-
-  <section style="background:#fff;padding:80px 0">
-    <div class="container">
-      <div class="tag">Pourquoi maintenant ?</div>
-      <h2>Un décalage réel entre <em>les droits et leur accès</em></h2>
-      <p class="sec-sub">Des aides existent. Des activités existent. Mais les familles peinent encore à relier ces informations dans un parcours lisible.</p>
-      <div class="stat-cards">
-        <div class="stat-card">
-          <div class="stat-n">4/10</div>
-          <p>Personnes citent le manque d'information sur les aides comme première cause de non-recours</p>
-          <small>Source : études non-recours 2022-2024</small>
+  <section class="s">
+    <div class="w">
+      <div class="text-grid" style="margin-bottom: 60px;">
+        <div class="text-col">
+          <h3>Une offre plurielle pour chaque étape de l'enfance</h3>
+          <p>Le tissu associatif et municipal de la Loire regorge d'opportunités. Notre approche consiste à clarifier cette offre, de l'éveil moteur pour les tout-petits aux clubs de compétition, en passant par les ateliers théâtre en Maison des Jeunes et de la Culture (MJC).</p>
         </div>
-        <div class="stat-card">
-          <div class="stat-n">3 sources</div>
-          <p>En moyenne, une famille doit consulter pour trouver l'offre, comprendre les aides et vérifier l'accès</p>
-          <small>Observation terrain Flooow</small>
-        </div>
-        <div class="stat-card">
-          <div class="stat-n">Variable</div>
-          <p>Le Pass'Sport, les aides CAF/MSA et les dispositifs locaux varient selon l'âge, la situation et le territoire</p>
-          <small>Données 2025-2026</small>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section style="background:var(--sand);padding:80px 0">
-    <div class="container">
-      <div class="tag">Nos trois engagements</div>
-      <h2>Ce que Flooow <em>s'engage</em> à faire</h2>
-      <div class="engage-grid">
-        <div class="eng-card">
-          <div class="eng-ico">🔍</div>
-          <h3>Rendre les activités plus visibles</h3>
-          <p>Aider à repérer des offres sportives, culturelles, de loisirs, de vacances ou d'apprentissage adaptées aux enfants — par âge, lieu, accessibilité et disponibilité.</p>
-        </div>
-        <div class="eng-card">
-          <div class="eng-ico">💶</div>
-          <h3>Rendre les aides plus compréhensibles</h3>
-          <p>Aider à distinguer prix affiché, aides possibles et reste à charge. Rendre lisible ce qui est cumulable, ce qui est conditionnel, ce qui est local.</p>
-        </div>
-        <div class="eng-card">
-          <div class="eng-ico">🗺</div>
-          <h3>Relier les parcours au terrain</h3>
-          <p>Ne pas séparer l'offre, les démarches, les contraintes d'horaires et les questions d'accès. Remettre ces éléments dans un seul parcours lisible.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section style="background:#fff;padding:80px 0">
-    <div class="container">
-      <div class="two">
-        <div>
-          <div class="tag">Utilité territoriale</div>
-          <h2>Un projet d'utilité <em>territoriale</em></h2>
-          <p class="sec-sub">Flooow ne remplace pas les structures, les collectivités ou les dispositifs existants. Le projet cherche à mieux les relier pour rendre le parcours des familles plus clair et plus proche du terrain.</p>
-          <div class="promise-row">
-            <h4>Ce que Flooow ne promet pas</h4>
-            <p>Pas de "tout en un" magique. Pas de chiffres gonflés. Pas de collecte excessive. Pas de couverture nationale immédiate. Flooow préfère une progression territoriale lisible, documentée et utile.</p>
+        <div class="text-col">
+          <div style="background: var(--flooow-orange-light); border: 1px solid var(--flooow-orange-bd); padding: 32px; border-radius: 12px;">
+            <h4 style="font-size: 18px; font-weight: 800; margin-bottom: 12px;">Recherche par quartiers</h4>
+            <p style="font-size: 14px; margin-bottom: 20px;">Utilisez notre outil de recherche pour explorer le répertoire des activités de Saint-Étienne, triées par zones géographiques et tranches d'âge rigoureuses.</p>
+            <button class="btn-black" onclick="openSearch()">Lancer une recherche locale</button>
           </div>
         </div>
-        <div>
-          <div class="tag">Construire avec le terrain</div>
-          <h2>Trois <em>communautés</em> d'action</h2>
-          <div class="comm-cards" style="grid-template-columns:1fr;gap:12px">
-            <div class="comm-card">
-              <h4>🏠 Flooow Family</h4>
-              <p>Des besoins concrets, des freins remontés, des retours d'usage. Les familles sont au cœur de la démarche.</p>
+      </div>
+
+      <div class="grid-three-col" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+        <div class="col-pata">
+          <div class="col-pata-img" style="background-image: url('img/1511556532299-8f662fc26c06-w900.jpg');"></div>
+          <h3 style="font-size: 22px; font-weight: 800; margin-top: 16px;">Pratiques Sportives</h3>
+          <p style="font-size: 14px; color: var(--tx2); line-height: 1.6;">Dojos, clubs de foot urbains, athlétisme ou escalade. Les associations sportives offrent le cadre idéal pour le développement moteur et la cohésion d'équipe, soutenu par des aides spécifiques de la ville.</p>
+        </div>
+        <div class="col-pata">
+          <div class="col-pata-img" style="background-image: url('img/1476480862126-209bfaa8edc8-w900.jpg');"></div>
+          <h3 style="font-size: 22px; font-weight: 800; margin-top: 16px;">Arts & Expressions</h3>
+          <p style="font-size: 14px; color: var(--tx2); line-height: 1.6;">Écoles de musique municipales, ateliers de peinture associatifs ou initiation théâtrale. La culture s'ouvre à tous les quotients familiaux grâce à des grilles tarifaires progressives.</p>
+        </div>
+        <div class="col-pata">
+          <div class="col-pata-img" style="background-image: url('img/1460661419201-fd4cecdf8a8b-w900.jpg');"></div>
+          <h3 style="font-size: 22px; font-weight: 800; margin-top: 16px;">Stages & Vacances</h3>
+          <p style="font-size: 14px; color: var(--tx2); line-height: 1.6;">L'enjeu crucial des congés scolaires. Retrouvez les dispositifs de "vacances apprenantes" et les séjours courts organisés par les centres sociaux du territoire stéphanois.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="view-aides" class="view-section">
+  <div class="hero-editorial" style="background-image: url('img/1554224155-8d04cb21cd6c-w2000.jpg'); background-position: center 30%; height: 40vh; min-height: 300px;">
+    <div class="w">
+      <span class="badge">Pédagogie</span>
+      <h1>Comprendre les aides financières.</h1>
+      <p>La pédagogie avant le calcul. Décryptage des leviers pour réduire le reste à charge des familles.</p>
+    </div>
+  </div>
+
+  <section class="s">
+    <div class="w">
+      <div class="text-grid">
+        <div class="text-col">
+          <h3>Le mythe de l'activité inaccessible</h3>
+          <p>L'obstacle majeur à l'inscription d'un jeune n'est pas le manque de volonté, mais la crainte d'un coût insurmontable. Pourtant, la France et le département de la Loire disposent d'un filet de sécurité puissant : Aides au temps libre de la CAF, Pass'Sport, Pass Culture ou réductions communales.</p>
+          <p>Le vrai défi est l'accès à l'information. Trop de familles renoncent faute de savoir qu'elles ont droit à une déduction de 50%, voire 80% sur la cotisation annuelle d'un club de gymnastique ou d'une école de dessin.</p>
+        </div>
+        <div class="text-col">
+          <h3 style="margin-bottom: 24px;">Les 3 leviers fondamentaux</h3>
+          
+          <div style="margin-bottom: 24px; padding-left: 20px; border-left: 3px solid var(--flooow-orange);">
+            <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">1. Le Quotient Familial (CAF)</h4>
+            <p style="font-size: 14px; color: var(--tx2); line-height: 1.5;">C'est la clé de voûte de la tarification solidaire. De nombreuses MJC et associations stéphanoises appliquent un tarif dégressif fondé sur ce quotient. Connaître son QF, c'est immédiatement savoir dans quelle tranche on se situe.</p>
+          </div>
+          
+          <div style="margin-bottom: 24px; padding-left: 20px; border-left: 3px solid var(--tx);">
+            <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">2. Les aides de l'État (Pass'Sport)</h4>
+            <p style="font-size: 14px; color: var(--tx2); line-height: 1.5;">Une déduction forfaitaire (généralement 50 €) applicable directement lors de la prise de licence sportive pour les familles éligibles à l'Allocation de Rentrée Scolaire (ARS).</p>
+          </div>
+          
+          <div style="margin-bottom: 24px; padding-left: 20px; border-left: 3px solid var(--bd);">
+            <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">3. Les initiatives communales</h4>
+            <p style="font-size: 14px; color: var(--tx2); line-height: 1.5;">Certaines mairies ou métropoles proposent des "Chèques loisirs" ou subventionnent les clubs pour garantir des places à tarif symbolique.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div style="margin-top: 60px; background: #000; color: #fff; padding: 60px; border-radius: 16px; text-align: center;">
+        <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 16px;">Notre démarche de transparence</h3>
+        <p style="font-size: 16px; color: #aaa; max-width: 700px; margin: 0 auto 32px; line-height: 1.6;">Le projet Flooow intègre une veille rigoureuse sur ces barèmes afin de fournir aux structures locales et aux familles des grilles tarifaires toujours exactes, et de traduire le droit en action concrète.</p>
+        <button class="btn-white" onclick="navigateTo('histoires')">Découvrir nos guides pratiques</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="view-organismes" class="view-section">
+  <div class="hero-editorial" style="background-image: url('img/1517466787929-bc90951d0974-w2000.jpg'); background-position: center 30%; height: 40vh; min-height: 300px;">
+    <div class="w">
+      <span class="badge">Réseau Local</span>
+      <h1>Soutenir les structures locales.</h1>
+      <p>Clubs, centres sociaux et villes : les véritables artisans de la cohésion par le loisir.</p>
+    </div>
+  </div>
+
+  <section class="s">
+    <div class="w">
+      <div class="text-grid">
+        <div class="text-col">
+          <h3>Le rôle central des associations</h3>
+          <p>Une MJC ou un club de football n'est pas seulement un lieu de pratique ; c'est un point d'ancrage social pour les jeunes de Saint-Étienne et de sa périphérie. Toutefois, ces structures font face à une charge administrative lourde : gestion des inscriptions, vérification des justificatifs CAF, encaissement des aides différées.</p>
+          <p>Flooow accompagne ces organismes en valorisant leur engagement d'inclusion. En rendant leurs grilles tarifaires lisibles au grand public, nous connectons l'offre associative aux familles qui en ont le plus besoin.</p>
+        </div>
+        <div class="text-col">
+          <h3>Un outil pour les collectivités</h3>
+          <p>Les pouvoirs publics allouent des budgets conséquents à l'accès au sport et à la culture. Mais comment mesurer finement l'impact d'une aide sur un quartier prioritaire ?</p>
+          <p>Notre démarche territoriale vise à offrir aux collectivités une cartographie précise : repérer les zones blanches de mobilité extrascolaire, identifier les disciplines en tension, et ajuster les aides publiques là où le frein financier demeure.</p>
+          <button class="btn-black" style="margin-top: 16px;" onclick="openHeartbeat(event)">Échanger avec l'équipe projet</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="view-histoires" class="view-section">
+  <div class="hero-editorial" style="background-image: url('img/1472653431158-6364773b2a56-w2000.jpg'); background-position: center 30%; height: 50vh; min-height: 400px;">
+    <div class="w">
+      <span class="badge">Le Magazine</span>
+      <h1>Histoires du terrain.</h1>
+      <p>Chroniques locales, portraits de familles, et retours d'expérience sur la mobilité et l'engagement dans la Loire.</p>
+    </div>
+  </div>
+
+  <section class="s s-bg">
+    <div class="w">
+      
+          <div class="article-grid">
+            <div class="article-card" onclick="navigateTo('article-velo')">
+              <div class="article-img" style="background-image: url('img/1517649763962-0c623066013b-w900.jpg');"></div>
+              <div class="article-content">
+                <div class="article-meta"><span>Écomobilité</span><span>Montreynaud</span></div>
+                <h3>Comment le vélo a changé le quotidien de la famille Martin à Montreynaud</h3>
+                <p>Aller à l'entraînement sans voiture, c'est possible. Rencontre avec une famille qui a repensé sa mobilité grâce aux aides locales.</p>
+                <span class="article-cta">Lire le récit &rarr;</span>
+              </div>
             </div>
-            <div class="comm-card">
-              <h4>🎯 Flooow Jeunes</h4>
-              <p>Des envies réelles, des formats crédibles, des lieux et horaires observés. La parole des jeunes, directement.</p>
+
+            <div class="article-card" onclick="navigateTo('article-inclusion')">
+              <div class="article-img" style="background-image: url('img/1502086223501-7ea6ecd79368-w900.jpg');"></div>
+              <div class="article-content">
+                <div class="article-meta"><span>Inclusion</span><span>Tarentaize</span></div>
+                <h3>Le sport partagé : quand la différence devient une force sur le terrain</h3>
+                <p>Immersion dans un club stéphanois pionnier dans l'accueil d'enfants en situation de handicap.</p>
+                <span class="article-cta">Lire le récit &rarr;</span>
+              </div>
             </div>
-            <div class="comm-card">
-              <h4>🏙 Flooow Territoires</h4>
-              <p>Des structures, associations et collectivités qui aident à rendre l'offre plus visible et plus actionnable.</p>
+
+            <div class="article-card" onclick="navigateTo('article-vacances')">
+              <div class="article-img" style="background-image: url('img/1533873984035-25970ab07461-w900.jpg');"></div>
+              <div class="article-content">
+                <div class="article-meta"><span>Vacances</span><span>Pilat</span></div>
+                <h3>Leur premier été en colonie : dépasser ses peurs et grandir</h3>
+                <p>Grâce aux subventions de la CAF, Léo et Sarah sont partis 10 jours en pleine nature. Un récit d'aventure et de confiance.</p>
+                <span class="article-cta">Lire le récit &rarr;</span>
+              </div>
             </div>
           </div>
-        </div>
+</section>
+</div>
+
+<section class="banner-adventure" id="joinBanner">
+  <div class="w">
+    <h2>Rejoignez la Flooow Family.</h2>
+    <p>Ne restez pas isolé(e) dans l'organisation des activités de vos enfants. Rejoignez notre espace communautaire InKlusif sur Heartbeat : partagez des infos, trouvez des covoiturages et soutenez l'accès aux loisirs pour tous dans la Loire.</p>
+    <button class="btn-white" style="padding: 16px 40px; font-size: 15px;" onclick="openHeartbeat(event)">Rejoindre la communauté locale</button>
+  </div>
+</section>
+
+
+<!-- ================= ARTICLE 1 : VÉLO ================= -->
+<div id="view-article-velo" class="view-section">
+  <div class="hero-editorial" style="background-image: url('img/1517649763962-0c623066013b-w2000.jpg'); background-position: center 30%; height: 50vh; min-height: 400px;">
+    <div class="w">
+      <span class="badge">Écomobilité</span>
+      <h1>Comment le vélo a changé le quotidien de la famille Martin à Montreynaud</h1>
+      <div class="article-meta" style="color: rgba(255,255,255,0.8); margin-top: 10px;">
+        <span>Par l'équipe Flooow</span> • <span>Saint-Étienne, Quartier Montreynaud</span> • <span>5 min de lecture</span>
       </div>
     </div>
-  </section>
+  </div>
+  <section class="s">
+    <div class="w">
+      <a class="back-link" style="display: inline-block; margin-bottom: 30px; font-weight: 600; color: var(--flooow-orange); cursor: pointer;" onclick="navigateTo('histoires')">← Retour aux récits</a>
+      <div style="max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8; color: var(--tx);">
+        <p style="font-size: 1.3rem; font-weight: 500; margin-bottom: 40px; color: var(--tx);">Pendant des années, les allers-retours entre l'école, le club de foot et le conservatoire relevaient du casse-tête logistique pour Samir et Leïla. Un emploi du temps fragmenté, une dépendance à la voiture, et un budget essence conséquent. Aujourd'hui, tout a changé.</p>
 
-  <section class="cta-final">
-    <div class="container">
-      <h2>Vous voulez participer à la mission ?</h2>
-      <p>La meilleure manière de faire avancer Flooow est de partir de situations réelles.</p>
-      <div class="cta-btns">
-        <button class="btn-w" onclick="showPage('agir')">Je contribue →</button>
-        <button class="btn-w" onclick="showPage('demo')">Demander une démo territoire</button>
-      </div>
-    </div>
-  </section>
-</div><!-- /page-mission -->
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin: 40px 0 20px;">Repenser la distance</h2>
+        <p>« Au début, l'idée de traverser la ville à vélo avec deux enfants de 8 et 10 ans nous paraissait irréaliste, » confie Samir. Les pentes stéphanoises ont la réputation d'être exigeantes. Pourtant, avec le développement des pistes cyclables et l'arrivée des vélos à assistance électrique, la perception des distances a évolué.</p>
+        <p>La famille s'est tournée vers la Maison du Vélo de Saint-Étienne, une association locale qui propose des formations de "remise en selle" et des conseils d'itinéraires sécurisés. En quelques séances, la confiance s'est installée.</p>
 
-<!-- ════════════════════════════════════ PAGE : TERRITOIRES -->
-<div id="page-territoires" class="page">
-  <section class="terr-hero">
-    <div class="container">
-      <div class="tag tag-navy" style="background:rgba(255,255,255,.12);color:rgba(255,255,255,.8)">Territoires</div>
-      <h1>Mieux comprendre les freins d'accès aux activités <em style="color:var(--terra)">sur votre territoire</em></h1>
-      <p class="hero-sub">Flooow aide à relier activités, aides et accès réel pour éclairer l'action locale. Pour les collectivités, associations, équipements, centres sociaux, clubs et partenaires locaux.</p>
-      <div class="cta-row" style="margin-top:28px">
-        <button class="btn-p" onclick="showPage('demo')">Demander une démonstration</button>
-        <button class="btn-w" onclick="showPage('demo')">Recevoir une note de présentation</button>
-      </div>
-    </div>
-  </section>
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin: 40px 0 20px;">Les aides financières au cœur de la transition</h2>
+        <p>L'achat de deux vélos électriques représentait un investissement lourd. C'est ici que l'accompagnement a joué son rôle. En cumulant l'aide de l'État et la prime de Saint-Étienne Métropole, le reste à charge est devenu gérable. « Sans ces coups de pouce, nous serions restés en voiture. C'est le déclic financier qui a permis le déclic écologique. »</p>
 
-  <section style="background:#fff;padding:80px 0">
-    <div class="container">
-      <div class="tag">Trois fonctions territoriales</div>
-      <h2>Ce que Flooow peut <em>aider à faire</em></h2>
-      <div class="fonctions-grid">
-        <div class="fn-card">
-          <div class="fn-num">Fonction 01</div>
-          <h3>Comprendre</h3>
-          <p>Mieux documenter les besoins remontés par les familles et les jeunes sur votre territoire. Identifier les freins les plus fréquents.</p>
-        </div>
-        <div class="fn-card">
-          <div class="fn-num">Fonction 02</div>
-          <h3>Cartographier</h3>
-          <p>Rendre visibles les structures, les activités, les aides disponibles et les points d'accès. Mettre en lien les acteurs locaux.</p>
-        </div>
-        <div class="fn-card">
-          <div class="fn-num">Fonction 03</div>
-          <h3>Piloter</h3>
-          <p>Hiérarchiser les freins récurrents et suivre une démarche pilote. Produire une synthèse partageable entre partenaires.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section style="background:var(--sand);padding:80px 0">
-    <div class="container">
-      <div class="tag">Modules de la démarche</div>
-      <h2>Ce que la démarche Flooow <em>peut montrer</em></h2>
-      <p class="sec-sub">Des modules honnêtes, avec leur niveau de maturité affiché.</p>
-      <div class="modules-grid">
-        <div class="mod-card">
-          <span class="mod-status s-pilote">En pilote</span>
-          <h4>Cartographie des offres et structures</h4>
-          <p>Visualiser les activités, publics, tarifs, contacts, aides connues et informations d'accès.</p>
-        </div>
-        <div class="mod-card">
-          <span class="mod-status s-pilote">En pilote</span>
-          <h4>Lecture des freins</h4>
-          <p>Voir remonter les motifs récurrents : information, coût, aides, horaires, déplacement.</p>
-        </div>
-        <div class="mod-card">
-          <span class="mod-status s-cadrage">En cadrage</span>
-          <h4>Vue synthèse territoire</h4>
-          <p>Produire une synthèse territoriale simple à partager entre partenaires du projet.</p>
-        </div>
-        <div class="mod-card">
-          <span class="mod-status s-cadrage">En cadrage</span>
-          <h4>Aide à la décision</h4>
-          <p>Hiérarchiser les interventions prioritaires selon les freins identifiés sur le terrain.</p>
-        </div>
-        <div class="mod-card">
-          <span class="mod-status s-deploy">Cible déploiement</span>
-          <h4>OpenData local</h4>
-          <p>Restitution anonymisée et agréée des données collectées au bénéfice du territoire.</p>
-        </div>
-        <div class="mod-card">
-          <span class="mod-status s-deploy">Cible déploiement</span>
-          <h4>Espace partenaires</h4>
-          <p>Accès privé aux documents de travail, ressources partagées et vues de suivi du pilote.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section style="background:#fff;padding:80px 0">
-    <div class="container">
-      <div class="two">
-        <div>
-          <div class="tag">Déroulé d'un pilote</div>
-          <h2>Comment se passe <em>un pilote Flooow ?</em></h2>
-          <div class="timeline" style="margin-top:32px">
-            <div class="tl-step"><div class="tl-dot">1</div><div class="tl-body"><h4>Cadrage du besoin local</h4><p>Identifier les publics prioritaires, les acteurs à mobiliser et le périmètre territorial du pilote.</p></div></div>
-            <div class="tl-step"><div class="tl-dot">2</div><div class="tl-body"><h4>Repérage des structures et aides</h4><p>Cartographier l'offre existante, les aides disponibles et les points d'accès sur le territoire.</p></div></div>
-            <div class="tl-step"><div class="tl-dot">3</div><div class="tl-body"><h4>Collecte de retours terrain</h4><p>Via Flooow Family, Flooow Jeunes et Flooow Territoires — besoins, freins, envies remontés directement.</p></div></div>
-            <div class="tl-step" style="padding-bottom:0"><div class="tl-dot">4</div><div class="tl-body"><h4>Restitution et suite</h4><p>Synthèse partagée avec les partenaires du pilote, préconisations et plan de déploiement progressif.</p></div></div>
-          </div>
-        </div>
-        <div>
-          <div class="tag">Données & confiance</div>
-          <h2>Une approche <em>respectueuse</em> des données</h2>
-          <p class="sec-sub">Flooow ne demande que les informations utiles au premier contact. Les premiers formulaires n'ont pas vocation à recueillir des données sensibles.</p>
-          <ul class="check-list">
-            <li><div class="ck">✓</div><p><strong>Données minimisées</strong> : uniquement ce qui est nécessaire à la démarche pilote.</p></li>
-            <li><div class="ck">✓</div><p><strong>Pas de données sensibles</strong> au premier contact — familles comme structures.</p></li>
-            <li><div class="ck">✓</div><p><strong>Finalité explicite</strong> : améliorer l'accès aux activités sur votre territoire, rien d'autre.</p></li>
-            <li><div class="ck">✓</div><p><strong>Hébergement et conformité</strong> documentés dans notre page Confiance.</p></li>
-          </ul>
-          <div style="margin-top:22px">
-            <button class="btn-n" onclick="showPage('confiance')">Voir la page Confiance →</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section style="background:var(--sand);padding:80px 0">
-    <div class="container" style="max-width:760px">
-      <div class="tag">Questions fréquentes</div>
-      <h2>Vos questions sur <em>Flooow Territoires</em></h2>
-      <div class="faq-list">
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span>À qui s'adresse Flooow Territoires ?</span><span class="faq-ico">+</span></div>
-          <div class="faq-a">Aux collectivités (communes, intercommunalités, départements), associations locales, équipements sportifs et culturels, centres sociaux, structures d'accompagnement jeunesse et tout acteur impliqué dans l'accès aux activités pour les enfants et les familles.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span>Que peut-on tester dans un pilote ?</span><span class="faq-ico">+</span></div>
-          <div class="faq-a">La cartographie des structures et offres locales, la collecte de besoins remontés par les familles, l'identification des freins les plus fréquents (coût, accès, information) et la production d'une synthèse territoriale partageable. Les fonctionnalités avancées sont en cadrage.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span>Quelles données sont nécessaires au démarrage ?</span><span class="faq-ico">+</span></div>
-          <div class="faq-a">Au premier contact, uniquement votre organisation, votre territoire et votre sujet prioritaire. Pas de données sensibles. Les informations complémentaires sont demandées progressivement, selon les étapes du pilote.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)"><span>Comment associer les structures locales ?</span><span class="faq-ico">+</span></div>
-          <div class="faq-a">Via la porte Flooow Territoires, les structures peuvent se référencer elles-mêmes ou être invitées par la collectivité partenaire. Le processus est simple : organisation, type d'acteur, territoire et objet de la contribution.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="cta-final">
-    <div class="container">
-      <h2>Vous souhaitez explorer un pilote local ?</h2>
-      <p>Partons d'un besoin concret, pas d'un discours générique.</p>
-      <div class="cta-btns">
-        <button class="btn-w" onclick="showPage('demo')">Demander une démonstration →</button>
-      </div>
-    </div>
-  </section>
-</div><!-- /page-territoires -->
-
-<!-- ════════════════════════════════════ PAGE : AGIR -->
-<div id="page-agir" class="page">
-  <section class="agir-hero">
-    <div class="container">
-      <div class="tag">Agir avec Flooow</div>
-      <h1>Choisissez votre <em>porte d'entrée</em></h1>
-      <p class="hero-sub">Votre retour terrain est ce qui rend Flooow utile. Trois formes d'action, trois publics, une même ambition : rendre les activités plus accessibles.</p>
-    </div>
-  </section>
-  <section style="background:var(--sand);padding:64px 0 80px">
-    <div class="container">
-      <div class="agir-grid">
-        <div class="agir-card">
-          <div class="agir-ico" style="background:#fff3e0">🏠</div>
-          <h3>Flooow Family</h3>
-          <p>Vous cherchez une activité pour votre enfant ? Vous hésitez à cause du coût, des aides, du trajet ou des démarches ? Partagez ce qui bloque aujourd'hui.</p>
-          <button class="btn-p" onclick="showPage('family')">Je partage mon besoin</button>
-        </div>
-        <div class="agir-card">
-          <div class="agir-ico" style="background:#e8f5e9">🎯</div>
-          <h3>Flooow Jeunes</h3>
-          <p>Qu'est-ce qui donne envie de participer ? Qu'est-ce qui décourage ? Quels lieux, quels horaires, quels formats manquent ? Votre avis compte.</p>
-          <button class="btn-p" onclick="showPage('jeunes')">Je donne mon avis</button>
-        </div>
-        <div class="agir-card">
-          <div class="agir-ico" style="background:#e3f2fd">🏙</div>
-          <h3>Flooow Territoires</h3>
-          <p>Vous proposez une activité, accompagnez des familles ou représentez une structure ? Référencez-vous, contribuez ou demandez un échange.</p>
-          <button class="btn-p" onclick="showPage('territoire-form')">Je référence une structure</button>
-        </div>
-      </div>
-    </div>
-  </section>
-</div><!-- /page-agir -->
-
-<!-- ════════════════════════════════════ FORM : FLOOOW FAMILY -->
-<div id="page-family" class="page">
-  <section class="form-page">
-    <div class="container">
-      <button class="form-back" onclick="showPage('agir')">← Retour</button>
-      <div class="form-box">
-        <div class="form-tag">Flooow Family</div>
-        <h2>Partagez un besoin concret</h2>
-        <p class="desc">Vous cherchez une activité pour votre enfant ? Dites-nous simplement ce qui bloque aujourd'hui. Votre retour aide à améliorer l'accès pour toutes les familles.</p>
-        <form onsubmit="showMerci(event,'family')">
-          <div class="form-group">
-            <label>Commune ou quartier *</label>
-            <input type="text" placeholder="ex: Paris 14e, Clichy, Brest centre…" required/>
-          </div>
-          <div class="form-group">
-            <label>Tranche d'âge de l'enfant *</label>
-            <select required>
-              <option value="">Sélectionner…</option>
-              <option>3–5 ans</option><option>6–8 ans</option><option>9–11 ans</option>
-              <option>12–14 ans</option><option>15–17 ans</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Type d'activité recherchée</label>
-            <select>
-              <option value="">Sélectionner…</option>
-              <option>Sport</option><option>Culture / arts</option><option>Loisirs créatifs</option>
-              <option>Vacances / séjours</option><option>Soutien scolaire</option><option>Numérique</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Principal frein rencontré *</label>
-            <select required>
-              <option value="">Sélectionner…</option>
-              <option>Difficulté à trouver l'information</option>
-              <option>Coût / reste à charge trop élevé</option>
-              <option>Aides difficiles à comprendre</option>
-              <option>Problème de trajet / transport</option>
-              <option>Horaires incompatibles</option>
-              <option>Démarches trop complexes</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Email de contact (optionnel)</label>
-            <input type="email" placeholder="Pour vous tenir informé des avancées"/>
-          </div>
-          <button type="submit" class="form-submit">Envoyer mon besoin →</button>
-          <p class="cnil-note">🔒 Vos données sont utilisées uniquement pour améliorer l'accès aux activités. Aucune donnée sensible n'est demandée ici. Conformément au RGPD, vous pouvez demander leur suppression à tout moment.</p>
-        </form>
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin: 40px 0 20px;">Un nouveau rythme familial</h2>
+        <p>Aujourd'hui, les trajets vers le stade de foot ou l'atelier de peinture ne sont plus des corvées de conduite. Ce sont des moments partagés en plein air. « Les enfants sont plus calmes en arrivant à leurs activités. Et nous, nous avons redécouvert notre ville. »</p>
+        <p>L'écomobilité n'est pas qu'une question de CO2 ; c'est aussi une question d'indépendance, de santé et de temps de qualité. Une philosophie qui résonne avec les valeurs portées par la communauté Flooow.</p>
       </div>
     </div>
   </section>
 </div>
 
-<!-- ════════════════════════════════════ FORM : FLOOOW JEUNES -->
-<div id="page-jeunes" class="page">
-  <section class="form-page">
-    <div class="container">
-      <button class="form-back" onclick="showPage('agir')">← Retour</button>
-      <div class="form-box">
-        <div class="form-tag">Flooow Jeunes</div>
-        <h2>Donnez votre avis</h2>
-        <p class="desc">Qu'est-ce qui donne envie de participer ? Qu'est-ce qui bloque ? Quels lieux, quels horaires, quels formats manquent ? Parlez-nous directement.</p>
-        <form onsubmit="showMerci(event,'jeunes')">
-          <div class="form-group">
-            <label>Ton âge (ou tranche d'âge) *</label>
-            <select required>
-              <option value="">Sélectionner…</option>
-              <option>11–13 ans</option><option>14–15 ans</option>
-              <option>16–17 ans</option><option>18–25 ans</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Commune ou quartier *</label>
-            <input type="text" placeholder="ex: Lyon 8e, Roubaix, Bordeaux…" required/>
-          </div>
-          <div class="form-group">
-            <label>Activité ou type d'activité qui te donne envie</label>
-            <input type="text" placeholder="ex: musique, foot, jeux vidéo, cuisine…"/>
-          </div>
-          <div class="form-group">
-            <label>Ce qui te bloque le plus *</label>
-            <select required>
-              <option value="">Sélectionner…</option>
-              <option>Je ne sais pas où trouver des infos</option>
-              <option>C'est trop cher</option>
-              <option>C'est loin / difficile d'y aller</option>
-              <option>Les horaires ne conviennent pas</option>
-              <option>Je ne connais personne qui y va</option>
-              <option>Les démarches sont compliquées</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Contact ou structure relais (optionnel)</label>
-            <input type="text" placeholder="Email, réseau social ou nom d'une structure"/>
-          </div>
-          <button type="submit" class="form-submit">Envoyer mon avis →</button>
-          <p class="cnil-note">🔒 Tes données sont utilisées uniquement pour améliorer l'accès aux activités. Aucune information sensible n'est demandée. Tu peux demander leur suppression à tout moment.</p>
-        </form>
+<!-- ================= ARTICLE 2 : INCLUSION ================= -->
+<div id="view-article-inclusion" class="view-section">
+  <div class="hero-editorial" style="background-image: url('img/1502086223501-7ea6ecd79368-w2000.jpg'); background-position: center 30%; height: 50vh; min-height: 400px;">
+    <div class="w">
+      <span class="badge">Inclusion</span>
+      <h1>Le sport partagé : quand la différence devient une force sur le terrain</h1>
+      <div class="article-meta" style="color: rgba(255,255,255,0.8); margin-top: 10px;">
+        <span>Par l'équipe Flooow</span> • <span>Saint-Étienne, Quartier Tarentaize</span> • <span>4 min de lecture</span>
+      </div>
+    </div>
+  </div>
+  <section class="s">
+    <div class="w">
+      <a class="back-link" style="display: inline-block; margin-bottom: 30px; font-weight: 600; color: var(--flooow-orange); cursor: pointer;" onclick="navigateTo('histoires')">← Retour aux récits</a>
+      <div style="max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8; color: var(--tx);">
+        <p style="font-size: 1.3rem; font-weight: 500; margin-bottom: 40px; color: var(--tx);">Trouver un club de sport est déjà un défi pour de nombreux parents. Mais lorsqu'un enfant est en situation de handicap, la recherche ressemble souvent à un parcours du combattant. À Saint-Étienne, plusieurs associations pionnières démontrent que l'inclusion n'est pas qu'un mot, mais une réalité quotidienne.</p>
+
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin: 40px 0 20px;">Dépasser les appréhensions</h2>
+        <p>« La première fois que nous avons inscrit Mathis au club d'athlétisme, nous étions terrifiés, » raconte Sophie, maman d'un garçon de 9 ans atteint de troubles du spectre autistique. « Est-ce que les autres enfants allaient l'accepter ? Est-ce que les éducateurs sauraient gérer ses crises ? »</p>
+        <p>La réponse s'est trouvée sur le terrain. Grâce à un partenariat avec la Maison des Jeunes et de la Culture (MJC) locale et un financement de la CAF, le club a pu former deux de ses entraîneurs à l'accueil d'enfants aux besoins spécifiques.</p>
+
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin: 40px 0 20px;">L'enrichissement mutuel</h2>
+        <p>L'inclusion sportive ne bénéficie pas seulement à l'enfant accueilli. Sur la piste d'athlétisme, la présence de Mathis a transformé la dynamique du groupe. « Les autres enfants ont naturellement développé une empathie incroyable. L'esprit de compétition a laissé place à un esprit de coopération, » souligne Marc, son entraîneur.</p>
+
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin: 40px 0 20px;">Soutenir ces initiatives</h2>
+        <p>Aujourd'hui, Flooow travaille étroitement avec la métropole pour recenser ces clubs engagés et rendre leurs offres visibles. Les aides spécifiques, souvent méconnues, permettent de couvrir les frais liés à l'accompagnement personnalisé. Car le droit de transpirer, de rire et de faire équipe doit appartenir à tous les enfants, sans exception.</p>
       </div>
     </div>
   </section>
 </div>
 
-<!-- ════════════════════════════════════ FORM : TERRITOIRE -->
-<div id="page-territoire-form" class="page">
-  <section class="form-page">
-    <div class="container">
-      <button class="form-back" onclick="showPage('agir')">← Retour</button>
-      <div class="form-box">
-        <div class="form-tag">Flooow Territoires</div>
-        <h2>Référencer ou contribuer</h2>
-        <p class="desc">Vous proposez une activité, accompagnez des familles ou représentez une structure locale ? Cette porte d'entrée est faite pour vous.</p>
-        <form onsubmit="showMerci(event,'territoire')">
-          <div class="form-group">
-            <label>Organisation / structure *</label>
-            <input type="text" placeholder="ex: Association Sportive du 14e, Centre social…" required/>
-          </div>
-          <div class="form-group">
-            <label>Type d'acteur *</label>
-            <select required>
-              <option value="">Sélectionner…</option>
-              <option>Association sportive</option><option>Association culturelle</option>
-              <option>Centre social / MJC</option><option>Équipement municipal</option>
-              <option>Collectivité</option><option>Structure d'accompagnement jeunesse</option><option>Autre</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Territoire concerné *</label>
-            <input type="text" placeholder="Commune, quartier, intercommunalité…" required/>
-          </div>
-          <div class="form-group">
-            <label>Objet de votre démarche *</label>
-            <select required>
-              <option value="">Sélectionner…</option>
-              <option>Référencer notre structure / activité</option>
-              <option>Contribuer à la cartographie locale</option>
-              <option>Échanger sur une démarche pilote</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Email de contact *</label>
-            <input type="email" placeholder="votre@email.org" required/>
-          </div>
-          <button type="submit" class="form-submit">Envoyer ma contribution →</button>
-          <p class="cnil-note">🔒 Vos données sont utilisées uniquement pour la démarche Flooow. Conformément au RGPD, vous pouvez demander leur suppression à tout moment. Contact : contact@flooow.fr</p>
-        </form>
+<!-- ================= ARTICLE 3 : VACANCES ================= -->
+<div id="view-article-vacances" class="view-section">
+  <div class="hero-editorial" style="background-image: url('img/1533873984035-25970ab07461-w2000.jpg'); background-position: center 30%; height: 50vh; min-height: 400px;">
+    <div class="w">
+      <span class="badge">Vacances</span>
+      <h1>Leur premier été en colonie : dépasser ses peurs et grandir</h1>
+      <div class="article-meta" style="color: rgba(255,255,255,0.8); margin-top: 10px;">
+        <span>Par l'équipe Flooow</span> • <span>Massif du Pilat</span> • <span>5 min de lecture</span>
+      </div>
+    </div>
+  </div>
+  <section class="s">
+    <div class="w">
+      <a class="back-link" style="display: inline-block; margin-bottom: 30px; font-weight: 600; color: var(--flooow-orange); cursor: pointer;" onclick="navigateTo('histoires')">← Retour aux récits</a>
+      <div style="max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.8; color: var(--tx);">
+        <p style="font-size: 1.3rem; font-weight: 500; margin-bottom: 40px; color: var(--tx);">Partir en vacances n'est pas une évidence pour toutes les familles stéphanoises. Pourtant, les séjours loin de la maison constituent une étape fondamentale dans le développement de l'enfant. Plongée au cœur du premier départ de Léo et Sarah, rendu possible par les aides locales.</p>
+
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin: 40px 0 20px;">L'obstacle financier et l'appréhension du départ</h2>
+        <p>Dans la famille de Karine, mère célibataire, les étés se passaient habituellement en bas de l'immeuble. « Les colonies de vacances me semblaient réservées à un autre monde. Financièrement, c'était impensable. Et puis, laisser partir mes enfants à 8 et 11 ans m'angoissait énormément, » confie-t-elle.</p>
+        <p>La découverte du dispositif AVE (Aides aux Vacances Enfants) de la CAF a été le premier déclic. Prise en charge à hauteur de 70%, la colonie dans le Massif du Pilat devenait soudainement accessible.</p>
+
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin: 40px 0 20px;">Une aventure grandeur nature</h2>
+        <p>Loin des écrans et du béton, Léo et Sarah ont passé dix jours immergés dans la nature. Construction de cabanes, randonnées, soirées autour du feu : chaque journée était une occasion de tester leurs limites et de se découvrir de nouvelles capacités. « Au retour, Léo avait grandi. Il était plus autonome, plus confiant. Il parlait de ses nouveaux amis avec des étoiles dans les yeux, » se réjouit Karine.</p>
+
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin: 40px 0 20px;">Le droit à la déconnexion et à l'émerveillement</h2>
+        <p>Les séjours en colonie sont bien plus que du divertissement. Ils offrent une bulle de respiration, un espace de socialisation inédit et une ouverture sur le monde. Chez Flooow, nous croyons que chaque jeune devrait avoir la chance de remplir son sac à dos de souvenirs impérissables. C'est pourquoi nous facilitons l'accès aux informations sur les aides aux vacances, pour que l'aventure ne soit plus un luxe, mais un droit.</p>
       </div>
     </div>
   </section>
 </div>
 
-<!-- ════════════════════════════════════ PAGE : DÉMO -->
-<div id="page-demo" class="page">
-  <section class="form-page">
-    <div class="container">
-      <button class="form-back" onclick="showPage('territoires')">← Retour Territoires</button>
-      <div class="form-box">
-        <div class="form-tag">Démo Territoire</div>
-        <h2>Découvrez comment Flooow peut s'adapter à votre territoire</h2>
-        <p class="desc">En 20 à 30 minutes, nous regardons ensemble votre contexte, vos publics et la meilleure manière de tester la démarche. Pas de discours générique — une conversation concrète.</p>
-        <form onsubmit="showMerci(event,'demo')">
-          <div class="form-group">
-            <label>Organisation / collectivité *</label>
-            <input type="text" placeholder="Commune, intercommunalité, association…" required/>
-          </div>
-          <div class="form-group">
-            <label>Votre fonction *</label>
-            <input type="text" placeholder="ex: Responsable jeunesse, Chargée de mission…" required/>
-          </div>
-          <div class="form-group">
-            <label>Territoire concerné *</label>
-            <input type="text" placeholder="Commune, quartier, département…" required/>
-          </div>
-          <div class="form-group">
-            <label>Sujet prioritaire *</label>
-            <select required>
-              <option value="">Sélectionner…</option>
-              <option>Cartographie des offres locales</option>
-              <option>Lisibilité des aides disponibles</option>
-              <option>Freins d'accès identifiés</option>
-              <option>Publics spécifiques (handicap, jeunes…)</option>
-              <option>Démarche pilote globale</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Email professionnel *</label>
-            <input type="email" placeholder="votre@collectivite.fr" required/>
-          </div>
-          <button type="submit" class="form-submit">Envoyer ma demande de démo →</button>
-          <p class="cnil-note">🔒 Ces données sont utilisées uniquement pour organiser la démonstration. Aucune information sensible n'est demandée. Conformément au RGPD, vous pouvez demander leur suppression : contact@flooow.fr</p>
-        </form>
+<!-- ================= MENTIONS LÉGALES ================= -->
+<div id="view-mentions" class="view-section">
+  <section class="s" style="padding-top: 140px;">
+    <div class="w" style="max-width: 860px;">
+      <span class="badge">Informations légales</span>
+      <h1 class="s-title" style="font-size: 40px;">Mentions légales</h1>
+      <div style="font-size: 15px; color: var(--tx); line-height: 1.8; margin-top: 24px;">
+        <h3 style="font-size: 20px; font-weight: 800; margin: 32px 0 12px;">Éditeur du site</h3>
+        <p>Le présent site est édité par <strong>l'association JUNGLE ATTITUDE</strong>, association déclarée régie par la loi du 1<sup>er</sup> juillet 1901, dont le siège social est situé 3 rue Flobert, 42000 Saint-Étienne.<br>
+        SIREN : 912 423 779 — SIRET (siège) : 912 423 779 00012 — RNA : W691104559 — Code APE : 94.99Z.<br>
+        Directeur de la publication : Laïd HAMOUDI, Président.<br>
+        Contact : <a href="mailto:contact@flooow.fr" style="color: var(--flooow-orange); text-decoration: underline;">contact@flooow.fr</a>.</p>
+
+        <h3 style="font-size: 20px; font-weight: 800; margin: 32px 0 12px;">Hébergement</h3>
+        <p>Ce site est hébergé par <strong>Hostinger International Ltd.</strong>, 61 Lordou Vironos Street, 6023 Larnaca, Chypre — <a href="https://www.hostinger.fr" target="_blank" rel="noopener noreferrer" style="color: var(--flooow-orange); text-decoration: underline;">www.hostinger.fr</a>.</p>
+
+        <h3 style="font-size: 20px; font-weight: 800; margin: 32px 0 12px;">Propriété intellectuelle</h3>
+        <p>L'ensemble des contenus (textes, marque Flooow, éléments graphiques) est protégé. Toute reproduction sans autorisation préalable est interdite. Les photographies d'illustration proviennent de banques d'images libres de droits (Unsplash).</p>
+
+        <h3 style="font-size: 20px; font-weight: 800; margin: 32px 0 12px;">Responsabilité</h3>
+        <p>Les informations relatives aux aides financières (Pass'Sport, Quotient Familial, dispositifs CAF, aides communales) sont fournies à titre indicatif et ne sauraient se substituer aux barèmes officiels des organismes concernés.</p>
+        <a class="back-link" style="display: inline-block; margin-top: 32px; font-weight: 600; color: var(--flooow-orange); cursor: pointer;" onclick="navigateTo('accueil')">← Retour à l'accueil</a>
       </div>
     </div>
   </section>
 </div>
 
-<!-- ════════════════════════════════════ PAGE : CONFIANCE -->
-<div id="page-confiance" class="page">
-  <section class="conf-hero">
-    <div class="container">
-      <div class="tag tag-navy" style="background:rgba(255,255,255,.12);color:rgba(255,255,255,.8)">Confiance & transparence</div>
-      <h1>Une démarche sobre, <em style="color:var(--terra)">transparente</em> et respectueuse</h1>
-      <p class="hero-sub">Pas de promesse gonflée. Pas de collecte excessive. Flooow construit sa crédibilité sur des engagements concrets et vérifiables.</p>
-    </div>
-  </section>
+<!-- ================= CONFIDENTIALITÉ (RGPD) ================= -->
+<div id="view-confidentialite" class="view-section">
+  <section class="s" style="padding-top: 140px;">
+    <div class="w" style="max-width: 860px;">
+      <span class="badge">Protection des données</span>
+      <h1 class="s-title" style="font-size: 40px;">Politique de confidentialité</h1>
+      <div style="font-size: 15px; color: var(--tx); line-height: 1.8; margin-top: 24px;">
+        <p>La présente politique décrit la manière dont vos données personnelles sont traitées dans le respect du Règlement Général sur la Protection des Données (RGPD).</p>
 
-  <section style="background:#fff;padding:80px 0">
-    <div class="container">
-      <div class="tag">Données personnelles</div>
-      <h2>Ce que nous collectons, <em>pourquoi</em> et comment</h2>
-      <div class="conf-grid">
-        <div class="conf-card">
-          <h3>🔒 Minimisation des données</h3>
-          <p>Flooow ne demande que l'essentiel au premier contact. Les formulaires se limitent à 5 champs maximum. Aucune donnée sensible (santé, handicap, situation familiale détaillée) n'est demandée lors des premiers échanges.</p>
-        </div>
-        <div class="conf-card">
-          <h3>🎯 Finalité explicite</h3>
-          <p>Les données collectées ont une seule finalité : améliorer l'accès aux activités pour les enfants sur les territoires. Elles ne sont ni revendues, ni utilisées à des fins publicitaires ou commerciales.</p>
-        </div>
-        <div class="conf-card">
-          <h3>⚖️ Conformité RGPD</h3>
-          <p>Vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour toute demande : contact@flooow.fr. Délai de réponse : 72h maximum.</p>
-        </div>
-        <div class="conf-card">
-          <h3>🌍 Hébergement</h3>
-          <p>Les données sont hébergées en Europe. Aucun transfert hors UE n'est effectué sans votre consentement explicite. La politique d'hébergement est documentée et disponible sur demande.</p>
-        </div>
+        <h3 style="font-size: 20px; font-weight: 800; margin: 32px 0 12px;">Responsable de traitement</h3>
+        <p>Association JUNGLE ATTITUDE, 3 rue Flobert, 42000 Saint-Étienne. Pour toute question relative à vos données : <a href="mailto:contact@flooow.fr" style="color: var(--flooow-orange); text-decoration: underline;">contact@flooow.fr</a>.</p>
+
+        <h3 style="font-size: 20px; font-weight: 800; margin: 32px 0 12px;">Données collectées</h3>
+        <p>Ce site est un site vitrine. Il ne crée pas de compte utilisateur et ne collecte pas de données de navigation à des fins publicitaires. Les seules données traitées sont celles que vous transmettez volontairement via le formulaire de contact (nom, adresse e-mail, message), dans le seul but de répondre à votre demande.</p>
+
+        <h3 style="font-size: 20px; font-weight: 800; margin: 32px 0 12px;">Services tiers</h3>
+        <p>Le site charge la police de caractères <em>Google Fonts</em> depuis les serveurs de Google, ce qui peut transmettre votre adresse IP à ce prestataire. Le bouton « Rejoindre la Flooow Family » renvoie vers la plateforme communautaire externe Heartbeat, régie par sa propre politique de confidentialité.</p>
+
+        <h3 style="font-size: 20px; font-weight: 800; margin: 32px 0 12px;">Vos droits</h3>
+        <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition et de portabilité de vos données. Pour l'exercer, écrivez à <a href="mailto:contact@flooow.fr" style="color: var(--flooow-orange); text-decoration: underline;">contact@flooow.fr</a>. Vous pouvez également introduire une réclamation auprès de la CNIL (www.cnil.fr).</p>
+        <a class="back-link" style="display: inline-block; margin-top: 32px; font-weight: 600; color: var(--flooow-orange); cursor: pointer;" onclick="navigateTo('accueil')">← Retour à l'accueil</a>
       </div>
     </div>
-  </section>
-
-  <section style="background:var(--sand);padding:80px 0">
-    <div class="container">
-      <div class="tag">Accessibilité</div>
-      <h2>Un site accessible <em>à tous</em></h2>
-      <p class="sec-sub">Flooow est conçu pour être lisible et utilisable par tous les publics, sur tous les supports.</p>
-      <div class="acces-grid">
-        <div class="acces-item"><div class="acces-ico">📱</div><h4>Mobile first</h4><p>Optimisé pour smartphone, tablette et bureau.</p></div>
-        <div class="acces-item"><div class="acces-ico">🎨</div><h4>Contrastes</h4><p>Respect des niveaux WCAG 2.1 AA pour tous les textes.</p></div>
-        <div class="acces-item"><div class="acces-ico">🔤</div><h4>Langage clair</h4><p>Zéro jargon institutionnel. Phrases courtes, actions directes.</p></div>
-        <div class="acces-item"><div class="acces-ico">📝</div><h4>Formulaires simples</h4><p>5 champs max, labels explicites, messages d'erreur clairs.</p></div>
-      </div>
-      <div style="margin-top:28px;background:#fff;border-radius:var(--r);padding:20px;border:1.5px solid var(--border)">
-        <p style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">Déclaration d'accessibilité :</strong> Ce site est en cours d'amélioration continue. Si vous rencontrez un problème d'accessibilité, signalez-le à <a href="mailto:contact@flooow.fr" style="color:var(--terra)">contact@flooow.fr</a> — nous traitons ces retours en priorité.</p>
-      </div>
-    </div>
-  </section>
-
-  <section style="background:#fff;padding:80px 0">
-    <div class="container" style="max-width:760px">
-      <div class="tag">Gouvernance & transparence</div>
-      <h2>Qui porte <em>Flooow</em> ?</h2>
-      <div style="display:flex;flex-direction:column;gap:16px;margin-top:36px">
-        <div class="conf-card"><h3>🧭 Statut du projet</h3><p>Flooow est une démarche pilote, pas une plateforme nationale déployée. Le projet progresse territoire par territoire, en collaboration avec les acteurs locaux. La mention "version bêta" n'est pas utilisée car elle dit peu de chose aux usagers — nous préférons "démarche pilote" ou "territoires d'expérimentation".</p></div>
-        <div class="conf-card"><h3>🤝 Méthode de construction</h3><p>Flooow se construit avec les familles, les jeunes et les territoires. Ateliers, entretiens, tests et retours d'usage alimentent chaque évolution. Aucune fonctionnalité n'est développée sans validation terrain préalable.</p></div>
-        <div class="conf-card"><h3>📅 Actualisation</h3><p>Les informations sur les aides (Pass'Sport, CAF/MSA, dispositifs locaux) sont vérifiées régulièrement. Chaque page stratégique porte une mention de dernière mise à jour. Dernière révision : juin 2026.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="cta-final">
-    <div class="container">
-      <h2>Une question ? Un retour ?</h2>
-      <p>Nous sommes disponibles et nous répondons dans les 72h.</p>
-      <div class="cta-btns">
-        <a href="mailto:contact@flooow.fr" class="btn-w">Nous contacter →</a>
-      </div>
-    </div>
-  </section>
-</div><!-- /page-confiance -->
-
-<!-- ════════════════════════════════════ PAGES MERCI -->
-<div id="page-merci-family" class="page">
-  <section style="background:var(--sand);min-height:80vh;display:flex;align-items:center">
-    <div class="container"><div class="merci-box">
-      <div class="merci-ico">🏠</div>
-      <h2>Merci pour votre retour !</h2>
-      <p>Votre besoin a bien été reçu. Chaque retour de famille aide à mieux comprendre ce qui bloque et à améliorer l'accès aux activités pour tous.</p>
-      <p style="font-size:.85rem;color:var(--muted);margin-top:-12px;margin-bottom:28px">Si vous avez laissé votre email, nous vous tiendrons informé des avancées sur votre territoire.</p>
-      <div class="cta-row" style="justify-content:center">
-        <button class="btn-p" onclick="showPage('home')">Retour à l'accueil</button>
-        <button class="btn-s" onclick="showPage('mission')">Découvrir la mission</button>
-      </div>
-    </div></div>
   </section>
 </div>
 
-<div id="page-merci-jeunes" class="page">
-  <section style="background:var(--sand);min-height:80vh;display:flex;align-items:center">
-    <div class="container"><div class="merci-box">
-      <div class="merci-ico">🎯</div>
-      <h2>Merci pour ton avis !</h2>
-      <p>Ton retour compte vraiment. Il va directement alimenter la réflexion sur les formats et les offres qui manquent pour les jeunes de ton territoire.</p>
-      <div class="cta-row" style="justify-content:center">
-        <button class="btn-p" onclick="showPage('home')">Retour à l'accueil</button>
-      </div>
-    </div></div>
+<!-- ================= CONTACT ================= -->
+<div id="view-contact" class="view-section">
+  <section class="s" style="padding-top: 140px;">
+    <div class="w" style="max-width: 720px;">
+      <span class="badge">Nous écrire</span>
+      <h1 class="s-title" style="font-size: 40px;">Contact</h1>
+      <p class="s-sub" style="margin-bottom: 32px;">Une question sur les activités, les aides ou un partenariat ? Écrivez-nous, nous revenons vers vous rapidement.</p>
+      <form onsubmit="return sendContact(event)" style="display: flex; flex-direction: column; gap: 16px;">
+        <label style="font-size: 13px; font-weight: 700;">Votre nom
+          <input id="ct-name" type="text" required style="width:100%; margin-top:6px; padding:14px 16px; border:1px solid var(--bd); border-radius:8px; font-family:var(--f); font-size:15px;">
+        </label>
+        <label style="font-size: 13px; font-weight: 700;">Votre e-mail
+          <input id="ct-email" type="email" required style="width:100%; margin-top:6px; padding:14px 16px; border:1px solid var(--bd); border-radius:8px; font-family:var(--f); font-size:15px;">
+        </label>
+        <label style="font-size: 13px; font-weight: 700;">Votre message
+          <textarea id="ct-msg" rows="5" required style="width:100%; margin-top:6px; padding:14px 16px; border:1px solid var(--bd); border-radius:8px; font-family:var(--f); font-size:15px; resize:vertical;"></textarea>
+        </label>
+        <button type="submit" class="btn-black" style="align-self:flex-start; margin-top:8px;">Envoyer le message</button>
+      </form>
+      <a class="back-link" style="display: inline-block; margin-top: 32px; font-weight: 600; color: var(--flooow-orange); cursor: pointer;" onclick="navigateTo('accueil')">← Retour à l'accueil</a>
+    </div>
   </section>
 </div>
 
-<div id="page-merci-territoire" class="page">
-  <section style="background:var(--sand);min-height:80vh;display:flex;align-items:center">
-    <div class="container"><div class="merci-box">
-      <div class="merci-ico">🏙</div>
-      <h2>Merci pour votre contribution !</h2>
-      <p>Votre structure a bien été référencée. Nous reviendrons vers vous prochainement pour échanger sur la suite.</p>
-      <div class="cta-row" style="justify-content:center">
-        <button class="btn-p" onclick="showPage('home')">Retour à l'accueil</button>
-        <button class="btn-s" onclick="showPage('territoires')">Page Territoires</button>
-      </div>
-    </div></div>
-  </section>
-</div>
-
-<div id="page-merci-demo" class="page">
-  <section style="background:var(--sand);min-height:80vh;display:flex;align-items:center">
-    <div class="container"><div class="merci-box">
-      <div class="merci-ico">✅</div>
-      <h2>Demande de démo reçue</h2>
-      <p>Nous reviendrons vers vous sous 48h pour confirmer le créneau. En attendant, vous pouvez consulter notre page Territoires pour en savoir plus sur la démarche.</p>
-      <div class="cta-row" style="justify-content:center">
-        <button class="btn-p" onclick="showPage('territoires')">Retour à la page Territoires</button>
-        <button class="btn-s" onclick="showPage('home')">Accueil</button>
-      </div>
-    </div></div>
-  </section>
-</div>
-
-<!-- ════════════════════════════════════ FOOTER -->
-<footer>
-  <div class="container">
-    <div class="foot-top">
+    <footer>
+  <div class="w">
+    <div class="foot-grid">
       <div class="foot-brand">
-        <div class="foot-logo">
-          <div class="logo-mark" style="width:28px;height:28px">
-            <svg viewBox="0 0 22 22" fill="none" width="16" height="16">
-              <path d="M4 18 C4 18, 7 10, 11 6 C15 2, 18 4, 18 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="11" cy="13" r="3" fill="#fff" opacity=".5"/>
-              <path d="M3 14 Q7 11 11 13 Q15 15 19 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".6"/>
-            </svg>
-          </div>
-          Flooow
-        </div>
-        <p>Trouver · Financer · S'y rendre</p>
-        <div class="foot-tagline">Démarche pilote — territoires d'expérimentation</div>
+        <img src="logo-flooow.png" alt="Flooow Logo Footer" style="height: 36px; margin-bottom: 16px;">
+        <p>Un engagement territorial, né dans la Loire, pour lever durablement les freins financiers, d'information et de mobilité liés aux loisirs de la jeunesse.</p>
       </div>
       <div class="foot-col">
-        <h4>Le projet</h4>
+        <h5>Univers Éditoriaux</h5>
         <ul>
-          <li><button onclick="showPage('mission')">Notre mission</button></li>
-          <li><button onclick="showPage('confiance')">Confiance & données</button></li>
-          <li><a href="mailto:contact@flooow.fr">Contact</a></li>
+          <li><a onclick="navigateTo('activites')">Les Activités</a></li>
+          <li><a onclick="navigateTo('aides')">Comprendre les Aides</a></li>
+          <li><a onclick="navigateTo('organismes')">Organismes locaux</a></li>
+          <li><a onclick="navigateTo('histoires')">Histoires & Récits</a></li>
         </ul>
       </div>
       <div class="foot-col">
-        <h4>Agir</h4>
+        <h5>Actions & Communauté</h5>
         <ul>
-          <li><button onclick="showPage('family')">Flooow Family</button></li>
-          <li><button onclick="showPage('jeunes')">Flooow Jeunes</button></li>
-          <li><button onclick="showPage('territoire-form')">Flooow Territoires</button></li>
+          <li><a onclick="openHeartbeat(event)">Rejoindre Flooow Family</a></li>
+          <li><a onclick="openHeartbeat(event)">Espace Covoiturage</a></li>
+          <li><a onclick="showToast('Ouverture de la FAQ...')">Foire Aux Questions</a></li>
         </ul>
       </div>
       <div class="foot-col">
-        <h4>Territoires</h4>
+        <h5>Légal & Contact</h5>
         <ul>
-          <li><button onclick="showPage('territoires')">Page Territoires</button></li>
-          <li><button onclick="showPage('demo')">Demander une démo</button></li>
+          <li><a onclick="navigateTo('mentions')">Mentions légales</a></li>
+          <li><a onclick="navigateTo('confidentialite')">Confidentialité</a></li>
+          <li><a onclick="navigateTo('contact')">Contact projet</a></li>
         </ul>
       </div>
     </div>
-    <div class="foot-bottom">
-      <p>© 2026 Flooow — Démarche pilote</p>
-      <div class="foot-legal">
-        <a href="#">Mentions légales</a>
-        <a href="#">Confidentialité</a>
-        <a href="mailto:contact@flooow.fr">contact@flooow.fr</a>
-      </div>
+    <div class="foot-btm">
+      <p>© 2026 Projet InKlusif Flooow (Saint-Étienne). Dédié à l'impact social local.</p>
     </div>
   </div>
 </footer>
 
 <script>
-  // ── SPA NAVIGATION
-  const pages = ['home','mission','territoires','agir','confiance','family','jeunes',
-    'territoire-form','demo','merci-family','merci-jeunes','merci-territoire','merci-demo'];
-  const navIds = ['mission','territoires','agir','confiance'];
+  // Lien officiel vers la communauté locale d'entraide (Heartbeat)
+  const HEARTBEAT_URL = "https://app.heartbeat.chat/inkusif/invitation?code=28FJ4C";
 
-  function showPage(id) {
-    pages.forEach(p => {
-      const el = document.getElementById('page-'+p);
-      if (el) el.classList.toggle('active', p === id);
-    });
-    navIds.forEach(n => {
-      const btn = document.getElementById('nav-'+n);
-      if (btn) btn.classList.toggle('active', n === id);
-    });
-    window.scrollTo({top:0, behavior:'smooth'});
+  function openHeartbeat(event) {
+    if (event) { event.preventDefault(); event.stopPropagation(); }
+    window.open(HEARTBEAT_URL, '_blank', 'noopener,noreferrer');
   }
 
-  // ── FORMS
-  function showMerci(e, type) {
-    e.preventDefault();
-    showPage('merci-'+type);
+  /* RECHERCHE OVERLAY : STYLE PATAGONIA ÉPURÉ */
+  function openSearch() {
+    document.getElementById('searchBar').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSearch() {
+    document.getElementById('searchBar').style.display = 'none';
+    document.body.style.overflow = '';
   }
 
-  // ── FAQ
-  function toggleFaq(el) {
-    const ans = el.nextElementSibling;
-    const ico = el.querySelector('.faq-ico');
-    ans.classList.toggle('open');
-    ico.classList.toggle('open');
+  /* FONCTIONNEMENT SPA : GESTION DES VUES ÉDITORIALES THÉMATIQUES */
+  function navigateTo(viewId) {
+    // Cache toutes les sections
+    const views = document.querySelectorAll('.view-section');
+    views.forEach(v => v.classList.remove('active'));
+    
+    // Affiche la section cible
+    const target = document.getElementById('view-' + viewId);
+    if(target) {
+      target.classList.add('active');
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    // Le bandeau global "Rejoignez la Flooow Family" n'a pas sa place au-dessus
+    // des pages de détail (articles) ni des pages utilitaires (légal/contact).
+    const banner = document.getElementById('joinBanner');
+    if (banner) {
+      const hide = viewId.startsWith('article-') || ['mentions','confidentialite','contact'].includes(viewId);
+      banner.style.display = hide ? 'none' : '';
+    }
   }
 
-  // ── MOBILE MENU (simple toggle)
+  /* FONCTION COMBINÉE POUR LA BARRE DE RECHERCHE */
+  function closeAndScroll(targetHash) {
+    closeSearch();
+    showToast("Redirection vers la thématique...");
+  }
+
+  /* NOTIFICATIONS ÉLÉGANTES (Remplacement des alert() natives) */
+  function showToast(text) {
+    const toast = document.getElementById('toastBox');
+    toast.innerText = text;
+    toast.classList.add('show');
+    setTimeout(() => { toast.classList.remove('show'); }, 3000);
+  }
+
+  /* MENU MOBILE (burger) */
   function toggleMobileMenu() {
-    const links = document.querySelector('.nav-links');
-    if (!links) return;
-    const vis = links.style.display === 'flex';
-    links.style.display = vis ? '' : 'flex';
-    links.style.flexDirection = 'column';
-    links.style.position = 'absolute';
-    links.style.top = '64px';
-    links.style.left = '0';
-    links.style.right = '0';
-    links.style.background = '#fff';
-    links.style.padding = '12px 16px';
-    links.style.borderBottom = '1px solid #e5ddd4';
-    links.style.zIndex = '100';
+    const menu = document.getElementById('mobileMenu');
+    const burger = document.getElementById('navBurger');
+    const open = menu.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    document.body.style.overflow = open ? 'hidden' : '';
   }
+  function closeMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    if (!menu.classList.contains('open')) return;
+    menu.classList.remove('open');
+    const burger = document.getElementById('navBurger');
+    burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', 'Ouvrir le menu');
+    document.body.style.overflow = '';
+  }
+  function navMobile(viewId) { closeMobileMenu(); navigateTo(viewId); }
+
+  /* FORMULAIRE DE CONTACT (ouvre le client mail — pas de backend nécessaire) */
+  const CONTACT_EMAIL = "contact@flooow.fr"; // adresse de contact de l'association JUNGLE ATTITUDE
+  function sendContact(e) {
+    e.preventDefault();
+    const name = document.getElementById('ct-name').value.trim();
+    const email = document.getElementById('ct-email').value.trim();
+    const msg = document.getElementById('ct-msg').value.trim();
+    const subject = encodeURIComponent('Contact site Flooow — ' + name);
+    const body = encodeURIComponent(msg + '\n\n— ' + name + ' (' + email + ')');
+    window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + subject + '&body=' + body;
+    showToast("Votre logiciel de messagerie va s'ouvrir…");
+    return false;
+  }
+
+document.addEventListener('DOMContentLoaded', function() {
+  const toast = document.getElementById('toastBox');
+  if (toast) toast.classList.remove('show');
+  // NB : les mégamenus sont masqués par défaut en CSS (.megamenu / .white-megamenu { display:none }).
+  // Ne pas leur poser de display:none inline ici : un style inline bat la règle :hover et bloque leur ouverture.
+
+  // ACCESSIBILITÉ : rendre focusables au clavier les liens/onglets qui n'ont pas de href.
+  document.querySelectorAll('a[onclick]:not([href]), .top-links-left > li > a, .top-links-center > li > a, .nav-links > li > a')
+    .forEach(a => { if (!a.hasAttribute('href') && !a.hasAttribute('tabindex')) a.setAttribute('tabindex', '0'); });
+
+  // Activation clavier (Entrée / Espace) sur ces éléments cliquables.
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { closeMobileMenu(); closeSearch(); return; }
+    if ((e.key === 'Enter' || e.key === ' ')) {
+      const t = e.target;
+      if (t.matches('a[onclick]:not([href]), .search-pill-container[role="button"]')) {
+        e.preventDefault(); t.click();
+      }
+    }
+  });
+});
 </script>
 </body>
 </html>
