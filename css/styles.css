@@ -114,6 +114,7 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body { font-family: var(--f); background: var(--bg); color: var(--tx); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 a { text-decoration: none; color: inherit; cursor: pointer; }
 button { font-family: var(--f); cursor: pointer; border: none; outline: none; }
@@ -215,9 +216,14 @@ nav { height: 80px; background: #fff; border-bottom: 1px solid var(--bd); positi
 .search-suggestions-box ul li a:hover { color: var(--flooow-orange); }
 
 /* VUES SPA */
-.view-section { display: none; animation: fadeIn 0.4s ease-out; }
+.view-section { display: none; }
 .view-section.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+/* Fondu en opacité seule (pas de translateY : évite le décalage/effet fantôme
+   à l'affichage et lors des captures pleine page). Respecte prefers-reduced-motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .view-section.active { animation: fadeIn 0.3s ease-out; }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* =======================================================
    ÉLÉMENTS ÉDITORIAUX COMMUNS
