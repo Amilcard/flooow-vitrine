@@ -5,17 +5,29 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Flooow — Trouver · Financer · S'y rendre</title>
   <meta name="description" content="Flooow aide les familles à accéder aux activités pour leurs enfants en reliant l'offre disponible, les aides possibles et les conditions d'accès réelles."/>
+  <!-- Poppins — police de l'app Flooow -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --terra:#d4622a;--terra-d:#b8501f;--terra-l:#fdf0eb;--terra-xl:#fef8f5;
+      /* Couleurs alignées sur l'app Flooow (terracotta = bouton plein #fa8938) */
+      --terra:hsl(25,95%,60%);--terra-d:hsl(25,95%,50%);--terra-l:hsl(25,95%,95%);--terra-xl:hsl(25,95%,97%);
       --navy:#1a2e4a;--navy-l:#243d5e;
-      --sand:#f5f0e8;--sand-d:#ede5d8;
-      --anthracite:#2d3142;
-      --text:#2d3142;--muted:#6b7280;--border:#e5ddd4;
+      /* Respiration chaude ultra-légère (pas de crème dominant) */
+      --sand:#fbf9f6;--sand-d:#f3eee7;--paper:#faf8f5;
+      --anthracite:#1e1e2e;
+      /* Aides (ambre — aligné app) · Mobilité (vert doux) · Territoire (bleu nuit) */
+      --amber:#d97706;--amber-bg:#fffbeb;--amber-bd:#fde6b8;
+      --green:hsl(150,45%,40%);--green-bg:#e8f6ee;--green-bd:#c4e8d3;
+      --blue:hsl(203,60%,44%);--blue-bg:#e9f2fb;--blue-bd:#c9e0f3;
+      --text:#333;--muted:#6b7280;--border:#e8e0d5;
       --white:#fff;
-      --r:12px;--sh:0 4px 24px rgba(0,0,0,.08);
-      --font:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;
+      /* Radius + ombre repris de l'app (cards 24px, ombre douce) */
+      --r:1.25rem;--r-lg:24px;--sh:0 4px 6px -1px rgba(0,0,0,.07),0 2px 4px -2px rgba(0,0,0,.06);--sh-hover:0 12px 28px -6px rgba(0,0,0,.12);
+      /* Poppins — police de l'app */
+      --font:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;
     }
     html{scroll-behavior:smooth}
     body{font-family:var(--font);color:var(--text);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -28,36 +40,43 @@
 
     /* ── HEADER ── */
     header{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-    .nav-w{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;align-items:center;height:64px;gap:0}
+    .nav-w{max-width:1340px;margin:0 auto;padding:0 28px;display:flex;align-items:center;height:64px;gap:0}
     .logo{display:flex;align-items:center;gap:9px;font-size:1.45rem;font-weight:900;color:var(--terra);letter-spacing:-.5px;margin-right:40px;flex-shrink:0;cursor:pointer}
     .logo-mark{width:36px;height:36px;background:var(--terra);border-radius:10px;display:flex;align-items:center;justify-content:center}
     .logo-mark svg{width:22px;height:22px}
+    .logo-img{height:40px;width:auto;display:block}
+    .app-access{display:flex;align-items:center;gap:16px;margin-top:24px;background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);padding:14px 18px;max-width:430px}
+    .app-qr{width:78px;height:78px;border-radius:10px;flex-shrink:0}
+    .app-access-txt{display:flex;flex-direction:column;gap:3px}
+    .app-access-txt strong{font-size:.9rem;font-weight:700;color:var(--anthracite)}
+    .app-access-txt span{font-size:.78rem;color:var(--muted);line-height:1.4}
+    .app-access-txt .btn-n{margin-top:6px}
     .nav-links{display:flex;gap:2px;list-style:none}
     .nav-links li a,.nav-links li button{padding:7px 13px;border-radius:8px;font-size:.875rem;font-weight:500;color:var(--text);background:none;border:none;cursor:pointer;transition:.15s;font-family:var(--font)}
     .nav-links li a:hover,.nav-links li button:hover,.nav-links li a.active,.nav-links li button.active{background:var(--terra-l);color:var(--terra)}
     .nav-sep{flex:1}
-    .btn-cta-sm{background:var(--terra)!important;color:#fff!important;padding:8px 18px!important;border-radius:8px!important;font-weight:700!important;margin-left:8px;transition:.15s!important;border:none;cursor:pointer;font-size:.875rem;font-family:var(--font)}
+    .btn-cta-sm{background:var(--terra)!important;color:#fff!important;padding:9px 20px!important;border-radius:100px!important;font-weight:600!important;margin-left:8px;transition:.15s!important;border:none;cursor:pointer;font-size:.875rem;font-family:var(--font);box-shadow:0 2px 8px rgba(250,137,56,.28)}
     .btn-cta-sm:hover{background:var(--terra-d)!important}
     .mobile-menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--text);font-size:1.3rem}
 
     /* ── BOUTONS ── */
-    .btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:14px 26px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;transition:.15s;font-family:var(--font)}
-    .btn-p:hover{background:var(--terra-d);transform:translateY(-1px)}
-    .btn-s{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--terra);color:var(--terra);padding:12px 24px;border-radius:10px;font-size:.95rem;font-weight:700;background:transparent;cursor:pointer;transition:.15s;font-family:var(--font)}
+    .btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:14px 28px;border-radius:100px;font-size:.92rem;font-weight:600;cursor:pointer;border:none;transition:.18s;font-family:var(--font);box-shadow:0 2px 10px rgba(250,137,56,.28)}
+    .btn-p:hover{background:var(--terra-d);transform:translateY(-1px);box-shadow:0 6px 18px rgba(250,137,56,.34)}
+    .btn-s{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--terra);color:var(--terra);padding:12px 26px;border-radius:100px;font-size:.92rem;font-weight:600;background:#fff;cursor:pointer;transition:.18s;font-family:var(--font)}
     .btn-s:hover{background:var(--terra-l)}
     .btn-n{display:inline-flex;align-items:center;gap:6px;color:var(--terra);font-size:.875rem;font-weight:700;cursor:pointer;background:none;border:none;font-family:var(--font);padding:4px 0;transition:.15s}
     .btn-n:hover{color:var(--terra-d);gap:10px}
-    .btn-w{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--terra);padding:13px 24px;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;border:none;transition:.15s;font-family:var(--font)}
-    .btn-w:hover{background:var(--terra-xl)}
+    .btn-w{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--terra);padding:13px 26px;border-radius:100px;font-size:.92rem;font-weight:600;cursor:pointer;border:none;transition:.18s;font-family:var(--font)}
+    .btn-w:hover{background:var(--terra-xl);transform:translateY(-1px)}
 
     /* ── COMMUNS ── */
-    .container{max-width:1200px;margin:0 auto;padding:0 28px}
-    .tag{display:inline-block;background:var(--terra-l);color:var(--terra);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:4px 12px;border-radius:20px;margin-bottom:14px}
-    .tag-navy{background:rgba(26,46,74,.12);color:var(--navy)}
-    h2{font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:900;color:var(--anthracite);line-height:1.2;margin-bottom:14px}
+    .container{max-width:1340px;margin:0 auto;padding:0 28px}
+    .tag{display:inline-flex;align-items:center;gap:5px;background:var(--terra-l);color:var(--terra);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:5px 14px;border-radius:100px;margin-bottom:16px;border:1px solid hsl(25,95%,86%)}
+    .tag-navy{background:rgba(26,46,74,.12);color:var(--navy);border-color:rgba(26,46,74,.2)}
+    h2{font-size:clamp(1.6rem,2.8vw,2.3rem);font-weight:800;color:var(--anthracite);line-height:1.18;margin-bottom:14px;letter-spacing:-.02em}
     h2 em{color:var(--terra);font-style:normal}
-    .sec-sub{font-size:1rem;color:var(--muted);max-width:560px;line-height:1.72}
-    section{padding:80px 0}
+    .sec-sub{font-size:1rem;color:var(--muted);max-width:560px;line-height:1.75}
+    section{padding:64px 0}
     .two{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
     .two.rev .vis{order:-1}
     .check-list{list-style:none;display:flex;flex-direction:column;gap:13px;margin-top:26px}
@@ -68,17 +87,19 @@
     .cta-row{display:flex;gap:12px;flex-wrap:wrap}
 
     /* ── CARDS ── */
-    .card{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:26px 22px;transition:.2s}
-    .card:hover{box-shadow:var(--sh);transform:translateY(-3px);border-color:var(--terra)}
+    .card{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);padding:28px 24px;transition:.25s}
+    .card:hover{box-shadow:var(--sh-hover);transform:translateY(-4px);border-color:transparent}
     .card-ico{width:46px;height:46px;background:var(--terra-l);border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:14px}
     .card h3{font-size:.97rem;font-weight:800;color:var(--anthracite);margin-bottom:7px;line-height:1.3}
     .card p{font-size:.84rem;color:var(--muted);line-height:1.6}
 
     /* ── HERO ── */
-    .hero{background:linear-gradient(135deg,var(--sand) 0%,var(--terra-xl) 60%,var(--sand-d) 100%);padding:80px 0 64px}
-    .hero-in{max-width:1200px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:1fr 440px;gap:60px;align-items:center}
-    .hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--terra);color:#fff;padding:4px 14px;border-radius:20px;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:18px}
-    h1{font-size:clamp(2rem,4vw,3.1rem);font-weight:900;line-height:1.1;color:var(--anthracite);margin-bottom:20px}
+    .hero{background:#fff;padding:80px 0 68px;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-160px;right:-100px;width:520px;height:520px;background:radial-gradient(circle,rgba(249,130,58,.07) 0%,transparent 65%);border-radius:50%;pointer-events:none}
+    .hero::after{content:'';position:absolute;bottom:-100px;left:-60px;width:360px;height:360px;background:radial-gradient(circle,rgba(100,160,220,.06) 0%,transparent 65%);border-radius:50%;pointer-events:none}
+    .hero-in{max-width:1340px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:1fr 440px;gap:60px;align-items:center}
+    .hero-badge{display:inline-flex;align-items:center;gap:7px;background:var(--terra);color:#fff;padding:6px 16px;border-radius:100px;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:22px;box-shadow:0 4px 16px rgba(249,130,58,.4)}
+    h1{font-size:clamp(2.1rem,4.2vw,3.3rem);font-weight:900;line-height:1.08;color:var(--anthracite);margin-bottom:20px;letter-spacing:-.03em}
     h1 em{color:var(--terra);font-style:normal}
     .hero-sub{font-size:1.05rem;color:var(--muted);max-width:500px;margin-bottom:32px;line-height:1.75}
 
@@ -101,55 +122,190 @@
     .t-chip{background:#f0f4ff;color:#1565c0;border-radius:6px;padding:4px 8px;font-size:.65rem;font-weight:600}
 
     /* ── TRIPTYQUE ── */
-    .triptyque{background:#fff;padding:80px 0}
-    .tri-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
-    .tri-card{border-radius:var(--r);padding:30px 24px;border:1.5px solid var(--border);transition:.2s;cursor:default}
+    .triptyque{background:#fff;padding:68px 0}
+    .tri-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+    .tri-card{border-radius:var(--r);padding:32px 26px;border:1.5px solid var(--border);transition:.25s;cursor:default;position:relative;overflow:hidden}
     .tri-card:hover{box-shadow:var(--sh);transform:translateY(-4px)}
-    .tri-card.featured{background:var(--terra);border-color:var(--terra);color:#fff}
-    .tri-card.featured p{color:rgba(255,255,255,.75)}
+    .tri-card.featured{background:linear-gradient(135deg,var(--terra) 0%,var(--terra-d) 100%);border-color:transparent;color:#fff;box-shadow:0 16px 48px rgba(249,130,58,.35)}
+    .tri-card.featured::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:rgba(255,255,255,.08);border-radius:50%}
+    .tri-card.featured p{color:rgba(255,255,255,.78)}
     .tri-card.featured h3{color:#fff}
-    .tri-num{font-size:2.2rem;font-weight:900;margin-bottom:12px;line-height:1}
-    .tri-card.featured .tri-num{color:rgba(255,255,255,.4)}
+    .tri-num{font-size:2rem;font-weight:900;margin-bottom:14px;line-height:1;letter-spacing:-.05em}
+    .tri-card.featured .tri-num{color:rgba(255,255,255,.35)}
     .tri-num-def{color:var(--border)}
-    .tri-card h3{font-size:1.1rem;font-weight:800;color:var(--anthracite);margin-bottom:9px}
-    .tri-card p{font-size:.87rem;color:var(--muted);line-height:1.65}
+    .tri-card h3{font-size:1.05rem;font-weight:700;color:var(--anthracite);margin-bottom:9px}
+    .tri-card p{font-size:.86rem;color:var(--muted);line-height:1.68}
+
+    /* ══════════════════════════════════
+       BENTO TERRITORIAL (cœur V2 — calque app)
+    ══════════════════════════════════ */
+    .bento-sec{background:#fff;padding:68px 0}
+    .bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(0,auto);gap:16px;margin-top:48px}
+    .bx{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);padding:24px;transition:.25s;display:flex;flex-direction:column;position:relative;overflow:hidden}
+    .bx:hover{box-shadow:var(--sh-hover);transform:translateY(-3px)}
+    .bx-head{display:flex;align-items:center;gap:9px;margin-bottom:14px}
+    .bx-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .bx-ttl{font-size:.92rem;font-weight:700;color:var(--anthracite);line-height:1.25}
+    .bx-sub{font-size:.78rem;color:var(--muted);font-weight:500}
+    /* spans */
+    .b-fiche{grid-column:span 2;grid-row:span 2}
+    .b-wide{grid-column:span 2}
+    .b-terr{grid-column:span 2;background:var(--blue-bg);border-color:var(--blue-bd);color:var(--navy)}
+
+    /* Fiche activité (calque exact app) */
+    .fiche{background:var(--paper);border:1.5px solid var(--border);border-radius:14px;padding:16px;margin-top:4px}
+    .fiche-top{display:flex;gap:12px;align-items:flex-start}
+    .fiche-img{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,#ffd9b3,#ffb877);display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+    .fiche-h{font-size:.95rem;font-weight:800;color:var(--anthracite)}
+    .fiche-meta{font-size:.74rem;color:var(--muted);margin-top:2px;line-height:1.4}
+    .fiche-price{display:flex;align-items:baseline;gap:8px;margin-top:12px}
+    .fiche-price .old{font-size:.8rem;color:var(--muted);text-decoration:line-through}
+    .fiche-price .rac{font-size:1.05rem;font-weight:900;color:var(--terra)}
+    .fiche-price .rac small{font-size:.66rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+    .aide-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+    .aide-badge{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-bd);font-size:.68rem;font-weight:700;padding:4px 9px;border-radius:6px;display:inline-flex;align-items:center;gap:4px}
+    .fiche-trajet{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;padding-top:12px;border-top:1px dashed var(--border)}
+    .trajet-chip{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd);font-size:.68rem;font-weight:700;padding:4px 9px;border-radius:6px;display:inline-flex;align-items:center;gap:4px}
+    .fiche-cta{margin-top:14px;align-self:flex-start;background:var(--terra);color:#fff;border:none;font-size:.78rem;font-weight:700;padding:8px 16px;border-radius:100px;cursor:pointer;font-family:var(--font);transition:.15s}
+    .fiche-cta:hover{background:var(--terra-d)}
+
+    /* Filtres simples */
+    .filtres{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+    .filtre-chip{font-size:.76rem;font-weight:600;padding:7px 13px;border-radius:100px;border:1.5px solid var(--border);color:var(--muted);background:#fff;transition:.15s;cursor:default}
+    .filtre-chip.on{background:var(--terra);color:#fff;border-color:var(--terra)}
+    .filtre-chip.ghost{border-style:dashed}
+
+    /* Mini stat rows territoire (dans bento) */
+    .bterr-rows{display:flex;flex-direction:column;gap:9px;margin-top:4px}
+    .bterr-row{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--blue-bd);border-radius:9px;padding:9px 12px}
+    .bterr-row .l{flex:1;font-size:.78rem;color:var(--muted)}
+    .bterr-row .v{font-size:.92rem;font-weight:800;color:var(--navy)}
+    .bterr-bar{height:5px;background:rgba(26,46,74,.12);border-radius:3px;overflow:hidden;margin-top:6px}
+    .bterr-bar i{display:block;height:100%;background:var(--terra);border-radius:3px}
+
+    /* ══════════════════════════════════
+       CARDS PHOTO APP-LIKE (piliers + activités)
+    ══════════════════════════════════ */
+    /* Badges colorés app */
+    .b-badge{display:inline-flex;align-items:center;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:4px 9px;border-radius:7px;line-height:1}
+    .bb-culture{background:var(--terra-l);color:var(--terra)}
+    .bb-sport{background:var(--green-bg);color:var(--green)}
+    .bb-scol{background:#ede9fe;color:#6d28d9}
+    .bb-saison{background:#fef9c3;color:#a16207}
+    .bb-age{background:#fff;color:var(--anthracite);border:1px solid var(--border)}
+    .bb-aides{background:var(--green-bg);color:var(--green)}
+
+    /* Pilier (photo + overlay) */
+    .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+    .pillar{position:relative;border-radius:var(--r-lg);overflow:hidden;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;color:#fff;isolation:isolate;transition:.25s}
+    .pillar:hover{transform:translateY(-4px);box-shadow:var(--sh-hover)}
+    .pillar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+    .pillar::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.55) 70%,rgba(0,0,0,.72) 100%);z-index:-1}
+    .pillar-badge{position:absolute;top:14px;left:14px;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em;padding:5px 11px;border-radius:100px;color:#fff}
+    .pb-blue{background:var(--blue)}.pb-green{background:var(--green)}.pb-orange{background:var(--terra)}.pb-pink{background:#db2777}
+    .pillar-ico{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.18);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;margin-bottom:12px;border:1.5px solid rgba(255,255,255,.3)}
+    .pillar h3{font-size:1.25rem;font-weight:800;line-height:1.1;margin-bottom:6px;color:#fff}
+    .pillar p{font-size:.78rem;color:rgba(255,255,255,.88);line-height:1.4;margin-bottom:14px}
+    .pillar-btn{align-self:flex-start;background:rgba(255,255,255,.96);color:var(--terra);border:none;font-size:.78rem;font-weight:700;padding:9px 16px;border-radius:100px;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:6px;transition:.15s}
+    .pillar-btn:hover{background:#fff;gap:9px}
+
+    /* Card activité (photo-first, calque app) */
+    .act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+    .act-card{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:.25s;display:flex;flex-direction:column}
+    .act-card:hover{box-shadow:var(--sh-hover);transform:translateY(-4px);border-color:transparent}
+    .act-photo{position:relative;height:190px;overflow:hidden}
+    .act-photo img{width:100%;height:100%;object-fit:cover}
+    .act-badges-top{position:absolute;top:12px;left:12px;display:flex;flex-wrap:wrap;gap:6px;max-width:80%}
+    .act-heart{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;color:var(--muted)}
+    .act-aides-tag{position:absolute;bottom:12px;left:12px}
+    .act-body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+    .act-title{font-size:1rem;font-weight:800;color:var(--anthracite)}
+    .act-loc{display:flex;align-items:flex-start;gap:6px;font-size:.78rem;color:var(--muted);line-height:1.4}
+    .act-loc svg{flex-shrink:0;margin-top:2px;color:var(--terra)}
+    .act-foot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:10px;border-top:1px solid var(--border)}
+    .act-price{font-size:1.05rem;font-weight:900;color:var(--anthracite)}
+    .act-price span{font-size:.72rem;font-weight:500;color:var(--muted)}
+    .act-aides-row{display:flex;flex-wrap:wrap;gap:5px}
+    .act-detail{background:var(--terra);color:#fff;border:none;font-size:.76rem;font-weight:700;padding:8px 15px;border-radius:100px;cursor:pointer;font-family:var(--font);white-space:nowrap;transition:.15s}
+    .act-detail:hover{background:var(--terra-d)}
+
+    @media(max-width:900px){.pillars{grid-template-columns:repeat(2,1fr)}.act-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.pillars,.act-grid{grid-template-columns:1fr}}
 
     /* ── PROBLEM ── */
-    .problem{background:var(--sand);padding:80px 0}
-    .prob-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
-    .prob-col{background:#fff;border-radius:var(--r);padding:24px;border-left:4px solid var(--terra)}
-    .prob-col h4{font-size:.95rem;font-weight:800;color:var(--anthracite);margin-bottom:8px}
-    .prob-col p{font-size:.84rem;color:var(--muted);line-height:1.6}
+    .problem{background:var(--sand);padding:64px 0}
+    .prob-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+    .prob-col{background:#fff;border-radius:var(--r-lg);padding:28px 24px;border:1px solid var(--border);border-top:3px solid var(--terra);transition:.25s}
+    .prob-col:hover{box-shadow:var(--sh-hover);transform:translateY(-3px)}
+    .prob-ico{width:44px;height:44px;background:var(--terra-l);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;color:var(--terra)}
+    .prob-col h4{font-size:.95rem;font-weight:700;color:var(--anthracite);margin-bottom:8px}
+    .prob-col p{font-size:.84rem;color:var(--muted);line-height:1.65}
 
     /* ── PORTES ACTION ── */
-    .portes{background:var(--terra-xl);padding:80px 0}
-    .portes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
-    .porte-card{background:#fff;border-radius:var(--r);padding:28px 22px;border:1.5px solid var(--border);transition:.2s;display:flex;flex-direction:column;gap:14px}
-    .porte-card:hover{box-shadow:var(--sh);border-color:var(--terra)}
-    .porte-tag{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--terra);margin-bottom:2px}
-    .porte-card h3{font-size:1rem;font-weight:800;color:var(--anthracite);margin-bottom:0}
+    .portes{background:#fff;padding:68px 0}
+    .portes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+    .porte-card{background:#fff;border-radius:var(--r-lg);padding:30px 24px;border:1px solid var(--border);transition:.25s;display:flex;flex-direction:column;gap:12px}
+    .porte-card:hover{box-shadow:var(--sh-hover);border-color:transparent;transform:translateY(-3px)}
+    .porte-tag{display:inline-block;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--terra);background:var(--terra-l);padding:3px 10px;border-radius:100px;margin-bottom:4px}
+    .porte-card h3{font-size:1.05rem;font-weight:700;color:var(--anthracite);margin-bottom:0}
     .porte-card p{font-size:.84rem;color:var(--muted);line-height:1.6;flex:1}
+    .porte-ico{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;margin-bottom:4px}
+    /* Communauté */
+    .commu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+    .commu-item{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);padding:26px 20px;text-align:center;transition:.25s}
+    .commu-item:hover{box-shadow:var(--sh-hover);transform:translateY(-3px)}
+    .commu-ico{width:52px;height:52px;border-radius:15px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+    .commu-item h4{font-size:.95rem;font-weight:700;color:var(--anthracite);margin-bottom:6px}
+    .commu-item p{font-size:.82rem;color:var(--muted);line-height:1.55}
+    @media(max-width:900px){.commu-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:520px){.commu-grid{grid-template-columns:1fr}}
+    /* Bandeau partenaires */
+    .partners-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:48px}
+    .partner-logo{height:60px;width:auto;object-fit:contain;opacity:.85;transition:.2s}
+    .partner-logo:hover{opacity:1}
 
-    /* ── CONFIANCE MINI ── */
-    .trust-band{background:var(--navy);padding:64px 0}
-    .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
-    .trust-item{text-align:center;padding:20px}
-    .trust-ico{font-size:1.6rem;margin-bottom:10px}
-    .trust-item h4{font-size:.9rem;font-weight:800;color:#fff;margin-bottom:5px}
-    .trust-item p{font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.5}
+    /* ── CONFIANCE MINI (clair, accents navy) ── */
+    .trust-band{background:#fff;padding:64px 0}
+    .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+    .trust-item{text-align:center;padding:26px 18px;background:#fff;border-radius:var(--r-lg);border:1px solid var(--border);transition:.25s}
+    .trust-item:hover{box-shadow:var(--sh-hover);transform:translateY(-3px)}
+    .trust-ico{width:48px;height:48px;background:var(--blue-bg);color:var(--navy);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+    .trust-item h4{font-size:.88rem;font-weight:700;color:var(--anthracite);margin-bottom:6px}
+    .trust-item p{font-size:.77rem;color:var(--muted);line-height:1.55}
 
     /* ── TERRITOIRES TEASER ── */
-    .terr-teaser{background:var(--sand);padding:80px 0}
+    .terr-teaser{background:var(--sand);padding:64px 0}
     .terr-dash{background:var(--navy);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:12px}
     .td-row{background:rgba(255,255,255,.08);border-radius:9px;padding:12px 15px;display:flex;align-items:center;gap:12px}
-    .td-ico{font-size:1rem;flex-shrink:0}
+    .td-ico{flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--terra)}
     .td-lbl{font-size:.8rem;color:rgba(255,255,255,.7);flex:1}
     .td-val{font-size:.9rem;font-weight:800;color:#fff}
     .td-bar{height:5px;background:rgba(255,255,255,.15);border-radius:3px;overflow:hidden;margin-top:8px}
     .td-bar-fill{height:100%;background:var(--terra);border-radius:3px}
 
+    /* ── BULLE D'AIDE FLOTTANTE (app-like) ── */
+    .help-fab{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:var(--terra);color:#fff;border:none;cursor:pointer;z-index:300;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 32px rgba(250,137,56,.4);transition:.2s}
+    .help-fab:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 16px 40px rgba(250,137,56,.5)}
+    .help-panel{position:fixed;bottom:92px;right:24px;width:328px;max-width:calc(100vw - 32px);background:#fff;border:1px solid var(--border);border-radius:20px;box-shadow:0 12px 48px rgba(0,0,0,.16);z-index:300;overflow:hidden;opacity:0;transform:translateY(12px) scale(.97);pointer-events:none;transition:.22s cubic-bezier(.4,0,.2,1)}
+    .help-panel.open{opacity:1;transform:none;pointer-events:auto}
+    .help-head{background:var(--terra);color:#fff;padding:18px 20px}
+    .help-head h4{font-size:.98rem;font-weight:700;margin-bottom:3px}
+    .help-head p{font-size:.78rem;color:rgba(255,255,255,.85);line-height:1.45}
+    .help-body{padding:14px}
+    .help-opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:1px solid var(--border);border-radius:14px;padding:13px 14px;cursor:pointer;transition:.15s;font-family:var(--font);margin-bottom:8px}
+    .help-opt:hover{border-color:var(--terra);background:var(--terra-xl)}
+    .help-opt-ico{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .help-opt-txt strong{display:block;font-size:.84rem;font-weight:700;color:var(--anthracite)}
+    .help-opt-txt span{font-size:.74rem;color:var(--muted)}
+
+    /* ── REVEAL ANIMATION ── */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s cubic-bezier(.4,0,.2,1),transform .65s cubic-bezier(.4,0,.2,1)}
+    .reveal.visible{opacity:1;transform:none}
+    .reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
+
     /* ── CTA FINAL HOME ── */
-    .cta-final{background:linear-gradient(135deg,var(--terra) 0%,var(--terra-d) 100%);padding:80px 0;text-align:center}
+    .cta-final{background:linear-gradient(135deg,var(--terra) 0%,var(--terra-d) 100%);padding:68px 0;text-align:center;position:relative;overflow:hidden}
+    .cta-final::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
     .cta-final h2{color:#fff;font-size:clamp(1.6rem,3vw,2.2rem)}
     .cta-final p{color:rgba(255,255,255,.8);max-width:520px;margin:12px auto 36px}
     .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
@@ -159,10 +315,11 @@
     ══════════════════════════════════ */
     .mission-hero{background:var(--sand);padding:80px 0 64px}
     .stat-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
-    .stat-card{background:#fff;border-radius:var(--r);padding:26px;text-align:center;border:1.5px solid var(--border)}
-    .stat-n{font-size:2.2rem;font-weight:900;color:var(--terra);margin-bottom:6px}
-    .stat-card p{font-size:.83rem;color:var(--muted);line-height:1.5}
-    .stat-card small{display:block;font-size:.68rem;color:var(--muted);margin-top:4px;opacity:.7}
+    .stat-card{background:#fff;border-radius:var(--r);padding:32px 24px;text-align:center;border:1.5px solid var(--border);box-shadow:0 2px 12px rgba(0,0,0,.04);transition:.25s}
+    .stat-card:hover{box-shadow:var(--sh);transform:translateY(-3px)}
+    .stat-n{font-size:2.6rem;font-weight:900;color:var(--terra);margin-bottom:8px;letter-spacing:-.04em;line-height:1}
+    .stat-card p{font-size:.84rem;color:var(--muted);line-height:1.58}
+    .stat-card small{display:block;font-size:.67rem;color:var(--muted);margin-top:6px;opacity:.65}
     .engage-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
     .eng-card{background:var(--sand);border-radius:var(--r);padding:28px 24px;border-top:4px solid var(--terra)}
     .eng-card h3{font-size:1rem;font-weight:800;color:var(--anthracite);margin-bottom:9px}
@@ -215,11 +372,11 @@
     /* ══════════════════════════════════
        PAGE AGIR
     ══════════════════════════════════ */
-    .agir-hero{background:var(--sand);padding:72px 0 56px}
+    .agir-hero{background:var(--sand);padding:80px 0 64px}
     .agir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
-    .agir-card{background:#fff;border-radius:16px;padding:32px 26px;border:2px solid var(--border);transition:.2s;display:flex;flex-direction:column;cursor:pointer;text-align:center}
-    .agir-card:hover{border-color:var(--terra);box-shadow:var(--sh);transform:translateY(-4px)}
-    .agir-ico{width:60px;height:60px;border-radius:16px;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+    .agir-card{background:#fff;border-radius:var(--r);padding:36px 28px;border:2px solid var(--border);transition:.25s;display:flex;flex-direction:column;cursor:pointer;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+    .agir-card:hover{border-color:var(--terra);box-shadow:var(--sh);transform:translateY(-5px)}
+    .agir-ico{width:64px;height:64px;border-radius:18px;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:1.6rem}
     .agir-card h3{font-size:1.1rem;font-weight:900;color:var(--anthracite);margin-bottom:10px}
     .agir-card p{font-size:.87rem;color:var(--muted);line-height:1.65;flex:1;margin-bottom:18px}
     .agir-card .btn-p{width:100%;justify-content:center}
@@ -286,6 +443,9 @@
       .tri-grid,.portes-grid,.fonctions-grid,.modules-grid,.agir-grid,.engage-grid{grid-template-columns:repeat(2,1fr)}
       .trust-grid{grid-template-columns:repeat(2,1fr)}
       .foot-top{grid-template-columns:1fr 1fr}
+      .bento{grid-template-columns:repeat(2,1fr)}
+      .b-fiche,.b-wide,.b-terr{grid-column:span 2}
+      .b-fiche{grid-row:auto}
     }
     @media(max-width:768px){
       .hero-in,.two,.two.rev,.terr-teaser .two{grid-template-columns:1fr;gap:36px}
@@ -293,6 +453,8 @@
       .two.rev .vis{order:0}
       .tri-grid,.portes-grid,.prob-cols,.stat-cards,.agir-grid,.engage-grid,.conf-grid,.acces-grid,.comm-cards{grid-template-columns:1fr}
       .fonctions-grid,.modules-grid,.trust-grid{grid-template-columns:1fr}
+      .bento{grid-template-columns:1fr}
+      .b-fiche,.b-wide,.b-terr{grid-column:span 1}
       .foot-top{grid-template-columns:1fr 1fr}
       nav .nav-links,.nav-sep{display:none}
       .mobile-menu-btn{display:block}
@@ -312,24 +474,17 @@
 <header>
   <div class="nav-w">
     <div class="logo" onclick="showPage('home')">
-      <div class="logo-mark">
-        <svg viewBox="0 0 22 22" fill="none">
-          <path d="M4 18 C4 18, 7 10, 11 6 C15 2, 18 4, 18 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="11" cy="13" r="3" fill="#fff" opacity=".5"/>
-          <path d="M3 14 Q7 11 11 13 Q15 15 19 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".6"/>
-        </svg>
-      </div>
-      Flooow
+      <img src="assets/logo-flooow.png" alt="Flooow" class="logo-img"/>
     </div>
     <ul class="nav-links">
-      <li><button onclick="showPage('mission')" id="nav-mission">Notre mission</button></li>
+      <li><button onclick="showPage('mission')" id="nav-mission">Mission</button></li>
       <li><button onclick="showPage('territoires')" id="nav-territoires">Territoires</button></li>
-      <li><button onclick="showPage('agir')" id="nav-agir">Agir</button></li>
+      <li><button onclick="showPage('agir')" id="nav-agir">Participer</button></li>
       <li><button onclick="showPage('confiance')" id="nav-confiance">Confiance</button></li>
     </ul>
     <div class="nav-sep"></div>
     <button class="btn-cta-sm" onclick="showPage('demo')">Demander une démo</button>
-    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M4 6h16M4 18h16"/></svg></button>
   </div>
 </header>
 
@@ -340,53 +495,58 @@
   <section class="hero">
     <div class="hero-in">
       <div>
-        <div class="hero-badge">🌊 Démarche pilote</div>
+        <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></svg> Démarche pilote</div>
         <h1>Trouver · Financer<br><em>S'y rendre</em></h1>
         <p class="hero-sub">Flooow aide les familles à accéder plus facilement aux activités pour leurs enfants en reliant trois informations souvent dispersées : l'offre disponible, les aides possibles et les conditions d'accès réelles.</p>
         <div class="cta-row">
-          <button class="btn-p" onclick="showPage('family')">Je partage un besoin</button>
-          <button class="btn-s" onclick="showPage('territoires')">Je représente un territoire</button>
+          <button class="btn-p" onclick="showPage('family')">Partager ma situation</button>
+          <button class="btn-s" onclick="showPage('mission')">Comprendre la mission</button>
         </div>
-        <div style="margin-top:18px">
-          <button class="btn-n" onclick="showPage('mission')">Découvrir la mission →</button>
+        <div class="app-access">
+          <img src="assets/qr-app-flooow.png" alt="QR code application Flooow" class="app-qr"/>
+          <div class="app-access-txt">
+            <strong>L'application Flooow</strong>
+            <span>Scannez le QR code ou ouvrez-la directement — aucune installation.</span>
+            <a class="btn-n" href="https://flooow-connect-8938a98d.vercel.app/home" target="_blank" rel="noopener">Ouvrir l'application →</a>
+          </div>
         </div>
       </div>
       <div class="hero-vis">
         <div class="mockup">
           <div class="mockup-in">
             <div class="mockup-bar">
-              <span>🌊 Flooow — Recherche d'activité</span>
+              <span>Flooow — Activités à proximité</span>
             </div>
             <div class="mockup-body">
-              <div class="m-card">
-                <div class="m-card-top">
-                  <div class="m-ico" style="background:#fff3e0">⚽</div>
-                  <div>
-                    <div class="m-card-title">Club de foot du quartier</div>
-                    <div style="font-size:.65rem;color:var(--muted)">Paris 14e · 6–12 ans</div>
+              <!-- Filtres simples -->
+              <div class="filtres" style="margin-bottom:4px">
+                <span class="filtre-chip on">6–12 ans</span>
+                <span class="filtre-chip">Culture</span>
+                <span class="filtre-chip ghost">+ Filtres</span>
+              </div>
+              <!-- Card activité photo (calque app) -->
+              <div class="act-card">
+                <div class="act-photo">
+                  <img src="assets/activity-culture.jpg" alt="Atelier arts plastiques"/>
+                  <div class="act-badges-top">
+                    <span class="b-badge bb-culture">Culture</span>
+                    <span class="b-badge bb-saison">Saison</span>
+                    <span class="b-badge bb-age">3–5 / 6–8</span>
                   </div>
+                  <div class="act-heart"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></div>
+                  <div class="act-aides-tag"><span class="b-badge bb-aides">Aides possibles</span></div>
                 </div>
-                <div>
-                  <span class="m-chip">Sport</span>
-                  <span class="m-chip-g">Accessible</span>
-                  <span class="m-chip-b">Mercredi</span>
-                </div>
-              </div>
-              <div class="aide-row">
-                <span>Prix affiché : <s style="color:var(--muted)">180 €</s></span>
-                <span class="prix">Reste : 36 €</span>
-              </div>
-              <div class="m-card" style="background:var(--terra-xl)">
-                <div style="font-size:.72rem;font-weight:800;color:var(--terra);margin-bottom:6px">💡 Aides applicables</div>
-                <div style="font-size:.7rem;color:var(--muted);line-height:1.5">
-                  Pass'Sport (50 €) · Aide CAF (60 €) · Coupon sport mairie (34 €)
-                </div>
-              </div>
-              <div>
-                <div style="font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:6px">🗺 Accès</div>
-                <div class="trajet-row">
-                  <span class="t-chip">🚇 Métro 14 — 8 min</span>
-                  <span class="t-chip">🚌 Bus 62</span>
+                <div class="act-body">
+                  <div class="act-title">Atelier arts plastiques</div>
+                  <div class="act-loc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> MJC du Parc de l'Europe · 30 av. du Parc</div>
+                  <div class="act-foot">
+                    <div class="act-price">210€ <span>/ saison</span></div>
+                    <button class="act-detail">+ de détails</button>
+                  </div>
+                  <div class="act-aides-row">
+                    <span class="aide-badge">Pass Culture</span>
+                    <span class="aide-badge">Chèques Loisirs Loire</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -404,17 +564,184 @@
       <p class="sec-sub">Le renoncement vient souvent d'une accumulation de petits obstacles séparés.</p>
       <div class="prob-cols">
         <div class="prob-col">
-          <h4>🔍 L'offre est peu visible</h4>
+          <div class="prob-ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <h4>L'offre est peu visible</h4>
           <p>Les activités existent, mais elles ne sont pas toujours simples à repérer pour les familles qui ne connaissent pas les bons canaux ou les structures locales.</p>
         </div>
         <div class="prob-col">
-          <h4>💶 Le coût réel reste flou</h4>
+          <div class="prob-ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h4>Le coût réel reste flou</h4>
           <p>Entre le prix affiché, les aides nationales, les dispositifs CAF/MSA, les aides locales et les conditions propres à chaque structure, le reste à charge est difficile à anticiper.</p>
         </div>
         <div class="prob-col">
-          <h4>🚌 L'accès n'est pas calculé</h4>
+          <div class="prob-ico">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+          <h4>L'accès n'est pas calculé</h4>
           <p>Les horaires, le trajet, l'accompagnement nécessaire ou l'absence de solutions de déplacement font renoncer avant même le premier contact avec la structure.</p>
         </div>
+      </div>
+      <div style="margin-top:32px">
+        <button class="btn-s" onclick="showPage('mission')">Comprendre la mission →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- APERÇU APPLICATION (piliers + activités photo, calque app) -->
+  <section style="background:#fff;padding:64px 0">
+    <div class="container">
+      <div class="tag">L'application</div>
+      <h2>Un aperçu de <em>l'application Flooow</em></h2>
+      <p class="sec-sub">Quatre portes d'entrée pour les familles : leurs aides, leurs trajets, leur ville et les clubs solidaires près de chez elles.</p>
+      <div class="pillars">
+        <div class="pillar reveal">
+          <img src="assets/aides-financieres.webp" alt="Mes aides"/>
+          <span class="pillar-badge pb-blue">Simulateur</span>
+          <div class="pillar-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h8M16 14h.01M12 14h.01M8 14h.01M16 18h.01M12 18h.01M8 18h.01"/></svg></div>
+          <h3>Mes aides</h3>
+          <p>Répondez à quelques questions, découvrez vos droits.</p>
+          <button class="pillar-btn" onclick="showPage('family')">Découvrir mes aides →</button>
+        </div>
+        <div class="pillar reveal reveal-d1">
+          <img src="assets/eco-mobilite.webp" alt="Mes trajets"/>
+          <span class="pillar-badge pb-green">Éco-mobilité</span>
+          <div class="pillar-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></div>
+          <h3>Mes trajets</h3>
+          <p>Vélo, bus ou covoiturage : à vous de choisir.</p>
+          <button class="pillar-btn" onclick="showPage('family')">Trouver mon trajet →</button>
+        </div>
+        <div class="pillar reveal reveal-d2">
+          <img src="assets/actualite-ville.webp" alt="Ma ville"/>
+          <span class="pillar-badge pb-orange">Local</span>
+          <div class="pillar-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg></div>
+          <h3>Ma ville</h3>
+          <p>Actus, agenda et infos pratiques près de chez vous.</p>
+          <button class="pillar-btn" onclick="showPage('territoires')">Explorer →</button>
+        </div>
+        <div class="pillar reveal reveal-d3">
+          <img src="assets/actualite-prix.webp" alt="Clubs solidaires"/>
+          <span class="pillar-badge pb-pink">Solidarité</span>
+          <div class="pillar-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></div>
+          <h3>Clubs solidaires</h3>
+          <p>Mettez en lumière un coach, un bénévole, un club.</p>
+          <button class="pillar-btn" onclick="showPage('territoire-form')">Découvrir →</button>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:36px">
+        <a class="btn-p" href="https://flooow-connect-8938a98d.vercel.app/home" target="_blank" rel="noopener">Ouvrir l'application Flooow →</a>
+        <p style="font-size:.8rem;color:var(--muted);margin-top:12px">Le site explique et oriente — l'application permet d'agir.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENTO TERRITORIAL (cœur V2) -->
+  <section class="bento-sec">
+    <div class="container">
+      <div class="tag">Concrètement</div>
+      <h2>Ce que Flooow <em>réunit au même endroit</em></h2>
+      <p class="sec-sub">L'offre, les aides cumulables, le reste à charge réel et le trajet — réunis dans une seule fiche, comme dans l'application.</p>
+      <div class="bento">
+
+        <!-- Fiche activité (grande) -->
+        <div class="bx b-fiche">
+          <div class="bx-head">
+            <div class="bx-ico" style="background:var(--terra-l);color:var(--terra)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <div><div class="bx-ttl">Une fiche activité lisible</div><div class="bx-sub">Tout ce qu'il faut pour décider, en un coup d'œil</div></div>
+          </div>
+          <div class="fiche">
+            <div class="fiche-top">
+              <div class="fiche-img"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/></svg></div>
+              <div>
+                <div class="fiche-h">Atelier cirque</div>
+                <div class="fiche-meta">École de Cirque de la Métropole<br>Parc des Sports · 6–12 ans</div>
+              </div>
+            </div>
+            <div class="fiche-price">
+              <span class="old">220 € / saison</span>
+              <span class="rac">76 € <small>reste à charge</small></span>
+            </div>
+            <div class="aide-badges">
+              <span class="aide-badge">Pass Culture</span>
+              <span class="aide-badge">Chèques Loisirs Loire</span>
+              <span class="aide-badge">Aide CAF</span>
+            </div>
+            <div class="fiche-trajet">
+              <span class="trajet-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6v6M15 6v6M2 12h19.6M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/></svg> Bus 12 — 9 min</span>
+              <span class="trajet-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg> Voie cyclable</span>
+            </div>
+            <button class="fiche-cta">+ de détails</button>
+          </div>
+        </div>
+
+        <!-- Filtres simples -->
+        <div class="bx b-wide">
+          <div class="bx-head">
+            <div class="bx-ico" style="background:var(--terra-l);color:var(--terra)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+            </div>
+            <div><div class="bx-ttl">Des filtres simples</div><div class="bx-sub">Par âge, type, jour et accessibilité</div></div>
+          </div>
+          <div class="filtres">
+            <span class="filtre-chip on">6–12 ans</span>
+            <span class="filtre-chip">Sport</span>
+            <span class="filtre-chip">Culture</span>
+            <span class="filtre-chip">Mercredi</span>
+            <span class="filtre-chip">Accessible</span>
+            <span class="filtre-chip ghost">+ Filtres</span>
+          </div>
+        </div>
+
+        <!-- Aides cumulables -->
+        <div class="bx" style="border-color:var(--amber-bd);background:var(--amber-bg)">
+          <div class="bx-head">
+            <div class="bx-ico" style="background:#fff;color:var(--amber)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div><div class="bx-ttl" style="color:#92590a">Aides cumulables</div></div>
+          </div>
+          <p style="font-size:.82rem;color:#92590a;line-height:1.6">On affiche les dispositifs réellement mobilisables — nationaux et locaux — et ce qui se cumule.</p>
+        </div>
+
+        <!-- Trajet / mobilité -->
+        <div class="bx" style="border-color:var(--green-bd);background:var(--green-bg)">
+          <div class="bx-head">
+            <div class="bx-ico" style="background:#fff;color:var(--green)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            </div>
+            <div><div class="bx-ttl" style="color:#1b5e3f">Le trajet, anticipé</div></div>
+          </div>
+          <p style="font-size:.82rem;color:#1b5e3f;line-height:1.6">Temps de trajet, transports et solutions de mobilité douce autour de l'activité.</p>
+        </div>
+
+        <!-- Mini-dashboard territoire -->
+        <div class="bx b-terr">
+          <div class="bx-head">
+            <div class="bx-ico" style="background:#fff;color:var(--navy)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg>
+            </div>
+            <div><div class="bx-ttl" style="color:var(--navy)">Côté territoire</div><div class="bx-sub" style="color:var(--muted)">Lecture des freins, pas des promesses</div></div>
+          </div>
+          <div class="bterr-rows">
+            <div class="bterr-row"><span class="l">Frein #1 — Déplacement</span><span class="v">41%</span></div>
+            <div class="bterr-row"><span class="l">Frein #2 — Coût / aides</span><span class="v">37%</span></div>
+            <div class="bterr-row"><span class="l">Frein #3 — Information</span><span class="v">22%</span></div>
+          </div>
+          <div style="margin-top:12px">
+            <div style="display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:2px"><span>Avancement pilote</span><span>62%</span></div>
+            <div class="bterr-bar"><i style="width:62%"></i></div>
+          </div>
+        </div>
+
+      </div>
+      <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <a class="btn-p" href="https://flooow-connect-8938a98d.vercel.app/home" target="_blank" rel="noopener">Ouvrir l'application →</a>
+        <button class="btn-s" onclick="showPage('family')">Partager ma situation</button>
       </div>
     </div>
   </section>
@@ -445,36 +772,93 @@
     </div>
   </section>
 
+  <!-- COMMUNAUTÉ -->
+  <section style="background:var(--sand);padding:64px 0">
+    <div class="container" style="text-align:center">
+      <div class="tag" style="margin-left:auto;margin-right:auto">La communauté</div>
+      <h2>Une communauté qui <em>se construit avec le terrain</em></h2>
+      <p class="sec-sub" style="margin-left:auto;margin-right:auto;text-align:center">Flooow avance avec celles et ceux qui vivent l'accès aux activités au quotidien. Chaque profil apporte une pièce du puzzle.</p>
+      <div class="commu-grid">
+        <div class="commu-item reveal">
+          <div class="commu-ico" style="background:var(--terra-l);color:var(--terra)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+          <h4>Les familles</h4>
+          <p>partagent leurs besoins réels et les freins qu'elles rencontrent.</p>
+        </div>
+        <div class="commu-item reveal reveal-d1">
+          <div class="commu-ico" style="background:var(--green-bg);color:var(--green)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
+          <h4>Les jeunes</h4>
+          <p>disent ce qui donne envie, ce qui bloque, ce qui manque.</p>
+        </div>
+        <div class="commu-item reveal reveal-d2">
+          <div class="commu-ico" style="background:var(--terra-l);color:var(--terra)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4"/></svg></div>
+          <h4>Les structures</h4>
+          <p>rendent leur offre visible et plus simple d'accès.</p>
+        </div>
+        <div class="commu-item reveal reveal-d3">
+          <div class="commu-ico" style="background:var(--blue-bg);color:var(--navy)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg></div>
+          <h4>Les collectivités</h4>
+          <p>éclairent l'action locale à partir de ce qui remonte du terrain.</p>
+        </div>
+      </div>
+      <div style="margin-top:36px">
+        <button class="btn-p" onclick="showPage('agir')">Rejoindre la démarche →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANDEAU PARTENAIRES (logos réels à fournir) -->
+  <section style="background:#fff;padding:48px 0">
+    <div class="container" style="text-align:center">
+      <p style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:24px">Ils construisent la démarche avec nous</p>
+      <div class="partners-row">
+        <img src="assets/logo-edlv.png" alt="Entrepreneurs dans la Ville" class="partner-logo"/>
+        <img src="assets/logo-edm.webp" alt="EDM" class="partner-logo"/>
+      </div>
+      <p style="font-size:.78rem;color:var(--muted);margin-top:20px">Vous portez un territoire ou une structure ? <button onclick="showPage('demo')" style="background:none;border:none;color:var(--terra);font-weight:700;cursor:pointer;font-family:var(--font);font-size:.78rem">Rejoindre les territoires pilotes →</button></p>
+    </div>
+  </section>
+
   <!-- PORTES D'ACTION -->
   <section class="portes">
     <div class="container">
-      <div class="tag">Agir avec Flooow</div>
-      <h2>Trois portes d'entrée,<br><em>trois actions concrètes</em></h2>
-      <p class="sec-sub">Votre retour terrain est ce qui rend Flooow utile. Choisissez votre porte d'entrée.</p>
+      <div class="tag">Choisissez votre profil</div>
+      <h2>Vous arrivez des réseaux ?<br><em>Trouvez votre porte d'entrée</em></h2>
+      <p class="sec-sub">Le site oriente chaque public vers une action simple. Choisissez la vôtre — votre retour terrain fait avancer la démarche.</p>
       <div class="portes-grid">
         <div class="porte-card">
-          <div>
-            <div class="porte-tag">Pour les familles</div>
-            <h3>Flooow Family</h3>
-          </div>
-          <p>Partagez un besoin concret ou un frein d'accès à une activité pour votre enfant. Votre retour aide à améliorer l'accès pour tous.</p>
-          <button class="btn-p" onclick="showPage('family')">Je partage mon besoin →</button>
+          <div class="porte-ico" style="background:var(--terra-l);color:var(--terra)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+          <div class="porte-tag">Familles</div>
+          <h3>Une activité pour votre enfant</h3>
+          <p>Partagez un besoin ou un frein d'accès. Votre retour aide à améliorer l'accès pour tous.</p>
+          <button class="btn-p" onclick="showPage('family')">Partager ma situation →</button>
         </div>
         <div class="porte-card">
-          <div>
-            <div class="porte-tag">Pour les jeunes</div>
-            <h3>Flooow Jeunes</h3>
-          </div>
-          <p>Dites ce qui donne envie, ce qui bloque, quels lieux et quels formats manquent. Votre avis compte directement.</p>
-          <button class="btn-p" onclick="showPage('jeunes')">Je donne mon avis →</button>
+          <div class="porte-ico" style="background:var(--green-bg);color:var(--green)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
+          <div class="porte-tag">Jeunes</div>
+          <h3>Votre avis compte</h3>
+          <p>Dites ce qui donne envie, ce qui bloque, quels lieux et formats manquent. Directement.</p>
+          <button class="btn-p" onclick="showPage('jeunes')">Partager mon avis →</button>
         </div>
         <div class="porte-card">
-          <div>
-            <div class="porte-tag">Pour les structures et collectivités</div>
-            <h3>Flooow Territoires</h3>
-          </div>
-          <p>Référencez une structure, contribuez à la cartographie ou échangez sur une démarche pilote locale.</p>
-          <button class="btn-p" onclick="showPage('territoire-form')">J'échange sur un territoire →</button>
+          <div class="porte-ico" style="background:var(--terra-l);color:var(--terra)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4"/></svg></div>
+          <div class="porte-tag">Structures &amp; associations</div>
+          <h3>Rendez votre offre visible</h3>
+          <p>Référencez une activité ou une structure et contribuez à la cartographie locale.</p>
+          <button class="btn-p" onclick="showPage('territoire-form')">Référencer une activité ou une structure →</button>
+        </div>
+        <div class="porte-card">
+          <div class="porte-ico" style="background:var(--blue-bg);color:var(--navy)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg></div>
+          <div class="porte-tag">Collectivités</div>
+          <h3>Un territoire pilote</h3>
+          <p>Mieux comprendre les freins d'accès et tester une démarche locale avec vos partenaires.</p>
+          <button class="btn-p" onclick="showPage('demo')">Échanger sur un territoire pilote →</button>
+        </div>
+        <div class="porte-card">
+          <div class="porte-ico" style="background:var(--amber-bg);color:var(--amber)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></svg></div>
+          <div class="porte-tag">Curieux</div>
+          <h3>Comprendre la démarche</h3>
+          <p>Découvrez pourquoi Flooow existe, à qui ça s'adresse et comment le projet se construit.</p>
+          <button class="btn-s" onclick="showPage('mission')">Comprendre la mission →</button>
         </div>
       </div>
     </div>
@@ -500,12 +884,12 @@
         </div>
         <div class="vis">
           <div class="terr-dash">
-            <div style="color:rgba(255,255,255,.45);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px">🗺 Tableau de bord pilote</div>
-            <div class="td-row"><span class="td-ico">🏫</span><span class="td-lbl">Structures référencées</span><span class="td-val">47</span></div>
-            <div class="td-row"><span class="td-ico">👨‍👩‍👧</span><span class="td-lbl">Besoins familles remontés</span><span class="td-val">183</span></div>
-            <div class="td-row"><span class="td-ico">💬</span><span class="td-lbl">Avis jeunes collectés</span><span class="td-val">94</span></div>
-            <div class="td-row"><span class="td-ico">🚌</span><span class="td-lbl">Frein #1 : Déplacement</span><span class="td-val">41%</span></div>
-            <div class="td-row"><span class="td-ico">💶</span><span class="td-lbl">Frein #2 : Coût / aides</span><span class="td-val">37%</span></div>
+            <div style="display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.55);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg> Tableau de bord pilote</div>
+            <div class="td-row"><span class="td-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4"/></svg></span><span class="td-lbl">Structures référencées</span><span class="td-val">47</span></div>
+            <div class="td-row"><span class="td-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="td-lbl">Besoins familles remontés</span><span class="td-val">183</span></div>
+            <div class="td-row"><span class="td-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span><span class="td-lbl">Avis jeunes collectés</span><span class="td-val">94</span></div>
+            <div class="td-row"><span class="td-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6v6M15 6v6M2 12h19.6M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/></svg></span><span class="td-lbl">Frein #1 : Déplacement</span><span class="td-val">41%</span></div>
+            <div class="td-row"><span class="td-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></svg></span><span class="td-lbl">Frein #2 : Coût / aides</span><span class="td-val">37%</span></div>
             <div style="padding:4px 0">
               <div style="display:flex;justify-content:space-between;font-size:.7rem;color:rgba(255,255,255,.5);margin-bottom:5px">
                 <span>Avancement pilote</span><span>62%</span>
@@ -522,17 +906,29 @@
   <section class="trust-band">
     <div class="container">
       <div style="text-align:center;margin-bottom:0">
-        <div class="tag tag-navy" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.7)">Nos engagements</div>
-        <h2 style="color:#fff;margin-top:8px">Une démarche sobre,<br>transparente et <em>respectueuse</em></h2>
+        <div class="tag tag-navy">Nos engagements</div>
+        <h2 style="margin-top:8px">Une démarche sobre,<br>transparente et <em>respectueuse</em></h2>
       </div>
       <div class="trust-grid">
-        <div class="trust-item"><div class="trust-ico">🔒</div><h4>Données minimisées</h4><p>Uniquement l'essentiel au premier contact. Aucune donnée sensible collectée initialement.</p></div>
-        <div class="trust-item"><div class="trust-ico">♿</div><h4>Accessibilité</h4><p>Design pensé pour tous les publics, sur tous les écrans, avec des contrastes suffisants.</p></div>
-        <div class="trust-item"><div class="trust-ico">🌱</div><h4>Démarche pilote</h4><p>Un projet qui progresse avec le terrain, pas une promesse de couverture nationale immédiate.</p></div>
-        <div class="trust-item"><div class="trust-ico">📅</div><h4>Mis à jour</h4><p>Les informations sur les aides et les structures sont vérifiées et actualisées régulièrement.</p></div>
+        <div class="trust-item">
+          <div class="trust-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <h4>Données minimisées</h4><p>Uniquement l'essentiel au premier contact. Aucune donnée sensible collectée initialement.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <h4>Accessibilité</h4><p>Design pensé pour tous les publics, sur tous les écrans, avec des contrastes suffisants.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg></div>
+          <h4>Démarche pilote</h4><p>Un projet qui progresse avec le terrain, pas une promesse de couverture nationale immédiate.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h4>Mis à jour</h4><p>Les informations sur les aides et les structures sont vérifiées et actualisées régulièrement.</p>
+        </div>
       </div>
       <div style="text-align:center;margin-top:32px">
-        <button class="btn-w" onclick="showPage('confiance')">Voir tous nos engagements →</button>
+        <button class="btn-s" onclick="showPage('confiance')">Voir tous nos engagements →</button>
       </div>
     </div>
   </section>
@@ -540,13 +936,13 @@
   <!-- CTA FINAL -->
   <section class="cta-final">
     <div class="container">
-      <h2>Choisissez votre porte d'entrée</h2>
-      <p>Famille, jeune, structure ou collectivité — votre retour peut rendre les activités plus accessibles.</p>
+      <h2>Rejoindre la démarche Flooow</h2>
+      <p>Famille, jeune, structure ou collectivité — chaque retour rend les activités plus accessibles aux enfants. On construit avec le terrain, pas à sa place.</p>
       <div class="cta-btns">
-        <button class="btn-w" onclick="showPage('family')">Je partage un besoin</button>
-        <button class="btn-w" onclick="showPage('jeunes')">Je donne mon avis</button>
-        <button class="btn-w" onclick="showPage('territoire-form')">Je référence une structure</button>
-        <button class="btn-w" onclick="showPage('demo')">J'échange sur un territoire</button>
+        <button class="btn-w" onclick="showPage('family')">Partager ma situation</button>
+        <button class="btn-w" onclick="showPage('jeunes')">Partager mon avis</button>
+        <button class="btn-w" onclick="showPage('territoire-form')">Référencer une activité ou une structure</button>
+        <button class="btn-w" onclick="showPage('demo')">Échanger sur un territoire pilote</button>
       </div>
     </div>
   </section>
@@ -594,17 +990,17 @@
       <h2>Ce que Flooow <em>s'engage</em> à faire</h2>
       <div class="engage-grid">
         <div class="eng-card">
-          <div class="eng-ico">🔍</div>
+          <div class="eng-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
           <h3>Rendre les activités plus visibles</h3>
           <p>Aider à repérer des offres sportives, culturelles, de loisirs, de vacances ou d'apprentissage adaptées aux enfants — par âge, lieu, accessibilité et disponibilité.</p>
         </div>
         <div class="eng-card">
-          <div class="eng-ico">💶</div>
+          <div class="eng-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 12h.01M18 12h.01"/></svg></div>
           <h3>Rendre les aides plus compréhensibles</h3>
           <p>Aider à distinguer prix affiché, aides possibles et reste à charge. Rendre lisible ce qui est cumulable, ce qui est conditionnel, ce qui est local.</p>
         </div>
         <div class="eng-card">
-          <div class="eng-ico">🗺</div>
+          <div class="eng-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3 3 6v15l6-3 6 3 6-3V3l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/></svg></div>
           <h3>Relier les parcours au terrain</h3>
           <p>Ne pas séparer l'offre, les démarches, les contraintes d'horaires et les questions d'accès. Remettre ces éléments dans un seul parcours lisible.</p>
         </div>
@@ -629,15 +1025,15 @@
           <h2>Trois <em>communautés</em> d'action</h2>
           <div class="comm-cards" style="grid-template-columns:1fr;gap:12px">
             <div class="comm-card">
-              <h4>🏠 Flooow Family</h4>
+              <h4 style="display:flex;align-items:center;gap:7px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>Flooow Family</h4>
               <p>Des besoins concrets, des freins remontés, des retours d'usage. Les familles sont au cœur de la démarche.</p>
             </div>
             <div class="comm-card">
-              <h4>🎯 Flooow Jeunes</h4>
+              <h4 style="display:flex;align-items:center;gap:7px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>Flooow Jeunes</h4>
               <p>Des envies réelles, des formats crédibles, des lieux et horaires observés. La parole des jeunes, directement.</p>
             </div>
             <div class="comm-card">
-              <h4>🏙 Flooow Territoires</h4>
+              <h4 style="display:flex;align-items:center;gap:7px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg>Flooow Territoires</h4>
               <p>Des structures, associations et collectivités qui aident à rendre l'offre plus visible et plus actionnable.</p>
             </div>
           </div>
@@ -807,31 +1203,31 @@
 <div id="page-agir" class="page">
   <section class="agir-hero">
     <div class="container">
-      <div class="tag">Agir avec Flooow</div>
+      <div class="tag">Participer à Flooow</div>
       <h1>Choisissez votre <em>porte d'entrée</em></h1>
-      <p class="hero-sub">Votre retour terrain est ce qui rend Flooow utile. Trois formes d'action, trois publics, une même ambition : rendre les activités plus accessibles.</p>
+      <p class="hero-sub">Votre retour terrain est ce qui rend Flooow utile. Familles, jeunes, structures, collectivités — une même ambition : rendre les activités plus accessibles aux enfants.</p>
     </div>
   </section>
   <section style="background:var(--sand);padding:64px 0 80px">
     <div class="container">
       <div class="agir-grid">
         <div class="agir-card">
-          <div class="agir-ico" style="background:#fff3e0">🏠</div>
-          <h3>Flooow Family</h3>
+          <div class="agir-ico" style="background:var(--terra-l);color:var(--terra)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+          <h3>Familles</h3>
           <p>Vous cherchez une activité pour votre enfant ? Vous hésitez à cause du coût, des aides, du trajet ou des démarches ? Partagez ce qui bloque aujourd'hui.</p>
-          <button class="btn-p" onclick="showPage('family')">Je partage mon besoin</button>
+          <button class="btn-p" onclick="showPage('family')">Partager ma situation</button>
         </div>
         <div class="agir-card">
-          <div class="agir-ico" style="background:#e8f5e9">🎯</div>
-          <h3>Flooow Jeunes</h3>
+          <div class="agir-ico" style="background:var(--green-bg);color:var(--green)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></div>
+          <h3>Jeunes</h3>
           <p>Qu'est-ce qui donne envie de participer ? Qu'est-ce qui décourage ? Quels lieux, quels horaires, quels formats manquent ? Votre avis compte.</p>
-          <button class="btn-p" onclick="showPage('jeunes')">Je donne mon avis</button>
+          <button class="btn-p" onclick="showPage('jeunes')">Partager mon avis</button>
         </div>
         <div class="agir-card">
-          <div class="agir-ico" style="background:#e3f2fd">🏙</div>
-          <h3>Flooow Territoires</h3>
+          <div class="agir-ico" style="background:var(--blue-bg);color:var(--navy)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4"/></svg></div>
+          <h3>Structures &amp; collectivités</h3>
           <p>Vous proposez une activité, accompagnez des familles ou représentez une structure ? Référencez-vous, contribuez ou demandez un échange.</p>
-          <button class="btn-p" onclick="showPage('territoire-form')">Je référence une structure</button>
+          <button class="btn-p" onclick="showPage('territoire-form')">Référencer une activité ou une structure</button>
         </div>
       </div>
     </div>
@@ -884,8 +1280,8 @@
             <label>Email de contact (optionnel)</label>
             <input type="email" placeholder="Pour vous tenir informé des avancées"/>
           </div>
-          <button type="submit" class="form-submit">Envoyer mon besoin →</button>
-          <p class="cnil-note">🔒 Vos données sont utilisées uniquement pour améliorer l'accès aux activités. Aucune donnée sensible n'est demandée ici. Conformément au RGPD, vous pouvez demander leur suppression à tout moment.</p>
+          <button type="submit" class="form-submit">Partager ma situation →</button>
+          <p class="cnil-note"><svg width="13" height="13" style="vertical-align:-1px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Vos données sont utilisées uniquement pour améliorer l'accès aux activités. Aucune donnée sensible n'est demandée ici. Conformément au RGPD, vous pouvez demander leur suppression à tout moment.</p>
         </form>
       </div>
     </div>
@@ -934,8 +1330,8 @@
             <label>Contact ou structure relais (optionnel)</label>
             <input type="text" placeholder="Email, réseau social ou nom d'une structure"/>
           </div>
-          <button type="submit" class="form-submit">Envoyer mon avis →</button>
-          <p class="cnil-note">🔒 Tes données sont utilisées uniquement pour améliorer l'accès aux activités. Aucune information sensible n'est demandée. Tu peux demander leur suppression à tout moment.</p>
+          <button type="submit" class="form-submit">Partager mon avis →</button>
+          <p class="cnil-note"><svg width="13" height="13" style="vertical-align:-1px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Tes données sont utilisées uniquement pour améliorer l'accès aux activités. Aucune information sensible n'est demandée. Tu peux demander leur suppression à tout moment.</p>
         </form>
       </div>
     </div>
@@ -982,8 +1378,8 @@
             <label>Email de contact *</label>
             <input type="email" placeholder="votre@email.org" required/>
           </div>
-          <button type="submit" class="form-submit">Envoyer ma contribution →</button>
-          <p class="cnil-note">🔒 Vos données sont utilisées uniquement pour la démarche Flooow. Conformément au RGPD, vous pouvez demander leur suppression à tout moment. Contact : contact@flooow.fr</p>
+          <button type="submit" class="form-submit">Référencer ma structure →</button>
+          <p class="cnil-note"><svg width="13" height="13" style="vertical-align:-1px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Vos données sont utilisées uniquement pour la démarche Flooow. Conformément au RGPD, vous pouvez demander leur suppression à tout moment. Contact : contact@flooow.fr</p>
         </form>
       </div>
     </div>
@@ -1027,8 +1423,8 @@
             <label>Email professionnel *</label>
             <input type="email" placeholder="votre@collectivite.fr" required/>
           </div>
-          <button type="submit" class="form-submit">Envoyer ma demande de démo →</button>
-          <p class="cnil-note">🔒 Ces données sont utilisées uniquement pour organiser la démonstration. Aucune information sensible n'est demandée. Conformément au RGPD, vous pouvez demander leur suppression : contact@flooow.fr</p>
+          <button type="submit" class="form-submit">Échanger sur un territoire pilote →</button>
+          <p class="cnil-note"><svg width="13" height="13" style="vertical-align:-1px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Ces données sont utilisées uniquement pour organiser la démonstration. Aucune information sensible n'est demandée. Conformément au RGPD, vous pouvez demander leur suppression : contact@flooow.fr</p>
         </form>
       </div>
     </div>
@@ -1051,19 +1447,19 @@
       <h2>Ce que nous collectons, <em>pourquoi</em> et comment</h2>
       <div class="conf-grid">
         <div class="conf-card">
-          <h3>🔒 Minimisation des données</h3>
+          <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Minimisation des données</h3>
           <p>Flooow ne demande que l'essentiel au premier contact. Les formulaires se limitent à 5 champs maximum. Aucune donnée sensible (santé, handicap, situation familiale détaillée) n'est demandée lors des premiers échanges.</p>
         </div>
         <div class="conf-card">
-          <h3>🎯 Finalité explicite</h3>
+          <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Finalité explicite</h3>
           <p>Les données collectées ont une seule finalité : améliorer l'accès aux activités pour les enfants sur les territoires. Elles ne sont ni revendues, ni utilisées à des fins publicitaires ou commerciales.</p>
         </div>
         <div class="conf-card">
-          <h3>⚖️ Conformité RGPD</h3>
+          <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 7l-4 7a4 4 0 0 0 8 0L7 7zM17 7l-4 7a4 4 0 0 0 8 0l-4-7zM5 21h14"/></svg> Conformité RGPD</h3>
           <p>Vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour toute demande : contact@flooow.fr. Délai de réponse : 72h maximum.</p>
         </div>
         <div class="conf-card">
-          <h3>🌍 Hébergement</h3>
+          <h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20z"/></svg> Hébergement</h3>
           <p>Les données sont hébergées en Europe. Aucun transfert hors UE n'est effectué sans votre consentement explicite. La politique d'hébergement est documentée et disponible sur demande.</p>
         </div>
       </div>
@@ -1076,10 +1472,10 @@
       <h2>Un site accessible <em>à tous</em></h2>
       <p class="sec-sub">Flooow est conçu pour être lisible et utilisable par tous les publics, sur tous les supports.</p>
       <div class="acces-grid">
-        <div class="acces-item"><div class="acces-ico">📱</div><h4>Mobile first</h4><p>Optimisé pour smartphone, tablette et bureau.</p></div>
-        <div class="acces-item"><div class="acces-ico">🎨</div><h4>Contrastes</h4><p>Respect des niveaux WCAG 2.1 AA pour tous les textes.</p></div>
-        <div class="acces-item"><div class="acces-ico">🔤</div><h4>Langage clair</h4><p>Zéro jargon institutionnel. Phrases courtes, actions directes.</p></div>
-        <div class="acces-item"><div class="acces-ico">📝</div><h4>Formulaires simples</h4><p>5 champs max, labels explicites, messages d'erreur clairs.</p></div>
+        <div class="acces-item"><div class="acces-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div><h4>Mobile first</h4><p>Optimisé pour smartphone, tablette et bureau.</p></div>
+        <div class="acces-item"><div class="acces-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20z"/></svg></div><h4>Contrastes</h4><p>Respect des niveaux WCAG 2.1 AA pour tous les textes.</p></div>
+        <div class="acces-item"><div class="acces-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5h16v2M9 20h6M12 5v15"/></svg></div><h4>Langage clair</h4><p>Zéro jargon institutionnel. Phrases courtes, actions directes.</p></div>
+        <div class="acces-item"><div class="acces-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg></div><h4>Formulaires simples</h4><p>5 champs max, labels explicites, messages d'erreur clairs.</p></div>
       </div>
       <div style="margin-top:28px;background:#fff;border-radius:var(--r);padding:20px;border:1.5px solid var(--border)">
         <p style="font-size:.85rem;color:var(--muted)"><strong style="color:var(--text)">Déclaration d'accessibilité :</strong> Ce site est en cours d'amélioration continue. Si vous rencontrez un problème d'accessibilité, signalez-le à <a href="mailto:contact@flooow.fr" style="color:var(--terra)">contact@flooow.fr</a> — nous traitons ces retours en priorité.</p>
@@ -1092,9 +1488,9 @@
       <div class="tag">Gouvernance & transparence</div>
       <h2>Qui porte <em>Flooow</em> ?</h2>
       <div style="display:flex;flex-direction:column;gap:16px;margin-top:36px">
-        <div class="conf-card"><h3>🧭 Statut du projet</h3><p>Flooow est une démarche pilote, pas une plateforme nationale déployée. Le projet progresse territoire par territoire, en collaboration avec les acteurs locaux. La mention "version bêta" n'est pas utilisée car elle dit peu de chose aux usagers — nous préférons "démarche pilote" ou "territoires d'expérimentation".</p></div>
-        <div class="conf-card"><h3>🤝 Méthode de construction</h3><p>Flooow se construit avec les familles, les jeunes et les territoires. Ateliers, entretiens, tests et retours d'usage alimentent chaque évolution. Aucune fonctionnalité n'est développée sans validation terrain préalable.</p></div>
-        <div class="conf-card"><h3>📅 Actualisation</h3><p>Les informations sur les aides (Pass'Sport, CAF/MSA, dispositifs locaux) sont vérifiées régulièrement. Chaque page stratégique porte une mention de dernière mise à jour. Dernière révision : juin 2026.</p></div>
+        <div class="conf-card"><h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z"/></svg> Statut du projet</h3><p>Flooow est une démarche pilote, pas une plateforme nationale déployée. Le projet progresse territoire par territoire, en collaboration avec les acteurs locaux. La mention "version bêta" n'est pas utilisée car elle dit peu de chose aux usagers — nous préférons "démarche pilote" ou "territoires d'expérimentation".</p></div>
+        <div class="conf-card"><h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg> Méthode de construction</h3><p>Flooow se construit avec les familles, les jeunes et les territoires. Ateliers, entretiens, tests et retours d'usage alimentent chaque évolution. Aucune fonctionnalité n'est développée sans validation terrain préalable.</p></div>
+        <div class="conf-card"><h3><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--terra)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Actualisation</h3><p>Les informations sur les aides (Pass'Sport, CAF/MSA, dispositifs locaux) sont vérifiées régulièrement. Chaque page stratégique porte une mention de dernière mise à jour. Dernière révision : juin 2026.</p></div>
       </div>
     </div>
   </section>
@@ -1114,7 +1510,7 @@
 <div id="page-merci-family" class="page">
   <section style="background:var(--sand);min-height:80vh;display:flex;align-items:center">
     <div class="container"><div class="merci-box">
-      <div class="merci-ico">🏠</div>
+      <div class="merci-ico" style="color:var(--terra)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
       <h2>Merci pour votre retour !</h2>
       <p>Votre besoin a bien été reçu. Chaque retour de famille aide à mieux comprendre ce qui bloque et à améliorer l'accès aux activités pour tous.</p>
       <p style="font-size:.85rem;color:var(--muted);margin-top:-12px;margin-bottom:28px">Si vous avez laissé votre email, nous vous tiendrons informé des avancées sur votre territoire.</p>
@@ -1129,7 +1525,7 @@
 <div id="page-merci-jeunes" class="page">
   <section style="background:var(--sand);min-height:80vh;display:flex;align-items:center">
     <div class="container"><div class="merci-box">
-      <div class="merci-ico">🎯</div>
+      <div class="merci-ico" style="color:var(--terra)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
       <h2>Merci pour ton avis !</h2>
       <p>Ton retour compte vraiment. Il va directement alimenter la réflexion sur les formats et les offres qui manquent pour les jeunes de ton territoire.</p>
       <div class="cta-row" style="justify-content:center">
@@ -1142,7 +1538,7 @@
 <div id="page-merci-territoire" class="page">
   <section style="background:var(--sand);min-height:80vh;display:flex;align-items:center">
     <div class="container"><div class="merci-box">
-      <div class="merci-ico">🏙</div>
+      <div class="merci-ico" style="color:var(--terra)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
       <h2>Merci pour votre contribution !</h2>
       <p>Votre structure a bien été référencée. Nous reviendrons vers vous prochainement pour échanger sur la suite.</p>
       <div class="cta-row" style="justify-content:center">
@@ -1156,7 +1552,7 @@
 <div id="page-merci-demo" class="page">
   <section style="background:var(--sand);min-height:80vh;display:flex;align-items:center">
     <div class="container"><div class="merci-box">
-      <div class="merci-ico">✅</div>
+      <div class="merci-ico" style="color:var(--terra)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
       <h2>Demande de démo reçue</h2>
       <p>Nous reviendrons vers vous sous 48h pour confirmer le créneau. En attendant, vous pouvez consulter notre page Territoires pour en savoir plus sur la démarche.</p>
       <div class="cta-row" style="justify-content:center">
@@ -1173,16 +1569,9 @@
     <div class="foot-top">
       <div class="foot-brand">
         <div class="foot-logo">
-          <div class="logo-mark" style="width:28px;height:28px">
-            <svg viewBox="0 0 22 22" fill="none" width="16" height="16">
-              <path d="M4 18 C4 18, 7 10, 11 6 C15 2, 18 4, 18 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-              <circle cx="11" cy="13" r="3" fill="#fff" opacity=".5"/>
-              <path d="M3 14 Q7 11 11 13 Q15 15 19 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" fill="none" opacity=".6"/>
-            </svg>
-          </div>
-          Flooow
+          <img src="assets/logo-flooow.png" alt="InKlusif Flooow" style="height:34px;width:auto;filter:brightness(0) invert(1)"/>
         </div>
-        <p>Trouver · Financer · S'y rendre</p>
+        <p style="margin-top:10px">InKlusif Flooow — Trouver · Financer · S'y rendre</p>
         <div class="foot-tagline">Démarche pilote — territoires d'expérimentation</div>
       </div>
       <div class="foot-col">
@@ -1194,7 +1583,7 @@
         </ul>
       </div>
       <div class="foot-col">
-        <h4>Agir</h4>
+        <h4>Participer</h4>
         <ul>
           <li><button onclick="showPage('family')">Flooow Family</button></li>
           <li><button onclick="showPage('jeunes')">Flooow Jeunes</button></li>
@@ -1210,7 +1599,7 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <p>© 2026 Flooow — Démarche pilote</p>
+      <p>© 2026 InKlusif Flooow — Démarche pilote</p>
       <div class="foot-legal">
         <a href="#">Mentions légales</a>
         <a href="#">Confidentialité</a>
@@ -1220,7 +1609,42 @@
   </div>
 </footer>
 
+<!-- ════════════════════════════════════ BULLE D'AIDE -->
+<div class="help-panel" id="helpPanel">
+  <div class="help-head">
+    <h4>Une question ?</h4>
+    <p>On répond simplement, sans jargon. Dites-nous d'où vous parlez.</p>
+  </div>
+  <div class="help-body">
+    <button class="help-opt" onclick="toggleHelp();showPage('family')">
+      <span class="help-opt-ico" style="background:var(--terra-l);color:var(--terra)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></span>
+      <span class="help-opt-txt"><strong>Je suis une famille</strong><span>Partager ma situation</span></span>
+    </button>
+    <button class="help-opt" onclick="toggleHelp();showPage('demo')">
+      <span class="help-opt-ico" style="background:var(--blue-bg);color:var(--navy)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg></span>
+      <span class="help-opt-txt"><strong>Je représente un territoire</strong><span>Échanger sur un territoire pilote</span></span>
+    </button>
+    <a class="help-opt" href="mailto:contact@flooow.fr" style="text-decoration:none">
+      <span class="help-opt-ico" style="background:var(--green-bg);color:var(--green)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></span>
+      <span class="help-opt-txt"><strong>Écrire à l'équipe</strong><span>contact@flooow.fr</span></span>
+    </a>
+  </div>
+</div>
+<button class="help-fab" id="helpFab" onclick="toggleHelp()" aria-label="Aide">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+</button>
+
 <script>
+  // ── BULLE D'AIDE
+  let helpOpen = false;
+  function toggleHelp() {
+    helpOpen = !helpOpen;
+    document.getElementById('helpPanel').classList.toggle('open', helpOpen);
+    document.getElementById('helpFab').innerHTML = helpOpen
+      ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>'
+      : '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>';
+  }
+
   // ── SPA NAVIGATION
   const pages = ['home','mission','territoires','agir','confiance','family','jeunes',
     'territoire-form','demo','merci-family','merci-jeunes','merci-territoire','merci-demo'];
@@ -1252,22 +1676,44 @@
     ico.classList.toggle('open');
   }
 
-  // ── MOBILE MENU (simple toggle)
+  // ── MOBILE MENU
+  let mobileOpen = false;
   function toggleMobileMenu() {
     const links = document.querySelector('.nav-links');
     if (!links) return;
-    const vis = links.style.display === 'flex';
-    links.style.display = vis ? '' : 'flex';
-    links.style.flexDirection = 'column';
-    links.style.position = 'absolute';
-    links.style.top = '64px';
-    links.style.left = '0';
-    links.style.right = '0';
-    links.style.background = '#fff';
-    links.style.padding = '12px 16px';
-    links.style.borderBottom = '1px solid #e5ddd4';
-    links.style.zIndex = '100';
+    mobileOpen = !mobileOpen;
+    if (mobileOpen) {
+      Object.assign(links.style, {display:'flex',flexDirection:'column',position:'fixed',
+        top:'64px',left:'0',right:'0',background:'#fff',padding:'16px 20px 20px',
+        borderBottom:'1px solid var(--border)',zIndex:'199',gap:'4px',
+        boxShadow:'0 8px 32px rgba(0,0,0,.10)'});
+    } else {
+      links.style.cssText = '';
+    }
+    document.querySelector('.mobile-menu-btn').innerHTML = mobileOpen
+      ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>'
+      : '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M4 6h16M4 18h16"/></svg>';
   }
+
+  // ── SCROLL REVEAL
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  // Ajouter la classe reveal aux cards génériques
+  document.querySelectorAll('.card,.tri-card,.prob-col,.porte-card,.trust-item,.fn-card,.mod-card,.agir-card,.eng-card,.stat-card,.conf-card,.acces-item,.comm-card,.tl-step,.bx').forEach(el => {
+    el.classList.add('reveal');
+  });
+  // Observer tout ce qui a la classe reveal (y compris les éléments HTML avec reveal inline)
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  // ── ENTRÉES RÉSEAUX : ?profil=famille|jeune|structure|collectivite
+  (function routeProfil(){
+    const map = { famille:'family', jeune:'jeunes', jeunes:'jeunes', structure:'territoire-form', collectivite:'demo', collectivité:'demo', curieux:'mission' };
+    const p = new URLSearchParams(location.search).get('profil');
+    if (p && map[p.toLowerCase()]) showPage(map[p.toLowerCase()]);
+  })();
 </script>
 </body>
 </html>
