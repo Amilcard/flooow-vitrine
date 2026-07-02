@@ -4,8 +4,125 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Flooow — Le droit aux activités pour tous, toute l'année.</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta name="description" content="Flooow réunit les familles, les clubs et les acteurs de la Loire pour simplifier l'accès aux activités jeunesse : offre locale, aides financières (CAF, Pass'Sport) et mobilité partagée.">
+<link rel="icon" type="image/png" href="logo-flooow.png">
+<link rel="apple-touch-icon" href="logo-flooow.png">
+
+<!-- Partage réseaux sociaux (Open Graph / Twitter).
+     og:url et og:image doivent être des URLs ABSOLUES : une fois le domaine connu,
+     remplacer https://VOTRE-DOMAINE.fr par l'adresse réelle du site (ex. https://flooow.fr). -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Flooow">
+<meta property="og:title" content="Flooow — Le droit aux activités pour tous, toute l'année.">
+<meta property="og:description" content="L'accès aux activités jeunesse dans la Loire : offre locale, aides financières et mobilité partagée.">
+<meta property="og:url" content="https://VOTRE-DOMAINE.fr/">
+<meta property="og:image" content="https://VOTRE-DOMAINE.fr/logo-flooow.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flooow — Le droit aux activités pour tous.">
+<meta name="twitter:description" content="L'accès aux activités jeunesse dans la Loire : offre locale, aides financières et mobilité partagée.">
+<meta name="twitter:image" content="https://VOTRE-DOMAINE.fr/logo-flooow.png">
+
+<!-- Police Poppins auto-hébergée (voir @font-face dans <style>) — plus de dépendance Google Fonts -->
 <style>
+/* ===== Police Poppins auto-hébergée (RGPD + pas de render-blocking externe) ===== */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/poppins-400-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/poppins-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/poppins-500-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/poppins-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/poppins-600-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/poppins-600-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/poppins-700-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('fonts/poppins-700-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('fonts/poppins-800-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('fonts/poppins-800-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('fonts/poppins-900-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('fonts/poppins-900-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   --bg: #FFFFFF;
   --bg-light: #F5F5F5;
@@ -233,13 +350,13 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
   <div class="search-modal-top">
     <div class="search-input-wrapper">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      <input type="text" class="search-modal-input" placeholder="Rechercher une activité, une aide, une MJC..." autofocus>
+      <input type="text" id="searchInput" class="search-modal-input" placeholder="Rechercher une activité, une aide, une MJC..." autofocus oninput="doSearch(this.value)" aria-label="Rechercher sur le site" aria-controls="searchResults">
     </div>
     <button class="search-cancel-btn" onclick="closeSearch()">Annuler</button>
   </div>
   <div class="search-suggestions-box">
-    <h5>Recherches fréquentes</h5>
-    <ul>
+    <h5 id="searchHeading">Recherches fréquentes</h5>
+    <ul id="searchResults" role="listbox">
       <li><a onclick="navigateTo('aides'); closeSearch();">Comprendre le Quotient Familial (CAF)</a></li>
       <li><a onclick="navigateTo('activites'); closeSearch();">Activités 3-5 ans à Saint-Étienne</a></li>
       <li><a onclick="navigateTo('histoires'); closeSearch();">L'impact du Pass'Sport dans la Loire</a></li>
@@ -872,6 +989,39 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
   </section>
 </div>
 
+<!-- ================= FAQ ================= -->
+<div id="view-faq" class="view-section">
+  <section class="s" style="padding-top: 140px;">
+    <div class="w" style="max-width: 820px;">
+      <span class="badge">Aide</span>
+      <h1 class="s-title" style="font-size: 40px;">Foire aux questions</h1>
+      <div style="margin-top: 32px; display: flex; flex-direction: column; gap: 28px;">
+        <div>
+          <h3 style="font-size: 19px; font-weight: 800; margin-bottom: 8px;">À quoi sert Flooow ?</h3>
+          <p style="font-size: 15px; color: var(--tx2); line-height: 1.7;">Flooow centralise l'offre d'activités jeunesse de la Loire, clarifie les aides financières et facilite la mobilité entre familles. L'objectif : lever les freins d'information, de coût et de transport qui poussent certaines familles à renoncer.</p>
+        </div>
+        <div>
+          <h3 style="font-size: 19px; font-weight: 800; margin-bottom: 8px;">Combien ça coûte pour une famille ?</h3>
+          <p style="font-size: 15px; color: var(--tx2); line-height: 1.7;">L'accès à l'information sur Flooow est gratuit pour les familles. Le coût des activités reste celui fixé par chaque club ou structure, souvent modulé selon le Quotient Familial.</p>
+        </div>
+        <div>
+          <h3 style="font-size: 19px; font-weight: 800; margin-bottom: 8px;">Comment savoir à quelles aides j'ai droit ?</h3>
+          <p style="font-size: 15px; color: var(--tx2); line-height: 1.7;">La rubrique <a onclick="navigateTo('aides')" style="color: var(--flooow-orange); text-decoration: underline; cursor: pointer;">Aides &amp; Accompagnement</a> décrypte les principaux dispositifs (Quotient Familial CAF, Pass'Sport, Pass Culture, aides communales) pour estimer votre reste à charge.</p>
+        </div>
+        <div>
+          <h3 style="font-size: 19px; font-weight: 800; margin-bottom: 8px;">Comment fonctionne le covoiturage entre parents ?</h3>
+          <p style="font-size: 15px; color: var(--tx2); line-height: 1.7;">L'entraide mobilité s'organise via notre espace communautaire. <a onclick="openHeartbeat(event)" style="color: var(--flooow-orange); text-decoration: underline; cursor: pointer;">Rejoindre la Flooow Family</a> pour partager des trajets vers les clubs et activités.</p>
+        </div>
+        <div>
+          <h3 style="font-size: 19px; font-weight: 800; margin-bottom: 8px;">Mon club ou ma structure peut-il apparaître sur Flooow ?</h3>
+          <p style="font-size: 15px; color: var(--tx2); line-height: 1.7;">Oui. Les clubs, MJC et centres sociaux engagés dans l'inclusion sont les bienvenus. Écrivez-nous via la page <a onclick="navigateTo('contact')" style="color: var(--flooow-orange); text-decoration: underline; cursor: pointer;">Contact</a>.</p>
+        </div>
+      </div>
+      <a class="back-link" style="display: inline-block; margin-top: 40px; font-weight: 600; color: var(--flooow-orange); cursor: pointer;" onclick="navigateTo('accueil')">← Retour à l'accueil</a>
+    </div>
+  </section>
+</div>
+
     <footer>
   <div class="w">
     <div class="foot-grid">
@@ -893,7 +1043,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
         <ul>
           <li><a onclick="openHeartbeat(event)">Rejoindre Flooow Family</a></li>
           <li><a onclick="openHeartbeat(event)">Espace Covoiturage</a></li>
-          <li><a onclick="showToast('Ouverture de la FAQ...')">Foire Aux Questions</a></li>
+          <li><a onclick="navigateTo('faq')">Foire Aux Questions</a></li>
         </ul>
       </div>
       <div class="foot-col">
@@ -924,33 +1074,86 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
   function openSearch() {
     document.getElementById('searchBar').style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    const input = document.getElementById('searchInput');
+    if (input) { input.value = ''; doSearch(''); setTimeout(() => input.focus(), 50); }
   }
   function closeSearch() {
     document.getElementById('searchBar').style.display = 'none';
     document.body.style.overflow = '';
   }
 
-  /* FONCTIONNEMENT SPA : GESTION DES VUES ÉDITORIALES THÉMATIQUES */
-  function navigateTo(viewId) {
-    // Cache toutes les sections
-    const views = document.querySelectorAll('.view-section');
-    views.forEach(v => v.classList.remove('active'));
-    
-    // Affiche la section cible
-    const target = document.getElementById('view-' + viewId);
-    if(target) {
-      target.classList.add('active');
-      window.scrollTo({top: 0, behavior: 'smooth'});
+  /* RECHERCHE FONCTIONNELLE : filtre un index des pages/articles du site.
+     Site éditorial (pas de base d'activités) → on indexe les rubriques et récits. */
+  const SEARCH_INDEX = [
+    { t: "Activités locales", d: "Sports, arts, loisirs créatifs, stages de vacances", k: "sport art culture loisir dojo judo musique théâtre stage vacances 3 5 6 11 12 17 ans", v: "activites" },
+    { t: "Aides & Accompagnement", d: "Quotient Familial, Pass'Sport, Pass Culture, aides communales", k: "aide caf quotient familial pass sport culture financement reste à charge subvention argent", v: "aides" },
+    { t: "Acteurs locaux", d: "Clubs, MJC, centres sociaux, collectivités", k: "club mjc centre social collectivité mairie association structure partenaire", v: "organismes" },
+    { t: "Histoires du terrain", d: "Récits de familles, reportages, mobilité", k: "histoire récit reportage terrain famille magazine", v: "histoires" },
+    { t: "Le vélo change le quotidien à Montreynaud", d: "Récit — écomobilité", k: "vélo écomobilité mobilité transport montreynaud famille martin", v: "article-velo" },
+    { t: "Le sport partagé et l'inclusion", d: "Récit — handicap", k: "inclusion handicap sport partagé tarentaize différence", v: "article-inclusion" },
+    { t: "Premier été en colonie", d: "Récit — vacances", k: "colonie vacances séjour caf pilat aide départ", v: "article-vacances" },
+    { t: "Foire aux questions", d: "Questions fréquentes", k: "faq question aide inscription comment", v: "faq" },
+    { t: "Contact", d: "Nous écrire", k: "contact écrire email message partenariat", v: "contact" },
+    { t: "Mentions légales", d: "Informations légales", k: "mention légale éditeur siret association", v: "mentions" },
+    { t: "Confidentialité", d: "Protection des données (RGPD)", k: "confidentialité rgpd donnée personnelle cookie", v: "confidentialite" }
+  ];
+
+  let _searchDefaultHTML = null;
+  function doSearch(query) {
+    const results = document.getElementById('searchResults');
+    const heading = document.getElementById('searchHeading');
+    if (_searchDefaultHTML === null) _searchDefaultHTML = results.innerHTML;
+    const q = (query || '').trim().toLowerCase();
+    if (q.length < 2) { // trop court → on ré-affiche les recherches fréquentes
+      heading.textContent = 'Recherches fréquentes';
+      results.innerHTML = _searchDefaultHTML;
+      return;
     }
+    const matches = SEARCH_INDEX.filter(item =>
+      (item.t + ' ' + item.d + ' ' + item.k).toLowerCase().includes(q)
+    );
+    if (!matches.length) {
+      heading.textContent = 'Aucun résultat';
+      results.innerHTML = '<li style="color:var(--tx2);font-size:15px;">Rien trouvé pour « ' + q.replace(/</g,'&lt;') + ' ». Essayez « aides », « sport », « vacances »…</li>';
+      return;
+    }
+    heading.textContent = matches.length + ' résultat' + (matches.length > 1 ? 's' : '');
+    results.innerHTML = matches.map(m =>
+      '<li role="option"><a onclick="navigateTo(\'' + m.v + '\'); closeSearch();">' +
+      '<strong>' + m.t + '</strong> — <span style="color:var(--tx2);font-weight:400;">' + m.d + '</span></a></li>'
+    ).join('');
+  }
+
+  /* FONCTIONNEMENT SPA : ROUTING PAR ANCRE (#aides, #contact, #article-velo…)
+     Chaque vue a son ancre → le bouton "Précédent" du navigateur et le partage
+     d'un lien direct fonctionnent. hashchange déclenche l'affichage. */
+  function showView(viewId) {
+    // Cache toutes les sections, affiche la cible (repli sur accueil si inconnue)
+    if (!document.getElementById('view-' + viewId)) viewId = 'accueil';
+    document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + viewId).classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
 
     // Le bandeau global "Rejoignez la Flooow Family" n'a pas sa place au-dessus
     // des pages de détail (articles) ni des pages utilitaires (légal/contact).
     const banner = document.getElementById('joinBanner');
     if (banner) {
-      const hide = viewId.startsWith('article-') || ['mentions','confidentialite','contact'].includes(viewId);
+      const hide = viewId.startsWith('article-') || ['mentions','confidentialite','contact','faq'].includes(viewId);
       banner.style.display = hide ? 'none' : '';
     }
   }
+
+  function currentViewId() {
+    return (location.hash || '#accueil').replace(/^#/, '') || 'accueil';
+  }
+
+  function navigateTo(viewId) {
+    // Met à jour l'ancre ; si elle ne change pas, on ré-affiche directement.
+    if (('#' + viewId) === location.hash) showView(viewId);
+    else location.hash = viewId;
+  }
+
+  window.addEventListener('hashchange', function() { showView(currentViewId()); });
 
   /* FONCTION COMBINÉE POUR LA BARRE DE RECHERCHE */
   function closeAndScroll(targetHash) {
@@ -1006,16 +1209,28 @@ document.addEventListener('DOMContentLoaded', function() {
   // NB : les mégamenus sont masqués par défaut en CSS (.megamenu / .white-megamenu { display:none }).
   // Ne pas leur poser de display:none inline ici : un style inline bat la règle :hover et bloque leur ouverture.
 
+  // Affiche la vue correspondant à l'ancre de l'URL (permet le partage de lien direct).
+  showView(currentViewId());
+
   // ACCESSIBILITÉ : rendre focusables au clavier les liens/onglets qui n'ont pas de href.
   document.querySelectorAll('a[onclick]:not([href]), .top-links-left > li > a, .top-links-center > li > a, .nav-links > li > a')
     .forEach(a => { if (!a.hasAttribute('href') && !a.hasAttribute('tabindex')) a.setAttribute('tabindex', '0'); });
 
-  // Activation clavier (Entrée / Espace) sur ces éléments cliquables.
+  // Les cartes d'article sont des <div onclick> : on les rend focusables et on
+  // leur donne un rôle de bouton pour les lecteurs d'écran et la navigation clavier.
+  document.querySelectorAll('.article-card[onclick]').forEach(c => {
+    c.setAttribute('role', 'button');
+    c.setAttribute('tabindex', '0');
+    const title = c.querySelector('h3');
+    if (title) c.setAttribute('aria-label', 'Lire le récit : ' + title.textContent);
+  });
+
+  // Activation clavier (Entrée / Espace) sur tous ces éléments cliquables.
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') { closeMobileMenu(); closeSearch(); return; }
     if ((e.key === 'Enter' || e.key === ' ')) {
       const t = e.target;
-      if (t.matches('a[onclick]:not([href]), .search-pill-container[role="button"]')) {
+      if (t.matches('a[onclick]:not([href]), .search-pill-container[role="button"], .article-card[role="button"]')) {
         e.preventDefault(); t.click();
       }
     }
