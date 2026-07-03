@@ -8,9 +8,6 @@
 <link rel="icon" type="image/png" href="img/logo-flooow.png">
 <link rel="apple-touch-icon" href="img/logo-flooow.png">
 
-<!-- Partage réseaux sociaux (Open Graph / Twitter).
-     og:url et og:image doivent être des URLs ABSOLUES : une fois le domaine connu,
-     remplacer https://VOTRE-DOMAINE.fr par l'adresse réelle du site (ex. https://flooow.fr). -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="Flooow">
@@ -23,7 +20,6 @@
 <meta name="twitter:description" content="L'accès aux activités jeunesse dans la Loire : offre locale, aides financières et mobilité partagée.">
 <meta name="twitter:image" content="https://VOTRE-DOMAINE.fr/img/logo-flooow.png">
 
-<!-- Données structurées (Google) — remplacer VOTRE-DOMAINE.fr par le domaine réel -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -33,7 +29,7 @@
   "url": "https://VOTRE-DOMAINE.fr/",
   "logo": "https://VOTRE-DOMAINE.fr/img/logo-flooow.png",
   "email": "contact@flooow.fr",
-  "description": "Flooow réunit les familles, les clubs et les acteurs de la Loire pour simplifier l'accès aux activités jeunesse : offre locale, aides financières et mobilité partagée.",
+  "description": "Flooow réunit les familles, les clubs et les acteurs de la Loire pour simplifier l'accès aux activités jeunesse : offre locale, aides financières (CAF, Pass'Sport) et mobilité partagée.",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "3 rue Flobert",
@@ -45,7 +41,6 @@
 }
 </script>
 
-<!-- Police Poppins auto-hébergée (voir @font-face dans le fichier CSS externe) — plus de dépendance Google Fonts -->
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -85,10 +80,11 @@
             </ul>
           </div>
           <div class="mega-col">
-            <h5>Actions dans la Loire</h5>
+            <h5>Focus &amp; Récit</h5>
             <ul>
-              <li><a onclick="navigateTo('activites')">Rendre le sport accessible</a></li>
-              <li><a onclick="navigateTo('aides')">Clarifier les aides CAF</a></li>
+              <li><a onclick="navigateTo('article-inclusion')">Le sport partagé (Tarentaize)</a></li>
+              <li><a onclick="navigateToSection('activites', 'section-sports')">Rendre le sport accessible</a></li>
+              <li><a onclick="navigateToSection('aides', 'section-qf')">Clarifier les aides CAF</a></li>
             </ul>
           </div>
           <div class="mega-focus-card">
@@ -100,22 +96,22 @@
       </li>
       
       <li>
-        <a>Actualités & Terrain</a>
+        <a>Actualités &amp; Terrain</a>
         <div class="megamenu">
           <div class="mega-col">
-            <h5>Thématiques</h5>
+            <h5>Chroniques du terrain</h5>
             <ul>
-              <li><a onclick="navigateTo('histoires')">Aides financières</a></li>
-              <li><a onclick="navigateTo('histoires')">Reportages en MJC</a></li>
-              <li><a onclick="navigateTo('histoires')">Mobilité et covoiturage</a></li>
+              <li><a onclick="navigateTo('article-velo')"><strong>Montreynaud :</strong> Le vélo dans la famille Martin</a></li>
+              <li><a onclick="navigateTo('article-inclusion')"><strong>Tarentaize :</strong> Quand la différence devient une force</a></li>
+              <li><a onclick="navigateTo('article-vacances')"><strong>Massif du Pilat :</strong> Leur premier été en colonie</a></li>
             </ul>
           </div>
           <div class="mega-col">
-            <h5>Activités Phares</h5>
+            <h5>Dernières parutions</h5>
             <ul>
-              <li><a onclick="navigateTo('activites')">Dojos & Arts martiaux</a></li>
-              <li><a onclick="navigateTo('activites')">Arts plastiques</a></li>
-              <li><a onclick="navigateTo('activites')">Musique & Théâtre</a></li>
+              <li><a onclick="navigateTo('article-velo')">Chronique Écomobilité</a></li>
+              <li><a onclick="navigateTo('article-inclusion')">Reportage Inclusion Sociale</a></li>
+              <li><a onclick="navigateTo('article-vacances')">Focus Aides aux Vacances</a></li>
             </ul>
           </div>
         </div>
@@ -129,7 +125,7 @@
           <div class="mega-text-block">
             <h5>Mise à jour des barèmes locaux</h5>
             <p>Nous croisons et actualisons les grilles de la CAF de la Loire et des dispositifs d'État sous 1 à 2 jours ouvrés. Notre but est de rendre l'information transparente et utile pour les familles stéphanoises.</p>
-            <button class="btn-white" style="margin-top: 16px;" onclick="navigateTo('aides')">Comprendre les aides</button>
+            <button class="btn-white" style="margin-top: 16px;" onclick="navigateToSection('aides', 'section-qf')">Comprendre les aides</button>
           </div>
         </div>
       </li>
@@ -152,50 +148,50 @@
           <div class="white-mega-col">
             <h5>Par type</h5>
             <ul>
-              <li><a onclick="navigateTo('activites')">Pratiques Sportives</a></li>
-              <li><a onclick="navigateTo('activites')">Arts & Culture</a></li>
-              <li><a onclick="navigateTo('activites')">Loisirs créatifs</a></li>
+              <li><a onclick="navigateToSection('activites', 'section-sports')">Pratiques Sportives</a></li>
+              <li><a onclick="navigateToSection('activites', 'section-arts')">Arts &amp; Culture</a></li>
+              <li><a onclick="navigateToSection('activites', 'section-creatifs')">Loisirs créatifs</a></li>
             </ul>
           </div>
           <div class="white-mega-col">
             <h5>Saisonnalité</h5>
             <ul>
-              <li><a onclick="navigateTo('activites')">Inscriptions annuelles</a></li>
-              <li><a onclick="navigateTo('activites')">Stages de vacances</a></li>
+              <li><a onclick="navigateToSection('activites', 'section-annuelles')">Inscriptions annuelles</a></li>
+              <li><a onclick="navigateToSection('activites', 'section-stages')">Stages de vacances</a></li>
             </ul>
           </div>
           <div class="white-mega-col">
             <h5>Tranches d'âge</h5>
             <ul>
-              <li><a onclick="navigateTo('activites')">Petite enfance (3-5 ans)</a></li>
-              <li><a onclick="navigateTo('activites')">Enfants (6-11 ans)</a></li>
-              <li><a onclick="navigateTo('activites')">Adolescents (12-17 ans)</a></li>
+              <li><a onclick="navigateToSection('activites', 'section-petite-enfance')">Petite enfance (3-5 ans)</a></li>
+              <li><a onclick="navigateToSection('activites', 'section-enfants')">Enfants (6-11 ans)</a></li>
+              <li><a onclick="navigateToSection('activites', 'section-ados')">Adolescents (12-17 ans)</a></li>
             </ul>
           </div>
           <div class="white-mega-col">
             <h5>Mobilité</h5>
             <ul>
-              <li><a onclick="openHeartbeat(event)">Covoiturage entre parents</a></li>
-              <li><a onclick="navigateTo('histoires')">Accès en transports</a></li>
+              <li><a onclick="navigateToSection('activites', 'section-covoiturage')">Covoiturage entre parents</a></li>
+              <li><a onclick="navigateToSection('activites', 'section-transports')">Accès en transports</a></li>
             </ul>
           </div>
         </div>
       </li>
       <li>
-        <a onclick="navigateTo('aides')">Aides & Accompagnement</a>
+        <a onclick="navigateTo('aides')">Aides &amp; Accompagnement</a>
         <div class="white-megamenu">
           <div class="white-mega-col">
             <h5>Dispositifs nationaux</h5>
             <ul>
-              <li><a onclick="navigateTo('aides')">Le Pass'Sport</a></li>
-              <li><a onclick="navigateTo('aides')">Le Pass Culture</a></li>
+              <li><a onclick="navigateToSection('aides', 'section-pass-sport')">Le Pass'Sport</a></li>
+              <li><a onclick="navigateToSection('aides', 'section-pass-culture')">Le Pass Culture</a></li>
             </ul>
           </div>
           <div class="white-mega-col">
             <h5>Aides Locales</h5>
             <ul>
-              <li><a onclick="navigateTo('aides')">Quotient Familial (CAF)</a></li>
-              <li><a onclick="navigateTo('aides')">Aides de la ville de Saint-Étienne</a></li>
+              <li><a onclick="navigateToSection('aides', 'section-qf')">Quotient Familial (CAF)</a></li>
+              <li><a onclick="navigateToSection('aides', 'section-ville')">Aides de la ville de Saint-Étienne</a></li>
             </ul>
           </div>
         </div>
@@ -206,15 +202,15 @@
           <div class="white-mega-col">
             <h5>Structures</h5>
             <ul>
-              <li><a onclick="navigateTo('organismes')">Clubs Sportifs</a></li>
-              <li><a onclick="navigateTo('organismes')">MJC et Centres Sociaux</a></li>
+              <li><a onclick="navigateToSection('organismes', 'section-clubs')">Clubs Sportifs</a></li>
+              <li><a onclick="navigateToSection('organismes', 'section-mjc')">MJC et Centres Sociaux</a></li>
             </ul>
           </div>
           <div class="white-mega-col">
             <h5>Institutions</h5>
             <ul>
-              <li><a onclick="navigateTo('organismes')">Collectivités</a></li>
-              <li><a onclick="navigateTo('organismes')">Partenaires publics</a></li>
+              <li><a onclick="navigateToSection('organismes', 'section-collectivites')">Collectivités</a></li>
+              <li><a onclick="navigateToSection('organismes', 'section-partenaires')">Partenaires publics</a></li>
             </ul>
           </div>
         </div>
@@ -313,38 +309,39 @@
         <h2 class="s-title">À la une : Chroniques du terrain</h2>
       </div>
       
-          <div class="article-grid">
-            <div class="article-card" onclick="navigateTo('article-velo')">
-              <div class="article-img" style="background-image: url('img/1517649763962-0c623066013b-w900.jpg');"></div>
-              <div class="article-content">
-                <div class="article-meta"><span>Écomobilité</span><span>Montreynaud</span></div>
-                <h3>Comment le vélo a changé le quotidien de la famille Martin à Montreynaud</h3>
-                <p>Aller à l'entraînement sans voiture, c'est possible. Rencontre avec une famille qui a repensé sa mobilité grâce aux aides locales.</p>
-                <span class="article-cta">Lire le récit &rarr;</span>
-              </div>
-            </div>
-
-            <div class="article-card" onclick="navigateTo('article-inclusion')">
-              <div class="article-img" style="background-image: url('img/1502086223501-7ea6ecd79368-w900.jpg');"></div>
-              <div class="article-content">
-                <div class="article-meta"><span>Inclusion</span><span>Tarentaize</span></div>
-                <h3>Le sport partagé : quand la différence devient une force sur le terrain</h3>
-                <p>Immersion dans un club stéphanois pionnier dans l'accueil d'enfants en situation de handicap.</p>
-                <span class="article-cta">Lire le récit &rarr;</span>
-              </div>
-            </div>
-
-            <div class="article-card" onclick="navigateTo('article-vacances')">
-              <div class="article-img" style="background-image: url('img/1533873984035-25970ab07461-w900.jpg');"></div>
-              <div class="article-content">
-                <div class="article-meta"><span>Vacances</span><span>Pilat</span></div>
-                <h3>Leur premier été en colonie : dépasser ses peurs et grandir</h3>
-                <p>Grâce aux subventions de la CAF, Léo et Sarah sont partis 10 jours en pleine nature. Un récit d'aventure et de confiance.</p>
-                <span class="article-cta">Lire le récit &rarr;</span>
-              </div>
-            </div>
+      <div class="article-grid">
+        <div class="article-card" onclick="navigateTo('article-velo')">
+          <div class="article-img" style="background-image: url('img/1517649763962-0c623066013b-w900.jpg');"></div>
+          <div class="article-content">
+            <div class="article-meta"><span>Écomobilité</span><span>Montreynaud</span></div>
+            <h3>Comment le vélo a changé le quotidien de la famille Martin à Montreynaud</h3>
+            <p>Aller à l'entraînement sans voiture, c'est possible. Rencontre avec une famille qui a repensé sa mobilité grâce aux aides locales.</p>
+            <span class="article-cta">Lire le récit &rarr;</span>
           </div>
-</section>
+        </div>
+
+        <div class="article-card" onclick="navigateTo('article-inclusion')">
+          <div class="article-img" style="background-image: url('img/1502086223501-7ea6ecd77368-w900.jpg');"></div>
+          <div class="article-content">
+            <div class="article-meta"><span>Inclusion</span><span>Tarentaize</span></div>
+            <h3>Le sport partagé : quand la différence devient une force sur le terrain</h3>
+            <p>Immersion dans un club stéphanois pionnier dans l'accueil d'enfants en situation de handicap.</p>
+            <span class="article-cta">Lire le récit &rarr;</span>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="navigateTo('article-vacances')">
+          <div class="article-img" style="background-image: url('img/1533873984035-25970ab07461-w900.jpg');"></div>
+          <div class="article-content">
+            <div class="article-meta"><span>Vacances</span><span>Pilat</span></div>
+            <h3>Leur premier été en colonie : dépasser ses peurs et grandir</h3>
+            <p>Grâce aux subventions de la CAF, Léo et Sarah sont partis 10 jours en pleine nature. Un récit d'aventure et de confiance.</p>
+            <span class="article-cta">Lire le récit &rarr;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <div id="view-activites" class="view-section">
@@ -372,23 +369,66 @@
         </div>
       </div>
 
-      <div class="grid-three-col" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
-        <div class="col-pata">
+      <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 32px;">Activités par type</h2>
+      <div class="grid-three-col" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 80px;">
+        <div class="col-pata" id="section-sports">
           <div class="col-pata-img" style="background-image: url('img/1511556532299-8f662fc26c06-w900.jpg');"></div>
           <h3 style="font-size: 22px; font-weight: 800; margin-top: 16px;">Pratiques Sportives</h3>
           <p style="font-size: 14px; color: var(--tx2); line-height: 1.6;">Dojos, clubs de foot urbains, athlétisme ou escalade. Les associations sportives offrent le cadre idéal pour le développement moteur et la cohésion d'équipe, soutenu par des aides spécifiques de la ville.</p>
         </div>
-        <div class="col-pata">
+        <div class="col-pata" id="section-arts">
           <div class="col-pata-img" style="background-image: url('img/1476480862126-209bfaa8edc8-w900.jpg');"></div>
-          <h3 style="font-size: 22px; font-weight: 800; margin-top: 16px;">Arts & Expressions</h3>
+          <h3 style="font-size: 22px; font-weight: 800; margin-top: 16px;">Arts &amp; Expressions</h3>
           <p style="font-size: 14px; color: var(--tx2); line-height: 1.6;">Écoles de musique municipales, ateliers de peinture associatifs ou initiation théâtrale. La culture s'ouvre à tous les quotients familiaux grâce à des grilles tarifaires progressives.</p>
         </div>
-        <div class="col-pata">
+        <div class="col-pata" id="section-creatifs">
           <div class="col-pata-img" style="background-image: url('img/1460661419201-fd4cecdf8a8b-w900.jpg');"></div>
-          <h3 style="font-size: 22px; font-weight: 800; margin-top: 16px;">Stages & Vacances</h3>
-          <p style="font-size: 14px; color: var(--tx2); line-height: 1.6;">L'enjeu crucial des congés scolaires. Retrouvez les dispositifs de "vacances apprenantes" et les séjours courts organisés par les centres sociaux du territoire stéphanois.</p>
+          <h3 style="font-size: 22px; font-weight: 800; margin-top: 16px;">Loisirs créatifs</h3>
+          <p style="font-size: 14px; color: var(--tx2); line-height: 1.6;">Ateliers de poterie, robotique ou création manuelle. Des activités souvent proposées par les MJC pour développer l'imagination et la motricité fine des enfants en dehors du cadre scolaire.</p>
         </div>
       </div>
+
+      <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 32px;">Saisonnalité</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 80px;">
+        <div id="section-annuelles" style="padding: 32px; border: 1px solid var(--bd); border-radius: 12px; background: #fff;">
+          <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 12px;">Inscriptions annuelles</h3>
+          <p style="font-size: 15px; color: var(--tx2); line-height: 1.6;">Les inscriptions se déroulent généralement en septembre. Un engagement sur l'année scolaire (de septembre à juin) permet un suivi régulier et une progression continue dans la discipline choisie. La plupart des clubs autorisent un ou deux cours d'essai gratuits.</p>
+        </div>
+        <div id="section-stages" style="padding: 32px; border: 1px solid var(--bd); border-radius: 12px; background: #fff;">
+          <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 12px;">Stages de vacances</h3>
+          <p style="font-size: 15px; color: var(--tx2); line-height: 1.6;">L'enjeu crucial des congés scolaires. Retrouvez les dispositifs de "vacances apprenantes" et les séjours courts ou intensifs organisés par les centres sociaux du territoire stéphanois (Toussaint, Février, Pâques, Été).</p>
+        </div>
+      </div>
+
+      <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 32px;">Tranches d'âge</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 80px;">
+        <div id="section-petite-enfance" style="padding: 24px; border: 1px solid var(--bd); border-radius: 12px;">
+          <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">Petite enfance (3-5 ans)</h3>
+          <p style="font-size: 14px; color: var(--tx2); line-height: 1.5;">Baby-gym, éveil musical ou bébé-nageur. Des activités douces centrées sur la découverte motrice, l'équilibre et la familiarisation avec le groupe.</p>
+        </div>
+        <div id="section-enfants" style="padding: 24px; border: 1px solid var(--bd); border-radius: 12px;">
+          <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">Enfants (6-11 ans)</h3>
+          <p style="font-size: 14px; color: var(--tx2); line-height: 1.5;">L'âge de l'initiation technique et des premiers sports d'équipe. La période idéale pour tester plusieurs disciplines avant de se spécialiser.</p>
+        </div>
+        <div id="section-ados" style="padding: 24px; border: 1px solid var(--bd); border-radius: 12px;">
+          <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">Adolescents (12-17 ans)</h3>
+          <p style="font-size: 14px; color: var(--tx2); line-height: 1.5;">Perfectionnement, compétition ou loisir de détente. L'offre s'adapte à l'autonomie croissante des jeunes (Pass Culture, accès libre en MJC).</p>
+        </div>
+      </div>
+
+      <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 32px;">Mobilité & Logistique</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <div id="section-covoiturage" style="padding: 32px; background: var(--flooow-orange-light); border-radius: 12px;">
+          <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 12px;">Covoiturage entre parents</h3>
+          <p style="font-size: 15px; margin-bottom: 16px;">Ne renoncez pas à une activité pour des questions de transport ! La communauté Flooow permet d'organiser des trajets partagés sécurisés entre familles d'un même club ou quartier.</p>
+          <button class="btn-black" onclick="openHeartbeat(event)">Accéder à l'espace Covoiturage</button>
+        </div>
+        <div id="section-transports" style="padding: 32px; border: 1px solid var(--bd); border-radius: 12px;">
+          <h3 style="font-size: 22px; font-weight: 800; margin-bottom: 12px;">Accès en transports</h3>
+          <p style="font-size: 15px; color: var(--tx2); line-height: 1.6;">Nous mettons en avant les clubs et associations directement desservis par le réseau STAS (tramways et bus) pour encourager l'autonomie des adolescents en toute sécurité.</p>
+        </div>
+      </div>
+
     </div>
   </section>
 </div>
@@ -407,25 +447,30 @@
       <div class="text-grid">
         <div class="text-col">
           <h3>Le mythe de l'activité inaccessible</h3>
-          <p>L'obstacle majeur à l'inscription d'un jeune n'est pas le manque de volonté, mais la crainte d'un coût insurmontable. Pourtant, la France et le département de la Loire disposent d'un filet de sécurité puissant : Aides au temps libre de la CAF, Pass'Sport, Pass Culture ou réductions communales.</p>
+          <p>L'obstacle majeur à l'inscription d'un jeune n'est pas le manque de volonté, mais la crainte d'un coût insurmontable. Pourtant, la France et le département de la Loire disposent d'un filet de sécurité puissant : Aides au temps lieu de la CAF, Pass'Sport, Pass Culture ou réductions communales.</p>
           <p>Le vrai défi est l'accès à l'information. Trop de familles renoncent faute de savoir qu'elles ont droit à une déduction de 50%, voire 80% sur la cotisation annuelle d'un club de gymnastique ou d'une école de dessin.</p>
         </div>
         <div class="text-col">
-          <h3 style="margin-bottom: 24px;">Les 3 leviers fondamentaux</h3>
+          <h3 style="margin-bottom: 24px;">Les 4 leviers fondamentaux</h3>
           
-          <div style="margin-bottom: 24px; padding-left: 20px; border-left: 3px solid var(--flooow-orange);">
+          <div id="section-qf" style="margin-bottom: 24px; padding-left: 20px; border-left: 3px solid var(--flooow-orange);">
             <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">1. Le Quotient Familial (CAF)</h4>
             <p style="font-size: 14px; color: var(--tx2); line-height: 1.5;">C'est la clé de voûte de la tarification solidaire. De nombreuses MJC et associations stéphanoises appliquent un tarif dégressif fondé sur ce quotient. Connaître son QF, c'est immédiatement savoir dans quelle tranche on se situe.</p>
           </div>
           
-          <div style="margin-bottom: 24px; padding-left: 20px; border-left: 3px solid var(--tx);">
+          <div id="section-pass-sport" style="margin-bottom: 24px; padding-left: 20px; border-left: 3px solid var(--tx);">
             <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">2. Les aides de l'État (Pass'Sport)</h4>
             <p style="font-size: 14px; color: var(--tx2); line-height: 1.5;">Une déduction forfaitaire (généralement 50 €) applicable directement lors de la prise de licence sportive pour les familles éligibles à l'Allocation de Rentrée Scolaire (ARS).</p>
           </div>
+
+          <div id="section-pass-culture" style="margin-bottom: 24px; padding-left: 20px; border-left: 3px solid var(--flooow-orange-light);">
+            <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">3. Le Pass Culture</h4>
+            <p style="font-size: 14px; color: var(--tx2); line-height: 1.5;">Ce dispositif national offre un crédit dédié à la culture dès le collège, utilisable pour financer des cours de musique, d'arts plastiques ou l'achat de matériel artistique.</p>
+          </div>
           
-          <div style="margin-bottom: 24px; padding-left: 20px; border-left: 3px solid var(--bd);">
-            <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">3. Les initiatives communales</h4>
-            <p style="font-size: 14px; color: var(--tx2); line-height: 1.5;">Certaines mairies ou métropoles proposent des "Chèques loisirs" ou subventionnent les clubs pour garantir des places à tarif symbolique.</p>
+          <div id="section-ville" style="margin-bottom: 24px; padding-left: 20px; border-left: 3px solid var(--bd);">
+            <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">4. Les initiatives communales</h4>
+            <p style="font-size: 14px; color: var(--tx2); line-height: 1.5;">La ville de Saint-Étienne et la Métropole proposent des dispositifs complémentaires ou subventionnent directement les clubs pour garantir des places à tarif symbolique.</p>
           </div>
         </div>
       </div>
@@ -452,15 +497,28 @@
     <div class="w">
       <div class="text-grid">
         <div class="text-col">
-          <h3>Le rôle central des associations</h3>
-          <p>Une MJC ou un club de football n'est pas seulement un lieu de pratique ; c'est un point d'ancrage social pour les jeunes de Saint-Étienne et de sa périphérie. Toutefois, ces structures font face à une charge administrative lourde : gestion des inscriptions, vérification des justificatifs CAF, encaissement des aides différées.</p>
-          <p>Flooow accompagne ces organismes en valorisant leur engagement d'inclusion. En rendant leurs grilles tarifaires lisibles au grand public, nous connectons l'offre associative aux familles qui en ont le plus besoin.</p>
+          <div id="section-clubs">
+            <h3>Le rôle central des clubs sportifs</h3>
+            <p>Une association sportive n'est pas seulement un lieu de pratique ; c'est un point d'ancrage social pour les jeunes de Saint-Étienne. Flooow accompagne ces structures en valorisant leur engagement d'inclusion et en connectant leur offre aux familles qui en ont le plus besoin.</p>
+          </div>
+          
+          <div id="section-mjc" style="margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--bd);">
+            <h3>MJC et Centres Sociaux</h3>
+            <p>Les Maisons des Jeunes et de la Culture sont le cœur battant de l'accessibilité culturelle. Elles font face à une charge administrative lourde (vérification des justificatifs CAF, aides différées). Nous les aidons à rendre leurs grilles tarifaires lisibles au grand public.</p>
+          </div>
         </div>
+
         <div class="text-col">
-          <h3>Un outil pour les collectivités</h3>
-          <p>Les pouvoirs publics allouent des budgets conséquents à l'accès au sport et à la culture. Mais comment mesurer finement l'impact d'une aide sur un quartier prioritaire ?</p>
-          <p>Notre démarche territoriale vise à offrir aux collectivités une cartographie précise : repérer les zones blanches de mobilité extrascolaire, identifier les disciplines en tension, et ajuster les aides publiques là où le frein financier demeure.</p>
-          <button class="btn-black" style="margin-top: 16px;" onclick="openHeartbeat(event)">Échanger avec l'équipe projet</button>
+          <div id="section-collectivites">
+            <h3>Un outil pour les collectivités</h3>
+            <p>Les pouvoirs publics allouent des budgets conséquents à l'accès au sport et à la culture. Mais comment mesurer finement l'impact d'une aide sur un quartier prioritaire ? Notre démarche offre aux collectivités une cartographie précise des zones blanches de mobilité extrascolaire.</p>
+          </div>
+          
+          <div id="section-partenaires" style="margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--bd);">
+            <h3>Partenaires publics &amp; institutionnels</h3>
+            <p>En travaillant main dans la main avec la CAF de la Loire, la Direction des Sports et les différents services sociaux, Flooow agit comme un traducteur territorial pour ajuster les aides publiques là où le frein financier demeure.</p>
+            <button class="btn-black" style="margin-top: 16px;" onclick="openHeartbeat(event)">Échanger avec l'équipe projet</button>
+          </div>
         </div>
       </div>
     </div>
@@ -477,40 +535,40 @@
   </div>
 
   <section class="s s-bg">
-    <div class="w">
-      
-          <div class="article-grid">
-            <div class="article-card" onclick="navigateTo('article-velo')">
-              <div class="article-img" style="background-image: url('img/1517649763962-0c623066013b-w900.jpg');"></div>
-              <div class="article-content">
-                <div class="article-meta"><span>Écomobilité</span><span>Montreynaud</span></div>
-                <h3>Comment le vélo a changé le quotidien de la famille Martin à Montreynaud</h3>
-                <p>Aller à l'entraînement sans voiture, c'est possible. Rencontre avec une famille qui a repensé sa mobilité grâce aux aides locales.</p>
-                <span class="article-cta">Lire le récit &rarr;</span>
-              </div>
-            </div>
-
-            <div class="article-card" onclick="navigateTo('article-inclusion')">
-              <div class="article-img" style="background-image: url('img/1502086223501-7ea6ecd79368-w900.jpg');"></div>
-              <div class="article-content">
-                <div class="article-meta"><span>Inclusion</span><span>Tarentaize</span></div>
-                <h3>Le sport partagé : quand la différence devient une force sur le terrain</h3>
-                <p>Immersion dans un club stéphanois pionnier dans l'accueil d'enfants en situation de handicap.</p>
-                <span class="article-cta">Lire le récit &rarr;</span>
-              </div>
-            </div>
-
-            <div class="article-card" onclick="navigateTo('article-vacances')">
-              <div class="article-img" style="background-image: url('img/1533873984035-25970ab07461-w900.jpg');"></div>
-              <div class="article-content">
-                <div class="article-meta"><span>Vacances</span><span>Pilat</span></div>
-                <h3>Leur premier été en colonie : dépasser ses peurs et grandir</h3>
-                <p>Grâce aux subventions de la CAF, Léo et Sarah sont partis 10 jours en pleine nature. Un récit d'aventure et de confiance.</p>
-                <span class="article-cta">Lire le récit &rarr;</span>
-              </div>
-            </div>
+    <div class="w" id="section-chroniques">
+      <div class="article-grid">
+        <div class="article-card" onclick="navigateTo('article-velo')">
+          <div class="article-img" style="background-image: url('img/1517649763962-0c623066013b-w900.jpg');"></div>
+          <div class="article-content">
+            <div class="article-meta"><span>Écomobilité</span><span>Montreynaud</span></div>
+            <h3>Comment le vélo a changé le quotidien de la famille Martin à Montreynaud</h3>
+            <p>Aller à l'entraînement sans voiture, c'est possible. Rencontre avec une famille qui a repensé sa mobilité grâce aux aides locales.</p>
+            <span class="article-cta">Lire le récit &rarr;</span>
           </div>
-</section>
+        </div>
+
+        <div class="article-card" onclick="navigateTo('article-inclusion')">
+          <div class="article-img" style="background-image: url('img/1502086223501-7ea6ecd79368-w900.jpg');"></div>
+          <div class="article-content">
+            <div class="article-meta"><span>Inclusion</span><span>Tarentaize</span></div>
+            <h3>Le sport partagé : quand la différence devient une force sur le terrain</h3>
+            <p>Immersion dans un club stéphanois pionnier dans l'accueil d'enfants en situation de handicap.</p>
+            <span class="article-cta">Lire le récit &rarr;</span>
+          </div>
+        </div>
+
+        <div class="article-card" onclick="navigateTo('article-vacances')">
+          <div class="article-img" style="background-image: url('img/1533873984035-25970ab07461-w900.jpg');"></div>
+          <div class="article-content">
+            <div class="article-meta"><span>Vacances</span><span>Pilat</span></div>
+            <h3>Leur premier été en colonie : dépasser ses peurs et grandir</h3>
+            <p>Grâce aux subventions de la CAF, Léo et Sarah sont partis 10 jours en pleine nature. Un récit d'aventure et de confiance.</p>
+            <span class="article-cta">Lire le récit &rarr;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <section class="banner-adventure" id="joinBanner">
@@ -521,8 +579,6 @@
   </div>
 </section>
 
-
-<!-- ================= ARTICLE 1 : VÉLO ================= -->
 <div id="view-article-velo" class="view-section">
   <div class="hero-editorial" style="background-image: url('img/1517649763962-0c623066013b-w2000.jpg'); background-position: center 30%; height: 50vh; min-height: 400px;">
     <div class="w">
@@ -554,7 +610,6 @@
   </section>
 </div>
 
-<!-- ================= ARTICLE 2 : INCLUSION ================= -->
 <div id="view-article-inclusion" class="view-section">
   <div class="hero-editorial" style="background-image: url('img/1502086223501-7ea6ecd79368-w2000.jpg'); background-position: center 30%; height: 50vh; min-height: 400px;">
     <div class="w">
@@ -585,7 +640,6 @@
   </section>
 </div>
 
-<!-- ================= ARTICLE 3 : VACANCES ================= -->
 <div id="view-article-vacances" class="view-section">
   <div class="hero-editorial" style="background-image: url('img/1533873984035-25970ab07461-w2000.jpg'); background-position: center 30%; height: 50vh; min-height: 400px;">
     <div class="w">
@@ -616,7 +670,6 @@
   </section>
 </div>
 
-<!-- ================= MENTIONS LÉGALES ================= -->
 <div id="view-mentions" class="view-section">
   <section class="s" style="padding-top: 140px;">
     <div class="w" style="max-width: 860px;">
@@ -633,7 +686,7 @@
         <p>Ce site est hébergé par <strong>Hostinger International Ltd.</strong>, 61 Lordou Vironos Street, 6023 Larnaca, Chypre — <a href="https://www.hostinger.fr" target="_blank" rel="noopener noreferrer" style="color: var(--flooow-orange-text); text-decoration: underline;">www.hostinger.fr</a>.</p>
 
         <h3 style="font-size: 20px; font-weight: 800; margin: 32px 0 12px;">Propriété intellectuelle</h3>
-        <p>L'ensemble des contenus (textes, marque Flooow, éléments graphiques) est protégé. Toute reproduction sans autorisation préalable est interdite. Les photographies d'illustration proviennent de banques d'images libres de droits (Unsplash).</p>
+        <p>L'ensemble des contenus (textes, marque Flooow, éléments graphiques) is protégé. Toute reproduction sans autorisation préalable est interdite. Les photographies d'illustration proviennent de banques d'images libres de droits (Unsplash).</p>
 
         <h3 style="font-size: 20px; font-weight: 800; margin: 32px 0 12px;">Responsabilité</h3>
         <p>Les informations relatives aux aides financières (Pass'Sport, Quotient Familial, dispositifs CAF, aides communales) sont fournies à titre indicatif et ne sauraient se substituer aux barèmes officiels des organismes concernés.</p>
@@ -643,7 +696,6 @@
   </section>
 </div>
 
-<!-- ================= CONFIDENTIALITÉ (RGPD) ================= -->
 <div id="view-confidentialite" class="view-section">
   <section class="s" style="padding-top: 140px;">
     <div class="w" style="max-width: 860px;">
@@ -669,7 +721,6 @@
   </section>
 </div>
 
-<!-- ================= CONTACT ================= -->
 <div id="view-contact" class="view-section">
   <section class="s" style="padding-top: 140px;">
     <div class="w" style="max-width: 720px;">
@@ -693,7 +744,6 @@
   </section>
 </div>
 
-<!-- ================= FAQ ================= -->
 <div id="view-faq" class="view-section">
   <section class="s" style="padding-top: 140px;">
     <div class="w" style="max-width: 820px;">
@@ -710,7 +760,7 @@
         </div>
         <div>
           <h3 style="font-size: 19px; font-weight: 800; margin-bottom: 8px;">Comment savoir à quelles aides j'ai droit ?</h3>
-          <p style="font-size: 15px; color: var(--tx2); line-height: 1.7;">La rubrique <a onclick="navigateTo('aides')" style="color: var(--flooow-orange-text); text-decoration: underline; cursor: pointer;">Aides &amp; Accompagnement</a> décrypte les principaux dispositifs (Quotient Familial CAF, Pass'Sport, Pass Culture, aides communales) pour estimer votre reste à charge.</p>
+          <p style="font-size: 15px; color: var(--tx2); line-height: 1.7;">La rubrique <a onclick="navigateToSection('aides', 'section-qf')" style="color: var(--flooow-orange-text); text-decoration: underline; cursor: pointer;">Aides &amp; Accompagnement</a> décrypte les principaux dispositifs (Quotient Familial CAF, Pass'Sport, Pass Culture, aides communales) pour estimer votre reste à charge.</p>
         </div>
         <div>
           <h3 style="font-size: 19px; font-weight: 800; margin-bottom: 8px;">Comment fonctionne le covoiturage entre parents ?</h3>
@@ -726,7 +776,7 @@
   </section>
 </div>
 
-    <footer>
+<footer>
   <div class="w">
     <div class="foot-grid">
       <div class="foot-brand">
@@ -739,11 +789,11 @@
           <li><a onclick="navigateTo('activites')">Les Activités</a></li>
           <li><a onclick="navigateTo('aides')">Comprendre les Aides</a></li>
           <li><a onclick="navigateTo('organismes')">Organismes locaux</a></li>
-          <li><a onclick="navigateTo('histoires')">Histoires & Récits</a></li>
+          <li><a onclick="navigateTo('histoires')">Histoires &amp; Récits</a></li>
         </ul>
       </div>
       <div class="foot-col">
-        <h5>Actions & Communauté</h5>
+        <h5>Actions &amp; Communauté</h5>
         <ul>
           <li><a onclick="openHeartbeat(event)">Rejoindre Flooow Family</a></li>
           <li><a onclick="openHeartbeat(event)">Espace Covoiturage</a></li>
@@ -751,7 +801,7 @@
         </ul>
       </div>
       <div class="foot-col">
-        <h5>Légal & Contact</h5>
+        <h5>Légal &amp; Contact</h5>
         <ul>
           <li><a onclick="navigateTo('mentions')">Mentions légales</a></li>
           <li><a onclick="navigateTo('confidentialite')">Confidentialité</a></li>
@@ -764,6 +814,37 @@
     </div>
   </div>
 </footer>
+
+<script>
+/**
+ * Navigue vers une vue spécifique puis scrolle doucement vers l'élément cible
+ * avec un décalage pour compenser la hauteur du header fixe (top-bar + nav).
+ */
+function navigateToSection(viewId, sectionId) {
+  // 1. Appelle la fonction de navigation existante (qui gère les classes .active)
+  if (typeof navigateTo === 'function') {
+    navigateTo(viewId);
+  }
+  
+  // 2. Laisse le temps au navigateur d'afficher le DOM de la nouvelle vue
+  setTimeout(() => {
+    const target = document.getElementById(sectionId);
+    if (target) {
+      // Décalage pour le header sticky (ajusté à 118px selon votre demande)
+      const offset = 118;
+      
+      // Calcul précis de la position finale
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      
+      // Scroll fluide vers la section
+      window.scrollTo({ 
+        top: top, 
+        behavior: 'smooth' 
+      });
+    }
+  }, 100); // 100ms est généralement suffisant pour le changement de vue
+}
+</script>
 
 <script src="js/app.js"></script>
 </body>
