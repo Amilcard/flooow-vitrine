@@ -42,6 +42,71 @@
 </script>
 
 <link rel="stylesheet" href="css/styles.css">
+<style>
+/* CSS additionnel pour le format "Grand visuel éditorial" Patagonia */
+.hero-editorial-link {
+  display: block;
+  width: 100%;
+  height: 75vh;
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+.hero-editorial-link::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.1) 100%);
+  transition: background 0.3s ease;
+}
+.hero-editorial-link:hover::before {
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.15) 100%);
+}
+.hero-editorial-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 60px 40px; /* Aligné avec le conteneur .w */
+  color: white;
+  z-index: 2;
+  box-sizing: border-box;
+}
+/* Centrage interne pour simuler le max-width: 1280px du site */
+.hero-editorial-content-inner {
+  max-width: 1200px; /* 1280 - (2 * 40 padding) */
+  margin: 0 auto;
+}
+.hero-editorial-link h2 {
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+  max-width: 800px;
+}
+.hero-editorial-link p {
+  font-size: clamp(16px, 1.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 24px;
+  max-width: 600px;
+  color: rgba(255, 255, 255, 0.9);
+}
+.hero-editorial-meta {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  display: block;
+  color: var(--flooow-orange-bd); /* Une touche de couleur dans le sur-titre */
+}
+</style>
 </head>
 <body>
 
@@ -303,23 +368,38 @@
     </div>
   </section>
 
-  <section class="s">
+  <section style="padding: 60px 0 0 0; background: #fff;">
+    <a onclick="navigateTo('article-velo')" class="hero-editorial-link" style="background-image: url('img/1517649763962-0c623066013b-w2000.jpg');">
+      <div class="hero-editorial-content">
+        <div class="hero-editorial-content-inner">
+          <span class="hero-editorial-meta">Montreynaud • Écomobilité</span>
+          <h2>Comment le vélo a changé le quotidien de la famille Martin</h2>
+          <p>Aller à l'entraînement sans voiture, c'est possible. Rencontre avec une famille stéphanoise qui a repensé sa mobilité grâce aux aides locales et à l'accompagnement d'associations.</p>
+          <button class="btn-white" style="margin-top: 16px;">Lire le récit</button>
+        </div>
+      </div>
+    </a>
+
+    <a onclick="navigateTo('article-vacances')" class="hero-editorial-link" style="background-image: url('img/1533873984035-25970ab07461-w2000.jpg'); margin-bottom: 0;">
+      <div class="hero-editorial-content">
+        <div class="hero-editorial-content-inner">
+          <span class="hero-editorial-meta">Massif du Pilat • Vacances</span>
+          <h2>Leur premier été en colonie : dépasser ses peurs et grandir</h2>
+          <p>Grâce aux subventions de la CAF, Léo et Sarah sont partis 10 jours en pleine nature. Un récit d'aventure, d'autonomie et de confiance loin du béton urbain.</p>
+          <button class="btn-white" style="margin-top: 16px;">Découvrir l'aventure</button>
+        </div>
+      </div>
+    </a>
+  </section>
+
+  <section class="s" style="padding-top: 80px;">
     <div class="w">
       <div class="s-title-block">
-        <h2 class="s-title">À la une : Chroniques du terrain</h2>
+        <h2 class="s-title" style="font-size: 28px;">Plus de récits du terrain</h2>
       </div>
       
-      <div class="article-grid">
-        <div class="article-card" onclick="navigateTo('article-velo')">
-          <div class="article-img" style="background-image: url('img/1517649763962-0c623066013b-w900.jpg');"></div>
-          <div class="article-content">
-            <div class="article-meta"><span>Écomobilité</span><span>Montreynaud</span></div>
-            <h3>Comment le vélo a changé le quotidien de la famille Martin à Montreynaud</h3>
-            <p>Aller à l'entraînement sans voiture, c'est possible. Rencontre avec une famille qui a repensé sa mobilité grâce aux aides locales.</p>
-            <span class="article-cta">Lire le récit &rarr;</span>
-          </div>
-        </div>
-
+      <div class="article-grid" style="grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));">
+        
         <div class="article-card" onclick="navigateTo('article-inclusion')">
           <div class="article-img" style="background-image: url('img/1502086223501-7ea6ecd77368-w900.jpg');"></div>
           <div class="article-content">
@@ -330,15 +410,15 @@
           </div>
         </div>
 
-        <div class="article-card" onclick="navigateTo('article-vacances')">
-          <div class="article-img" style="background-image: url('img/1533873984035-25970ab07461-w900.jpg');"></div>
-          <div class="article-content">
-            <div class="article-meta"><span>Vacances</span><span>Pilat</span></div>
-            <h3>Leur premier été en colonie : dépasser ses peurs et grandir</h3>
-            <p>Grâce aux subventions de la CAF, Léo et Sarah sont partis 10 jours en pleine nature. Un récit d'aventure et de confiance.</p>
-            <span class="article-cta">Lire le récit &rarr;</span>
+        <div class="article-card" style="background: var(--bg-light); border: 2px dashed var(--bd); box-shadow: none; align-items: center; justify-content: center; text-align: center;" onclick="navigateTo('contact')">
+          <div class="article-content" style="align-items: center;">
+            <svg viewBox="0 0 24 24" style="width: 48px; height: 48px; fill: none; stroke: var(--tx2); stroke-width: 1.5; margin-bottom: 24px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            <h3 style="margin-bottom: 12px;">Vous avez une histoire à partager ?</h3>
+            <p style="margin-bottom: 24px;">Une expérience associative, un retour sur une aide financière ou un covoiturage solidaire ?</p>
+            <button class="btn-black">Nous écrire</button>
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -775,7 +855,26 @@
     </div>
   </section>
 </div>
-
+<section class="s" style="background: #fdfaf7; border-top: 1px solid var(--bd); padding: 80px 0;">
+  <div class="w">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; background: #fff; padding: 40px; border-radius: 24px; box-shadow: 0 4px 24px rgba(0,0,0,0.04);">
+      
+      <div style="flex: 0 0 auto;">
+        <div style="padding: 16px; border: 2px solid var(--bd); border-radius: 16px; display: inline-block; background: #fff;">
+          <img src="img/qr-code-flooow.jpg" alt="QR Code pour accéder à flooow.fr" style="width: 160px; height: 160px; display: block; border-radius: 8px;">
+        </div>
+      </div>
+      
+      <div style="flex: 1 1 400px;">
+        <span class="badge" style="margin-bottom: 12px;">Mobile</span>
+        <h2 style="font-size: 28px; font-weight: 800; margin-bottom: 16px;">Gardez Flooow à portée de main</h2>
+        <p style="font-size: 16px; color: var(--tx2); line-height: 1.6; margin-bottom: 16px;">Scannez ce QR Code avec l'appareil photo de votre smartphone pour partager le site à d'autres parents ou pour consulter les aides et activités directement depuis votre mobile.</p>
+        <p style="font-size: 16px; font-weight: 700; color: var(--tx);">Lien direct : <a href="https://flooow.fr" style="color: var(--flooow-orange-text); text-decoration: underline;">flooow.fr</a></p>
+      </div>
+      
+    </div>
+  </div>
+</section>
 <footer>
   <div class="w">
     <div class="foot-grid">
