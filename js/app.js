@@ -1,3 +1,19 @@
+let baseAides = [];
+
+// Chargement au démarrage
+async function chargerDonnees() {
+  try {
+    const response = await fetch('database_final.json'); // Assurez-vous que le fichier est au bon endroit
+    if (!response.ok) throw new Error("Erreur de chargement");
+    baseAides = await response.json();
+    console.log("Base de données chargée avec succès :", baseAides.length, "aides.");
+  } catch (error) {
+    console.error("Impossible de charger les aides :", error);
+  }
+}
+
+// Appeler cette fonction une fois au chargement
+chargerDonnees();
 // Lien officiel vers la communauté locale d'entraide (Heartbeat)
   const HEARTBEAT_URL = "https://app.heartbeat.chat/inkusif/invitation?code=28FJ4C";
 
@@ -139,6 +155,34 @@
     return false;
   }
 
+  // Fonction de calcul appelée lors de la soumission du formulaire
+function calculerSimulateur() {
+  // 1. Récupération des valeurs du formulaire (HTML)
+  const qf = parseInt(document.getElementById('sim-qf').value) || 9999;
+  const age = parseInt(document.getElementById('sim-enf-age').value) || 0;
+  const periode = document.getElementById('sim-periode').value; // 'scolaire' ou 'vacances'
+  const region = document.getElementById('sim-region').value; // 'AURA', 'PACA', 'IDF'
+
+  // 2. Filtrage dynamique sur votre base chargée (baseAides)
+  const aidesEligibles = baseAides.filter(aide => {
+    const ageOk = age >= aide.criteres.age.min && age <= aide.criteres.age.max;
+    const periodeOk = aide.criteres.periode_dispo.includes(periode);
+    const regionOk = aide.region === region || aide.region === 'national';
+    
+    return ageOk && periodeOk && regionOk;
+  });
+
+  // 3. Affichage des résultats
+  const resultList = document.getElementById('res-list');
+  resultList.innerHTML = aidesEligibles.map(a => `
+    <div class="result-card">
+      <h4>${a.nom}</h4>
+      <p>${a.description}</p>
+      <span>Montant estimé : ${a.montant.valeur}</span>
+      <a href="${a.source_url}" target="_blank">Voir source</a>
+    </div>
+  `).join('');
+}
 document.addEventListener('DOMContentLoaded', function() {
   const toast = document.getElementById('toastBox');
   if (toast) toast.classList.remove('show');

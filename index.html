@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+
+<!-- ================= SIMULATEUR D'AIDES FINANCIÈRES AVANCÉ ================= -->
+  <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -42,6 +44,81 @@
 </script>
 
 <link rel="stylesheet" href="css/styles.css">
+<<<<<<< Updated upstream
+=======
+<style>
+/* CSS additionnel pour le format "Grand visuel éditorial" Patagonia */
+.hero-editorial-link {
+  display: block;
+  width: 100%;
+  height: 75vh;
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+.hero-editorial-link::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  /* Dégradé plus couvrant et plus sombre pour une lisibilité parfaite */
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.15) 100%);
+  transition: background 0.3s ease;
+}
+.hero-editorial-link:hover::before {
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.2) 100%);
+}
+.hero-editorial-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 80px 40px; /* Un peu plus d'air en bas */
+  color: white;
+  z-index: 2;
+  box-sizing: border-box;
+}
+/* Centrage interne pour simuler le max-width: 1280px du site */
+.hero-editorial-content-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.hero-editorial-link h2 {
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+  max-width: 800px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4); /* Ombre pour détacher le titre */
+}
+.hero-editorial-link p {
+  font-size: clamp(16px, 1.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 32px;
+  max-width: 600px;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4); /* Ombre pour le texte */
+}
+.hero-editorial-meta {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  display: inline-block; /* Essentiel pour que le fond épouse le texte */
+  color: #ffffff;
+  background: var(--flooow-orange); /* Transformation en badge uni */
+  padding: 6px 12px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+</style>
+>>>>>>> Stashed changes
 </head>
 <body>
 
@@ -249,7 +326,7 @@
     </div>
   </div>
 
-  <section class="s" style="padding-top: 120px;">
+  <section class="s" style="padding-top: 80px;">
     <div class="w">
       <div class="text-grid">
         <div class="text-col">
@@ -265,6 +342,19 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <section style="padding: 0; background: #fff;">
+    <a onclick="navigateTo('simulateur')" class="hero-editorial-link" style="background-image: url('img/1554224155-8d04cb21cd6c-w2000.jpg'); margin-bottom: 0;">
+      <div class="hero-editorial-content">
+        <div class="hero-editorial-content-inner">
+          <span class="hero-editorial-meta">Outils & Accompagnement</span>
+          <h2 style="max-width: 900px;">Estimer mes aides financières</h2>
+          <p>Quotient Familial CAF, Pass'Sport, aides de la ville... Le système est parfois complexe. Découvrez rapidement à quelles subventions vous avez droit pour financer les activités de vos enfants cette année.</p>
+          <button class="btn-white" style="margin-top: 16px;" onclick="navigateTo('simulateur')">Calculer mon reste à charge</button>
+        </div>
+      </div>
+    </a>
   </section>
 
   <section class="s s-bg">
@@ -433,14 +523,112 @@
   </section>
 </div>
 
-<div id="view-aides" class="view-section">
-  <div class="hero-editorial" style="background-image: url('img/1554224155-8d04cb21cd6c-w2000.jpg'); background-position: center 30%; height: 50vh; min-height: 440px;">
-    <div class="w">
-      <span class="badge">Pédagogie</span>
-      <h1>Comprendre les aides financières.</h1>
-      <p>La pédagogie avant le calcul. Décryptage des leviers pour réduire le reste à charge des familles.</p>
+<!-- ================= SIMULATEUR D'AIDES FINANCIÈRES AVANCÉ ================= -->
+  <div id="view-simulateur" class="view-section">
+    <div class="hero-editorial" style="background-image: url('img/1554224155-8d04cb21cd6c-w2000.jpg'); background-position: center 30%; height: 40vh; min-height: 350px;">
+      <div class="w">
+        <span class="badge">Outil interactif</span>
+        <h1>Simulateur d'aides sur-mesure.</h1>
+        <p>Estimez vos droits selon votre situation, l'âge de vos enfants, vos allocations et la période de l'activité.</p>
+      </div>
     </div>
+
+    <section class="s" style="background: var(--bg-light);">
+      <div class="w" style="max-width: 950px;">
+        
+        <div style="background: #fff; border: 1px solid var(--bd); border-radius: 16px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+          <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 24px;">Votre profil familial &amp; projet</h2>
+          
+          <form id="sim-form" onsubmit="calculerAidesAvance(event)" style="display: flex; flex-direction: column; gap: 28px;">
+            
+            <!-- Critères financiers et territoriaux -->
+            <label style="font-size: 14px; font-weight: 700;">Votre Quotient Familial (CAF)
+            <span style="display:block; font-size: 12px; color: var(--tx2); font-weight: 400; margin-bottom: 8px;">Clé pour les aides Départementales (CAF de la Loire) et Municipales.</span>
+            <input 
+              id="sim-qf" 
+              type="number" 
+              placeholder="Ex: 650" 
+              style="width:100%; padding:14px 16px; border:1px solid var(--bd); border-radius:8px; font-family:var(--f); font-size:15px;"
+              onkeydown="if(event.key === 'Enter'){ event.preventDefault(); calculerAidesAvance(event); }"
+            >
+          </label>
+
+              <label style="font-size: 14px; font-weight: 700;">Période de l'activité
+                <span style="display:block; font-size: 12px; color: var(--tx2); font-weight: 400; margin-bottom: 8px;">Détermine l'éligibilité aux aides aux vacances ou annuelles.</span>
+                <select id="sim-periode" style="width:100%; padding:14px 16px; border:1px solid var(--bd); border-radius:8px; font-family:var(--f); font-size:15px; background: #fff;">
+                  <option value="scolaire">Période scolaire (Année complète / Club / MJC)</option>
+                  <option value="vacances">Vacances (Stages courts / Centres aérés / Colonies)</option>
+                </select>
+              </label>
+            </div>
+
+            <!-- Prestations déjà perçues (Checkboxes) -->
+            <div>
+              <label style="font-size: 14px; font-weight: 700; display: block; margin-bottom: 12px;">Allocations déjà perçues par le foyer :</label>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: var(--bg-light); padding: 20px; border-radius: 8px;">
+                <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; cursor: pointer;">
+                  <input type="checkbox" id="sim-presta-ars" style="width: 18px; height: 18px; accent-color: var(--flooow-orange);">
+                  ARS (Allocation de Rentrée Scolaire) — *Requis pour Pass'Sport*
+                </label>
+                <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 500; cursor: pointer;">
+                  <input type="checkbox" id="sim-presta-aeeh" style="width: 18px; height: 18px; accent-color: var(--flooow-orange);">
+                  AEEH (Allocation d'Éducation de l'Enfant Handicapé)
+                </label>
+              </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid var(--bd); margin: 4px 0;">
+
+            <!-- Âge des enfants -->
+            <div>
+              <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 16px;">Nombre d'enfants à inscrire par tranche d'âge :</h3>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                <label style="font-size: 13px; font-weight: 600; color: var(--tx2);">Petite enfance (3-5 ans)
+                  <input id="sim-enf-petit" type="number" min="0" value="0" style="width:100%; margin-top:6px; padding:12px; border:1px solid var(--bd); border-radius:8px; font-family:var(--f); font-size:15px;">
+                </label>
+                <label style="font-size: 13px; font-weight: 600; color: var(--tx2);">Enfants (6-14 ans)
+                  <input id="sim-enf-moyen" type="number" min="0" value="0" style="width:100%; margin-top:6px; padding:12px; border:1px solid var(--bd); border-radius:8px; font-family:var(--f); font-size:15px;">
+                </label>
+                <label style="font-size: 13px; font-weight: 600; color: var(--tx2);">Adolescents (15-17 ans)
+                  <input id="sim-enf-ado" type="number" min="0" value="0" style="width:100%; margin-top:6px; padding:12px; border:1px solid var(--bd); border-radius:8px; font-family:var(--f); font-size:15px;">
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-black" style="font-size: 16px; padding: 16px; margin-top: 8px;">Lancer l'estimation personnalisée</button>
+          </form>
+
+          <!-- BLOC RÉSULTATS -->
+          <div id="sim-results" style="display: none; margin-top: 40px; padding-top: 40px; border-top: 2px dashed var(--bd);">
+            <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 24px; color: var(--flooow-orange-text);">Vos simulations par échelon territorial</h2>
+            
+            <div id="res-list" style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 24px;">
+              <!-- Les résultats structurés s'injecteront ici -->
+            </div>
+
+            <div style="background: var(--flooow-orange-light); padding: 24px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 18px; font-weight: 700;">Aide cumulée potentielle :</span>
+              <span id="res-total" style="font-size: 32px; font-weight: 900; color: var(--flooow-orange-dark);">0 €</span>
+            </div>
+
+            <p style="font-size: 12px; color: var(--tx2); margin-top: 16px; line-height: 1.5;">
+              * <strong>Avertissement :</strong> Ce simulateur croise les données territoriales de la région Auvergne-Rhône-Alpes, du département de la Loire et de la municipalité de Saint-Étienne. Les montants restent des estimations indicatives et dépendent de la conformité des pièces justificatives fournies aux structures.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
   </div>
+
+  <div id="view-aides" class="view-section">
+    <div class="hero-editorial" style="background-image: url('img/1554224155-8d04cb21cd6c-w2000.jpg'); background-position: center 30%; height: 50vh; min-height: 440px;">
+      <div class="w">
+        <span class="badge">Pédagogie</span>
+        <h1>Comprendre les aides financières.</h1>
+        <p>La pédagogie avant le calcul. Décryptage des leviers pour réduire le reste à charge des familles.</p>
+      </div>
+    </div>
 
   <section class="s">
     <div class="w">
@@ -475,6 +663,13 @@
         </div>
       </div>
       
+      <div style="margin-top: 60px; background: #fdfaf7; border: 2px dashed var(--flooow-orange-bd); padding: 60px; border-radius: 16px; text-align: center;">
+        <span class="badge" style="margin-bottom: 16px; background: var(--flooow-orange); color: #fff; border: none;">Nouveau</span>
+        <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 16px;">Passez de la théorie à la pratique</h3>
+        <p style="font-size: 16px; color: var(--tx2); max-width: 700px; margin: 0 auto 32px; line-height: 1.6;">Maintenant que vous connaissez les dispositifs (CAF, Pass'Sport, Pass Culture...), utilisez notre simulateur interactif. En renseignant votre situation familiale, obtenez immédiatement une estimation de vos droits.</p>
+        <button class="btn-black" style="padding: 16px 40px; font-size: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.15);" onclick="navigateTo('simulateur')">Lancer mon estimation personnalisée</button>
+      </div>
+
       <div style="margin-top: 60px; background: #000; color: #fff; padding: 60px; border-radius: 16px; text-align: center;">
         <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 16px;">Notre démarche de transparence</h3>
         <p style="font-size: 16px; color: #aaa; max-width: 700px; margin: 0 auto 32px; line-height: 1.6;">Le projet Flooow intègre une veille rigoureuse sur ces barèmes afin de fournir aux structures locales et aux familles des grilles tarifaires toujours exactes, et de traduire le droit en action concrète.</p>
@@ -843,6 +1038,112 @@ function navigateToSection(viewId, sectionId) {
       });
     }
   }, 100); // 100ms est généralement suffisant pour le changement de vue
+}
+
+async function calculerAidesAvance(e) {
+  e.preventDefault();
+
+  // 1. Récupération des données utilisateur
+  const qf = parseInt(document.getElementById('sim-qf').value) || 9999;
+  const hasARS = document.getElementById('sim-presta-ars').checked;
+  const periode = document.getElementById('sim-periode').value; // 'scolaire' ou 'vacances'
+  const petit = parseInt(document.getElementById('sim-enf-petit').value) || 0;
+  const moyen = parseInt(document.getElementById('sim-enf-moyen').value) || 0;
+  const ado = parseInt(document.getElementById('sim-enf-ado').value) || 0;
+  const totalEnfants = petit + moyen + ado;
+
+  // 2. Charger la base de données
+  const response = await fetch('database_final.json');
+  const baseAides = await response.json();
+
+  let totalAides = 0;
+  let sections = {
+    national: { nom: "Échelon National", aides: [] },
+    region: { nom: "Échelon Régional", aides: [] },
+    caf_locale: { nom: "Échelon Départemental (CAF)", aides: [] },
+    commune: { nom: "Échelon Municipal", aides: [] }
+  };
+
+  // 3. Boucle dynamique sur toutes les aides du JSON
+  baseAides.forEach(aide => {
+    // Vérification de l'éligibilité (logique simplifiée)
+    const ageOk = (petit + moyen + ado) > 0; // À affiner selon chaque aide
+    const periodeOk = aide.criteres.periode_dispo.includes(periode);
+    
+    if (ageOk && periodeOk) {
+      // Calcul du montant (exemple simple)
+      const montant = parseInt(aide.montant.valeur) || 0;
+      
+      if (sections[aide.echelon]) {
+        sections[aide.echelon].aides.push({
+          nom: aide.nom,
+          montant: montant,
+          desc: aide.description
+        });
+        totalAides += montant;
+      }
+    }
+  });
+  // --- 4. LOGIQUE MUNICIPALE (Saint-Étienne) ---
+  if (qf <= 750) {
+    let baseVille = qf <= 500 ? 40 : 25;
+    // Bonus inclusion si AEEH coché
+    if (hasAEEH) baseVille += 20;
+    
+    const montantVille = totalEnfants * baseVille;
+    sectionsTerritoriales.municipal.aides.push({
+      nom: "Chèques Loisirs Municipaux",
+      montant: montantVille,
+      desc: "Aide directe de la commune pour rompre l'isolement en encourageant la mixité sur l'offre locale."
+    });
+    totalAides += montantVille;
+  }
+
+  // Construction du rendu HTML par échelon
+  let htmlFinal = "";
+  for (let key in sectionsTerritoriales) {
+    const echelon = sectionsTerritoriales[key];
+    if (echelon.aides.length > 0) {
+      htmlFinal += `
+        <div style="border: 1px solid var(--bd); border-radius: 12px; background: #fff; overflow:hidden;">
+          <div style="background: var(--tx); color: #fff; padding: 12px 20px; font-weight: 700; font-size: 14px;">
+            ${echelon.nom}
+          </div>
+          <div style="padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+            ${echelon.aides.map(a => `
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding-bottom: 12px; border-bottom: 1px dashed var(--bd);">
+                <div style="text-align: left;">
+                  <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 4px;">${a.nom}</h4>
+                  <p style="font-size: 13px; color: var(--tx2); line-height: 1.4;">${a.desc}</p>
+                </div>
+                <span style="font-weight: 800; font-size: 16px; color: var(--flooow-orange-text); white-space: nowrap;">+ ${a.montant} €</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>`;
+    }
+  }
+
+  if (htmlFinal === "") {
+    htmlFinal = `
+      <div style="background: #F5F5F5; padding: 24px; border-radius: 12px; text-align: left;">
+        <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 8px;">Tarification Générale</h4>
+        <p style="font-size: 14px; color: var(--tx2); line-height: 1.5;">
+          Vos critères actuels n'ouvrent pas de droits aux enveloppes automatiques. Cependant, la plupart des clubs et MJC stéphanois de notre catalogue proposent des facilités de paiement (règlements en plusieurs fois) ou des tarifs dégressifs dès le deuxième enfant inscrit.
+        </p>
+      </div>`;
+  }
+
+  // Injection et affichage
+  document.getElementById('res-list').innerHTML = htmlFinal;
+  document.getElementById('res-total').innerText = totalAides > 0 ? `~ ${totalAides} €` : `0 €`;
+  
+  const resultBlock = document.getElementById('sim-results');
+  resultBlock.style.display = 'block';
+  
+  setTimeout(() => {
+    resultBlock.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 100);
 }
 </script>
 
