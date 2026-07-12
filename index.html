@@ -475,6 +475,75 @@
         </div>
       </div>
       
+      <!-- ============================================================
+           SIMULATEUR D'AIDES — bloc additif (charte Terracotta existante)
+           À insérer dans #view-aides, avant le bloc noir "transparence".
+           ============================================================ -->
+      <div id="section-simulateur" style="margin-top: 60px; background: var(--flooow-orange-light); border: 1px solid var(--flooow-orange-bd); padding: 48px; border-radius: 16px;">
+        <h3 style="font-size: 26px; font-weight: 800; margin-bottom: 8px;">Estimez vos aides en 30 secondes</h3>
+        <p style="font-size: 15px; color: var(--tx2); line-height: 1.6; margin-bottom: 28px; max-width: 700px;">
+          Quelques informations suffisent pour estimer les aides mobilisables et votre reste à charge.
+          Le calcul s'appuie sur le même moteur de règles que l'application Flooow. Rien n'est enregistré.
+        </p>
+
+        <form id="sim-form" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; align-items: end;">
+
+          <div>
+            <label style="font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px;">Période de l'activité</label>
+            <div style="display: flex; gap: 16px; padding: 12px 0;">
+              <label style="font-size: 14px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                <input type="radio" name="sim-periode" id="sim-periode-scolaire" checked> Saison scolaire
+              </label>
+              <label style="font-size: 14px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                <input type="radio" name="sim-periode" id="sim-periode-vacances"> Vacances
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label for="sim-age" style="font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px;">Âge de l'enfant</label>
+            <input id="sim-age" type="number" min="3" max="17" inputmode="numeric" placeholder="Ex. 10"
+                   style="width: 100%; padding: 12px 14px; border: 1px solid var(--flooow-orange-bd); border-radius: 8px; font-family: var(--f); font-size: 15px; background: #fff;">
+          </div>
+
+          <div>
+            <label for="sim-prix" style="font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px;">Coût estimé de l'activité (€)</label>
+            <input id="sim-prix" type="number" min="1" step="1" inputmode="decimal" placeholder="Ex. 250"
+                   style="width: 100%; padding: 12px 14px; border: 1px solid var(--flooow-orange-bd); border-radius: 8px; font-family: var(--f); font-size: 15px; background: #fff;">
+          </div>
+
+          <div>
+            <label for="sim-qf" style="font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px;">Quotient familial CAF <span style="font-weight: 400; color: var(--tx2);">(facultatif)</span></label>
+            <input id="sim-qf" type="number" min="0" inputmode="numeric" placeholder="Ex. 650"
+                   style="width: 100%; padding: 12px 14px; border: 1px solid var(--flooow-orange-bd); border-radius: 8px; font-family: var(--f); font-size: 15px; background: #fff;">
+          </div>
+
+          <div>
+            <label for="sim-enfants" style="font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px;">Enfants dans le foyer</label>
+            <input id="sim-enfants" type="number" min="1" max="12" value="1" inputmode="numeric"
+                   style="width: 100%; padding: 12px 14px; border: 1px solid var(--flooow-orange-bd); border-radius: 8px; font-family: var(--f); font-size: 15px; background: #fff;">
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px; padding-bottom: 4px;">
+            <label style="font-size: 14px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="checkbox" id="sim-loire"> Nous habitons dans la Loire (42)
+            </label>
+            <label style="font-size: 14px; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="checkbox" id="sim-qpv"> Quartier prioritaire (QPV)
+            </label>
+            <label id="sim-nuitee-wrap" style="font-size: 14px; display: none; align-items: center; gap: 8px; cursor: pointer;">
+              <input type="checkbox" id="sim-nuitee"> Séjour avec nuitées (colonie, camp)
+            </label>
+          </div>
+
+          <div>
+            <button type="submit" id="sim-submit" class="btn-black" style="width: 100%;">Estimer mes aides</button>
+          </div>
+        </form>
+
+        <div id="sim-results" style="display: none; margin-top: 28px; background: #fff; border: 1px solid var(--flooow-orange-bd); border-radius: 12px; padding: 28px; max-width: 640px;"></div>
+      </div>
+
       <div style="margin-top: 60px; background: #000; color: #fff; padding: 60px; border-radius: 16px; text-align: center;">
         <h3 style="font-size: 28px; font-weight: 800; margin-bottom: 16px;">Notre démarche de transparence</h3>
         <p style="font-size: 16px; color: #aaa; max-width: 700px; margin: 0 auto 32px; line-height: 1.6;">Le projet Flooow intègre une veille rigoureuse sur ces barèmes afin de fournir aux structures locales et aux familles des grilles tarifaires toujours exactes, et de traduire le droit en action concrète.</p>
@@ -846,6 +915,7 @@ function navigateToSection(viewId, sectionId) {
 }
 </script>
 
+<script src="js/simulateur-aides.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
